@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Rus Sentences</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Sentence</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rus_sentences.each do |rus_sentence| %>
+      <tr>
+        <td><%= rus_sentence.id %></td>
+        <td><%= rus_sentence.sentence %></td>
+        <td><%= link_to 'Show', rus_sentence %></td>
+        <td><%= link_to 'Edit', edit_rus_sentence_path(rus_sentence) %></td>
+        <td><%= link_to 'Destroy', rus_sentence, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rus Sentence', new_rus_sentence_path %>
