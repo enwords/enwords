@@ -1,0 +1,27 @@
+<%= form_for(eng_sentence) do |f| %>
+  <% if eng_sentence.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(eng_sentence.errors.count, "error") %> prohibited this eng_sentence from being saved:</h2>
+
+      <ul>
+      <% eng_sentence.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :id %>
+    <%= f.text_field :id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sentence %>
+    <%= f.text_field :sentence %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

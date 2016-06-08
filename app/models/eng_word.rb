@@ -1,0 +1,2 @@
+class EngWord < ApplicationRecord
+end

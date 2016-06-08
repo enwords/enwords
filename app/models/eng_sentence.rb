@@ -1,0 +1,2 @@
+class EngSentence < ApplicationRecord
+end

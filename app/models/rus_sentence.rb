@@ -1,0 +1,2 @@
+class RusSentence < ApplicationRecord
+end
