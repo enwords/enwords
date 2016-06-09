@@ -1,0 +1,22 @@
+<%= form_for(word_collection) do |f| %>
+  <% if word_collection.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(word_collection.errors.count, "error") %> prohibited this word_collection from being saved:</h2>
+
+      <ul>
+      <% word_collection.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.text_field :user_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
