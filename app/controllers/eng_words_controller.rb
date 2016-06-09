@@ -7,6 +7,14 @@ class EngWordsController < ApplicationController
     @eng_words = EngWord.all
   end
 
+  def lwords
+    @eng_words = EngWord.all
+    # @tt = EngWordsUsers.where(user_id: current_user, is_learned: false)
+    # @eng_words = EngWord.where(word_id: @tt)
+
+
+  end
+
   # GET /eng_words/1
   # GET /eng_words/1.json
   def show
@@ -61,6 +69,8 @@ class EngWordsController < ApplicationController
     end
   end
 
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_eng_word
@@ -71,4 +81,7 @@ class EngWordsController < ApplicationController
     def eng_word_params
       params.require(:eng_word).permit(:id, :word)
     end
+
+
+
 end
