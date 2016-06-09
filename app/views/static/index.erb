@@ -16,3 +16,10 @@
         <li><%= link_to 'Users', users_path %></li>
     <% end %>
 <% end %>
+
+<% if user_signed_in? %>
+
+        <li><%= link_to 'Words', eng_words_path %></li>
+        <li><%= link_to 'Word Collections', word_collections_path %></li>
+
+<% end %>
