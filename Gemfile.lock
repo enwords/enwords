@@ -39,8 +39,10 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.0.0)
+    bcrypt (3.1.11)
     bcrypt (3.1.11-x86-mingw32)
     builder (3.2.2)
+    byebug (9.0.5)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.1.x)
@@ -81,10 +83,14 @@ GEM
     minitest (5.9.0)
     multi_json (1.12.1)
     nio4r (1.2.1)
+    nokogiri (1.6.8)
+      mini_portile2 (~> 2.1.0)
+      pkg-config (~> 1.1.7)
     nokogiri (1.6.8-x86-mingw32)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
     orm_adapter (0.5.0)
+    pg (0.18.4)
     pg (0.18.4-x86-mingw32)
     pkg-config (1.1.7)
     puma (3.4.0)
@@ -158,13 +164,14 @@ GEM
     websocket-extensions (0.1.2)
 
 PLATFORMS
+  ruby
   x86-mingw32
 
 DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise
-  jbuilder (~> 2.0)
+  jbuilder (~> 2.5)
   jquery-rails
   pg
   puma (~> 3.0)
@@ -176,4 +183,4 @@ DEPENDENCIES
   web-console
 
 BUNDLED WITH
-   1.12.4
+   1.12.5
