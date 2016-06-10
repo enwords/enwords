@@ -7,12 +7,14 @@ class EngWordsController < ApplicationController
     @eng_words = EngWord.all
   end
 
-  def lwords
-    @eng_words = EngWord.all
-    # @tt = EngWordsUsers.where(user_id: current_user, is_learned: false)
-    # @eng_words = EngWord.where(word_id: @tt)
+  def learned
+    @eng_words = EngWord.joins(:users).
+        where(users: { id: current_user}, eng_words_users: {is_learned: true})
+  end
 
-
+  def learning
+    @eng_words = EngWord.joins(:users).
+        where(users: { id: current_user}, eng_words_users: {is_learned: false})
   end
 
   # GET /eng_words/1

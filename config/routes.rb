@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root to: 'static#index'
-  get '/lwords' => 'eng_words#lwords'
+  get '/learning' => 'eng_words#learning'
+  get '/learned' => 'eng_words#learned'
 
 end
