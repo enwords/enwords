@@ -1,18 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Изучаемые слова</h1>
+<h1>Изученные слова</h1>
 
-<table>
+<%= form_for :learned do |f| %>
 
+    <div class="field">
+      <%= f.collection_check_boxes :expertise_ids, @eng_words, :id, :word do |b| %>
+          <div class="collection-check-box">
+            <%= b.check_box %>
+            <%= b.label %>
+          </div>
+      <% end %>
+    </div>
 
-
-  <tbody>
-  <% @eng_words.each do |eng_word| %>
-      <tr>
-
-        <td><%= eng_word.word%></td>
-
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

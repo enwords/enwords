@@ -1,4 +1,5 @@
 class EngWordsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_eng_word, only: [:show, :edit, :update, :destroy]
 
   # GET /eng_words
