@@ -37,3 +37,12 @@ RusSentence.create! [
                         {id: 9, sentence: 'Я тружусь в одиночестве', is_audio: true},
                         {id: 10, sentence: 'Ты - кровать', is_audio: false}
                     ]
+
+cc = "insert into eng_words_users (eng_word_id, user_id, is_learned) values (4, 1, false);"
+ActiveRecord::Base.connection.execute(cc)
+cc = "insert into eng_words_users (eng_word_id, user_id, is_learned) values (5, 1, false);"
+ActiveRecord::Base.connection.execute(cc)
+cc = "insert into eng_words_users (eng_word_id, user_id, is_learned) values (9, 1, false);"
+ActiveRecord::Base.connection.execute(cc)
+cc = "insert into eng_words_users (eng_word_id, user_id, is_learned) values (1, 1, true);"
+ActiveRecord::Base.connection.execute(cc)
