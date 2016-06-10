@@ -8,6 +8,12 @@ class EngWordsController < ApplicationController
     @eng_words = EngWord.all
   end
 
+  def is_learned
+    # mark selected words as learned
+    EngWordsUsers.where(user_id: current_user, eng_word_id: params[:words_ids]).update_all(is_learned: true)
+    redirect_to learning_path
+  end
+
   def learned
     @eng_words = EngWord.joins(:users).
         where(users: { id: current_user}, eng_words_users: {is_learned: true})
