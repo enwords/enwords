@@ -1,2 +1,0 @@
-module EngWordsHelper
-end

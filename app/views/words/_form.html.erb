@@ -1,10 +1,10 @@
-<%= form_for(eng_word) do |f| %>
-  <% if eng_word.errors.any? %>
+<%= form_for(word) do |f| %>
+  <% if word.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(eng_word.errors.count, "error") %> prohibited this eng_word from being saved:</h2>
+      <h2><%= pluralize(word.errors.count, "error") %> prohibited this word from being saved:</h2>
 
       <ul>
-      <% eng_word.errors.full_messages.each do |message| %>
+      <% word.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>

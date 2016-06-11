@@ -1,5 +1,5 @@
-class EngWord < ApplicationRecord
-  has_and_belongs_to_many :word_collections
+class Word < ApplicationRecord
+  has_and_belongs_to_many :collections
   has_and_belongs_to_many :eng_sentences
   has_and_belongs_to_many :users
 
