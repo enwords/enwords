@@ -3,7 +3,7 @@ class CreateEngSentences < ActiveRecord::Migration[5.0]
     create_table(:eng_sentences, :id => false) do |t|
       t.integer :id, :primary_key => true, :unique => true , :null => false
       t.string :sentence
-      t.boolean :is_audio
+      t.boolean :audio
     end
   end
 end
