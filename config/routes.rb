@@ -5,16 +5,16 @@ Rails.application.routes.draw do
   resources :rus_sentences
   resources :eng_sentences
 
-  resources :eng_words   do
+  resources :words   do
     collection do
-      put :is_learned
+      put :set_learning
     end
   end
-  resources :word_collections
+  resources :collections
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root to: 'static#index'
-  get '/learning' => 'eng_words#learning'
-  get '/learned' => 'eng_words#learned'
+  get '/learning' => 'words#learning'
+  get '/learned' => 'words#learned'
 
 end

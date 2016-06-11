@@ -3,12 +3,12 @@
 <h1>Изучаемые слова</h1>
 
 
-<%= form_tag is_learned_eng_words_path, method: :put do %>
+<%= form_tag set_learning_words_path, method: :put do %>
     <table>
       <th colspan="1"></th>
       <th>id</th>
       <th>word</th>
-      <% @eng_words.each do |word| %>
+      <% @words.each do |word| %>
           <tr>
             <td> <%= check_box_tag "words_ids[]", word.id %> </td>
             <td> <%= word.id %> </td>
