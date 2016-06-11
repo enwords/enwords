@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20160610201436) do
   create_table "collections", force: :cascade do |t|
     t.datetime "created_at",                                                                                               null: false
     t.datetime "updated_at",                                                                                               null: false
-    t.string   "name",       default: "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x00000004100708>", null: false
+    t.string   "name",       default: "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x00000004d5ee50>", null: false
     t.integer  "user_id"
     t.index ["user_id"], name: "index_collections_on_user_id", using: :btree
   end
@@ -68,9 +68,9 @@ ActiveRecord::Schema.define(version: 20160610201436) do
   end
 
   create_table "users_words", id: false, force: :cascade do |t|
-    t.integer "user_id",    null: false
-    t.integer "word_id",    null: false
-    t.boolean "is_learned"
+    t.integer "user_id", null: false
+    t.integer "word_id", null: false
+    t.boolean "learned"
     t.index ["user_id", "word_id"], name: "index_users_words_on_user_id_and_word_id", unique: true, using: :btree
   end
 
