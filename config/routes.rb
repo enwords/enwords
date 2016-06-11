@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :words   do
     collection do
       put :set_learning
+      put :set_learned
     end
   end
   resources :collections

@@ -8,20 +8,26 @@ class WordsController < ApplicationController
     @words = Word.all
   end
 
-  def set_learning
+  def set_learned
     # mark selected words as learned
-    UsersWords.where(user_id: current_user, word_id: params[:words_ids]).update_all(is_learned: true)
+    UsersWords.where(user_id: current_user, word_id: params[:words_ids]).update_all(learned: true)
     redirect_to learning_path
+  end
+
+  def set_learning
+    # mark selected words as learning
+    UsersWords.where(user_id: current_user, word_id: params[:words_ids]).update_all(learned: false)
+    redirect_to learned_path
   end
 
   def learned
     @words = Word.joins(:users).
-        where(users: { id: current_user}, users_words: {is_learned: true})
+        where(users: { id: current_user}, users_words: {learned: true})
   end
 
   def learning
     @words = Word.joins(:users).
-        where(users: { id: current_user}, users_words: {is_learned: false})
+        where(users: { id: current_user}, users_words: {learned: false})
   end
 
   # GET /words/1
