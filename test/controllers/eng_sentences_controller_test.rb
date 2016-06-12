@@ -20,7 +20,7 @@ class EngSentencesControllerTest < ActionDispatch::IntegrationTest
       post eng_sentences_url, params: { eng_sentence: { id: @eng_sentence.id, sentence: @eng_sentence.sentence } }
     end
 
-    assert_redirected_to eng_sentence_path(EngSentence.last)
+    assert_redirected_to eng_sentence_path(Sentence.last)
   end
 
   test "should show eng_sentence" do
