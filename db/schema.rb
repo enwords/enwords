@@ -11,15 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160610201436) do
+ActiveRecord::Schema.define(version: 20160612092653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "audio", id: false, force: :cascade do |t|
+    t.integer "sentence_id"
+    t.index ["sentence_id"], name: "index_audio_on_sentence_id", using: :btree
+  end
+
   create_table "collections", force: :cascade do |t|
     t.datetime "created_at",                                                                                               null: false
     t.datetime "updated_at",                                                                                               null: false
-    t.string   "name",       default: "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x00000004d5ee50>", null: false
+    t.string   "name",       default: "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x00000005158998>", null: false
     t.integer  "user_id"
     t.index ["user_id"], name: "index_collections_on_user_id", using: :btree
   end
@@ -29,19 +34,22 @@ ActiveRecord::Schema.define(version: 20160610201436) do
     t.integer "collection_id", null: false
   end
 
-  create_table "eng_sentences", id: :integer, force: :cascade do |t|
-    t.string  "sentence"
-    t.boolean "is_audio"
+  create_table "languages", id: :integer, force: :cascade do |t|
+    t.string "name"
   end
 
-  create_table "eng_sentences_rus_sentences", id: false, force: :cascade do |t|
-    t.integer "eng_sentence_id", null: false
-    t.integer "rus_sentence_id", null: false
+  create_table "links", id: false, force: :cascade do |t|
+    t.integer "sentence_1_id", null: false
+    t.integer "sentence_2_id", null: false
+    t.index ["sentence_1_id", "sentence_2_id"], name: "index_links_on_sentence_1_id_and_sentence_2_id", unique: true, using: :btree
+    t.index ["sentence_1_id"], name: "index_links_on_sentence_1_id", using: :btree
+    t.index ["sentence_2_id"], name: "index_links_on_sentence_2_id", using: :btree
   end
 
-  create_table "rus_sentences", id: :integer, force: :cascade do |t|
+  create_table "sentences", id: :integer, force: :cascade do |t|
+    t.integer "language_id"
     t.string  "sentence"
-    t.boolean "is_audio"
+    t.index ["language_id"], name: "index_sentences_on_language_id", using: :btree
   end
 
   create_table "sentences_words", id: false, force: :cascade do |t|
@@ -60,10 +68,14 @@ ActiveRecord::Schema.define(version: 20160610201436) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.integer  "role"
+    t.integer  "language_1_id",                       null: false
+    t.integer  "language_2_id",                       null: false
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.integer  "role"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["language_1_id"], name: "index_users_on_language_1_id", using: :btree
+    t.index ["language_2_id"], name: "index_users_on_language_2_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
@@ -75,8 +87,13 @@ ActiveRecord::Schema.define(version: 20160610201436) do
   end
 
   create_table "words", id: :integer, force: :cascade do |t|
-    t.string "word"
+    t.integer "language_id"
+    t.string  "word"
+    t.index ["language_id"], name: "index_words_on_language_id", using: :btree
   end
 
+  add_foreign_key "audio", "sentences"
   add_foreign_key "collections", "users"
+  add_foreign_key "sentences", "languages"
+  add_foreign_key "words", "languages"
 end

@@ -6,37 +6,46 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 #
+cc = "insert into languages (id, name) values (1, 'eng');"
+ActiveRecord::Base.connection.execute(cc)
+cc = "insert into languages (id, name) values (2, 'rus');"
+ActiveRecord::Base.connection.execute(cc)
 
+
+Sentence.create! [
+                     {id: 1, language_id: 1, sentence: 'Hello my name is Dima'},
+                     {id: 2, language_id: 1, sentence: 'Go to home baby'},
+                     {id: 3, language_id: 1, sentence: 'His car is bad'},
+                     {id: 4, language_id: 1, sentence: 'I work alone'},
+                     {id: 5, language_id: 1, sentence: 'You are the bad'},
+                     {id: 6, language_id: 1, sentence: 'Привет меня зовут Дима'},
+                     {id: 7, language_id: 1, sentence: 'Иди домой лол'},
+                     {id: 8, language_id: 1, sentence: 'Его автомобиль не очень хороший'},
+                     {id: 9, language_id: 1, sentence: 'Я тружусь в одиночестве'},
+                     {id: 10, language_id: 1, sentence: 'Ты - кровать'}
+                 ]
+
+cc = "insert into audio (sentence_id) values (2);"
+ActiveRecord::Base.connection.execute(cc)
+
+cc = "insert into audio (sentence_id) values (4);"
+ActiveRecord::Base.connection.execute(cc)
 
 Word.create! [
-                    {id: 1, word: 'is'},
-                    {id: 2, word: 'my'},
-                    {id: 3, word: 'go'},
-                    {id: 4, word: 'hello'},
-                    {id: 5, word: 'name'},
-                    {id: 6, word: 'to'},
-                    {id: 7, word: 'home'},
-                    {id: 8, word: 'baby'},
-                    {id: 9, word: 'the'},
-                    {id: 10, word: 'bad'}
+                 {id: 1, language_id: 1, word: 'is'},
+                 {id: 2, language_id: 1, word: 'my'},
+                 {id: 3, language_id: 1, word: 'go'},
+                 {id: 4, language_id: 1, word: 'hello'},
+                 {id: 5, language_id: 1, word: 'name'},
+                 {id: 6, language_id: 1, word: 'to'},
+                 {id: 7, language_id: 1, word: 'home'},
+                 {id: 8, language_id: 1, word: 'baby'},
+                 {id: 9, language_id: 1, word: 'the'},
+                 {id: 10, language_id: 1, word: 'bad'}
 
-                ]
+             ]
 
-EngSentence.create! [
-                        {id: 1, sentence: 'Hello my name is Dima', audio: false},
-                        {id: 2, sentence: 'Go to home baby', audio: true},
-                        {id: 3, sentence: 'His car is bad', audio: false},
-                        {id: 4, sentence: 'I work alone', audio: true},
-                        {id: 5, sentence: 'You are the bad', audio: false}
-                    ]
 
-RusSentence.create! [
-                        {id: 6, sentence: 'Привет меня зовут Дима', audio: false},
-                        {id: 7, sentence: 'Иди домой лол', audio: true},
-                        {id: 8, sentence: 'Его автомобиль не очень хороший', audio: false},
-                        {id: 9, sentence: 'Я тружусь в одиночестве', audio: true},
-                        {id: 10, sentence: 'Ты - кровать', audio: false}
-                    ]
 
 cc = "insert into users_words (word_id, user_id, learned) values (4, 1, false);"
 ActiveRecord::Base.connection.execute(cc)
