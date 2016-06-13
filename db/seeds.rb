@@ -53,5 +53,11 @@ cc = "insert into users_words (word_id, user_id, learned) values (5, 1, false);"
 ActiveRecord::Base.connection.execute(cc)
 cc = "insert into users_words (word_id, user_id, learned) values (9, 1, false);"
 ActiveRecord::Base.connection.execute(cc)
-cc = "insert into users_words (word_id, user_id, learned) values (1, 1, true);"
+cc = "insert into users_words (word_id, user_id, learned) values (3, 2, true);"
+ActiveRecord::Base.connection.execute(cc)
+cc = "insert into users_words (word_id, user_id, learned) values (4, 2, false);"
+ActiveRecord::Base.connection.execute(cc)
+cc = "insert into users_words (word_id, user_id, learned) values (6, 2, false);"
+ActiveRecord::Base.connection.execute(cc)
+cc = "insert into users_words (word_id, user_id, learned) values (8, 2, true);"
 ActiveRecord::Base.connection.execute(cc)

@@ -5,29 +5,42 @@ class WordsController < ApplicationController
   # GET /words
   # GET /words.json
   def index
-    @words = Word.all
+    # @words = Word.all
+    @words = Word.joins(:users).where(users: {id: current_user})
+  end
+
+  def set
+    # UsersWords.create!(user_id: current_user, word_id: params[:words_ids], learned: true)
+    ActiveRecord::Base.connection.execute("insert into users_words (word_id, user_id, learned) values (?, ?, ?);",
+                                          params[:words_ids], current_user, true)
+    redirect_to(:back)
   end
 
   def set_learned
     # mark selected words as learned
     UsersWords.where(user_id: current_user, word_id: params[:words_ids]).update_all(learned: true)
-    redirect_to learning_path
+    redirect_to(:back)
   end
 
   def set_learning
     # mark selected words as learning
     UsersWords.where(user_id: current_user, word_id: params[:words_ids]).update_all(learned: false)
-    redirect_to learned_path
+    redirect_to(:back)
+  end
+
+  def unset
+    # @words = Word.joins(:users).where(users: { id: current_user})
+    @words = Word.left_joins(:users).where('user_id != ?', current_user)
   end
 
   def learned
     @words = Word.joins(:users).
-        where(users: { id: current_user}, users_words: {learned: true})
+        where(users: {id: current_user}, users_words: {learned: true})
   end
 
   def learning
     @words = Word.joins(:users).
-        where(users: { id: current_user}, users_words: {learned: false})
+        where(users: {id: current_user}, users_words: {learned: false})
   end
 
   # GET /words/1
@@ -51,7 +64,7 @@ class WordsController < ApplicationController
 
     respond_to do |format|
       if word.save
-        format.html { redirect_to word, notice: 'Eng word was successfully created.' }
+        format.html { redirect_to word, notice: 'Word was successfully created.' }
         format.json { render :show, status: :created, location: word }
       else
         format.html { render :new }
@@ -65,7 +78,7 @@ class WordsController < ApplicationController
   def update
     respond_to do |format|
       if word.update(word_params)
-        format.html { redirect_to word, notice: 'Eng word was successfully updated.' }
+        format.html { redirect_to word, notice: 'Word was successfully updated.' }
         format.json { render :show, status: :ok, location: word }
       else
         format.html { render :edit }
@@ -79,24 +92,22 @@ class WordsController < ApplicationController
   def destroy
     word.destroy
     respond_to do |format|
-      format.html { redirect_to words_url, notice: 'Eng word was successfully destroyed.' }
+      format.html { redirect_to words_url, notice: 'Word was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
 
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_word
-      @word = Word.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_word
+    @word = Word.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def word_params
-      params.require(:word).permit(:id, :word)
-    end
-
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def word_params
+    params.require(:word).permit(:id, :word)
+  end
 
 
 end

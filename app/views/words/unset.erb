@@ -1,10 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Words</h1>
+<h1>Неопределенные слова</h1>
 
 
-
-<%= form_tag set_learning_words_path, method: :put do %>
+<%= form_tag set_users_words_path, method: :put do %>
     <table>
       <th colspan="1"></th>
       <th>id</th>
@@ -17,9 +16,5 @@
           </tr>
       <% end %>
     </table>
-    <%= submit_tag "Set learning" %>
+    <%= submit_tag "Set" %>
 <% end %>
-
-<br>
-
-<%= link_to 'New Eng Word', new_word_path %>
