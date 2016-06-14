@@ -6,9 +6,8 @@ Rails.application.routes.draw do
 
   resources :words   do
     collection do
-      put :set_learning
-      put :set_learned
-      put :set
+      put :update_word_status
+      put :set_word_status
     end
   end
   resources :collections

@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(version: 20160612092653) do
   end
 
   create_table "collections", force: :cascade do |t|
-    t.datetime "created_at",                                                                                               null: false
-    t.datetime "updated_at",                                                                                               null: false
-    t.string   "name",       default: "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x00000005158998>", null: false
+    t.datetime "created_at",                                                                                        null: false
+    t.datetime "updated_at",                                                                                        null: false
+    t.string   "name",       default: "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x3e05440>", null: false
     t.integer  "user_id"
     t.index ["user_id"], name: "index_collections_on_user_id", using: :btree
   end
@@ -68,11 +68,11 @@ ActiveRecord::Schema.define(version: 20160612092653) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.integer  "role"
     t.integer  "language_1_id",                       null: false
     t.integer  "language_2_id",                       null: false
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["language_1_id"], name: "index_users_on_language_1_id", using: :btree
     t.index ["language_2_id"], name: "index_users_on_language_2_id", using: :btree
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 20160612092653) do
   create_table "users_words", id: false, force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "word_id", null: false
-    t.boolean "learned"
+    t.boolean "learned", null: false
     t.index ["user_id", "word_id"], name: "index_users_words_on_user_id_and_word_id", unique: true, using: :btree
   end
 
