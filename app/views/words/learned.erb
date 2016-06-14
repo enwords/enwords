@@ -3,7 +3,7 @@
 <h1>Изученные слова</h1>
 
 
-<%= form_tag set_learning_words_path, method: :put do %>
+<%= form_tag update_word_status_words_path, method: :put do %>
     <table>
       <th colspan="1"></th>
       <th>id</th>
@@ -16,5 +16,5 @@
           </tr>
       <% end %>
     </table>
-    <%= submit_tag "Set learning" %>
+    <%= submit_tag "Добавить в изучаемые", value: false  %>
 <% end %>
