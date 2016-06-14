@@ -5,12 +5,10 @@ class WordsController < ApplicationController
   # GET /words
   # GET /words.json
   def index
-    # @words = Word.all
-    @words = Word.joins(:users).where(users: {id: current_user})
+    @words = Word.all
   end
 
   def set_word_status
-    # UsersWords.create!(user_id: current_user, word_id: params[:words_ids], learned: true)
     params[:words_ids].each { |word_id|
       sql = "insert into users_words (word_id, user_id, learned) values (#{word_id}, #{current_user.id}, #{params[:commit]})"
       ActiveRecord::Base.connection.execute(sql)
@@ -19,21 +17,18 @@ class WordsController < ApplicationController
   end
 
   def update_word_status
-    UsersWords.where(user_id: current_user, word_id: params[:words_ids]).update_all(learned: params[:commit])
+
+    par = params[:commit]
+    if par == 'Delete'
+
+      UsersWords.delete_all(user_id: current_user, word_id: params[:words_ids])
+     # UsersWords.where(user_id: current_user,
+     #                   word_id: params[:words_ids]).destroy_all
+    else
+      UsersWords.where(user_id: current_user, word_id: params[:words_ids]).update_all(learned: par)
+    end
     redirect_to(:back)
   end
-
-  # def set_learned
-  #   # mark selected words as learned
-  #   UsersWords.where(user_id: current_user, word_id: params[:words_ids]).update_all(learned: true)
-  #   redirect_to(:back)
-  # end
-  #
-  # def set_learning
-  #   # mark selected words as learning
-  #   UsersWords.where(user_id: current_user, word_id: params[:words_ids]).update_all(learned: false)
-  #   redirect_to(:back)
-  # end
 
   def unset
     sql = "SELECT words.* FROM words
