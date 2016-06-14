@@ -48,6 +48,16 @@ order by id"
 
   end
 
+  def learned
+    @words = Word.joins(:users).
+        where(users: {id: current_user}, users_words: {learned: true})
+  end
+
+  def learning
+    @words = Word.joins(:users).
+        where(users: {id: current_user}, users_words: {learned: false})
+  end
+
   # GET /words/1
   # GET /words/1.json
   def show
