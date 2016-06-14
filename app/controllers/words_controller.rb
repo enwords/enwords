@@ -11,8 +11,10 @@ class WordsController < ApplicationController
 
   def set
     # UsersWords.create!(user_id: current_user, word_id: params[:words_ids], learned: true)
-    ActiveRecord::Base.connection.execute("insert into users_words (word_id, user_id, learned) values (?, ?, ?);",
-                                          params[:words_ids], current_user, true)
+    params[:words_ids].each { |word_id|
+      sql = "insert into users_words (word_id, user_id, learned) values (#{word_id}, #{current_user.id}, #{true})"
+      ActiveRecord::Base.connection.execute(sql)
+    }
     redirect_to(:back)
   end
 
@@ -29,8 +31,16 @@ class WordsController < ApplicationController
   end
 
   def unset
-    # @words = Word.joins(:users).where(users: { id: current_user})
-    @words = Word.left_joins(:users).where('user_id != ?', current_user)
+    sql = "SELECT words.* FROM words
+left join (SELECT users_words.* FROM users_words
+LEFT  JOIN users ON users.id = users_words.user_id
+WHERE (users_words.user_id = #{current_user.id})) as tmp
+on words.id = tmp.word_id
+where tmp.word_id is null
+order by id"
+
+    @words = ActiveRecord::Base.connection.execute(sql)
+
   end
 
   def learned
