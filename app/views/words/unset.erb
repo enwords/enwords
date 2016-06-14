@@ -3,16 +3,16 @@
 <h1>Неопределенные слова</h1>
 
 
-<%= form_tag set_users_words_path, method: :put do %>
+<%= form_tag set_words_path, method: :put do %>
     <table>
       <th colspan="1"></th>
       <th>id</th>
       <th>word</th>
       <% @words.each do |word| %>
           <tr>
-            <td> <%= check_box_tag "words_ids[]", word.id %> </td>
-            <td> <%= word.id %> </td>
-            <td><%= word.word %>  </td>
+            <td> <%= check_box_tag "words_ids[]", word["id"] %> </td>
+            <td> <%= word["id"] %> </td>
+            <td><%= word["word"] %>  </td>
           </tr>
       <% end %>
     </table>
