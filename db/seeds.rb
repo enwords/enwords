@@ -7,10 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 #
 
-Language.create! [
-                     {id: 1, name: 'eng'},
-                     {id: 2, name: 'rus'}
-                 ]
+# Language.create! [
+#                      {id: 1, name: 'eng'},
+#                      {id: 2, name: 'rus'}
+#                  ]
+
+
 
 Word.create! [
                  {id: 1, language_id: 1, word: 'is'},
@@ -75,4 +77,4 @@ val = [
     {user_id: 2, word_id: 7, learned: true},
     {user_id: 1, word_id: 9, learned: true}
 ]
-UsersWords.create! val
+Wordbook.create! val

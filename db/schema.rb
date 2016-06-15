@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20160612092653) do
   create_table "collections", force: :cascade do |t|
     t.datetime "created_at",                                                                                               null: false
     t.datetime "updated_at",                                                                                               null: false
-    t.string   "name",       default: "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x000000052fe748>", null: false
+    t.string   "name",       default: "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x00000003b11770>", null: false
     t.integer  "user_id"
     t.index ["user_id"], name: "index_collections_on_user_id", using: :btree
   end
@@ -79,11 +79,13 @@ ActiveRecord::Schema.define(version: 20160612092653) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  create_table "users_words", id: false, force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "word_id", null: false
+  create_table "wordbooks", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "word_id"
     t.boolean "learned", null: false
-    t.index ["user_id", "word_id"], name: "index_users_words_on_user_id_and_word_id", unique: true, using: :btree
+    t.index ["user_id", "word_id"], name: "index_wordbooks_on_user_id_and_word_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_wordbooks_on_user_id", using: :btree
+    t.index ["word_id"], name: "index_wordbooks_on_word_id", using: :btree
   end
 
   create_table "words", id: :integer, force: :cascade do |t|
