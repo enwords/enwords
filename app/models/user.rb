@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
-  has_and_belongs_to_many :words
+  has_many :words, through: :users_wordses
+  has_many :collections
+  belongs_to :language
+
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :set_default_lang, :if => :new_record?
 
