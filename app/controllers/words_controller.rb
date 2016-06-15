@@ -5,7 +5,7 @@ class WordsController < ApplicationController
   # GET /words
   # GET /words.json
   def index
-    @words = Word.all
+    @words = Word.all.order(:id)
   end
 
   def set_word_status
@@ -23,7 +23,7 @@ class WordsController < ApplicationController
     params[:words_ids].each { |wid|
       val << {user_id: current_user.id, word_id: wid, learned: bool}
     }
-  UsersWords.create! val
+  Wordbook.create! val
   redirect_to(:back)
 end
 
@@ -31,7 +31,7 @@ def update_word_status
   parameter = params[:commit]
   case parameter
     when 'Скрыть'
-      UsersWords.delete_all(user_id: current_user, word_id: params[:words_ids])
+      Wordbook.delete_all(user_id: current_user, word_id: params[:words_ids])
     else
       bool = false
       case parameter
@@ -40,16 +40,16 @@ def update_word_status
         when 'Изучил'
          bool = true
       end
-      UsersWords.where(user_id: current_user, word_id: params[:words_ids]).update_all(learned: bool)
+      Wordbook.where(user_id: current_user, word_id: params[:words_ids]).update_all(learned: bool)
   end
   redirect_to(:back)
 end
 
 def unset
   sql = "SELECT words.* FROM words
-left join (SELECT users_words.* FROM users_words
-LEFT  JOIN users ON users.id = users_words.user_id
-WHERE (users_words.user_id = #{current_user.id})) as tmp
+left join (SELECT wordbooks.* FROM wordbooks
+LEFT  JOIN users ON users.id = wordbooks.user_id
+WHERE (wordbooks.user_id = #{current_user.id})) as tmp
 on words.id = tmp.word_id
 where tmp.word_id is null
 order by id"
@@ -59,13 +59,11 @@ order by id"
 end
 
 def learned
-  @words = Word.joins(:users).
-      where(users: {id: current_user}, users_words: {learned: true})
+  @words = current_user.words.where(wordbooks: {learned: true}).order(:id)
 end
 
 def learning
-  @words = Word.joins(:users).
-      where(users: {id: current_user}, users_words: {learned: false})
+  @words = current_user.words.where(wordbooks: {learned: false}).order(:id)
 end
 
 # GET /words/1
