@@ -6,30 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 #
-cc = "insert into languages (id, name) values (1, 'eng');"
-ActiveRecord::Base.connection.execute(cc)
-cc = "insert into languages (id, name) values (2, 'rus');"
-ActiveRecord::Base.connection.execute(cc)
 
-
-Sentence.create! [
-                     {id: 1, language_id: 1, sentence: 'Hello my name is Dima'},
-                     {id: 2, language_id: 1, sentence: 'Go to home baby'},
-                     {id: 3, language_id: 1, sentence: 'His car is bad'},
-                     {id: 4, language_id: 1, sentence: 'I work alone'},
-                     {id: 5, language_id: 1, sentence: 'You are the bad'},
-                     {id: 6, language_id: 1, sentence: 'Привет меня зовут Дима'},
-                     {id: 7, language_id: 1, sentence: 'Иди домой лол'},
-                     {id: 8, language_id: 1, sentence: 'Его автомобиль не очень хороший'},
-                     {id: 9, language_id: 1, sentence: 'Я тружусь в одиночестве'},
-                     {id: 10, language_id: 1, sentence: 'Ты - кровать'}
+Language.create! [
+                     {id: 1, name: 'eng'},
+                     {id: 2, name: 'rus'}
                  ]
-
-cc = "insert into audio (sentence_id) values (2);"
-ActiveRecord::Base.connection.execute(cc)
-
-cc = "insert into audio (sentence_id) values (4);"
-ActiveRecord::Base.connection.execute(cc)
 
 Word.create! [
                  {id: 1, language_id: 1, word: 'is'},
@@ -41,23 +22,57 @@ Word.create! [
                  {id: 7, language_id: 1, word: 'home'},
                  {id: 8, language_id: 1, word: 'baby'},
                  {id: 9, language_id: 1, word: 'the'},
-                 {id: 10, language_id: 1, word: 'bad'}
-
+                 {id: 10, language_id: 1, word: 'bad'},
+                 {id: 11, language_id: 2, word: 'слово'},
+                 {id: 12, language_id: 2, word: 'жизнь'},
+                 {id: 13, language_id: 1, word: 'this'},
+                 {id: 14, language_id: 1, word: 'have'},
+                 {id: 15, language_id: 1, word: 'me'},
+                 {id: 16, language_id: 1, word: 'my'},
+                 {id: 17, language_id: 1, word: 'what'},
+                 {id: 18, language_id: 1, word: 'and'},
+                 {id: 19, language_id: 1, word: 'do'},
+                 {id: 20, language_id: 1, word: 'be'},
+                 {id: 21, language_id: 1, word: 'we'},
+                 {id: 22, language_id: 1, word: 'are'},
+                 {id: 23, language_id: 1, word: 'with'},
              ]
 
+Sentence.create! [
+                     {id: 1, language_id: 1, sentence: 'Hello my name is Dima'},
+                     {id: 2, language_id: 1, sentence: 'Go to home baby'},
+                     {id: 3, language_id: 1, sentence: 'His car is bad'},
+                     {id: 4, language_id: 1, sentence: 'I work alone'},
+                     {id: 5, language_id: 1, sentence: 'You are the bad'},
+                     {id: 6, language_id: 2, sentence: 'Привет меня зовут Дима'},
+                     {id: 7, language_id: 2, sentence: 'Иди домой лол'},
+                     {id: 8, language_id: 2, sentence: 'Его автомобиль не очень хороший'},
+                     {id: 9, language_id: 2, sentence: 'Я тружусь в одиночестве'},
+                     {id: 10, language_id: 2, sentence: 'Ты - кровать'}
+                 ]
+
+arr = [[1, 1], [1, 3], [2, 1], [3, 2], [4, 1], [11, 7], [11, 8], [12, 8], [12, 9]]
+arr.each do |x|
+  sql = "insert into sentences_words (word_id, sentence_id) values (#{x.join(", ")})"
+  ActiveRecord::Base.connection.execute(sql)
+end
 
 
-cc = "insert into users_words (word_id, user_id, learned) values (4, 1, false);"
-ActiveRecord::Base.connection.execute(cc)
-cc = "insert into users_words (word_id, user_id, learned) values (5, 1, false);"
-ActiveRecord::Base.connection.execute(cc)
-cc = "insert into users_words (word_id, user_id, learned) values (9, 1, false);"
-ActiveRecord::Base.connection.execute(cc)
-cc = "insert into users_words (word_id, user_id, learned) values (3, 2, true);"
-ActiveRecord::Base.connection.execute(cc)
-cc = "insert into users_words (word_id, user_id, learned) values (4, 2, false);"
-ActiveRecord::Base.connection.execute(cc)
-cc = "insert into users_words (word_id, user_id, learned) values (6, 2, false);"
-ActiveRecord::Base.connection.execute(cc)
-cc = "insert into users_words (word_id, user_id, learned) values (8, 2, true);"
-ActiveRecord::Base.connection.execute(cc)
+(1...10).each do |x|
+  ActiveRecord::Base.connection.execute("insert into audio (sentence_id) values (#{x})") if x.even?
+end
+
+(1..5).each do |x|
+  y = 6
+  ActiveRecord::Base.connection.execute("insert into links (sentence_1_id, sentence_2_id) values (#{x}, #{y})")
+  y = y + 1
+end
+
+
+val = [
+    {user_id: 1, word_id: 10, learned: false},
+    {user_id: 2, word_id: 3, learned: true},
+    {user_id: 2, word_id: 7, learned: true},
+    {user_id: 1, word_id: 9, learned: true}
+]
+UsersWords.create! val
