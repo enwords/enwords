@@ -7,11 +7,15 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 #
 
-# Language.create! [
-#                      {id: 1, name: 'eng'},
-#                      {id: 2, name: 'rus'}
-#                  ]
+Language.create! [
+                     {id: 1, name: 'eng'},
+                     {id: 2, name: 'rus'}
+                 ]
 
+User.create! [
+    {id: 1,	email: 'qqq@qqq.qqq', 	password: 'qqqqqq'}, #$2a$11$Zf5x.t4VjysM6Ddcr8K3YOhYyWyZxjyxPGofFoPs1BTEu2WUKY5Fy
+    {id: 2,	email: 'qqq@qqq2.qqq', 	password: 'qqqqqq'}
+             ]
 
 
 Word.create! [
