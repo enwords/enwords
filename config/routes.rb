@@ -16,5 +16,4 @@ Rails.application.routes.draw do
   get '/learning' => 'words#learning'
   get '/learned' => 'words#learned'
   get '/unset' => 'words#unset'
-  # get '/unset' => 'users_words#unset'
 end

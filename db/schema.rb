@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(version: 20160612092653) do
   end
 
   create_table "collections", force: :cascade do |t|
-    t.datetime "created_at",                                                                                               null: false
-    t.datetime "updated_at",                                                                                               null: false
-    t.string   "name",       default: "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x00000003b11770>", null: false
+    t.datetime "created_at",                                                                                        null: false
+    t.datetime "updated_at",                                                                                        null: false
+    t.string   "name",       default: "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x5cdb310>", null: false
     t.integer  "user_id"
     t.index ["user_id"], name: "index_collections_on_user_id", using: :btree
   end

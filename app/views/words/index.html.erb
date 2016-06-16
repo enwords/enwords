@@ -1,27 +1,31 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row row-content">
+    <div class="col-xs-12">
+      <h1>Все слова</h1>
 
-<h1>Words</h1>
-
-
-<% if false %>
-<%= form_tag set_word_status_words_path, method: :put do %>
-    <table>
-      <th colspan="1"></th>
-      <th>id</th>
-      <th>word</th>
-      <% @words.each do |word| %>
-          <tr>
-            <td> <%= check_box_tag "words_ids[]", word.id %> </td>
-            <td> <%= word.id %> </td>
-            <td><%= word.word %>  </td>
-          </tr>
+      <% if false %>
+          <%= form_tag set_word_status_words_path, method: :put do %>
+              <table>
+                <th colspan="1"></th>
+                <th>id</th>
+                <th>word</th>
+                <% @words.each do |word| %>
+                    <tr>
+                      <td> <%= check_box_tag "words_ids[]", word.id %> </td>
+                      <td> <%= word.id %> </td>
+                      <td><%= word.word %>  </td>
+                    </tr>
+                <% end %>
+              </table>
+              <%= submit_tag "Изучать" %>
+              <%= submit_tag "Знаю" %>
+          <% end %>
       <% end %>
-    </table>
-    <%= submit_tag "Изучать" %>
-    <%= submit_tag "Знаю" %>
-<% end %>
-<% end %>
 
-<br>
+      <br>
 
-<%= link_to 'New Eng Word', new_word_path %>
+      <%= link_to 'New Eng Word', new_word_path %>
+
+    </div>
+  </div>
+</div>
