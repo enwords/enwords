@@ -36,69 +36,78 @@ body
     padding-left: 15px
     .text-muted
       margin: 20px 0
-      a
-        background-color: transparent
-        color: $text-muted
+    a
+      //background-color: transparent
+      color: $text-muted
 
-
-$bgDefault: rgba(223, 223, 223, 0.28)
-$colDefault:  white
-$bgHighlight: #696969
 
 //NAVBAR
-.navbar-brand
-  padding: 5px 15px
 
+$bgDefault      : #262e32
+$bgHighlight    : #262e32
+$colDefault     : #dddddd
+$colHighlight   : #e57554
+$dropDown       : true
 .navbar-default
-  background: $bgDefault
-  color: $colDefault
-  border-color: $bgDefault
-
-.navbar-default .navbar-nav > .active > a
-  background: $bgHighlight
-  color: $colDefault
-
-.navbar-default .navbar-nav > .active > a:hover
-  background: $bgHighlight
-  color: $colDefault
-
-.navbar-default .navbar-nav > .active > a:focus
-  background: $bgHighlight
-  color: $colDefault
-
-.navbar-default .navbar-nav > .open > a
-  background: $bgDefault
-  color: $colDefault
-
-.navbar-default .navbar-nav > .open > a:hover
-  background: $bgDefault
-  color: $colDefault
-
-.navbar-default .navbar-nav > .open > a:focus
-  background: $bgDefault
-  color: $colDefault
-
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus
-  color: $colDefault
-  background-color: $bgHighlight
-     
-.navbar-default .navbar-toggle
-  background-color: $bgHighlight
-  border-color: $bgHighlight
-
-.navbar-default .navbar-toggle:hover,
-.navbar-default .navbar-toggle:focus
-  background-color: $bgHighlight
-
-.navbar-default .navbar-toggle .icon-bar
-  background-color: $colDefault
-
-.navbar-default .navbar-collapse, .navbar-default .navbar-form
-  border-color: $bgHighlight
-
-.navbar-default .navbar-brand
-  color: $colDefault
-
-.navbar .nav > li > a
-  color: $colDefault
-//
+  background-color: $bgDefault
+  border: none
+  .navbar-brand
+    color: $colDefault
+    &:hover, &:focus
+      color: $colDefault
+  .navbar-text
+    color: $colDefault
+  .navbar-nav
+    > li
+      > a
+        color: $colDefault
+        &:hover, &:focus
+          color: $colHighlight
+      @if $dropDown
+        > .dropdown-menu
+          background-color: $bgDefault
+          > li
+            > a
+              color: $colDefault
+              &:hover, &:focus
+                color: $colHighlight
+                background-color: $bgHighlight
+            > .divider
+              background-color: $bgHighlight
+    @if $dropDown
+      .open .dropdown-menu > .active
+        > a, > a:hover, > a:focus
+          color: $colHighlight
+          background-color: $bgHighlight
+    > .active
+      > a, > a:hover, > a:focus
+        color: $colHighlight
+        background-color: $bgHighlight
+    > .open
+      > a, > a:hover, > a:focus
+        color: $colHighlight
+        background-color: $bgHighlight
+  .navbar-toggle
+    border: none
+    &:hover, &:focus
+      background-color: $bgDefault
+    .icon-bar
+      background-color: $colDefault
+  .navbar-collapse,
+  .navbar-form
+    border: none
+  .navbar-link
+    color: $colDefault
+    &:hover
+      color: $colHighlight
+@media (max-width: 767px)
+  .navbar-default .navbar-nav .open .dropdown-menu
+    > li > a
+      color: $colDefault
+      &:hover, &:focus
+        color: $colHighlight
+    > .active
+      > a, > a:hover, > a:focus
+        color: $colHighlight
+        background-color: $bgHighlight
+////
