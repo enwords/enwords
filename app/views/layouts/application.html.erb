@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Enwords</title>
-    <%= csrf_meta_tags %>
+<html lang="ru">
+<head>
+  <title>Enwords</title>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= favicon_link_tag 'favicon.png' %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+</head>
 
-  <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-
-  <%= yield %>
-  </body>
+<body>
+<%= render 'shared/navigation' %>
+<%= yield %>
+<%= render 'shared/footer' %>
+</body>
 </html>
