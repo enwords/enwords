@@ -8,19 +8,48 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-
-      <%= link_to image_tag("logomin.png", :border => 0, :style => 'height: 40px;') + " Enwords", root_path, :class => 'navbar-brand' %>
-
+      <%= link_to "Enwords", root_path, :class => 'navbar-brand' %>
     </div>
-    <div id="navbar" class="navbar-collapse collapse">
 
-      <ul class="nav navbar-nav">
-        <li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Главная", root_path %></li>
-        <li class="<%= 'active' if current_page?(learning_path) %>"><%= link_to "Изучаемые слова", learning_path %></li>
-        <li class="<%= 'active' if current_page?(learned_path) %>"><%= link_to "Изученные слова", learned_path %></li>
-        <li class="<%= 'active' if current_page?(unset_path) %>"><%= link_to "Неопределенные слова", unset_path %></li>
-        <li class="<%= 'active' if current_page?(words_path) %>"><%= link_to "Все слова", words_path %></li>
-      </ul>
+    <div id="navbar" class="navbar-collapse collapse">
+      <% if signed_in? %>
+          <ul class="nav navbar-nav">
+
+            <li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Главная", root_path %></li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Слова<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li class="<%= 'active' if current_page?(words_path) %>"><%= link_to "Все", words_path %></li>
+                <li class="<%= 'active' if current_page?(learning_path) %>"><%= link_to "Изучаемые", learning_path %></li>
+                <li class="<%= 'active' if current_page?(learned_path) %>"><%= link_to "Выученные", learned_path %></li>
+                <li class="<%= 'active' if current_page?(unset_path) %>"><%= link_to "Остальные", unset_path %></li>
+              </ul>
+            </li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to 'Настройки', edit_user_registration_path %></li>
+            <li><%= link_to destroy_user_session_path, method: 'delete' do %>
+                  <span class="glyphicon glyphicon-log-out"></span> Выйти
+              <% end %>
+            </li>
+          </ul>
+
+      <% else %>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="<%= 'active' if current_page?(new_user_registration_path) %>"><%= link_to new_user_registration_path do %>
+                  Регистрация
+              <% end %>
+            </li>
+
+            <li class="<%= 'active' if current_page?(new_user_session_path) %>"><%= link_to new_user_session_path do %>
+                  <span class="glyphicon glyphicon-log-in"></span> Войти
+              <% end %>
+            </li>
+          </ul>
+      <% end %>
+
 
     </div>
   </div>
