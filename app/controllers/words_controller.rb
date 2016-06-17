@@ -46,17 +46,7 @@ def update_word_status
 end
 
 def unset
-#   sql = "SELECT words.* FROM words
-# left join (SELECT wordbooks.* FROM wordbooks
-# LEFT  JOIN users ON users.id = wordbooks.user_id
-# WHERE (wordbooks.user_id = #{current_user.id})) as tmp
-# on words.id = tmp.word_id
-# where tmp.word_id is null
-# order by id"
-#
-#   @words = ActiveRecord::Base.connection.execute(sql)
-    @words = Word.where("id NOT IN (SELECT wordbooks.word_id FROM wordbooks WHERE (wordbooks.user_id = #{current_user.id}))")
-                 .paginate(page: params[:page], per_page: 10)
+  @words = Word.where.not(id: Wordbook.select(:word_id).where(user: current_user)).paginate(page: params[:page], per_page: 20)
 end
 
 def learned
