@@ -18,8 +18,7 @@ Rails.application.routes.draw do
 
   resources :words   do
     collection do
-      put :update_word_status
-      put :set_word_status
+      put :word_action
     end
   end
 

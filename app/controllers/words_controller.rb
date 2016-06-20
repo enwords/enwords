@@ -8,18 +8,31 @@ class WordsController < ApplicationController
     @words = Word.all.order(:id)
   end
 
-  def set_word_status
+  def word_action
     parameter = params[:commit]
-    val = []
-    bool = false
     case parameter
+      when 'Добивить в изучаемые'
+        set_word_status false
+      when 'Добивить в выученные'
+        set_word_status true
       when 'Изучать'
-        bool = false
-      when 'Знаю'
-        bool = true
+        update_word_status false
+      when 'Выучил'
+        update_word_status true
+      when 'Скрыть'
+        delete_word_status
       else
         return
     end
+  end
+
+  def delete_word_status
+    Wordbook.delete_all(user_id: current_user, word_id: params[:words_ids])
+    redirect_to(:back)
+  end
+
+  def set_word_status(bool)
+    val = []
     params[:words_ids].each { |wid|
       val << {user_id: current_user.id, word_id: wid, learned: bool}
     }
@@ -27,21 +40,8 @@ class WordsController < ApplicationController
   redirect_to(:back)
 end
 
-def update_word_status
-  parameter = params[:commit]
-  case parameter
-    when 'Скрыть'
-      Wordbook.delete_all(user_id: current_user, word_id: params[:words_ids])
-    else
-      bool = false
-      case parameter
-        when 'Изучать'
-          bool = false
-        when 'Изучил'
-         bool = true
-      end
-      Wordbook.where(user_id: current_user, word_id: params[:words_ids]).update_all(learned: bool)
-  end
+def update_word_status(bool)
+  Wordbook.where(user_id: current_user, word_id: params[:words_ids]).update_all(learned: bool)
   redirect_to(:back)
 end
 
