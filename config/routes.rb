@@ -14,15 +14,12 @@ Rails.application.routes.draw do
 
   resources :users
 
-  resources :sentences do
-    collection do
-      put :practice
-    end
-  end
+  resources :sentences
 
   resources :words   do
     collection do
       put :word_action
+      # put :practice
     end
   end
 
@@ -32,4 +29,5 @@ Rails.application.routes.draw do
   get '/learning' => 'words#learning'
   get '/learned' => 'words#learned'
   get '/unset' => 'words#unset'
+  get '/practice' => 'words#practice'
 end

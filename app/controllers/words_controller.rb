@@ -22,10 +22,19 @@ class WordsController < ApplicationController
       when 'Скрыть'
         delete_word_status
       when 'Тренеровать'
-        redirect_to(practice_sentences_path(params[:words_ids]))
+        redirect_to practice_path
+        practice
+
       else
         return
     end
+  end
+
+  def practice
+    # @sentences = Sentence.includes(sentences_words: :sentence).where(sentences_words: {word_id: params[:words_ids]})
+    @sentences = Sentence.joins(:sentences_words).joins(:words).where(sentences_words: {word: params[:words_ids]})
+     puts params[:words_ids]
+    # params[:words_ids]))
   end
 
   def delete_word_status
