@@ -1,48 +1,48 @@
 require 'test_helper'
 
-class EngSentencesControllerTest < ActionDispatch::IntegrationTest
+class SentencesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @eng_sentence = eng_sentences(:one)
+    @sentence = sentences(:one)
   end
 
   test "should get index" do
-    get eng_sentences_url
+    get sentences_url
     assert_response :success
   end
 
   test "should get new" do
-    get new_eng_sentence_url
+    get new_sentence_url
     assert_response :success
   end
 
-  test "should create eng_sentence" do
-    assert_difference('EngSentence.count') do
-      post eng_sentences_url, params: { eng_sentence: { id: @eng_sentence.id, sentence: @eng_sentence.sentence } }
+  test "should create sentence" do
+    assert_difference('Sentence.count') do
+      post sentences_url, params: { sentence: { id: @sentence.id, sentence: @sentence.sentence } }
     end
 
-    assert_redirected_to eng_sentence_path(Sentence.last)
+    assert_redirected_to sentence_path(Sentence.last)
   end
 
-  test "should show eng_sentence" do
-    get eng_sentence_url(@eng_sentence)
+  test "should show sentence" do
+    get sentence_url(@sentence)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_eng_sentence_url(@eng_sentence)
+    get edit_sentence_url(@sentence)
     assert_response :success
   end
 
-  test "should update eng_sentence" do
-    patch eng_sentence_url(@eng_sentence), params: { eng_sentence: { id: @eng_sentence.id, sentence: @eng_sentence.sentence } }
-    assert_redirected_to eng_sentence_path(@eng_sentence)
+  test "should update sentence" do
+    patch sentence_url(@sentence), params: { sentence: { id: @sentence.id, sentence: @sentence.sentence } }
+    assert_redirected_to sentence_path(@sentence)
   end
 
-  test "should destroy eng_sentence" do
-    assert_difference('EngSentence.count', -1) do
-      delete eng_sentence_url(@eng_sentence)
+  test "should destroy sentence" do
+    assert_difference('Sentence.count', -1) do
+      delete sentence_url(@sentence)
     end
 
-    assert_redirected_to eng_sentences_path
+    assert_redirected_to sentences_path
   end
 end
