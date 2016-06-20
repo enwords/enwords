@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class EngSentenceTest < ActiveSupport::TestCase
+class SentenceTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

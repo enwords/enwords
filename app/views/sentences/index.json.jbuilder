@@ -1,4 +1,4 @@
-json.array!(@eng_sentences) do |eng_sentence|
-  json.extract! eng_sentence, :id, :id, :sentence
-  json.url eng_sentence_url(eng_sentence, format: :json)
+json.array!(@sentences) do |sentence|
+  json.extract! sentence, :id, :sentence
+  json.url sentence_url(sentence, format: :json)
 end

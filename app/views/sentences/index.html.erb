@@ -12,13 +12,13 @@
   </thead>
 
   <tbody>
-    <% @eng_sentences.each do |eng_sentence| %>
+    <% @sentences.each do |sentence| %>
       <tr>
-        <td><%= eng_sentence.id %></td>
-        <td><%= eng_sentence.sentence %></td>
-        <td><%= link_to 'Show', eng_sentence %></td>
-        <td><%= link_to 'Edit', edit_eng_sentence_path(eng_sentence) %></td>
-        <td><%= link_to 'Destroy', eng_sentence, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= sentence.id %></td>
+        <td><%= sentence.sentence %></td>
+        <td><%= link_to 'Show', sentence %></td>
+        <td><%= link_to 'Edit', edit_sentence_path(sentence) %></td>
+        <td><%= link_to 'Destroy', sentence, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Eng Sentence', new_eng_sentence_path %>
+<%= link_to 'New Eng Sentence', new_sentence_path %>
