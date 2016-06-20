@@ -10,14 +10,14 @@
             <th>word</th>
             <% @words.each do |word| %>
                 <tr>
-                  <td> <%= check_box_tag "words_ids[]", word["id"] %> </td>
-                  <td> <%= word["id"] %> </td>
-                  <td><%= word["word"] %>  </td>
+                  <td> <%= check_box_tag "words_ids[]", word.id %> </td>
+                  <td> <%= word.id %> </td>
+                  <td><%= word.word %>  </td>
                 </tr>
             <% end %>
           </table>
-          <%= submit_tag "Добивить в изучаемые" %>
-          <%= submit_tag "Добивить в выученные" %>
+          <%= submit_tag "Добавить в изучаемые" %>
+          <%= submit_tag "Добавить в выученные" %>
       <% end %>
 
       <%= will_paginate @words %>
