@@ -14,7 +14,11 @@ Rails.application.routes.draw do
 
   resources :users
 
-  resources :sentences
+  resources :sentences do
+    collection do
+      put :practice
+    end
+  end
 
   resources :words   do
     collection do
