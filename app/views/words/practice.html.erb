@@ -1,3 +1,12 @@
-<% @sentences.each do |sentence| %>
-    <p><%= sentence.sentence %> </p>
-<%end %>
+<div class="container">
+  <div class="row row-content">
+    <div class="col-xs-12">
+      <% @sentences.each do |sentence| %>
+          <div class="pair" style="margin-bottom: 20px; text-align: center">
+            <p><%= sentence["original"] %> </p>
+            <p><%= sentence["translate"] %> </p>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>

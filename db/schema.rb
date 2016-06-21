@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160612092653) do
+ActiveRecord::Schema.define(version: 20160621081409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20160612092653) do
   create_table "collections", force: :cascade do |t|
     t.datetime "created_at",                                                                                        null: false
     t.datetime "updated_at",                                                                                        null: false
-    t.string   "name",       default: "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x5cdb310>", null: false
+    t.string   "name",       default: "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x5e7c970>", null: false
     t.integer  "user_id"
     t.index ["user_id"], name: "index_collections_on_user_id", using: :btree
   end
@@ -55,6 +55,14 @@ ActiveRecord::Schema.define(version: 20160612092653) do
   create_table "sentences_words", id: false, force: :cascade do |t|
     t.integer "word_id",     null: false
     t.integer "sentence_id", null: false
+  end
+
+  create_table "trainings", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "sentence_id"
+    t.index ["sentence_id"], name: "index_trainings_on_sentence_id", using: :btree
+    t.index ["user_id", "sentence_id"], name: "index_trainings_on_user_id_and_sentence_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_trainings_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

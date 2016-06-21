@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_many :wordbooks
   has_many :words, through: :wordbooks
+  has_many :trainings
+  has_many :sentences, through: :trainings
   has_many :collections
 
   enum role: [:user, :vip, :admin]

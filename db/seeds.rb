@@ -69,7 +69,7 @@ end
 end
 
 (1..5).each do |x|
-  y = 6
+  y ||= 6
   ActiveRecord::Base.connection.execute("insert into links (sentence_1_id, sentence_2_id) values (#{x}, #{y})")
   y = y + 1
 end
