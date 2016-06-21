@@ -3,5 +3,4 @@ class CreateTrainings < ActiveRecord::Migration[5.0]
     t.references :user
     t.references :sentence
   end
-  add_index :trainings, [:user_id, :sentence_id], unique: true
 end

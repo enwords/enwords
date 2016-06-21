@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(version: 20160621081409) do
   end
 
   create_table "collections", force: :cascade do |t|
-    t.datetime "created_at",                                                                                        null: false
-    t.datetime "updated_at",                                                                                        null: false
-    t.string   "name",       default: "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x5e7c970>", null: false
+    t.datetime "created_at",                                                                                               null: false
+    t.datetime "updated_at",                                                                                               null: false
+    t.string   "name",       default: "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x000000034c5d58>", null: false
     t.integer  "user_id"
     t.index ["user_id"], name: "index_collections_on_user_id", using: :btree
   end
@@ -61,7 +61,6 @@ ActiveRecord::Schema.define(version: 20160621081409) do
     t.integer "user_id"
     t.integer "sentence_id"
     t.index ["sentence_id"], name: "index_trainings_on_sentence_id", using: :btree
-    t.index ["user_id", "sentence_id"], name: "index_trainings_on_user_id_and_sentence_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_trainings_on_user_id", using: :btree
   end
 
