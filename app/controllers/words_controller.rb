@@ -22,19 +22,47 @@ class WordsController < ApplicationController
       when 'Скрыть'
         delete_word_status
       when 'Тренеровать'
-        redirect_to practice_path
-        practice
-
+        set_training
       else
         return
     end
   end
 
+  #TODO need optimization
+  def set_training
+    Training.delete_all(user_id: current_user)
+    arr = []
+    val = []
+
+    params[:words_ids].each do |wid|
+      arr << Sentence.joins(:sentences_words).where(sentences_words: {word_id: wid}).order("RANDOM()").limit(5)
+    end
+
+    arr.each do |sentences_arr|
+      sentences_arr.each do |sen|
+        val << {user_id: current_user.id, sentence_id: sen.id}
+      end
+    end
+
+    Training.create! val
+    redirect_to(practice_path)
+  end
+
   def practice
-    # @sentences = Sentence.includes(sentences_words: :sentence).where(sentences_words: {word_id: params[:words_ids]})
-    @sentences = Sentence.joins(:sentences_words).joins(:words).where(sentences_words: {word: params[:words_ids]})
-     puts params[:words_ids]
-    # params[:words_ids]))
+
+    # @sentences = Sentence.includes(:audio).select('en.id id, en.sentence sen1, ru.sentence sen2, audio.sentence_id a')
+    # .join
+
+    sql = "
+SELECT s1.id id, s1.sentence original, s2.sentence translate, audio.sentence_id audio from sentences s1
+JOIN links ON links.sentence_1_id = s1.id
+JOIN sentences s2 ON links.sentence_2_id = s2.id
+JOIN trainings ON trainings.sentence_id = s1.id
+LEFT JOIN audio ON audio.sentence_id = s1.id
+where user_id = #{current_user.id}
+"
+    @sentences = ActiveRecord::Base.connection.execute(sql)
+
   end
 
   def delete_word_status
