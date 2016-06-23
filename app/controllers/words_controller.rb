@@ -85,7 +85,8 @@ where user_id = #{current_user.id}
   end
 
   def unset
-    @words = Word.where.not(id: Wordbook.select(:word_id).where(user: current_user)).paginate(page: params[:page], per_page: 20)
+    @words = Word.joins(:sentences).where(sentences: {language_id: current_user.language_1_id }).
+        where.not(id: Wordbook.select(:word_id).where(user: current_user)).group(:id).order(:id).paginate(page: params[:page], per_page: 20)
   end
 
   def learned
