@@ -5,7 +5,11 @@ class WordsController < ApplicationController
   # GET /words
   # GET /words.json
   def index
-    @words = Word.all.order(:id)
+    # @words = Word.all.order(:id)
+
+
+    @words = Word.joins(:sentences).where(sentences: {language_id: current_user.language_1_id}).
+        group(:id).order(:id).paginate(page: params[:page], per_page: 20)
   end
 
   def word_action
@@ -13,16 +17,16 @@ class WordsController < ApplicationController
     case parameter
       when 'Добавить в изучаемые'
         set_word_status false
+        redirect_to(:back)
       when 'Добавить в выученные'
         set_word_status true
-      when 'Изучать'
-        update_word_status false
-      when 'Выучил'
-        update_word_status true
-      when 'Скрыть'
+        redirect_to(:back)
+      when 'Добавить в неопределенные'
         delete_word_status
-      when 'Тренеровать'
+        redirect_to(:back)
+      when 'Тренировать'
         set_training
+        redirect_to(practice_path)
       else
         return
     end
@@ -45,7 +49,6 @@ class WordsController < ApplicationController
     end
 
     Training.create! val
-    redirect_to(practice_path)
   end
 
   def practice
@@ -60,32 +63,29 @@ JOIN sentences s2 ON links.sentence_2_id = s2.id
 JOIN trainings ON trainings.sentence_id = s1.id
 LEFT JOIN audio ON audio.sentence_id = s1.id
 where user_id = #{current_user.id}
-"
+    "
     @sentences = ActiveRecord::Base.connection.execute(sql)
 
   end
 
   def delete_word_status
     Wordbook.delete_all(user_id: current_user, word_id: params[:words_ids])
-    redirect_to(:back)
   end
 
   def set_word_status(bool)
-    val = []
-    params[:words_ids].each { |wid|
-      val << {user_id: current_user.id, word_id: wid, learned: bool}
-    }
-    Wordbook.create! val
-    redirect_to(:back)
-  end
-
-  def update_word_status(bool)
-    Wordbook.where(user_id: current_user, word_id: params[:words_ids]).update_all(learned: bool)
-    redirect_to(:back)
+    unless params[:words_ids].nil?
+      params[:words_ids].each do |wid|
+        if Wordbook.find_by(user_id: current_user.id, word_id: wid).nil?
+          Wordbook.create!(user_id: current_user.id, word_id: wid, learned: bool)
+        else
+          Wordbook.where(user_id: current_user, word_id: params[:words_ids]).update_all(learned: bool)
+        end
+      end
+    end
   end
 
   def unset
-    @words = Word.joins(:sentences).where(sentences: {language_id: current_user.language_1_id }).
+    @words = Word.joins(:sentences).where(sentences: {language_id: current_user.language_1_id}).
         where.not(id: Wordbook.select(:word_id).where(user: current_user)).group(:id).order(:id).paginate(page: params[:page], per_page: 20)
   end
 
