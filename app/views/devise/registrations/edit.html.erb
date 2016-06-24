@@ -20,17 +20,17 @@
           <% end %>
 
           <div class="field">
-            <%= f.label :password, "Новый пароль" %> <i>(leave blank if you don't want to change it)</i><br/>
+            <%= f.label :password, "Новый пароль" %> <i>(оставьте поле пустым, если не хотите менять)</i><br/>
             <%= f.password_field :password, autocomplete: "off" %>
           </div>
 
           <div class="field">
-            <%= f.label :password_confirmation, "Подтвердите пароль" %><br/>
+            <%= f.label :password_confirmation, "Повторите пароль" %><br/>
             <%= f.password_field :password_confirmation, autocomplete: "off" %>
           </div>
 
           <div class="field">
-            <%= f.label :current_password, "Текущий пароль"%> <i>(we need your current password to confirm your changes)</i><br/>
+            <%= f.label :current_password, "Старый пароль"%> <i> (для подтверждения)</i><br/>
             <%= f.password_field :current_password, autocomplete: "off" %>
           </div>
 
@@ -41,11 +41,9 @@
           </div>
       <% end %>
 
-      <h3>Удалить аккаунт</h3>
-
       <p><%= button_to "Удалить аккаунт", registration_path(resource_name), data: {confirm: "Вы уверены?"}, method: :delete %></p>
 
-      <%= link_to "На главную", :back %>
+      <%= link_to "Назад", :back %>
 
     </div>
   </div>
