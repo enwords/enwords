@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row row-content">
     <div class="col-xs-12">
-      <h2>Изученные слова</h2>
+      <h2>Выученные слова</h2>
 
       <%= form_tag word_action_words_path, method: :put do %>
           <table>
@@ -16,9 +16,11 @@
                 </tr>
             <% end %>
           </table>
-          <%= submit_tag "Изучать" %>
-          <%= submit_tag "Скрыть" %>
-      <% end %>
+          <%= submit_tag "Добавить в изучаемые" %>
+          <%= submit_tag "Добавить в неопределенные" %>
+          <%= submit_tag "Тренировать" %>
+
+    <% end %>
     </div>
   </div>
 </div>

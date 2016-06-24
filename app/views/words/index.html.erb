@@ -3,28 +3,26 @@
     <div class="col-xs-12">
       <h1>Все слова</h1>
 
-      <% if false %>
-          <%= form_tag set_word_status_words_path, method: :put do %>
-              <table>
-                <th colspan="1"></th>
-                <th>id</th>
-                <th>word</th>
-                <% @words.each do |word| %>
-                    <tr>
-                      <td> <%= check_box_tag "words_ids[]", word.id %> </td>
-                      <td> <%= word.id %> </td>
-                      <td><%= word.word %>  </td>
-                    </tr>
-                <% end %>
-              </table>
-              <%= submit_tag "Изучать" %>
-              <%= submit_tag "Знаю" %>
-          <% end %>
+      <%= form_tag word_action_words_path, method: :put do %>
+          <table>
+            <th colspan="1"></th>
+            <th>id</th>
+            <th>word</th>
+            <% @words.each do |word| %>
+                <tr>
+                  <td> <%= check_box_tag "words_ids[]", word.id %> </td>
+                  <td> <%= word.id %> </td>
+                  <td> <%= word.word %>  </td>
+                </tr>
+            <% end %>
+          </table>
+          <%= submit_tag "Добавить в изучаемые" %>
+          <%= submit_tag "Добавить в выученные" %>
+          <%= submit_tag "Добавить в неопределенные" %>
+          <%= submit_tag "Тренировать" %>
       <% end %>
 
-      <br>
-
-      <%= link_to 'New Eng Word', new_word_path %>
+      <%= will_paginate @words %>
 
     </div>
   </div>
