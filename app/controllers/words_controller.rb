@@ -1,12 +1,6 @@
 class WordsController < ApplicationController
   before_action :authenticate_user!
 
-  # GET /words
-  # GET /words.json
-  def index
-    @words = Word.joins(:sentences).where(sentences: {language_id: current_user.language_1_id}).
-        group(:id).order(:id).paginate(page: params[:page], per_page: 20)
-  end
 
   def word_action
     parameter = params[:commit]
@@ -80,20 +74,30 @@ where user_id = #{current_user.id}
     end
   end
 
-  # GET /unset
-  def unset
+  # GET /words
+  # GET /words.json
+  def index
     @words = Word.joins(:sentences).where(sentences: {language_id: current_user.language_1_id}).
-        where.not(id: Wordbook.select(:word_id).where(user: current_user)).group(:id).order(:id).paginate(page: params[:page], per_page: 20)
-  end
-
-  # GET /learned
-  def learned
-    @words = current_user.words.where(wordbooks: {learned: true}).order(:id)
+        group(:id).order(:id).paginate(page: params[:page], per_page: 20)
   end
 
   # GET /learning
   def learning
-    @words = current_user.words.where(wordbooks: {learned: false}).order(:id)
+    @words = current_user.words.where(wordbooks: {learned: false}).order(:id).
+        paginate(page: params[:page], per_page: 20)
+  end
+
+  # GET /learned
+  def learned
+    @words = current_user.words.where(wordbooks: {learned: true}).order(:id).
+        paginate(page: params[:page], per_page: 20)
+  end
+
+  # GET /unset
+  def unset
+    @words = Word.joins(:sentences).where(sentences: {language_id: current_user.language_1_id}).
+        where.not(id: Wordbook.select(:word_id).where(user: current_user)).group(:id).order(:id).
+        paginate(page: params[:page], per_page: 20)
   end
 
   private
