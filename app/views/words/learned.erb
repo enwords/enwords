@@ -19,8 +19,10 @@
           <%= submit_tag "Добавить в изучаемые" %>
           <%= submit_tag "Добавить в неопределенные" %>
           <%= submit_tag "Тренировать" %>
+      <% end %>
 
-    <% end %>
+      <%= will_paginate @words %>
+
     </div>
   </div>
 </div>
