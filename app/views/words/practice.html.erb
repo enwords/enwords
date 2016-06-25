@@ -1,14 +1,18 @@
 <div class="container">
   <div class="row row-content">
     <div class="col-xs-12">
-      <% flag = 'show' %>
       <% @sentences.each do |sentence| %>
           <div class="col-xs-12" style="margin-bottom: 20px; text-align: center">
-            <p><%= sentence["original"] %> </p>
-            <p><%= sentence["translate"] %> </p>
+            <p><%= sentence[:sentence] %> </p>
+            <p><%= sentence.sentences.to_a.first.sentence %> </p>
+            <% unless sentence.audio.nil? %>
+              <%= link_to "audio", "https://audio.tatoeba.org/sentences/eng/#{sentence.audio.sentence_id}.mp3"%>
+                <% end %>
           </div>
-          <% flag = 'hide' %>
       <% end %>
+      <div class="digg_pagination">
+        <%= will_paginate @sentences, :page_links => false, :previous_label => '← Назад', :next_label => 'Далее →' %>
+      </div>
     </div>
   </div>
 </div>

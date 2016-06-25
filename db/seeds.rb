@@ -10,8 +10,8 @@ require 'csv'
 
 puts 'wait few minutes'
 Language.create! [
-                     {id: 1, name: 'eng'},
-                     {id: 2, name: 'rus'}
+                     {id: 1, sentence: 'eng'},
+                     {id: 2, sentence: 'rus'}
                  ]
 
 User.create! [
@@ -44,7 +44,7 @@ puts 'word_sentence done'
 
 CSV.foreach(Rails.root.join('db', 'seeds_data', 'audio.tsv'), :col_sep => "\t", :headers => false,
             :encoding => 'utf-8').each do |row|
-  sql = "insert into audio (sentence_id) values (#{ row[0]})"
+  sql = "insert into audios (sentence_id) values (#{ row[0]})"
   ActiveRecord::Base.connection.execute(sql)
 end
 puts 'audio done'
