@@ -1,11 +1,13 @@
 <div class="container">
   <div class="row row-content">
     <div class="col-xs-12">
+      <% flag = 'show' %>
       <% @sentences.each do |sentence| %>
-          <div class="pair" style="margin-bottom: 20px; text-align: center">
+          <div class="col-xs-12" style="margin-bottom: 20px; text-align: center">
             <p><%= sentence["original"] %> </p>
             <p><%= sentence["translate"] %> </p>
           </div>
+          <% flag = 'hide' %>
       <% end %>
     </div>
   </div>
