@@ -18,9 +18,12 @@
           </table>
           <%= submit_tag "Добавить в изучаемые" %>
           <%= submit_tag "Добавить в выученные" %>
-      <% end %>
+          <%= submit_tag "Тренировать" %>
+    <% end %>
 
-      <%= will_paginate @words %>
+      <div class="digg_pagination">
+        <%= will_paginate @words, :page_links => false, :previous_label => '← Назад', :next_label => 'Далее →' %>
+      </div>
 
     </div>
   </div>
