@@ -2,12 +2,18 @@
   <div class="row row-content">
     <div class="col-xs-12">
       <% @sentences.each do |sentence| %>
-          <div class="col-xs-12" style="margin-bottom: 20px; text-align: center">
-            <p><%= sentence[:sentence] %> </p>
+          <div class="col-xs-12" style="margin-bottom: 20px; text-align: center; font-size: 150%">
+            <p>
+              <% if sentence.audio.nil? %>
+                <div class="audioButton glyphicon glyphicon-volume-off"></div>
+            <% else %>
+                <div class="audioButton glyphicon glyphicon-volume-up" onclick="play()"></div>
+                <%= audio_tag("https://audio.tatoeba.org/sentences/eng/#{sentence.id }.mp3", autoplay: false, id: 'audio-play') %>
+            <% end %>
+
+            <%= sentence[:sentence] %> </p>
             <p><%= sentence.sentences.to_a.first.sentence %> </p>
-            <% unless sentence.audio.nil? %>
-              <%= link_to "audio", "https://audio.tatoeba.org/sentences/eng/#{sentence.audio.sentence_id}.mp3"%>
-                <% end %>
+
           </div>
       <% end %>
       <div class="digg_pagination">
@@ -16,3 +22,10 @@
     </div>
   </div>
 </div>
+
+<!--bugfix for autoplay-->
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function () {
+    play();
+  });
+</script>
