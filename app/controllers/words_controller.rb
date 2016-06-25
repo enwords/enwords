@@ -42,20 +42,8 @@ class WordsController < ApplicationController
   end
 
   def practice
-
-    # @sentences = Sentence.includes(:audio).select('en.id id, en.sentence sen1, ru.sentence sen2, audio.sentence_id a')
-    # .join
-
-    sql = "
-SELECT s1.id id, s1.sentence original, s2.sentence translate, audio.sentence_id audio from sentences s1
-JOIN links ON links.sentence_1_id = s1.id
-JOIN sentences s2 ON links.sentence_2_id = s2.id
-JOIN trainings ON trainings.sentence_id = s1.id
-LEFT JOIN audio ON audio.sentence_id = s1.id
-where user_id = #{current_user.id}
-    "
-    @sentences = ActiveRecord::Base.connection.execute(sql)
-
+    @sentences = Sentence.where(id: Training.select(:sentence_id).where(user: current_user)).includes(:audio).
+        paginate(page: params[:page], per_page: 1)
   end
 
   def delete_word_status
