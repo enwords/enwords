@@ -15,3 +15,9 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+
+//audio
+function play(){
+    var audio = document.getElementById("audio-play");
+    audio.play();
+}
