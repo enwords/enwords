@@ -1,26 +1,38 @@
 <div class="container">
   <div class="row row-content">
-    <div class="col-xs-12">
       <% @sentences.each do |sentence| %>
-          <div class="col-xs-12" style="margin-bottom: 20px; text-align: center; font-size: 150%">
-            <p>
-              <% if sentence.audio.nil? %>
+          <div class="col-xs-12" style="margin-bottom: 20px; text-align: center">
+            <h3><% if sentence.audio.nil? %>
                 <div class="audioButton glyphicon glyphicon-volume-off"></div>
             <% else %>
                 <div class="audioButton glyphicon glyphicon-volume-up" onclick="play()"></div>
                 <%= audio_tag("https://audio.tatoeba.org/sentences/eng/#{sentence.id }.mp3", autoplay: false, id: 'audio-play') %>
             <% end %>
+            <%= sentence.sentence %> </h3>
+            <h4><%= sentence.sentences.first.sentence %> </h4>
+          </div>
 
-            <%= sentence[:sentence] %> </p>
-            <p><%= sentence.sentences.to_a.first.sentence %> </p>
+          <div class="col-xs-12">
+            <% sentence.words.each do |word| %>
+                <% if word.wordbooks.where(user_id: current_user.id).any? %>
+                    <% x = word.wordbooks.where(user_id: current_user.id).first.learned %>
+                    <% color = "#54FF5E" if x %>
+                    <% color = "#e57554" unless x %>
+                <% else %>
+                    <% color = "#999999" %>
+                <% end %>
 
+                <p style="background-color: <%= color %>"><%= word.word.capitalize %></p>
+
+            <% end %>
           </div>
       <% end %>
-      <div class="digg_pagination">
-        <%= will_paginate @sentences, :page_links => false, :previous_label => '← Назад', :next_label => 'Далее →' %>
-      </div>
+
     </div>
   </div>
+
+<div class="digg_pagination" style="position: fixed; bottom: 100px;  width: 100%">
+  <%= will_paginate @sentences, :page_links => false, previous_label: '❮', next_label: '❯' %>
 </div>
 
 <!--bugfix for autoplay-->
@@ -30,7 +42,7 @@
   });
 
   //audio
-  function play(){
+  function play() {
     var audio = document.getElementById("audio-play");
     audio.play();
   }
