@@ -5,16 +5,16 @@ class WordsController < ApplicationController
   def word_action
     parameter = params[:commit]
     case parameter
-      when 'Добавить в изучаемые'
+      when 'to_learning'
         set_word_status false
         redirect_to(:back)
-      when 'Добавить в выученные'
+      when 'to_learned'
         set_word_status true
         redirect_to(:back)
-      when 'Добавить в неопределенные'
+      when 'to_other'
         delete_word_status
         redirect_to(:back)
-      when 'Тренировать'
+      when 'to_training'
         set_training
         redirect_to(practice_path)
       else

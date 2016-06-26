@@ -1,29 +1,11 @@
 <div class="container">
   <div class="row row-content">
-    <div class="col-xs-12">
-      <h1>Все слова</h1>
-
-      <%= form_tag word_action_words_path, method: :put do %>
-          <table>
-            <th colspan="1"></th>
-            <th>id</th>
-            <th>word</th>
-            <% @words.each do |word| %>
-                <tr>
-                  <td> <%= check_box_tag "words_ids[]", word.id %> </td>
-                  <td> <%= word.id %> </td>
-                  <td> <%= word.word %>  </td>
-                </tr>
-            <% end %>
-          </table>
-          <%= submit_tag "Добавить в изучаемые" %>
-          <%= submit_tag "Добавить в выученные" %>
-          <%= submit_tag "Добавить в неопределенные" %>
-          <%= submit_tag "Тренировать" %>
-      <% end %>
-
-      <%= will_paginate @words %>
-
+    <div class="col-xs-12 title">
+      <h3>Все слова</h3>
     </div>
+  </div>
+
+  <div class="row row-content">
+    <%= render 'words/word_list'  %>
   </div>
 </div>

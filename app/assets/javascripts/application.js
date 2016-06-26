@@ -15,3 +15,11 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
+
+//checkboxes
+function toggle(source) {
+    checkboxes = document.getElementsByName('words_ids[]');
+    for(var i=0, n=checkboxes.length;i<n;i++) {
+        checkboxes[i].checked = source.checked;
+    }
+}
