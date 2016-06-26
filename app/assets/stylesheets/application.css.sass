@@ -26,7 +26,8 @@ body
   padding: 50px 0px 0px 0px
   .row-content
     padding: 20px 0px 20px 0px
-
+    @media (max-width: 600px)
+      padding: 10px 0px 10px 0px
 
 #footer
   position: absolute
@@ -119,7 +120,8 @@ $dropDown       : true
 //Paginate
 .digg_pagination
   text-align: center
-  background: white
+  //background: white
+  background: transparent
   cursor: default
   a, span, em
     padding: 0.2em 0.5em
