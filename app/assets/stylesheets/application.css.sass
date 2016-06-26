@@ -21,6 +21,7 @@ html
   min-height: 100%
 
 body
+  font-family: "Lato", Calibri, Arial, sans-serif
   margin-bottom: 60px
   padding: 50px 0px 0px 0px
   .row-content
@@ -131,25 +132,26 @@ $dropDown       : true
   .current
     font-style: normal
     font-weight: bold
-    background: #2e6ab1
+    background: $colHighlight
     color: white
-    border: 1px solid #2e6ab1
+    border: 1px solid $colHighlight
   a
     text-decoration: none
-    color: #105cb6
-    border: 1px solid #9aafe5
+    color: #555555
+    border: 1px solid #ccc
     &:hover, &:focus
-      color: #000033
-      border-color: #000033
+      color: #555555
+      border-color: #ccc
+      background: #e6e6e6
   .page_info
-    background: #2e6ab1
+    background: $colHighlight
     color: white
     padding: 0.4em 0.6em
     width: 22em
     margin-bottom: 0.3em
     text-align: center
     b
-      color: #000033
+      color: #555555
       background: #2e6ab1 + 60
       padding: 0.1em 0.25em
   /* self-clearing method:
@@ -163,6 +165,21 @@ $dropDown       : true
     height: 1%
   *:first-child+html &
     overflow: hidden
+////
+
+//Words and training
+.word_list
+  height: 480px
+
+th, td
+  padding-right: 10px
+
+.title
+  text-align: center
+
+.btn
+  margin-bottom: 4px
+  white-space: normal
 ////
 
 //Audio
