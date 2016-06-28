@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :words   do
     collection do
       put :word_action
+      put :set_status_on_training
     end
   end
 

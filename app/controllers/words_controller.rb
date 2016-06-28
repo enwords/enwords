@@ -62,6 +62,18 @@ class WordsController < ApplicationController
     end
   end
 
+  def set_status_on_training
+    if params[:bool].nil?
+      Wordbook.delete_all(user_id: current_user, word_id: params[:word_id])
+    else
+      if Wordbook.find_by(user_id: current_user.id, word_id: params[:word_id]).nil?
+        Wordbook.create!(user_id: current_user.id, word_id: params[:word_id], learned: params[:bool])
+      else
+        Wordbook.where(user_id: current_user, word_id: params[:word_id]).update_all(learned: params[:bool])
+      end
+    end
+  end
+
   # GET /words
   # GET /words.json
   def index

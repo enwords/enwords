@@ -1,55 +1,62 @@
 <div class="container">
   <div class="row row-content">
-      <% @sentences.each do |sentence| %>
-          <div class="col-xs-12" style="margin-bottom: 20px; text-align: center">
-            <h3><% if sentence.audio.nil? %>
+    <% @sentences.each do |sentence| %>
+        <div class="col-xs-12" style="margin-bottom: 20px; text-align: center">
+          <h3>
+            <% if sentence.audio.nil? %>
                 <div class="audioButton glyphicon glyphicon-volume-off"></div>
             <% else %>
                 <div class="audioButton glyphicon glyphicon-volume-up" onclick="play()"></div>
                 <%= audio_tag("https://audio.tatoeba.org/sentences/eng/#{sentence.id }.mp3", autoplay: false, id: 'audio-play') %>
             <% end %>
             <%= sentence.sentence %> </h3>
-            <h4><%= sentence.sentences.first.sentence %> </h4>
-          </div>
+          <h4><%= sentence.sentences.first.sentence %> </h4>
+        </div>
 
         <div class="col-xs-12">
+          <% sentence.words.each do |word| %>
+
+              <% hash = {'0' => ['#b7b7b7', 'Учить', false, 'btn btn-warning btn-xs'],
+                         'false' => ['#f0ad4e', 'Знаю', true, 'btn btn-success btn-xs'],
+                         'true' => ['#5cb85c', 'Забыть', nil, 'btn btn-default btn-xs']
+              } %>
 
 
+              <% current_bool= 0 %>
+              <% if word.wordbooks.where(user_id: current_user.id).any? %>
+                  <% current_bool = word.wordbooks.where(user_id: current_user.id).first.learned %>
+              <% end %>
 
-            <% sentence.words.each do |word| %>
-                <% if word.wordbooks.where(user_id: current_user.id).any? %>
-                    <% x = word.wordbooks.where(user_id: current_user.id).first.learned %>
-                    <% color = "#54FF5E" if x %>
-                    <% color = "#e57554" unless x %>
-                <% else %>
-                    <% color = "#999999" %>
-                <% end %>
+              <% value = hash[current_bool.to_s] %>
 
-                  <div class="col-xs-9"style="background-color: <%= color %>"><%= word.word.capitalize %></div>
-                  <div class="col-xs-3" style="text-align: right">
-                    button
-                  </div>
-            <% end %>
+              <div class="col-xs-9" style="background-color: <%= value[0] %>"><%= word.word.capitalize %></div>
+              <div class="col-xs-3" style="text-align: right">
+
+
+                <%= button_to value[1], {controller: 'words', action: 'set_status_on_training', bool: value[2], word_id: word.id}, method: :put, class: value[3] %>
+
+              </div>
+          <% end %>
         </div>
-      <% end %>
-
-    </div>
+    <% end %>
   </div>
+</div>
 
 
 <div class="digg_pagination" id="pagination-practice">
-  <%= will_paginate @sentences, :page_links => false, previous_label: '❮', next_label: '❯' %>
+  <%= will_paginate @sentences, page_links: false, previous_label: '❮', next_label: '❯' %>
 </div>
 
+#TODO turn on after development
 <!--bugfix for autoplay-->
-<script type="text/javascript" charset="utf-8">
-  $(document).ready(function () {
-    play();
-  });
-
-  //audio
-  function play() {
-    var audio = document.getElementById("audio-play");
-    audio.play();
-  }
-</script>
+<!--<script type="text/javascript" charset="utf-8">-->
+//  $(document).ready(function () {
+//    play();
+//  });
+//
+//  //audio
+//  function play() {
+//    var audio = document.getElementById("audio-play");
+//    audio.play();
+//  }
+<!--</script>-->
