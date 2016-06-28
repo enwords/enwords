@@ -21,7 +21,7 @@
             <%= button_tag(type: 'submit', value: 'to_training', name: 'commit', class: "btn btn-default") { 'Тренировать выбранные' } %>
             <%= button_tag(type: 'submit', value: 'to_learning', name: 'commit', class: "btn btn-default") { 'Добавить в изучаемые' } unless current_page?(learning_path) %>
             <%= button_tag(type: 'submit', value: 'to_learned', name: 'commit', class: "btn btn-default") { 'Добавить в выученные' } unless current_page?(learned_path) %>
-            <%= button_tag(type: 'submit', value: 'to_other', name: 'commit', class: "btn btn-default") { 'Добавить в неизвестные' } unless current_page?(unset_path) %>
+            <%= button_tag(type: 'submit', value: 'to_unknown', name: 'commit', class: "btn btn-default") { 'Добавить в неизвестные' } unless current_page?(unset_path) %>
             <div class="col-xs-12 hidden-sm hidden-md hidden-lg digg_pagination" id="pagination-mobile">
               <%= will_paginate @words, previous_label: '❮', next_label: '❯', page_links: false %>
             </div>

@@ -11,7 +11,7 @@ class WordsController < ApplicationController
       when 'to_learned'
         set_word_status true
         redirect_to(:back)
-      when 'to_other'
+      when 'to_unknown'
         delete_word_status
         redirect_to(:back)
       when 'to_training'
