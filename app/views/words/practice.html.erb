@@ -5,7 +5,7 @@
             <h3><% if sentence.audio.nil? %>
                 <div class="audioButton glyphicon glyphicon-volume-off"></div>
             <% else %>
-                <div class="audioButton glyphicon glyphicon-volume-up" onclick="play()"></div>
+                <!--<div class="audioButton glyphicon glyphicon-volume-up" onclick="play()"></div>-->
                 <%= audio_tag("https://audio.tatoeba.org/sentences/eng/#{sentence.id }.mp3", autoplay: false, id: 'audio-play') %>
             <% end %>
             <%= sentence.sentence %> </h3>
@@ -31,7 +31,8 @@
     </div>
   </div>
 
-<div class="digg_pagination" style="position: fixed; bottom: 100px;  width: 100%">
+
+<div class="digg_pagination" id="pagination-practice">
   <%= will_paginate @sentences, :page_links => false, previous_label: '❮', next_label: '❯' %>
 </div>
 

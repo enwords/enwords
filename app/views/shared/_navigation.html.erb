@@ -22,12 +22,12 @@
               <ul class="dropdown-menu">
                 <li class="<%= 'active' if current_page?(learning_path) %>"><%= link_to "Изучаемые", learning_path %></li>
                 <li class="<%= 'active' if current_page?(learned_path) %>"><%= link_to "Выученные", learned_path %></li>
-                <li class="<%= 'active' if current_page?(unset_path) %>"><%= link_to "Остальные", unset_path %></li>
+                <li class="<%= 'active' if current_page?(unset_path) %>"><%= link_to "Неизвестные", unset_path %></li>
                 <li class="<%= 'active' if current_page?(words_path) %>"><%= link_to "Все", words_path %></li>
               </ul>
             </li>
 
-            <li class="<%= 'active' if current_page?(practice_path) %>"><%= link_to "Последняя тренеровка", practice_path %></li>
+            <li class="<%= 'active' if current_page?(practice_path) %>"><%= link_to "Последняя тренировка", practice_path %></li>
 
           </ul>
 
