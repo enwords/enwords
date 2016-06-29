@@ -13,30 +13,26 @@
           <h4><%= sentence.sentences.first.sentence %> </h4>
         </div>
 
+        <% hash = {'0' => ['#b7b7b7', 'Учить', false, 'btn btn-warning btn-xs'],
+                   'false' => ['#f0ad4e', 'Знаю', true, 'btn btn-success btn-xs'],
+                   'true' => ['#5cb85c', 'Забыть', nil, 'btn btn-default btn-xs']
+        } %>
         <div class="col-xs-12">
-          <% sentence.words.each do |word| %>
+          <table>
+            <% sentence.words.each do |word| %>
+                <% current_bool= 0 %>
+                <% if word.wordbooks.where(user_id: current_user.id).any? %>
+                    <% current_bool = word.wordbooks.where(user_id: current_user.id).first.learned %>
+                <% end %>
 
-              <% hash = {'0' => ['#b7b7b7', 'Учить', false, 'btn btn-warning btn-xs'],
-                         'false' => ['#f0ad4e', 'Знаю', true, 'btn btn-success btn-xs'],
-                         'true' => ['#5cb85c', 'Забыть', nil, 'btn btn-default btn-xs']
-              } %>
+                <% value = hash[current_bool.to_s] %>
 
-
-              <% current_bool= 0 %>
-              <% if word.wordbooks.where(user_id: current_user.id).any? %>
-                  <% current_bool = word.wordbooks.where(user_id: current_user.id).first.learned %>
-              <% end %>
-
-              <% value = hash[current_bool.to_s] %>
-
-              <div class="col-xs-9" style="background-color: <%= value[0] %>"><%= word.word.capitalize %></div>
-              <div class="col-xs-3" style="text-align: right">
-
-
-                <%= button_to value[1], {controller: 'words', action: 'set_status_on_training', bool: value[2], word_id: word.id}, method: :put, class: value[3] %>
-
-              </div>
-          <% end %>
+                <tr style="background-color: <%= value[0]%> ">
+                  <td style="width: 100%; "><%= word.word.capitalize %></td>
+                  <td><%= button_to value[1], {controller: 'words', action: 'set_status_on_training', bool: value[2], word_id: word.id}, method: :put, class: value[3] %></td>
+                </tr>
+            <% end %>
+          </table>
         </div>
     <% end %>
   </div>
@@ -48,15 +44,15 @@
 </div>
 
 #TODO turn on after development
-<!--bugfix for autoplay-->
-<!--<script type="text/javascript" charset="utf-8">-->
-//  $(document).ready(function () {
-//    play();
-//  });
-//
-//  //audio
-//  function play() {
-//    var audio = document.getElementById("audio-play");
-//    audio.play();
-//  }
-<!--</script>-->
+bugfix for autoplay
+<script type="text/javascript" charset="utf-8">
+  //  $(document).ready(function () {
+  //    play();
+  //  });
+  //
+  //  //audio
+  //  function play() {
+  //    var audio = document.getElementById("audio-play");
+  //    audio.play();
+  //  }
+</script>
