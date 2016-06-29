@@ -3,22 +3,19 @@ class WordsController < ApplicationController
 
 
   def word_action
-    parameter = params[:commit]
-    case parameter
-      when 'to_learning'
-        set_word_status false
-        redirect_to(:back)
-      when 'to_learned'
-        set_word_status true
-        redirect_to(:back)
-      when 'to_unknown'
-        delete_word_status
-        redirect_to(:back)
-      when 'to_training'
-        set_training
-        redirect_to(practice_path)
-      else
-        return
+    unless params[:words_ids].nil?
+      parameter = params[:commit]
+      case parameter
+        when 'to_learning'
+          set_word_status false
+        when 'to_learned'
+          set_word_status true
+        when 'to_unknown'
+          delete_word_status
+        when 'to_training'
+          set_training
+        else
+      end
     end
   end
 
@@ -31,14 +28,13 @@ class WordsController < ApplicationController
     params[:words_ids].each do |wid|
       arr << Sentence.joins(:sentences_words).where(sentences_words: {word_id: wid}).order("RANDOM()").limit(5)
     end
-
     arr.each do |sentences_arr|
       sentences_arr.each do |sen|
         val << {user_id: current_user.id, sentence_id: sen.id}
       end
     end
-
     Training.create! val
+    redirect_to(practice_path)
   end
 
   def practice
@@ -48,18 +44,18 @@ class WordsController < ApplicationController
 
   def delete_word_status
     Wordbook.delete_all(user_id: current_user, word_id: params[:words_ids])
+    redirect_to(:back)
   end
 
   def set_word_status(bool)
-    unless params[:words_ids].nil?
-      params[:words_ids].each do |wid|
-        if Wordbook.find_by(user_id: current_user.id, word_id: wid).nil?
-          Wordbook.create!(user_id: current_user.id, word_id: wid, learned: bool)
-        else
-          Wordbook.where(user_id: current_user, word_id: params[:words_ids]).update_all(learned: bool)
-        end
+    params[:words_ids].each do |wid|
+      if Wordbook.find_by(user_id: current_user.id, word_id: wid).nil?
+        Wordbook.create!(user_id: current_user.id, word_id: wid, learned: bool)
+      else
+        Wordbook.where(user_id: current_user, word_id: params[:words_ids]).update_all(learned: bool)
       end
     end
+    redirect_to(:back)
   end
 
   def set_status_on_training
