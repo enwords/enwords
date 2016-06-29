@@ -4,9 +4,9 @@
         <div class="col-xs-12" style="margin-bottom: 20px; text-align: center">
           <h3>
             <% if sentence.audio.nil? %>
-                <div class="audioButton glyphicon glyphicon-volume-off"></div>
+                <span class="audioButton glyphicon glyphicon-volume-off"></span>
             <% else %>
-                <div class="audioButton glyphicon glyphicon-volume-up" onclick="play()"></div>
+                <span class="audioButton glyphicon glyphicon-volume-up" onclick="play()"></span>
                 <%= audio_tag("https://audio.tatoeba.org/sentences/eng/#{sentence.id }.mp3", autoplay: false, id: 'audio-play') %>
             <% end %>
             <%= sentence.sentence %> </h3>
@@ -17,7 +17,7 @@
                    'false' => ['#f0ad4e', 'Знаю', true, 'btn btn-success btn-xs'],
                    'true' => ['#5cb85c', 'Забыть', nil, 'btn btn-default btn-xs']
         } %>
-        <div class="col-xs-12">
+        <div class="col-xs-12" id="wordlist_training">
           <table>
             <% sentence.words.each do |word| %>
                 <% current_bool= 0 %>
@@ -29,7 +29,7 @@
 
                 <tr style="background-color: <%= value[0]%> ">
                   <td style="width: 100%; "><%= word.word.capitalize %></td>
-                  <td><%= button_to value[1], {controller: 'words', action: 'set_status_on_training', bool: value[2], word_id: word.id}, method: :put, class: value[3] %></td>
+                  <td><%= button_to value[1], {controller: 'words', action: 'set_status_on_training', bool: value[2], word_id: word.id}, method: :put, class: value[3] , onclick: 'reload_onclick()'%></td>
                 </tr>
             <% end %>
           </table>
@@ -55,4 +55,10 @@ bugfix for autoplay
   //    var audio = document.getElementById("audio-play");
   //    audio.play();
   //  }
+</script>
+
+<script type="text/javascript" charset="utf-8">
+  function reload_onclick() {
+    $("#wordlist_training").load(location.href + " #wordlist_training");
+  }
 </script>
