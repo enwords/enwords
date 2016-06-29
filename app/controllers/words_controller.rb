@@ -19,7 +19,7 @@ class WordsController < ApplicationController
     end
   end
 
-  #TODO need optimization
+
   def set_training
     Training.delete_all(user_id: current_user)
     arr = []
@@ -52,7 +52,7 @@ class WordsController < ApplicationController
       if Wordbook.find_by(user_id: current_user.id, word_id: wid).nil?
         Wordbook.create!(user_id: current_user.id, word_id: wid, learned: bool)
       else
-        Wordbook.where(user_id: current_user, word_id: params[:words_ids]).update_all(learned: bool)
+        Wordbook.where(user_id: current_user, word_id: wid).update_all(learned: bool)
       end
     end
     redirect_to(:back)
@@ -65,7 +65,7 @@ class WordsController < ApplicationController
       if Wordbook.find_by(user_id: current_user.id, word_id: params[:word_id]).nil?
         Wordbook.create!(user_id: current_user.id, word_id: params[:word_id], learned: params[:bool])
       else
-        Wordbook.where(user_id: current_user, word_id: params[:word_id]).update_all(learned: params[:bool])
+        Wordbook.where(user_id: current_user.id, word_id: params[:word_id]).update_all(learned: params[:bool])
       end
     end
   end
