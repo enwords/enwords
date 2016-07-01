@@ -13,10 +13,7 @@
           <h4><%= sentence.sentences.first.sentence %> </h4>
         </div>
 
-        <% hash = {'0' => ['rgb(183, 183, 183)', 'Учить', false, 'slider round', 'rgb(240, 173, 78)'],
-                   'false' => ['rgb(240, 173, 78)', 'Знаю', true, 'slider round', 'rgb(92, 184, 92)'],
-                   'true' => ['rgb(92, 184, 92)', 'Учить', false, 'slider round', 'rgb(240, 173, 78)']
-        } %>
+
         <div class="col-xs-12" id="wordlist_training">
           <table>
             <% n = 0 %>
@@ -27,19 +24,41 @@
                 <% rescue %>
                 <% end %>
 
-                <%= current_bool %>
-                <% value = hash[current_bool.to_s] %>
+                <% hash = {
+                    future_bool: false.to_s,
+                    current_background: 'rgb(183, 183, 183)',
+                    grey_background: 'rgb(183, 183, 183)',
+                    orange_background: 'rgb(240, 173, 78)',
+                    green_background: 'rgb(92, 184, 92)'
+                }
+                   if current_bool.equal?(false)
+                     hash[:current_background] = 'rgb(240, 173, 78)'
+                     hash[:future_bool]= true.to_s
+                   elsif current_bool.equal?(true)
+                     hash[:current_background]= 'rgb(92, 184, 92)'
+                     hash[:future_bool] = false.to_s
+                   end
+                %>
 
                 <tr>
                   <td style="width: 50%; "><%= word.word.capitalize %></td>
                   <td>
+
+                    <% button = 'button'+ n.to_s
+                       switch = 'switch' + n.to_s %>
                     <label class="switch">
-                      <%= button_to '', {controller: 'words', action: 'set_status_on_training', bool: value[2], word_id: word.id, user_id: current_user.id}, method: :put, form: { id: "b#{n}"}%>
-                      <div class="slider round" id="btn<%= n %>" style="background-color: <%= value[0] %>" onclick="setColor('btn<%= n %>','<%= value[0] %>', '<%= value[4] %>', 'b<%=n%>')"></div>
+                      <%= button_to '', {controller: 'words', action: 'set_status_on_training', bool: hash[:future_bool],
+                                         word_id: word.id, user_id: current_user.id}, method: :put, form: {id: button} %>
+                      <div class="slider round" id='<%= switch %>' style="background-color: <%= hash[:current_background] %>"
+                           onclick="setColor('<%= button %>', '<%= switch %>', '<%= hash[:grey_background] %>',
+                               '<%= hash[:orange_background] %>', '<%= hash[:green_background] %>')">
+                        <% n = n + 1 %>
+                      </div>
                     </label>
+
+
                   </td>
                 </tr>
-                <% n = n + 1 %>
             <% end %>
           </table>
         </div>
@@ -64,26 +83,22 @@
   //      audio.play();
   //    }
 
-  function setColor(btn, color1, color2, b) {
-    var property = document.getElementById(btn);
-    var property2 = document.getElementById(b);
+  function setColor(btn, swtch, grey, orange, green) {
+    var property_switch = document.getElementById(swtch);
+    var property_slider = document.getElementById(swtch+".slider.round:before");
+    var property_button = document.getElementById(btn);
 
-    if (property2.action.includes("true")) {
-      property2.action = property2.action.replace("true", "false");
-      property2.action = property2.action.replace("true", "false");
-    } else{
-      property2.action = property2.action.replace("false", "true");
+    if (property_switch.style.backgroundColor == grey || property_switch.style.backgroundColor == green) {
+      property_switch.style.backgroundColor = orange;
+      property_slider.style.borderRadius = '34px';
+      property_button.action = property_button.action.replace("true", "false");
     }
 
-    if (property.style.backgroundColor == color1) {
-      property.style.backgroundColor = color2;
+    else if (property_switch.style.backgroundColor == orange) {
+      property_switch.style.backgroundColor = green;
+      property_switch.style.borderRadius = '34px';
+      property_button.action = property_button.action.replace("false", "true");
     }
-    else if (window.getComputedStyle(property).backgroundColor == color2 &
-        window.getComputedStyle(property).backgroundColor != 'rgb(183, 183, 183)') {
-      property.style.backgroundColor = color1;
-    }
-    else property.style.backgroundColor = 'rgb(92, 184, 92)';
-//    reload_onclick()
   }
 
   function reload_onclick() {
