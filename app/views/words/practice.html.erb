@@ -13,24 +13,33 @@
           <h4><%= sentence.sentences.first.sentence %> </h4>
         </div>
 
-        <% hash = {'0' => ['#b7b7b7', 'Учить', false, 'btn btn-warning btn-xs'],
-                   'false' => ['#f0ad4e', 'Знаю', true, 'btn btn-success btn-xs'],
-                   'true' => ['#5cb85c', 'Забыть', nil, 'btn btn-default btn-xs']
+        <% hash = {'0' => ['rgb(183, 183, 183)', 'Учить', false, 'slider round', 'rgb(240, 173, 78)'],
+                   'false' => ['rgb(240, 173, 78)', 'Знаю', true, 'slider round', 'rgb(92, 184, 92)'],
+                   'true' => ['rgb(92, 184, 92)', 'Учить', false, 'slider round', 'rgb(240, 173, 78)']
         } %>
         <div class="col-xs-12" id="wordlist_training">
           <table>
+            <% n = 0 %>
             <% sentence.words.each do |word| %>
                 <% current_bool= 0 %>
-                <% if word.wordbooks.where(user_id: current_user.id).any? %>
+                <% begin %>
                     <% current_bool = word.wordbooks.where(user_id: current_user.id).first.learned %>
+                <% rescue %>
                 <% end %>
 
+                <%= current_bool %>
                 <% value = hash[current_bool.to_s] %>
 
-                <tr style="background-color: <%= value[0]%> ">
-                  <td style="width: 100%; "><%= word.word.capitalize %></td>
-                  <td><%= button_to value[1], {controller: 'words', action: 'set_status_on_training', bool: value[2], word_id: word.id}, method: :put, class: value[3] , onclick: 'reload_onclick()'%></td>
+                <tr>
+                  <td style="width: 50%; "><%= word.word.capitalize %></td>
+                  <td>
+                    <label class="switch">
+                      <%= button_to '', {controller: 'words', action: 'set_status_on_training', bool: value[2], word_id: word.id, user_id: current_user.id}, method: :put, form: { id: "b#{n}"}%>
+                      <div class="slider round" id="btn<%= n %>" style="background-color: <%= value[0] %>" onclick="setColor('btn<%= n %>','<%= value[0] %>', '<%= value[4] %>', 'b<%=n%>')"></div>
+                    </label>
+                  </td>
                 </tr>
+                <% n = n + 1 %>
             <% end %>
           </table>
         </div>
@@ -38,27 +47,109 @@
   </div>
 </div>
 
-
 <div class="digg_pagination" id="pagination-practice">
   <%= will_paginate @sentences, page_links: false, previous_label: '❮', next_label: '❯' %>
 </div>
 
-#TODO turn on after development
-bugfix for autoplay
+<!--#TODO turn on after development-->
+<!--bugfix for autoplay-->
 <script type="text/javascript" charset="utf-8">
-  //  $(document).ready(function () {
-  //    play();
-  //  });
+  //    $(document).ready(function () {
+  //      play();
+  //    });
   //
-  //  //audio
-  //  function play() {
-  //    var audio = document.getElementById("audio-play");
-  //    audio.play();
-  //  }
-</script>
+  //    //audio
+  //    function play() {
+  //      var audio = document.getElementById("audio-play");
+  //      audio.play();
+  //    }
 
-<script type="text/javascript" charset="utf-8">
+  function setColor(btn, color1, color2, b) {
+    var property = document.getElementById(btn);
+    var property2 = document.getElementById(b);
+
+    if (property2.action.includes("true")) {
+      property2.action = property2.action.replace("true", "false");
+      property2.action = property2.action.replace("true", "false");
+    } else{
+      property2.action = property2.action.replace("false", "true");
+    }
+
+    if (property.style.backgroundColor == color1) {
+      property.style.backgroundColor = color2;
+    }
+    else if (window.getComputedStyle(property).backgroundColor == color2 &
+        window.getComputedStyle(property).backgroundColor != 'rgb(183, 183, 183)') {
+      property.style.backgroundColor = color1;
+    }
+    else property.style.backgroundColor = 'rgb(92, 184, 92)';
+//    reload_onclick()
+  }
+
   function reload_onclick() {
     $("#wordlist_training").load(location.href + " #wordlist_training");
   }
 </script>
+
+<style>
+  /* The switch - the box around the slider */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+
+  /* Hide default HTML checkbox */
+  .switch input {
+    display: none;
+  }
+
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+</style>
