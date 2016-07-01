@@ -49,9 +49,9 @@ class WordsController < ApplicationController
 
   def set_word_status(bool)
     params[:words_ids].each do |wid|
-      if Wordbook.find_by(user_id: current_user.id, word_id: wid).nil?
+      begin
         Wordbook.create!(user_id: current_user.id, word_id: wid, learned: bool)
-      else
+      rescue
         Wordbook.where(user_id: current_user, word_id: wid).update_all(learned: bool)
       end
     end
@@ -59,14 +59,11 @@ class WordsController < ApplicationController
   end
 
   def set_status_on_training
-    if params[:bool].nil?
-      Wordbook.delete_all(user_id: current_user, word_id: params[:word_id])
-    else
-      if Wordbook.find_by(user_id: current_user.id, word_id: params[:word_id]).nil?
-        Wordbook.create!(user_id: current_user.id, word_id: params[:word_id], learned: params[:bool])
-      else
-        Wordbook.where(user_id: current_user.id, word_id: params[:word_id]).update_all(learned: params[:bool])
-      end
+    begin
+      Wordbook.create!(user_id: params[:user_id], word_id: params[:word_id], learned: params[:bool])
+      return
+    rescue
+      Wordbook.where(user_id: params[:user_id], word_id: params[:word_id]).update_all(learned: params[:bool])
     end
   end
 
