@@ -23,3 +23,28 @@ function toggle(source) {
         checkboxes[i].checked = source.checked;
     }
 }
+
+//audio
+function play() {
+    var audio = document.getElementById("audio-play");
+    audio.play();
+}
+
+function setColor(btn, swtch, grey, orange, green, n, left_edge, right_edge) {
+    var property_switch = document.getElementById(swtch);
+    var property_button = document.getElementById(btn);
+    var property_slider = document.getElementsByClassName("round")[n];
+
+    if (property_switch.style.backgroundColor == grey || property_switch.style.backgroundColor == orange) {
+        property_switch.style.backgroundColor = green;
+        property_button.action = property_button.action.replace("false", "true");
+        property_slider.style.left = right_edge
+    }
+
+    else if (property_switch.style.backgroundColor == green) {
+        property_switch.style.backgroundColor = orange;
+        property_button.action = property_button.action.replace("true", "false");
+        property_slider.style.left = left_edge
+
+    }
+}

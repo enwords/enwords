@@ -16,47 +16,53 @@
 
         <div class="col-xs-12" id="wordlist_training">
           <table>
-            <% n = 0 %>
-            <% sentence.words.each do |word| %>
-                <% current_bool= 0 %>
-                <% begin %>
-                    <% current_bool = word.wordbooks.where(user_id: current_user.id).first.learned %>
-                <% rescue %>
-                <% end %>
+            <% n = 0
+               sentence.words.each do |word|
+                 begin
+                   current_bool = word.wordbooks.where(user_id: current_user.id).first.learned
+                rescue
 
-                <% hash = {
-                    future_bool: false.to_s,
-                    current_background: 'rgb(183, 183, 183)',
-                    grey_background: 'rgb(183, 183, 183)',
-                    orange_background: 'rgb(240, 173, 78)',
-                    green_background: 'rgb(92, 184, 92)'
-                }
-                   if current_bool.equal?(false)
-                     hash[:current_background] = 'rgb(240, 173, 78)'
-                     hash[:future_bool]= true.to_s
-                   elsif current_bool.equal?(true)
-                     hash[:current_background]= 'rgb(92, 184, 92)'
-                     hash[:future_bool] = false.to_s
-                   end
-                %>
+                 end
 
-                <tr>
-                  <td style="width: 50%; "><%= word.word.capitalize %></td>
+
+                 left_edge = '3px'
+                 right_edge = '30px'
+                 current_edge = left_edge
+
+                 colors = {
+                     future_bool: true.to_s,
+                     current_background: 'rgb(183, 183, 183)',
+                     grey_background: 'rgb(183, 183, 183)',
+                     orange_background: 'rgb(240, 173, 78)',
+                     green_background: 'rgb(92, 184, 92)'}
+
+                 if current_bool.equal?(false)
+                   colors[:future_bool]= true.to_s
+                   colors[:current_background] = colors[:orange_background]
+                   current_edge = left_edge
+                 elsif current_bool.equal?(true)
+                   colors[:future_bool] = false.to_s
+                   colors[:current_background]= colors[:green_background]
+                   current_edge = right_edge
+                 end
+
+                 button = 'button'+ n.to_s
+                 switch = 'switch' + n.to_s
+            %>
+
+                <tr class=<%= cycle('odd', 'even') %>>
+                  <td style="width: 100%; "><%= word.word.capitalize %></td>
                   <td>
-
-                    <% button = 'button'+ n.to_s
-                       switch = 'switch' + n.to_s %>
                     <label class="switch">
-                      <%= button_to '', {controller: 'words', action: 'set_status_on_training', bool: hash[:future_bool],
-                                         word_id: word.id, user_id: current_user.id}, method: :put, form: {id: button} %>
-                      <div class="slider round" id='<%= switch %>' style="background-color: <%= hash[:current_background] %>"
-                           onclick="setColor('<%= button %>', '<%= switch %>', '<%= hash[:grey_background] %>',
-                               '<%= hash[:orange_background] %>', '<%= hash[:green_background] %>')">
-                        <% n = n + 1 %>
-                      </div>
+                      <%= button_to '', {
+                          controller: 'words', action: 'set_status_on_training', bool: colors[:future_bool],
+                          word_id: word.id, user_id: current_user.id}, method: :put, form: {id: button},
+                                    onclick: "setColor('#{button}', '#{switch}', '#{ colors[:grey_background] }',
+                      '#{colors[:orange_background]}', '#{colors[:green_background]}', #{n}, '#{left_edge}', '#{right_edge}')" %>
+                      <div class="slider" id='<%= switch %>' style="background-color: <%= colors[:current_background] %>"></div>
+                      <div class="round" style="left: <%= current_edge %>"></div>
+                      <% n = n + 1 %>
                     </label>
-
-
                   </td>
                 </tr>
             <% end %>
@@ -70,101 +76,8 @@
   <%= will_paginate @sentences, page_links: false, previous_label: '❮', next_label: '❯' %>
 </div>
 
-<!--#TODO turn on after development-->
-<!--bugfix for autoplay-->
 <script type="text/javascript" charset="utf-8">
-  //    $(document).ready(function () {
-  //      play();
-  //    });
-  //
-  //    //audio
-  //    function play() {
-  //      var audio = document.getElementById("audio-play");
-  //      audio.play();
-  //    }
-
-  function setColor(btn, swtch, grey, orange, green) {
-    var property_switch = document.getElementById(swtch);
-    var property_slider = document.getElementById(swtch+".slider.round:before");
-    var property_button = document.getElementById(btn);
-
-    if (property_switch.style.backgroundColor == grey || property_switch.style.backgroundColor == green) {
-      property_switch.style.backgroundColor = orange;
-      property_slider.style.borderRadius = '34px';
-      property_button.action = property_button.action.replace("true", "false");
-    }
-
-    else if (property_switch.style.backgroundColor == orange) {
-      property_switch.style.backgroundColor = green;
-      property_switch.style.borderRadius = '34px';
-      property_button.action = property_button.action.replace("false", "true");
-    }
-  }
-
-  function reload_onclick() {
-    $("#wordlist_training").load(location.href + " #wordlist_training");
-  }
+  //  $(document).ready(function () {
+  //    play();
+  //  });
 </script>
-
-<style>
-  /* The switch - the box around the slider */
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-  }
-
-  /* Hide default HTML checkbox */
-  .switch input {
-    display: none;
-  }
-
-  /* The slider */
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-
-  input:checked + .slider {
-    background-color: #2196F3;
-  }
-
-  input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
-  }
-
-  input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-  }
-
-  /* Rounded sliders */
-  .slider.round {
-    border-radius: 34px;
-  }
-
-  .slider.round:before {
-    border-radius: 50%;
-  }
-</style>
