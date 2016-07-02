@@ -1,37 +1,41 @@
-<div id="word_list">
-<%= form_tag word_action_words_path, method: :put do%>
-    <div class="col-xs-6 col-sm-3 col-sm-offset-3">
-      <table>
-        <th><input type="checkbox" onclick="toggle(this)"/></th>
-        <!--<th>id</th>-->
-        <th>Выбрать все</th>
-        <% @words.each do |word| %>
-            <tr>
-              <td> <%= check_box_tag "words_ids[]", word.id %> </td>
-              <!--<td> <%= word.id %> </td>-->
-              <td> <%= word.word.capitalize %> </td>
-            </tr>
-        <% end %>
-      </table>
+<% unless @words.any? %>
+    <div class="col-xs-12">
+      <p class="title">В этом списке нет слов, вы можете найти новые слова <a href="<%= unset_path %>">здесь</a></p>
     </div>
-    <div class="col-xs-6 col-sm-2">
-      <div style="position: fixed">
-        <div class="col-xs-12">
-          <div class="btn-group-vertical" role="group">
-            <%= button_tag(type: 'submit', value: 'to_training', name: 'commit', class: "btn btn-default") { 'Тренировать выбранные' } %>
-            <%= button_tag(type: 'submit', value: 'to_learning', name: 'commit', class: "btn btn-default") { 'Добавить в изучаемые' } unless current_page?(learning_path) %>
-            <%= button_tag(type: 'submit', value: 'to_learned', name: 'commit', class: "btn btn-default") { 'Добавить в выученные' } unless current_page?(learned_path) %>
-            <%= button_tag(type: 'submit', value: 'to_unknown', name: 'commit', class: "btn btn-default") { 'Добавить в неизвестные' } unless current_page?(unset_path) %>
-            <div class="col-xs-12 hidden-sm hidden-md hidden-lg digg_pagination" id="pagination-mobile">
-              <%= will_paginate @words, previous_label: '❮', next_label: '❯', page_links: false %>
+<% else %>
+    <div id="word_list">
+      <%= form_tag word_action_words_path, method: :put do %>
+          <div class="col-xs-6 col-sm-3 col-sm-offset-3">
+            <table>
+              <th><input type="checkbox" onclick="toggle(this)"/></th>
+              <th>Выбрать все</th>
+              <% @words.each do |word| %>
+                  <tr>
+                    <td> <%= check_box_tag "words_ids[]", word.id %> </td>
+                    <td> <%= word.word.capitalize %> </td>
+                  </tr>
+              <% end %>
+            </table>
+          </div>
+          <div class="col-xs-6 col-sm-2">
+            <div style="position: fixed">
+              <div class="col-xs-12">
+                <div class="btn-group-vertical" role="group">
+                  <%= button_tag(type: 'submit', value: 'to_training', name: 'commit', class: "btn btn-default") { 'Тренировать выбранные' } %>
+                  <%= button_tag(type: 'submit', value: 'to_learning', name: 'commit', class: "btn btn-default") { 'Добавить в изучаемые' } unless current_page?(learning_path) %>
+                  <%= button_tag(type: 'submit', value: 'to_learned', name: 'commit', class: "btn btn-default") { 'Добавить в выученные' } unless current_page?(learned_path) %>
+                  <%= button_tag(type: 'submit', value: 'to_unknown', name: 'commit', class: "btn btn-default") { 'Добавить в неизвестные' } unless current_page?(unset_path) %>
+                  <div class="col-xs-12 hidden-sm hidden-md hidden-lg digg_pagination" id="pagination-mobile">
+                    <%= will_paginate @words, previous_label: '❮', next_label: '❯', page_links: false %>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+      <% end %>
+    </div>
+
+    <div class="hidden-xs digg_pagination" id="pagination-desktop">
+      <%= will_paginate @words, previous_label: '❮', next_label: '❯', outer_window: 0 %>
     </div>
 <% end %>
-</div>
-
-<div class="hidden-xs digg_pagination" id="pagination-desktop">
-  <%= will_paginate @words, previous_label: '❮', next_label: '❯', outer_window: 0 %>
-</div>
