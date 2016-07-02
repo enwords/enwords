@@ -24,15 +24,17 @@ body
   font-family: "Lato", Calibri, Arial, sans-serif
   margin-bottom: 60px
   padding: 50px 0px 0px 0px
-  .row-content
+  .title
     padding: 20px 0px 20px 0px
     @media (max-height: 600px)
       padding: 10px 0px 10px 0px
     @media (max-height: 320px)
       padding: 3px 0px 3px 0px
-    .title
       h3
         margin-top: 10px
+
+  .row
+    margin-right: 0px
 
 #footer
   position: absolute
@@ -179,14 +181,16 @@ $dropDown       : true
   bottom: 5px
 
 #pagination-desktop
-  //position: absolute
-  //bottom: 40px
   width: 100%
 
 #pagination-practice
   position: fixed
-  bottom: 100px
-  width: 100%
+  bottom: 50px
+  left: 50%
+  -webkit-transform: translateX(-50%)
+  -moz-transform: translateX(-50%)
+  -ms-transform: translateX(-50%)
+  transform: translateX(-50%)
   font-size: 140%
 ////
 
@@ -198,9 +202,9 @@ $dropDown       : true
   @media (min-height: 361px)
     height: 580px
 
+  td
+    padding: 3px 20px 2px 0
 
-td
-  padding: 3px 20px 2px 0
 
 .title
   text-align: center
@@ -208,6 +212,9 @@ td
 .btn
   margin-bottom: 4px
   white-space: normal
+
+.odd
+  background: #fafafa
 ////
 
 //Audio
@@ -220,4 +227,41 @@ td
 
 .glyphicon-volume-off
   opacity: 0.3
+////
+
+//Switch
+.switch 
+  position: relative
+  display: inline-block
+  width: 52px
+  height: 25px
+  top: 5px
+
+  /* Hide default HTML checkbox */
+  input 
+    display: none
+
+  .slider 
+    position: absolute
+    cursor: pointer
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    -webkit-transition: .4s
+    transition: .4s
+    border-radius: 25px
+
+  .round 
+    cursor: pointer
+    position: absolute
+    content: ""
+    height: 19px
+    width: 19px
+    /*left: 3px changed in html */
+    bottom: 3px
+    background-color: white
+    border-radius: 50%
+    -webkit-transition: .4s
+    transition: .4s
 ////
