@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row row-content">
     <% @sentences.each do |sentence| %>
-        <div class="col-xs-12" style="margin-bottom: 20px; text-align: center">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2 title" style="margin-bottom: 20px;">
           <h3>
             <% if sentence.audio.nil? %>
                 <span class="audioButton glyphicon glyphicon-volume-off"></span>
@@ -14,7 +14,7 @@
         </div>
 
 
-        <div class="col-xs-12" id="wordlist_training">
+        <div class="col-xs-12 col-lg-8 col-lg-offset-2" id="wordlist_training">
           <table>
             <% n = 0
                sentence.words.each do |word|
@@ -50,7 +50,7 @@
                  switch = 'switch' + n.to_s
             %>
 
-                <tr class=<%= cycle('odd', 'even') %>>
+                <tr class='<%= cycle('odd', 'even') %>' >
                   <td style="width: 100%; "><%= word.word.capitalize %></td>
                   <td>
                     <label class="switch">
