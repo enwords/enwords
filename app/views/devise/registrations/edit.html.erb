@@ -1,50 +1,52 @@
 <div class="container">
   <div class="row row-content">
     <div class="col-xs-12">
-      <h2>Настройки пользователя</h2>
-    </div>
-  </div>
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3 wrapper">
+        <h2 class="form-signin-heading">Настройки пользователя</h2>
+        <%= form_for(resource, as: resource_name, url: update_user_registration_path, html: {method: :put}) do |f| %>
 
-  <div class="row row-content">
-    <div class="col-xs-12">
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put}) do |f| %>
-          <%= devise_error_messages! %>
+            <div class="col-xs-12 error">
+              <p><%= devise_error_messages! %> </p>
+            </div>
 
-          <div class="field">
-            <%= f.label :email, "Почта" %><br/>
-            <%= f.email_field :email, autofocus: true %>
-          </div>
+            <div class="field">
+              <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: "Почта" %>
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                  <div>Все еще ждем поддтверждения для: <%= resource.unconfirmed_email %></div>
+              <% end %>
+            </div>
 
-          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-          <% end %>
+            <div class="field">
+              <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: "Новый пароль" %>
+            </div>
 
-          <div class="field">
-            <%= f.label :password, "Новый пароль" %> <i>(оставьте поле пустым, если не хотите менять)</i><br/>
-            <%= f.password_field :password, autocomplete: "off" %>
-          </div>
+            <div class="field">
+              <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: "Повторите пароль" %>
+            </div>
 
-          <div class="field">
-            <%= f.label :password_confirmation, "Повторите пароль" %><br/>
-            <%= f.password_field :password_confirmation, autocomplete: "off" %>
-          </div>
+            <div class="field">
+              <%= f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: "Текущий пароль" %>
+            </div>
 
-          <div class="field">
-            <%= f.label :current_password, "Старый пароль"%> <i> (для подтверждения)</i><br/>
-            <%= f.password_field :current_password, autocomplete: "off" %>
-          </div>
+            <div style="padding-bottom: 20px"></div>
 
-          <br>
+            <div class="field">
+              <%= submit_tag "Сохранить изменения", class: "btn btn-lg btn-primary btn-block" %>
+            </div>
 
-          <div class="actions">
-            <%= f.submit "Сохранить изменения" %>
-          </div>
-      <% end %>
+        <% end %>
+        <%= button_to "Удалить аккаунт", registration_path(resource_name),
+                      data: {confirm: "Вы уверены? Восстановление аккаунта не возможно."},
+                      method: :delete, class: "btn btn-lg btn-danger btn-block" %>
 
-      <p><%= button_to "Удалить аккаунт", registration_path(resource_name), data: {confirm: "Вы уверены?"}, method: :delete %></p>
-
-      <%= link_to "Назад", :back %>
+      </div>
 
     </div>
   </div>
 </div>
+
+<style>
+
+
+
+</style>
