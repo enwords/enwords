@@ -26,7 +26,7 @@
                   <%= button_tag(type: 'submit', value: 'to_learned', name: 'commit', class: "btn btn-default") { 'Добавить в выученные' } unless current_page?(learned_path) %>
                   <%= button_tag(type: 'submit', value: 'to_unknown', name: 'commit', class: "btn btn-default") { 'Добавить в неизвестные' } unless current_page?(unset_path) %>
                   <div class="col-xs-12 hidden-sm hidden-md hidden-lg digg_pagination" id="pagination-mobile">
-                    <%= will_paginate @words, previous_label: '❮', next_label: '❯', page_links: false %>
+                    <%= will_paginate @words, previous_label: '❬', next_label: '❭', page_links: false %>
                   </div>
                 </div>
               </div>
@@ -36,6 +36,6 @@
     </div>
 
     <div class="hidden-xs digg_pagination" id="pagination-desktop">
-      <%= will_paginate @words, previous_label: '❮', next_label: '❯', outer_window: 0 %>
+      <%= will_paginate @words, previous_label: '❬', next_label: '❭', outer_window: 0 %>
     </div>
 <% end %>

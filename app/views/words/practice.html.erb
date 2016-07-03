@@ -1,7 +1,6 @@
-<div class="container">
-  <div class="row row-content">
+<div class="container" style="padding-bottom: 20px">
     <% @sentences.each do |sentence| %>
-        <div class="col-xs-12 col-lg-8 col-lg-offset-2 title" style="margin-bottom: 20px;">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 title" style="margin-bottom: 20px;">
           <h3>
             <% if sentence.audio.nil? %>
                 <span class="audioButton glyphicon glyphicon-volume-off"></span>
@@ -14,7 +13,7 @@
         </div>
 
 
-        <div class="col-xs-12 col-lg-8 col-lg-offset-2" id="wordlist_training">
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3" id="wordlist_training">
           <table>
             <% n = 0
                sentence.words.each do |word|
@@ -70,10 +69,9 @@
         </div>
     <% end %>
   </div>
-</div>
 
 <div class="digg_pagination" id="pagination-practice">
-  <%= will_paginate @sentences, page_links: false, previous_label: '❮', next_label: '❯' %>
+  <%= will_paginate @sentences, page_links: false, previous_label: '❬', next_label: '❭' %>
 </div>
 
 <script type="text/javascript" charset="utf-8">
