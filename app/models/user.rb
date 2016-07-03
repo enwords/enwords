@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :wordbooks
+  has_many :wordbooks, dependent: :delete_all
   has_many :words, through: :wordbooks
   has_many :trainings
   has_many :sentences, through: :trainings
