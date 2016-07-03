@@ -16,6 +16,11 @@
 @import "bootstrap-sprockets"
 @import "bootstrap"
 
+$btnColHover  : #F5F5F5
+$btnColBack   :  white
+$btnColActive : #82adb0
+
+
 html
   position: relative
   min-height: 100%
@@ -24,6 +29,7 @@ body
   font-family: "Lato", Calibri, Arial, sans-serif
   margin-bottom: 60px
   padding: 50px 0px 0px 0px
+  background-color: rgb(252, 249, 242)
   .title
     padding: 20px 0px 20px 0px
     @media (max-height: 600px)
@@ -33,8 +39,8 @@ body
       h3
         margin-top: 10px
 
-  .row
-    margin-right: 0px
+  //.row
+  //  margin-right: 0px
 
 #footer
   position: absolute
@@ -42,7 +48,7 @@ body
   width: 100%
   /* Set the fixed height of the footer here */
   height: 60px
-  background-color: #f5f5f5
+  background-color: rgb(240, 237, 234)
   @media (max-height: 380px)
     display: none
   .container
@@ -51,17 +57,15 @@ body
     .text-muted
       margin: 20px 0
     a
-      //background-color: transparent
       color: $text-muted
 
 
 //NAVBAR
-
-$bgDefault      : #262e32
-$bgHighlight    : #262e32
-$colDefault     : #dddddd
-$colHighlight   : #e57554
-$dropDown       : true
+$bgDefault      : #5cafb5
+$bgHighlight    : #5cafb5
+$colDefault     : #FCF9F2
+$colHighlight   : white
+$dropDown       : false
 .navbar-default
   background-color: $bgDefault
   border: none
@@ -77,6 +81,18 @@ $dropDown       : true
         color: $colDefault
         &:hover, &:focus
           color: $colHighlight
+    @media (min-width: 768px)
+      .dropdown-menu
+        background-color: white
+        li
+          a
+            color: $bgDefault
+      .active
+        a
+          background-color: white
+          &:hover
+            background-color: $btnColHover
+
       @if $dropDown
         > .dropdown-menu
           background-color: $bgDefault
@@ -131,39 +147,30 @@ $dropDown       : true
   text-align: center
   background: transparent
   cursor: default
+  border: none
   a, span, em
     padding: 0.2em 0.5em
     display: block
     float: left
     margin-right: 1px
+    background-color: $btnColBack
+    box-shadow: 0 1px 2px rgba(0,0,0,.15)
   .disabled
     color: #dddddd
-    border: 1px solid #dddddd
   .current
     font-style: normal
     font-weight: bold
-    background: $colHighlight
-    color: white
-    border: 1px solid $colHighlight
+    background: $bgHighlight
+    color: $btnColBack
   a
     text-decoration: none
-    color: #888888
-    border: 1px solid #ccc
+    color: $bgHighlight
     &:hover, &:focus
-      color: #555555
-      border-color: #ccc
-      background: #e6e6e6
-  .page_info
-    background: $colHighlight
-    color: white
-    padding: 0.4em 0.6em
-    width: 22em
-    margin-bottom: 0.3em
-    text-align: center
-    b
-      color: #555555
-      background: #2e6ab1 + 60
-      padding: 0.1em 0.25em
+      color: $bgHighlight
+      background-color: $btnColHover
+    &:active
+      color: $btnColActive
+      box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125)
   /* self-clearing method:
   &:after
     content: "."
@@ -200,11 +207,9 @@ $dropDown       : true
   @media (max-height: 360px)
     height: 550px
   @media (min-height: 361px)
-    height: 580px
-
+    height: 600px
   td
     padding: 3px 20px 2px 0
-
 
 .title
   text-align: center
@@ -212,9 +217,74 @@ $dropDown       : true
 .btn
   margin-bottom: 4px
   white-space: normal
+.btn-default
+  color: $bgHighlight
+  background-color: $btnColBack
+  border: none
+  box-shadow: 0 1px 2px rgba(0,0,0,.15)
+  &:hover, &:focus
+    border: none
+    outline: 0
+    color: $bgHighlight
+    background-color: $btnColHover
+  &:active:focus
+    color: $btnColActive
+    background-color: $btnColHover
+    outline: 0
 
-.odd
-  background: #fafafa
+//.odd
+//  background: #fafafa
+
+////
+
+
+//Form
+
+.wrapper 
+  margin-top: 80px
+    margin-bottom: 80px
+
+
+.form-signin 
+  max-width: 380px
+  padding: 15px 35px 45px
+  margin: 0 auto
+  background-color: #fff
+  border: 1px solid rgba(0,0,0,0.1)
+
+  .form-signin-heading,
+  .checkbox 
+    margin-bottom: 30px
+
+
+  .checkbox 
+    font-weight: normal
+
+
+  .form-control 
+    position: relative
+    font-size: 16px
+    height: auto
+    padding: 10px
+
+    &:focus 
+      z-index: 2
+  
+
+
+  input[type="text"] 
+    margin-bottom: -1px
+    border-bottom-left-radius: 0
+    border-bottom-right-radius: 0
+
+
+  input[type="password"] 
+    margin-bottom: 20px
+    border-top-left-radius: 0
+    border-top-right-radius: 0
+
+
+
 ////
 
 //Audio
