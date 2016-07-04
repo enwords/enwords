@@ -15,26 +15,45 @@
       <% if signed_in? %>
           <ul class="nav navbar-nav">
 
-            <li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Главная", root_path %></li>
+            <li><%= link_to "Главная", root_path %></li>
 
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Слова<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li class="<%= 'active' if current_page?(learning_path) %>"><%= link_to "Изучаемые", learning_path %></li>
-                <li class="<%= 'active' if current_page?(learned_path) %>"><%= link_to "Выученные", learned_path %></li>
-                <li class="<%= 'active' if current_page?(unset_path) %>"><%= link_to "Неизвестные", unset_path %></li>
-                <li class="<%= 'active' if current_page?(words_path) %>"><%= link_to "Все", words_path %></li>
+                <li><%= link_to learned_path do %>
+                      <span class="fa fa-check item"></span>Выученные
+                  <% end %>
+                </li>
+
+                <li><%= link_to learning_path do %>
+                      <span class="fa fa-remove item"></span>Изучаемые
+                  <% end %>
+                </li>
+
+                <li><%= link_to unset_path do %>
+                      <span class="fa fa-question item"></span>Неизвестные
+                  <% end %>
+                </li>
+
+                <li><%= link_to words_path do %>
+                      <span class="fa fa-book item"></span>Все
+                  <% end %>
+                </li>
+
               </ul>
             </li>
-
-            <li class="<%= 'active' if current_page?(practice_path) %>"><%= link_to "Последняя тренировка", practice_path %></li>
+            <li><%= link_to "Последняя тренировка", practice_path %></li>
 
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to 'Настройки', edit_user_registration_path %></li>
+            <li><%= link_to edit_user_registration_path do %>
+                  <span class="fa fa-cog item"></span>Настройки
+              <% end %>
+            </li>
+
             <li><%= link_to destroy_user_session_path, method: 'delete' do %>
-                  <span class="glyphicon glyphicon-log-out"></span> Выйти
+                  <span class="fa fa-sign-out item"></span>Выйти
               <% end %>
             </li>
           </ul>
@@ -47,7 +66,7 @@
             </li>
 
             <li class="<%= 'active' if current_page?(new_user_session_path) %>"><%= link_to new_user_session_path do %>
-                  <span class="glyphicon glyphicon-log-in"></span> Войти
+                  <span class="fa fa-sign-in item"></span>Войти
               <% end %>
             </li>
           </ul>
