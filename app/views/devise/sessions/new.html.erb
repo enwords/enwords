@@ -1,36 +1,36 @@
 <div class="container">
   <div class="row row-content">
     <div class="col-xs-12">
-      <h2>Вход</h2>
-    </div>
-  </div>
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3 wrapper">
+        <h2 class="form-signin-heading">Вход</h2>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-  <div class="row row-content">
-    <div class="col-xs-12">
-      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <div class="field">
-            <%= f.label :email, "Почта" %><br/>
-            <%= f.email_field :email, autofocus: true %>
-          </div>
+            <div class="col-xs-12 error">
+              <p><%= devise_error_messages! %> </p>
+            </div>
 
-          <div class="field">
-            <%= f.label :password , "Пароль" %><br/>
-            <%= f.password_field :password, autocomplete: "off" %>
-          </div>
+            <div class="field">
+              <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: "Почта" %>
+            </div>
 
-          <% if devise_mapping.rememberable? -%>
-              <div class="field">
-                <%= f.check_box :remember_me%>
-                <%= f.label :remember_me,  "Запомнить" %>
-              </div>
-          <% end -%>
+            <div class="field">
+            <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: "Пароль" %>
+            </div>
 
-          <div class="actions">
-            <%= f.submit "Войти" %>
-          </div>
-      <% end %>
+            <% if devise_mapping.rememberable? -%>
+                <div class="field" style="padding-top: 10px">
+                  <%= f.check_box :remember_me%>
+                  <%= f.label :remember_me,  "Запомнить" %>
+                </div>
+            <% end -%>
 
-      <%= render "devise/shared/links" %>
+            <div class="field" style="padding-top: 20px">
+              <%= submit_tag "Войти", class: "btn btn-lg btn-primary btn-block" %>
+            </div>
+
+        <% end %>
+        <%= render "devise/shared/links" %>
+      </div>
     </div>
   </div>
 </div>

@@ -25,12 +25,10 @@
             </div>
 
             <div class="field">
-              <%= f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: "Текущий пароль" %>
+              <%= f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: "Текущий пароль (обязательно)" %>
             </div>
 
-            <div style="padding-bottom: 20px"></div>
-
-            <div class="field">
+            <div class="field" style="padding-top: 20px">
               <%= submit_tag "Сохранить изменения", class: "btn btn-lg btn-primary btn-block" %>
             </div>
 
@@ -40,13 +38,6 @@
                       method: :delete, class: "btn btn-lg btn-danger btn-block" %>
 
       </div>
-
     </div>
   </div>
 </div>
-
-<style>
-
-
-
-</style>
