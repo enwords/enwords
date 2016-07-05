@@ -28,9 +28,5 @@ Rails.application.routes.draw do
   resources :collections
 
   root to: 'static#index'
-  get '/learning' => 'words#learning'
-  get '/learned' => 'words#learned'
-  get '/unset' => 'words#unset'
   get '/practice' => 'words#practice'
-  get '/wordsearch' => 'words#wordsearch'
 end
