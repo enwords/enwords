@@ -3,7 +3,7 @@ class WordsController < ApplicationController
 
 
   def word_action
-    unless params[:words_ids].nil?
+    if params[:words_ids]
       parameter = params[:commit]
       case parameter
         when 'to_learning'
@@ -64,6 +64,14 @@ class WordsController < ApplicationController
       return
     rescue
       Wordbook.where(user_id: params[:user_id], word_id: params[:word_id]).update_all(learned: params[:bool])
+    end
+  end
+
+  def wordsearch
+    if params[:search]
+      @words = Word.joins(:sentences).where(sentences: {language_id: current_user.language_1_id}).
+          where('word LIKE ?', "#{params[:search]}%").
+          group(:id).order(:id).paginate(page: params[:page], per_page: 20)
     end
   end
 

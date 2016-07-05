@@ -47,6 +47,15 @@
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
+            <li class="search">
+              <%= form_tag wordsearch_path, :method => 'get' do %>
+                  <%= text_field_tag :search, params[:search], placeholder: "Поиск слов" %>
+                  <%= button_tag type: "submit", :name => nil do %>
+                      <span class="fa fa-search"></span>
+                  <% end %>
+              <% end %>
+            </li>
+
             <li><%= link_to edit_user_registration_path do %>
                   <span class="fa fa-cog item"></span>Настройки
               <% end %>
@@ -60,12 +69,12 @@
 
       <% else %>
           <ul class="nav navbar-nav navbar-right">
-            <li class="<%= 'active' if current_page?(new_user_registration_path) %>"><%= link_to new_user_registration_path do %>
+            <li><%= link_to new_user_registration_path do %>
                   Регистрация
               <% end %>
             </li>
 
-            <li class="<%= 'active' if current_page?(new_user_session_path) %>"><%= link_to new_user_session_path do %>
+            <li><%= link_to new_user_session_path do %>
                   <span class="fa fa-sign-in item"></span>Войти
               <% end %>
             </li>
@@ -76,3 +85,4 @@
     </div>
   </div>
 </nav>
+

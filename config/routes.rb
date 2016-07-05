@@ -32,4 +32,5 @@ Rails.application.routes.draw do
   get '/learned' => 'words#learned'
   get '/unset' => 'words#unset'
   get '/practice' => 'words#practice'
+  get '/wordsearch' => 'words#wordsearch'
 end
