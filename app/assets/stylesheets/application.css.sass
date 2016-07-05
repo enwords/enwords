@@ -148,6 +148,43 @@ $dropDown       : false
         background-color: $bgHighlight
 ////
 
+//search
+
+
+.search
+  @media (max-width: 767px)
+    left: 8px
+  @media (min-width: 768px)
+    top: 14px
+  color: $bgHighlight
+  input, button, select, textarea
+    padding-right: 3px
+    padding-left: 6px
+    /* IE7-8 doesn't have border-radius, so don't indent the padding */
+    margin-bottom: 0
+    -webkit-border-radius: 3px
+    -moz-border-radius: 3px
+    border-radius: 13px
+    border: transparent
+    &:focus
+      outline: none
+
+  button
+    border: 0
+    background: none
+    /** belows styles are working good */
+    padding: 2px 5px
+    position: relative
+    left: -26px
+    /* IE7-8 doesn't have border-radius, so don't indent the padding */
+    margin-bottom: 0
+    -webkit-border-radius: 3px
+    -moz-border-radius: 3px
+    border-radius: 13px
+
+////
+
+
 //Paginate
 .digg_pagination
   text-align: center
