@@ -20,22 +20,24 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Слова<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><%= link_to learned_path do %>
+
+                <li><%= link_to words_path status: 'learned' do %>
                       <span class="fa fa-check item"></span>Выученные
                   <% end %>
                 </li>
 
-                <li><%= link_to learning_path do %>
+
+                <li><%= link_to words_path status: 'learning' do %>
                       <span class="fa fa-remove item"></span>Изучаемые
                   <% end %>
                 </li>
 
-                <li><%= link_to unset_path do %>
+                <li><%= link_to words_path status: 'unknown' do %>
                       <span class="fa fa-question item"></span>Неизвестные
                   <% end %>
                 </li>
 
-                <li><%= link_to words_path do %>
+                <li><%= link_to words_path status: 'all' do %>
                       <span class="fa fa-book item"></span>Все
                   <% end %>
                 </li>
@@ -48,7 +50,7 @@
 
           <ul class="nav navbar-nav navbar-right">
             <li class="search">
-              <%= form_tag wordsearch_path, :method => 'get' do %>
+              <%= form_tag words_path, :method => 'get' do %>
                   <%= text_field_tag :search, params[:search], placeholder: "Поиск слов" %>
                   <%= button_tag type: "submit", :name => nil do %>
                       <span class="fa fa-search"></span>

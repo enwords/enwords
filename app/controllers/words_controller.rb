@@ -4,8 +4,7 @@ class WordsController < ApplicationController
 
   def word_action
     if params[:words_ids]
-      parameter = params[:commit]
-      case parameter
+      case params[:commit]
         when 'to_learning'
           set_word_status false
         when 'to_learned'
@@ -67,7 +66,53 @@ class WordsController < ApplicationController
     end
   end
 
-  def wordsearch
+
+  # GET /words
+  # GET /words.json
+  def index
+    if params[:status]
+      case params[:status]
+        when 'learning'
+          learning
+        when 'learned'
+          learned
+        when 'unknown'
+          unknown
+        when 'all'
+          all
+        when 'word_search'
+          word_search
+        else
+          redirect_to(root_path)
+      end
+    else
+      redirect_to(root_path)
+    end
+  end
+
+  def all
+    @words = Word.joins(:sentences).where(sentences: {language_id: current_user.language_1_id}).
+        group(:id).order(:id).paginate(page: params[:page], per_page: 20)
+  end
+
+  def learning
+    @words = current_user.words.where(wordbooks: {learned: false}).order(:id).
+        paginate(page: params[:page], per_page: 20)
+  end
+
+  def learned
+    @words = current_user.words.where(wordbooks: {learned: true}).order(:id).
+        paginate(page: params[:page], per_page: 20)
+  end
+
+  def unknown
+    @words = Word.joins(:sentences).where(sentences: {language_id: current_user.language_1_id}).
+        where.not(id: Wordbook.select(:word_id).where(user: current_user)).group(:id).order(:id).
+        paginate(page: params[:page], per_page: 20)
+  end
+
+
+  def word_search
     if params[:search]
       @words = Word.joins(:sentences).where(sentences: {language_id: current_user.language_1_id}).
           where('word LIKE ?', "#{params[:search]}%").
@@ -75,31 +120,6 @@ class WordsController < ApplicationController
     end
   end
 
-  # GET /words
-  # GET /words.json
-  def index
-    @words = Word.joins(:sentences).where(sentences: {language_id: current_user.language_1_id}).
-        group(:id).order(:id).paginate(page: params[:page], per_page: 20)
-  end
-
-  # GET /learning
-  def learning
-    @words = current_user.words.where(wordbooks: {learned: false}).order(:id).
-        paginate(page: params[:page], per_page: 20)
-  end
-
-  # GET /learned
-  def learned
-    @words = current_user.words.where(wordbooks: {learned: true}).order(:id).
-        paginate(page: params[:page], per_page: 20)
-  end
-
-  # GET /unset
-  def unset
-    @words = Word.joins(:sentences).where(sentences: {language_id: current_user.language_1_id}).
-        where.not(id: Wordbook.select(:word_id).where(user: current_user)).group(:id).order(:id).
-        paginate(page: params[:page], per_page: 20)
-  end
 
   private
   # Never trust parameters from the scary internet, only allow the white list through.
