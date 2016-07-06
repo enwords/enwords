@@ -1,6 +1,6 @@
 <% unless @words.any? %>
     <div class="col-xs-12">
-      <p class="title">В этом списке нет слов, вы можете найти новые слова <a href="<%= unset_path %>">здесь</a></p>
+      <p class="title">В этом списке нет слов, вы можете найти новые слова <a href="<%= words_path status: 'unknown' %>">здесь</a></p>
     </div>
 <% else %>
     <div id="word_list">
