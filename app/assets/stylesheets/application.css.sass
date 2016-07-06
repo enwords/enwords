@@ -32,6 +32,7 @@ body
   margin-bottom: 60px
   padding: 50px 0px 0px 0px
   background-color: rgb(252, 249, 242)
+  color: #585858
   .title
     padding: 20px 0px 20px 0px
     @media (max-height: 600px)
@@ -257,15 +258,18 @@ $dropDown       : false
 //Words and training
 
 #word_list
-  @media (max-height: 360px)
-    height: 550px
-  @media (min-height: 361px)
-    height: 600px
+  @media (max-width: 360px)
+  margin-bottom: 10px
+  @media (min-width: 769px)
+    height: 534px
+    margin-bottom: 66px
   td
     padding: 3px 20px 2px 0
 
 .title
   text-align: center
+  h3
+    margin-top: 10px
 
 .btn
   margin-bottom: 4px
