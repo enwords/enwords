@@ -53,7 +53,7 @@
                   <td style="width: 100%; "><%= word.word.capitalize %></td>
                   <td>
                     <label class="switch">
-                      <%= button_to '', {
+                      <%= button_to name = nil, {
                           controller: 'words', action: 'set_status_on_training', bool: colors[:future_bool],
                           word_id: word.id, user_id: current_user.id}, method: :put, form: {id: button},
                                     onclick: "setColor('#{button}', '#{switch}', '#{ colors[:grey_background] }',
@@ -70,7 +70,7 @@
     <% end %>
   </div>
 
-<div class="digg_pagination" id="pagination-practice">
+<div class="digg_pagination" id="pagination-training">
   <%= will_paginate @sentences, page_links: false, previous_label: '❬', next_label: '❭' %>
 </div>
 

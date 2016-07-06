@@ -33,10 +33,10 @@ class WordsController < ApplicationController
       end
     end
     Training.create! val
-    redirect_to(practice_path)
+    redirect_to(training_path)
   end
 
-  def practice
+  def training
     @sentences = Sentence.where(id: Training.select(:sentence_id).where(user: current_user)).includes(:audio).
         paginate(page: params[:page], per_page: 1)
   end
@@ -86,7 +86,8 @@ class WordsController < ApplicationController
           redirect_to(root_path)
       end
     else
-      redirect_to(root_path)
+      word_search
+      # redirect_to(root_path)
     end
   end
 
