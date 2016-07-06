@@ -14,9 +14,10 @@ Rails.application.routes.draw do
     get 'settings' => 'devise/registrations#edit', as: :edit_user_registration
   end
 
+  root to: 'static#index'
   resources :users
-
   resources :sentences
+
 
   resources :words do
     collection do
@@ -24,13 +25,8 @@ Rails.application.routes.draw do
       put :set_status_on_training
     end
   end
+  put '/words' => 'words#index'
 
   resources :collections
-
-  root to: 'static#index'
-  get '/learning' => 'words#learning'
-  get '/learned' => 'words#learned'
-  get '/unset' => 'words#unset'
-  get '/practice' => 'words#practice'
-  get '/wordsearch' => 'words#wordsearch'
+  get '/training' => 'words#training'
 end
