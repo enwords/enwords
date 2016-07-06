@@ -151,6 +151,10 @@ $dropDown       : false
 
 //search
 .search
+  li
+    form
+      width: 180px
+
   @media (max-width: 767px)
     left: 8px
   @media (min-width: 768px)
@@ -172,9 +176,9 @@ $dropDown       : false
     border: 0
     background: none
     /** belows styles are working good */
-    padding: 2px 5px
     position: relative
-    left: -26px
+    right: 32px
+    bottom: 1px
     /* IE7-8 doesn't have border-radius, so don't indent the padding */
     margin-bottom: 0
     -webkit-border-radius: 3px
@@ -315,12 +319,11 @@ $dropDown       : false
 
   .form-signin-heading,
   .checkbox 
+    margin-top: 10px
     margin-bottom: 30px
 
-
-  .checkbox 
+  .checkbox
     font-weight: normal
-
 
   .form-control 
     position: relative
