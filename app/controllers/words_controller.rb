@@ -112,7 +112,7 @@ class WordsController < ApplicationController
   def word_search
     if params[:search]
       @words = Word.joins(:sentences).where(sentences: {language_id: current_user.language_1_id}).
-          where('word LIKE ?', "#{params[:search]}%").
+          where('word LIKE ?', "#{params[:search].downcase}%").
           group(:id).order(:id).paginate(page: params[:page], per_page: 20)
     end
   end
