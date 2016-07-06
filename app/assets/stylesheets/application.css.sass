@@ -72,7 +72,7 @@ $dropDown       : false
   background-color: $bgDefault
   border: none
   .item
-    width: 16px
+    width: 20px
   .navbar-brand
     color: $colDefault
     &:hover, &:focus
@@ -229,9 +229,16 @@ $dropDown       : false
 #pagination-mobile
   font-size: 140%
   bottom: 5px
+  .next_page, .previous_page
+    height: 35px
+    width: 35px
 
 #pagination-desktop
   width: 100%
+  .next_page, .previous_page
+    height: 25.6px
+    width: 25.6px
+
 
 #pagination-training
   position: fixed
@@ -242,6 +249,9 @@ $dropDown       : false
   -ms-transform: translateX(-50%)
   transform: translateX(-50%)
   font-size: 140%
+  .next_page, .previous_page
+    height: 35px
+    width: 35px
 ////
 
 //Words and training
