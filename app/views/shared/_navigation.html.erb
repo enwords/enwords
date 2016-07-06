@@ -37,7 +37,7 @@
                   <% end %>
                 </li>
 
-                <li><%= link_to words_path status: 'all' do %>
+                <li><%= link_to words_path do %>
                       <span class="fa fa-book item"></span>Все
                   <% end %>
                 </li>
@@ -50,9 +50,9 @@
 
           <ul class="nav navbar-nav navbar-right">
             <li class="search">
-              <%= form_tag words_path, :method => 'get' do %>
+              <%= form_tag words_path, method: 'get' do %>
                   <%= text_field_tag :search, params[:search], placeholder: "Поиск слов" %>
-                  <%= button_tag type: "submit", :name => nil do %>
+                  <%= button_tag type: "submit", name: nil do %>
                       <span class="fa fa-search"></span>
                   <% end %>
               <% end %>

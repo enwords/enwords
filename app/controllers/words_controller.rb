@@ -14,10 +14,10 @@ class WordsController < ApplicationController
         when 'to_training'
           set_training
         else
+          redirect_to(root_path)
       end
     end
   end
-
 
   def set_training
     Training.delete_all(user_id: current_user)
@@ -73,27 +73,23 @@ class WordsController < ApplicationController
     if params[:status]
       case params[:status]
         when 'learning'
+          @title = 'Изучаемые слова'
           learning
         when 'learned'
+          @title = 'Выученные слова'
           learned
         when 'unknown'
+          @title = 'Неизвестные слова'
           unknown
-        when 'all'
-          all
-        when 'word_search'
-          word_search
-        else
-          redirect_to(root_path)
       end
-    else
+    elsif params[:search]
+      @title = 'Результат поиска'
       word_search
-      # redirect_to(root_path)
+    else
+      @title = 'Все слова'
+      @words = Word.joins(:sentences).where(sentences: {language_id: current_user.language_1_id}).
+          group(:id).order(:id).paginate(page: params[:page], per_page: 20)
     end
-  end
-
-  def all
-    @words = Word.joins(:sentences).where(sentences: {language_id: current_user.language_1_id}).
-        group(:id).order(:id).paginate(page: params[:page], per_page: 20)
   end
 
   def learning
