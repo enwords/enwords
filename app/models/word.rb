@@ -1,7 +1,5 @@
 class Word < ApplicationRecord
-  has_many :wordbooks
-  has_many :collections
+  belongs_to :collection
   has_and_belongs_to_many :sentences
-  has_and_belongs_to_many :users
-  belongs_to :language
+  belongs_to :user
 end

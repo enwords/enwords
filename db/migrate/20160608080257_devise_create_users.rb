@@ -33,9 +33,10 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       t.timestamps null: false
 
       t.integer :role
-      t.integer :language_1_id, index: true, foreign_key: true, :null => false
-      t.integer :language_2_id, index: true, foreign_key: true, :null => false
-
+      t.integer :native_language
+      t.integer :learning_language
+      t.integer :sentences_number
+      t.boolean :audio_enable
     end
 
     add_index :users, :email,                unique: true

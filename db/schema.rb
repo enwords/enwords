@@ -16,15 +16,15 @@ ActiveRecord::Schema.define(version: 20160621081409) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "audio", id: false, force: :cascade do |t|
+  create_table "audios", id: false, force: :cascade do |t|
     t.integer "sentence_id"
-    t.index ["sentence_id"], name: "index_audio_on_sentence_id", using: :btree
+    t.index ["sentence_id"], name: "index_audios_on_sentence_id", using: :btree
   end
 
   create_table "collections", force: :cascade do |t|
-    t.datetime "created_at",                                                                                               null: false
-    t.datetime "updated_at",                                                                                               null: false
-    t.string   "name",       default: "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x000000034c5d58>", null: false
+    t.datetime "created_at",                                                                                        null: false
+    t.datetime "updated_at",                                                                                        null: false
+    t.string   "name",       default: "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x5e58a90>", null: false
     t.integer  "user_id"
     t.index ["user_id"], name: "index_collections_on_user_id", using: :btree
   end
@@ -34,22 +34,15 @@ ActiveRecord::Schema.define(version: 20160621081409) do
     t.integer "collection_id", null: false
   end
 
-  create_table "languages", id: :integer, force: :cascade do |t|
-    t.string "name"
-  end
-
   create_table "links", id: false, force: :cascade do |t|
     t.integer "sentence_1_id", null: false
     t.integer "sentence_2_id", null: false
     t.index ["sentence_1_id", "sentence_2_id"], name: "index_links_on_sentence_1_id_and_sentence_2_id", unique: true, using: :btree
-    t.index ["sentence_1_id"], name: "index_links_on_sentence_1_id", using: :btree
-    t.index ["sentence_2_id"], name: "index_links_on_sentence_2_id", using: :btree
   end
 
   create_table "sentences", id: :integer, force: :cascade do |t|
-    t.integer "language_id"
-    t.string  "sentence"
-    t.index ["language_id"], name: "index_sentences_on_language_id", using: :btree
+    t.string "sentence"
+    t.string "language"
   end
 
   create_table "sentences_words", id: false, force: :cascade do |t|
@@ -78,31 +71,28 @@ ActiveRecord::Schema.define(version: 20160621081409) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.integer  "role"
-    t.integer  "language_1_id",                       null: false
-    t.integer  "language_2_id",                       null: false
+    t.integer  "native_language"
+    t.integer  "learning_language"
+    t.integer  "sentences_number"
+    t.boolean  "audio_enable"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
-    t.index ["language_1_id"], name: "index_users_on_language_1_id", using: :btree
-    t.index ["language_2_id"], name: "index_users_on_language_2_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  create_table "wordbooks", id: false, force: :cascade do |t|
+  create_table "word_statuses", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "word_id"
     t.boolean "learned", null: false
-    t.index ["user_id", "word_id"], name: "index_wordbooks_on_user_id_and_word_id", unique: true, using: :btree
-    t.index ["user_id"], name: "index_wordbooks_on_user_id", using: :btree
-    t.index ["word_id"], name: "index_wordbooks_on_word_id", using: :btree
+    t.index ["user_id", "word_id"], name: "index_word_statuses_on_user_id_and_word_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_word_statuses_on_user_id", using: :btree
+    t.index ["word_id"], name: "index_word_statuses_on_word_id", using: :btree
   end
 
   create_table "words", id: :integer, force: :cascade do |t|
-    t.integer "language_id"
-    t.string  "word"
-    t.index ["language_id"], name: "index_words_on_language_id", using: :btree
+    t.string "word"
+    t.string "language"
   end
 
-  add_foreign_key "audio", "sentences"
+  add_foreign_key "audios", "sentences"
   add_foreign_key "collections", "users"
-  add_foreign_key "sentences", "languages"
-  add_foreign_key "words", "languages"
 end

@@ -20,7 +20,7 @@
             <% n = 0
                sentence.words.each do |word|
                  begin
-                   current_bool = word.wordbooks.where(user_id: current_user.id).first.learned
+                   current_bool = word.word_statuses.where(user_id: current_user.id).first.learned
                 rescue
 
                  end
