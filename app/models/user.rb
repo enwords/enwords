@@ -1,20 +1,26 @@
 class User < ActiveRecord::Base
-  has_many :wordbooks, dependent: :delete_all
-  has_many :words, through: :wordbooks
+  has_many :word_statuses, dependent: :delete_all
+  has_many :words, through: :word_statuses
   has_many :trainings
   has_many :sentences, through: :trainings
   has_many :collections
+  # has_one :native_language, class_name: "Language"
+  # has_one :learning_language,  class_name: "Language"
 
   enum role: [:user, :vip, :admin]
-  after_initialize :set_default_role, :set_default_lang, :if => :new_record?
 
-  def set_default_role
+  lang = [:rus, :eng]
+  enum native_language: lang, _prefix: :native
+  enum learning_language: lang, _prefix: :learning
+
+  after_initialize :set_default_settings, if: :new_record?
+
+  def set_default_settings
     self.role ||= :user
-  end
-
-  def set_default_lang
-    self.language_1_id = 1 #eng
-    self.language_2_id = 2 #rus
+    self.native_language ||= :rus#rus
+    self.learning_language ||= :eng#eng
+    self.sentences_number ||= 5
+    self.audio_enable ||= true
   end
 
   # Include default devise modules. Others available are:
