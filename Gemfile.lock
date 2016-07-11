@@ -42,6 +42,7 @@ GEM
     autoprefixer-rails (6.3.6.2)
       execjs
     bcrypt (3.1.11)
+    bcrypt (3.1.11-x86-mingw32)
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -64,6 +65,8 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.7.0)
+    font-awesome-sass (4.6.2)
+      sass (>= 3.2)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
@@ -90,8 +93,12 @@ GEM
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
+    nokogiri (1.6.8-x86-mingw32)
+      mini_portile2 (~> 2.1.0)
+      pkg-config (~> 1.1.7)
     orm_adapter (0.5.0)
     pg (0.18.4)
+    pg (0.18.4-x86-mingw32)
     pkg-config (1.1.7)
     puma (3.4.0)
     rack (2.0.0.rc1)
@@ -149,6 +156,8 @@ GEM
     turbolinks-source (5.0.0.beta5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2016.5)
+      tzinfo (>= 1.0.0)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
     warden (1.2.6)
@@ -164,6 +173,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   autoprefixer-rails
@@ -171,6 +181,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise
+  font-awesome-sass (= 4.6.2)
   jbuilder (~> 2.5)
   jquery-rails
   pg

@@ -7,10 +7,12 @@
         <%= form_tag word_action_words_path, method: :put do %>
             <div class="col-xs-6 col-sm-3 col-sm-offset-3" id="word_list">
               <table>
+                <th></th>
                 <th><input type="checkbox" onclick="toggle(this)"/></th>
                 <th>Выбрать все</th>
                 <% @words.each do |word| %>
                     <tr>
+                      <td> <%= word.id %> </td>
                       <td> <%= check_box_tag "words_ids[]", word.id %> </td>
                       <td> <%= word.word.capitalize %> </td>
                     </tr>

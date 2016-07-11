@@ -39,6 +39,7 @@ class WordsController < ApplicationController
   def training
     @sentences = Sentence.where(id: Training.select(:sentence_id).where(user: current_user)).includes(:audio).
         paginate(page: params[:page], per_page: 1)
+    @native_language = current_user.native_language
   end
 
   def delete_word_status
@@ -89,16 +90,20 @@ class WordsController < ApplicationController
       @title = 'Все слова'
       @words = Word.joins(:sentences).where(sentences: {language: current_user.learning_language}).
           group(:id).order(:id).paginate(page: params[:page], per_page: 20)
+
+      # @words = Sentence.where(language: current_user.native_language).joins(:sentences).where(sentences: {language: current_user.learning_language}).first
+      #              .words.group(:id).order(:id).paginate(page: params[:page], per_page: 20)
+
     end
   end
 
   def learning
-    @words = current_user.words.where(word_statuses: {learned: false}).order(:id).
+    @words = current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: false}).order(:id).
         paginate(page: params[:page], per_page: 20)
   end
 
   def learned
-    @words = current_user.words.where(word_statuses: {learned: true}).order(:id).
+    @words = current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: true}).order(:id).
         paginate(page: params[:page], per_page: 20)
   end
 

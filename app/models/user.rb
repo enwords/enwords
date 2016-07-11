@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   enum role: [:user, :vip, :admin]
 
-  lang = [:rus, :eng]
+  lang = [:eng, :rus, :jpn]
   enum native_language: lang, _prefix: :native
   enum learning_language: lang, _prefix: :learning
 
