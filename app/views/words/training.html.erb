@@ -6,10 +6,10 @@
                 <span class="audioButton glyphicon glyphicon-volume-off"></span>
             <% else %>
                 <span class="audioButton glyphicon glyphicon-volume-up" onclick="play()"></span>
-                <%= audio_tag("https://audio.tatoeba.org/sentences/eng/#{sentence.id }.mp3", autoplay: false, id: 'audio-play') %>
+                <%= audio_tag("https://audio.tatoeba.org/sentences/#{sentence.language}/#{sentence.id }.mp3", autoplay: false, id: 'audio-play') %>
             <% end %>
             <%= sentence.sentence %> </h3>
-          <h4><%= sentence.sentences.first.sentence %> </h4>
+          <h4><%= sentence.sentences.where(language: @native_language).first.sentence %> </h4>
         </div>
 
 
