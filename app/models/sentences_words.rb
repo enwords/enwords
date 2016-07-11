@@ -1,0 +1,3 @@
+class SentencesWords < ApplicationRecord
+
+end
