@@ -10,41 +10,37 @@ require 'csv'
 
 puts 'wait few minutes'
 
-CSV.foreach(Rails.root.join('db', 'seeds_data', 'words.tsv'), :col_sep => "\t", :headers => false,
-            :encoding => 'utf-8').each do |row|
-
-  sql = "insert into words (id, language, word) values (#{row[0]}, '#{row[1]}', '#{row[2]}')"
-  ActiveRecord::Base.connection.execute(sql)
+csv_text = File.read(Rails.root.join('db', 'seeds_data', 'words.tsv'))
+csv = CSV.parse(csv_text, :col_sep => "\t", :headers => false, :encoding => 'utf-8')
+csv.each do |row|
+   Word.create!(id: row[0], language: row[1], word: row[2])
 end
 puts 'words done'
 
-CSV.foreach(Rails.root.join('db', 'seeds_data', 'sentences.tsv'), :col_sep => "\t", :headers => false,
-            :encoding => 'utf-8').each do |row|
-  sql = "insert into sentences (id, language, sentence) values (#{row[0]}, '#{row[1]}', '#{row[2]}')"
-  # sql = "insert into sentences (id, language, sentence) values (#{row[0]}, '" + row[1]+ "', '"+ row[2] + "')"
-  ActiveRecord::Base.connection.execute(sql)
+csv_text = File.read(Rails.root.join('db', 'seeds_data', 'sentences.tsv'))
+csv = CSV.parse(csv_text, :col_sep => "\t", :headers => false, :encoding => 'utf-8')
+csv.each do |row|
+  Sentence.create!(id: row[0], language: row[1], sentence: row[2])
 end
 puts 'sentences done'
 
-CSV.foreach(Rails.root.join('db', 'seeds_data', 'word_sentence.tsv'), :col_sep => "\t", :headers => false,
-            :encoding => 'utf-8').each do |row|
-  sql = "insert into sentences_words (word_id, sentence_id) values (#{row[0]}, #{row[1]})"
-  # sql = "insert into sentences_words (word_id, sentence_id) values (#{row[0]}, #{row[1]})"
-  ActiveRecord::Base.connection.execute(sql)
+csv_text = File.read(Rails.root.join('db', 'seeds_data', 'word_sentence.tsv'))
+csv = CSV.parse(csv_text, :col_sep => "\t", :headers => false, :encoding => 'utf-8')
+csv.each do |row|
+  SentencesWords.create!(word_id: row[0], sentence_id: row[1])
 end
 puts 'word_sentence done'
 
-
-CSV.foreach(Rails.root.join('db', 'seeds_data', 'audio.tsv'), :col_sep => "\t", :headers => false,
-            :encoding => 'utf-8').each do |row|
-  sql = "insert into audios (sentence_id) values (#{ row[0]})"
-  ActiveRecord::Base.connection.execute(sql)
+csv_text = File.read(Rails.root.join('db', 'seeds_data', 'audio.tsv'))
+csv = CSV.parse(csv_text, :col_sep => "\t", :headers => false, :encoding => 'utf-8')
+csv.each do |row|
+  Audio.create!(sentence_id: row[0])
 end
 puts 'audio done'
 
-CSV.foreach(Rails.root.join('db', 'seeds_data', 'links.tsv'), :col_sep => "\t", :headers => false,
-            :encoding => 'utf-8').each do |row|
-  sql = "insert into links (sentence_1_id, sentence_2_id) values (#{ row[0]}, #{row[1]})"
-  ActiveRecord::Base.connection.execute(sql)
+csv_text = File.read(Rails.root.join('db', 'seeds_data', 'links.tsv'))
+csv = CSV.parse(csv_text, :col_sep => "\t", :headers => false, :encoding => 'utf-8')
+csv.each do |row|
+  Links.create!(sentence_1_id: row[0], sentence_2_id: row[1])
 end
 puts 'links done'
