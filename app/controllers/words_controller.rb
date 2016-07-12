@@ -25,7 +25,7 @@ class WordsController < ApplicationController
     val = []
 
     params[:words_ids].each do |wid|
-      arr << Sentence.joins(:sentences_words).where(sentences_words: {word_id: wid}).order("RANDOM()").limit(5)
+      arr << Sentence.joins(:sentences_words).where(sentences_words: {word_id: wid}).joins(:sentences).where(sentences_sentences: {language: current_user.native_language}).order("RANDOM()").limit(5)
     end
     arr.each do |sentences_arr|
       sentences_arr.each do |sen|
