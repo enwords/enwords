@@ -88,12 +88,41 @@ class WordsController < ApplicationController
       word_search
     else
       @title = 'Все слова'
-      @words = Word.joins(:sentences).where(sentences: {language: current_user.learning_language}).
-          group(:id).order(:id).paginate(page: params[:page], per_page: 20)
 
-      # @words = Sentence.where(language: current_user.native_language).joins(:sentences).where(sentences: {language: current_user.learning_language}).first
-      #              .words.group(:id).order(:id).paginate(page: params[:page], per_page: 20)
+      sql = "
+      select w.id, w.word from words w
+join sentences_words sw on sw.word_id = w.id
+join sentences s1 on sw.sentence_id = s1.id
+join links l on l.sentence_1_id = s1.id
+join sentences s2 on l.sentence_2_id = s2.id
+where w.language = 'jpn'
+and s1.language = 'jpn'
+and s2.language = 'rus'
+group by w.id
+order by w.id
+offset 1000
+limit 20
+"
+      @words = ActiveRecord::Base.connection.execute(sql)
 
+
+#       # @words = Word.joins(:sentences).joins(:sentences).where(s1: {language: current_user.learning_language}, s2: {language: current_user.native_language}, words: {language: current_user.learning_language})
+#       #                .group(:id).order(:id).paginate(page: params[:page], per_page: 20)
+#
+
+
+      # Edge.joins(:first, :second).where(nodes: {value: 1}, seconds_edges: {value: 2})
+      # SELECT "edges".* FROM "edges" INNER JOIN "nodes" ON "nodes"."id" = "edges"."first_id" INNER JOIN "nodes" "seconds_edges" ON "seconds_edges"."id" = "edges"."second_id" WHERE "nodes"."value" = 1 AND "seconds_edges"."value" = 2
+
+
+# @words = Word.joins(:sentences).where(language: current_user.learning_language).joins(:sentences).
+#     where(sentences_sentences: {language: current_user.native_language}).where(language: current_user.learning_language)
+#              .group(:id).order(:id).paginate(page: params[:page], per_page: 20)
+
+# @words = Word.where(Sentence.where(language: current_user.learning_language).joins(:sentences).
+#     where(sentences: {language: current_user.native_language})).where(language: current_user.learning_language).
+#               group(:id).order(:id).paginate(page: params[:page], per_page: 20)
+#
     end
   end
 

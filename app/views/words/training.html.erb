@@ -1,15 +1,19 @@
 <div class="container" style="padding-bottom: 20px">
-    <% @sentences.each do |sentence| %>
+    <% @sentences.each do |row| %>
         <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 title" style="margin-bottom: 20px;">
           <h3>
-            <% if sentence.audio.nil? %>
+            <% if row.audio.nil? %>
                 <span class="audioButton glyphicon glyphicon-volume-off"></span>
             <% else %>
                 <span class="audioButton glyphicon glyphicon-volume-up" onclick="play()"></span>
-                <%= audio_tag("https://audio.tatoeba.org/sentences/#{sentence.language}/#{sentence.id }.mp3", autoplay: false, id: 'audio-play') %>
+                <%= audio_tag("https://audio.tatoeba.org/sentences/#{row.language}/#{row.id }.mp3", autoplay: false, id: 'audio-play') %>
             <% end %>
-            <%= sentence.sentence %> </h3>
-          <h4><%= sentence.sentences.where(language: @native_language).first.sentence %> </h4>
+            <%=row.id%>
+            <%=row.sentence %>
+          </h3>
+          <h4><%= row.sentences.
+                  where(language: @native_language).
+                  first.sentence%> </h4>
         </div>
 
 
@@ -18,7 +22,7 @@
             <th></th>
             <th style="text-align: center; padding-left: 2px;">Знаете?</th>
             <% n = 0
-               sentence.words.each do |word|
+               row.words.each do |word|
                  begin
                    current_bool = word.word_statuses.where(user_id: current_user.id).first.learned
                 rescue
