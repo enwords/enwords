@@ -25,7 +25,8 @@ class WordsController < ApplicationController
     val = []
 
     params[:words_ids].each do |wid|
-      arr << Sentence.joins(:sentences_words).where(sentences_words: {word_id: wid}).joins(:sentences).where(sentences_sentences: {language: current_user.native_language}).order("RANDOM()").limit(5)
+      arr << Sentence.joins(:sentences_words).where(sentences_words: {word_id: wid}).joins(:translations).
+          where(translations_sentences: {language: current_user.native_language}).order("RANDOM()").limit(5)
     end
     arr.each do |sentences_arr|
       sentences_arr.each do |sen|
@@ -88,41 +89,14 @@ class WordsController < ApplicationController
       word_search
     else
       @title = 'Все слова'
-
-      sql = "
-      select w.id, w.word from words w
-join sentences_words sw on sw.word_id = w.id
-join sentences s1 on sw.sentence_id = s1.id
-join links l on l.sentence_1_id = s1.id
-join sentences s2 on l.sentence_2_id = s2.id
-where w.language = 'jpn'
-and s1.language = 'jpn'
-and s2.language = 'rus'
-group by w.id
-order by w.id
-offset 1000
-limit 20
-"
-      @words = ActiveRecord::Base.connection.execute(sql)
-
-
-#       # @words = Word.joins(:sentences).joins(:sentences).where(s1: {language: current_user.learning_language}, s2: {language: current_user.native_language}, words: {language: current_user.learning_language})
-#       #                .group(:id).order(:id).paginate(page: params[:page], per_page: 20)
-#
-
-
-      # Edge.joins(:first, :second).where(nodes: {value: 1}, seconds_edges: {value: 2})
-      # SELECT "edges".* FROM "edges" INNER JOIN "nodes" ON "nodes"."id" = "edges"."first_id" INNER JOIN "nodes" "seconds_edges" ON "seconds_edges"."id" = "edges"."second_id" WHERE "nodes"."value" = 1 AND "seconds_edges"."value" = 2
-
-
-# @words = Word.joins(:sentences).where(language: current_user.learning_language).joins(:sentences).
-#     where(sentences_sentences: {language: current_user.native_language}).where(language: current_user.learning_language)
-#              .group(:id).order(:id).paginate(page: params[:page], per_page: 20)
-
-# @words = Word.where(Sentence.where(language: current_user.learning_language).joins(:sentences).
-#     where(sentences: {language: current_user.native_language})).where(language: current_user.learning_language).
-#               group(:id).order(:id).paginate(page: params[:page], per_page: 20)
-#
+      @words = Word.joins("INNER JOIN sentences_words sw ON sw.word_id = words.id
+                           INNER JOIN sentences s1 on sw.sentence_id = s1.id
+                           INNER JOIN links l on l.sentence_1_id = s1.id
+                           INNER JOIN sentences s2 on l.sentence_2_id = s2.id
+                           where words.language = '#{current_user.learning_language}'
+                           and s1.language = '#{current_user.learning_language}'
+                           and s2.language = '#{current_user.native_language}'").
+          group(:id).order(:id).paginate(page: params[:page], per_page: 20)
     end
   end
 
