@@ -1,7 +1,6 @@
 class WordsController < ApplicationController
   before_action :authenticate_user!
 
-
   def word_action
     if params[:words_ids]
       case params[:commit]
@@ -89,13 +88,10 @@ class WordsController < ApplicationController
       word_search
     else
       @title = 'Все слова'
-      @words = Word.joins("INNER JOIN sentences_words sw ON sw.word_id = words.id
-                           INNER JOIN sentences s1 on sw.sentence_id = s1.id
-                           INNER JOIN links l on l.sentence_1_id = s1.id
-                           INNER JOIN sentences s2 on l.sentence_2_id = s2.id
-                           where words.language = '#{current_user.learning_language}'
-                           and s1.language = '#{current_user.learning_language}'
-                           and s2.language = '#{current_user.native_language}'").
+
+      @words = Word.joins(sentences: :translations).where(words: {language: current_user.learning_language},
+                                                          sentences: {language: current_user.learning_language},
+                                                          translations_sentences: {language: current_user.native_language}).
           group(:id).order(:id).paginate(page: params[:page], per_page: 20)
     end
   end
@@ -111,18 +107,20 @@ class WordsController < ApplicationController
   end
 
   def unknown
-    @words = Word.joins(:sentences).where(sentences: {language: current_user.learning_language}).
+    @words = Word.joins(sentences: :translations).where(words: {language: current_user.learning_language},
+                                                        sentences: {language: current_user.learning_language},
+                                                        translations_sentences: {language: current_user.native_language}).
         where.not(id: WordStatus.select(:word_id).where(user: current_user)).group(:id).order(:id).
         paginate(page: params[:page], per_page: 20)
   end
 
 
   def word_search
-    if params[:search]
-      @words = Word.joins(:sentences).where(sentences: {language: current_user.learning_language}).
+      @words = Word.joins(sentences: :translations).where(words: {language: current_user.learning_language},
+                                                          sentences: {language: current_user.learning_language},
+                                                          translations_sentences: {language: current_user.native_language}).
           where('word LIKE ?', "#{params[:search].downcase}%").
           group(:id).order(:id).paginate(page: params[:page], per_page: 20)
-    end
   end
 
 
