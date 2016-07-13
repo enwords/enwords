@@ -10,7 +10,7 @@
                             autoplay: false, id: 'audio-play') %>
           <% end %>
           <%= sentence.sentence %> </h3>
-        <h4><%= sentence.translations.where(language: @native_language).first.sentence %> </h4>
+        <h4><%= sentence.translations.where(language: current_user.native_language).first.sentence %> </h4>
       </div>
 
 
@@ -51,8 +51,8 @@
                 <td>
                   <label class="switch">
                     <%= button_to name = nil, {
-                        controller: 'words', action: 'set_status_on_training', bool: colors[:future_bool],
-                        word_id: word.id, user_id: current_user.id}, method: :put, form: {id: button},
+                        controller: 'words', action: 'create_or_update_word_status', bool: colors[:future_bool],
+                        word_id: word.id}, method: :put, form: {id: button},
                                   onclick: "setColor('#{button}', '#{switch}', '#{ colors[:grey_background] }',
                       '#{colors[:orange_background]}', '#{colors[:green_background]}', #{n}, '#{left_position}', '#{right_position}')" %>
                     <div class="slider" id='<%= switch %>' style="background-color: <%= colors[:current_background] %>"></div>

@@ -18,6 +18,31 @@ class WordsController < ApplicationController
     end
   end
 
+
+  # def set_training
+  #   Training.delete_all(user_id: current_user)
+  #   arr = []
+  #   val = []
+  #
+  #   params[:words_ids].each do |wid|
+  #     sentence_banch = Sentence.joins(:sentences_words).where(sentences_words: {word_id: wid}).joins(:translations).
+  #         where(translations_sentences: {language: current_user.native_language}).order("RANDOM()").
+  #         limit(current_user.sentences_number)
+  #     arr << sentence_banch.ids
+  #
+  #   end
+  #
+  #   arr.each do |sentences_arr|
+  #     sentences_arr.each do |sen|
+  #       val << {user_id: current_user.id, sentence_id: sen.id}
+  #     end
+  #   end
+  #   Training.create!(user_id: current_user.id, sentence_id: sentence_banch)
+  #
+  #   redirect_to(training_path)
+  # end
+
+
   def set_training
     Training.delete_all(user_id: current_user)
     arr = []
@@ -25,21 +50,23 @@ class WordsController < ApplicationController
 
     params[:words_ids].each do |wid|
       arr << Sentence.joins(:sentences_words).where(sentences_words: {word_id: wid}).joins(:translations).
-          where(translations_sentences: {language: current_user.native_language}).order("RANDOM()").limit(5)
+          where(translations_sentences: {language: current_user.native_language}).order("RANDOM()").
+          limit(current_user.sentences_number)
     end
+
     arr.each do |sentences_arr|
       sentences_arr.each do |sen|
         val << {user_id: current_user.id, sentence_id: sen.id}
       end
     end
     Training.create! val
+
     redirect_to(training_path)
   end
 
   def training
     @sentences = Sentence.where(id: Training.select(:sentence_id).where(user: current_user)).includes(:audio).
         paginate(page: params[:page], per_page: 1)
-    @native_language = current_user.native_language
   end
 
   def delete_word_status
@@ -49,24 +76,29 @@ class WordsController < ApplicationController
 
   def set_word_status(bool)
     params[:words_ids].each do |wid|
-      begin
-        WordStatus.create!(user_id: current_user.id, word_id: wid, learned: bool)
-      rescue
-        WordStatus.where(user_id: current_user, word_id: wid).update_all(learned: bool)
-      end
+      create_or_update_word_status(wid, bool)
     end
     redirect_to(:back)
   end
 
-  def set_status_on_training
+  def create_or_update_word_status(word_id=params[:word_id], bool=params[:bool])
     begin
-      WordStatus.create!(user_id: params[:user_id], word_id: params[:word_id], learned: params[:bool])
-      return
+      WordStatus.create!(user_id: current_user.id, word_id: word_id, learned: bool)
     rescue
-      WordStatus.where(user_id: params[:user_id], word_id: params[:word_id]).update_all(learned: params[:bool])
+      WordStatus.where(user_id: current_user, word_id: word_id).update_all(learned: bool)
     end
   end
 
+  def words_with_status(bool)
+    current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: bool})
+  end
+
+
+  def words_without_status
+    Word.joins(sentences: :translations).where(words: {language: current_user.learning_language},
+                                               sentences: {language: current_user.learning_language},
+                                               translations_sentences: {language: current_user.native_language})
+  end
 
   # GET /words
   # GET /words.json
@@ -75,10 +107,10 @@ class WordsController < ApplicationController
       case params[:status]
         when 'learning'
           @title = 'Изучаемые слова'
-          learning
+          learned_and_learning(false)
         when 'learned'
           @title = 'Выученные слова'
-          learned
+          learned_and_learning(true)
         when 'unknown'
           @title = 'Неизвестные слова'
           unknown
@@ -88,39 +120,25 @@ class WordsController < ApplicationController
       word_search
     else
       @title = 'Все слова'
-
-      @words = Word.joins(sentences: :translations).where(words: {language: current_user.learning_language},
-                                                          sentences: {language: current_user.learning_language},
-                                                          translations_sentences: {language: current_user.native_language}).
-          group(:id).order(:id).paginate(page: params[:page], per_page: 20)
+      @words = words_without_status.group(:id).order(:id).paginate(page: params[:page], per_page: 20)
     end
   end
 
-  def learning
-    @words = current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: false}).order(:id).
-        paginate(page: params[:page], per_page: 20)
+
+  def learned_and_learning(bool)
+    @words = words_with_status(bool).order(:id).paginate(page: params[:page], per_page: 20)
   end
 
-  def learned
-    @words = current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: true}).order(:id).
-        paginate(page: params[:page], per_page: 20)
-  end
 
   def unknown
-    @words = Word.joins(sentences: :translations).where(words: {language: current_user.learning_language},
-                                                        sentences: {language: current_user.learning_language},
-                                                        translations_sentences: {language: current_user.native_language}).
-        where.not(id: WordStatus.select(:word_id).where(user: current_user)).group(:id).order(:id).
+    @words = words_without_status.where.not(id: WordStatus.select(:word_id).where(user: current_user)).group(:id).order(:id).
         paginate(page: params[:page], per_page: 20)
   end
 
 
   def word_search
-      @words = Word.joins(sentences: :translations).where(words: {language: current_user.learning_language},
-                                                          sentences: {language: current_user.learning_language},
-                                                          translations_sentences: {language: current_user.native_language}).
-          where('word LIKE ?', "#{params[:search].downcase}%").
-          group(:id).order(:id).paginate(page: params[:page], per_page: 20)
+    @words = words_without_status.where('word LIKE ?', "#{params[:search].downcase}%").group(:id).order(:id).
+        paginate(page: params[:page], per_page: 20)
   end
 
 

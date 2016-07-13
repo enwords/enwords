@@ -22,13 +22,13 @@
               <ul class="dropdown-menu">
 
                 <li><%= link_to words_path status: 'learned' do %>
-                      <span class="fa fa-check item"></span>Выученные
+                      <span class="fa fa-check item"></span>Выученные (<%= current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: true}).count %>)
                   <% end %>
                 </li>
 
 
                 <li><%= link_to words_path status: 'learning' do %>
-                      <span class="fa fa-remove item"></span>Изучаемые
+                      <span class="fa fa-remove item"></span>Изучаемые (<%= current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: false}).count %>)
                   <% end %>
                 </li>
 
