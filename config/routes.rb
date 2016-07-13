@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   resources :words do
     collection do
       put :word_action
-      put :set_status_on_training
+      put :create_or_update_word_status
     end
   end
   put '/words' => 'words#index'
