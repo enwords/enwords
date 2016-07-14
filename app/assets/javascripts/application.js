@@ -30,9 +30,9 @@ function play() {
     audio.play();
 }
 
-function setColor(btn, swtch, grey, orange, green, n, left_edge, right_edge) {
-    var property_switch = document.getElementById(swtch);
-    var property_button = document.getElementById(btn);
+function setColor(grey, orange, green, n, left_edge, right_edge) {
+    var property_switch = document.getElementsByClassName("slider")[n];
+    var property_button = document.getElementsByClassName("button_hide")[n];
     var property_slider = document.getElementsByClassName("round")[n];
 
     if (property_switch.style.backgroundColor == grey || property_switch.style.backgroundColor == orange) {

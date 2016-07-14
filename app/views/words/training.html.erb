@@ -42,8 +42,6 @@
                  colors[:current_background]= colors[:green_background]
                  current_position = right_position
                end
-               button = 'button'+ n.to_s
-               switch = 'switch' + n.to_s
           %>
 
               <tr class='<%= cycle('odd', 'even') %>'>
@@ -52,15 +50,17 @@
                   <label class="switch">
                     <%= button_to name = nil, {
                         controller: 'words', action: 'create_or_update_word_status', bool: colors[:future_bool],
-                        word_id: word.id}, method: :put, form: {id: button},
-                                  onclick: "setColor('#{button}', '#{switch}', '#{ colors[:grey_background] }',
+                        word_id: word.id}, form: {class: "button_hide" , method: :post},
+                                  onclick: "setColor('#{ colors[:grey_background] }',
                       '#{colors[:orange_background]}', '#{colors[:green_background]}', #{n}, '#{left_position}', '#{right_position}')" %>
-                    <div class="slider" id='<%= switch %>' style="background-color: <%= colors[:current_background] %>"></div>
+
+                    <div class="slider" style="background-color: <%= colors[:current_background] %>"></div>
                     <div class="round" style="left: <%= current_position %>"></div>
-                    <% n = n + 1 %>
+
                   </label>
                 </td>
               </tr>
+              <% n = n + 1 %>
           <% end %>
         </table>
       </div>
