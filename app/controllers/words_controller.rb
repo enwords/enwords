@@ -49,9 +49,10 @@ class WordsController < ApplicationController
     val = []
 
     params[:words_ids].each do |wid|
-      arr << Sentence.joins(:sentences_words).where(sentences_words: {word_id: wid}).joins(:translations).
-          where(translations_sentences: {language: current_user.native_language}).order("RANDOM()").
-          limit(current_user.sentences_number)
+      arr << Sentence.select(:id).joins(:sentences_words).joins(:translations).left_joins(:audio).
+          where(sentences_words: {word_id: wid},
+                translations_sentences: {language: current_user.native_language}).
+          order('audios.sentence_id ASC').limit(current_user.sentences_number)
     end
 
     arr.each do |sentences_arr|
