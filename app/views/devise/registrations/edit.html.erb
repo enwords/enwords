@@ -24,6 +24,35 @@
               <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: "Повторите пароль" %>
             </div>
 
+
+
+
+
+            <div class="field">
+              <h5>Родной язык
+              <p class="settings_item"> <%= f.select(:native_language, User.native_languages.keys
+                  .map { |native_language| [native_language.titleize, native_language] }) %></p></h5>
+            </div>
+
+            <div class="field">
+              <h5>Изучаемый язык
+              <p class="settings_item"><%= f.select(:learning_language, User.learning_languages.keys
+                  .map { |learning_language| [learning_language.titleize, learning_language] }) %></p> </h5>
+            </div>
+
+
+            <div class="field">
+              <h5>Количество предложений на одно слово
+                <p class="settings_item"><%= f.number_field :sentences_number,  min: 1, max: 20 %></p></h5>
+            </div>
+
+
+            <div class="field">
+              <h5>Включить автовоспроизведение аудио?
+              <p class="settings_item"> <%= f.check_box :audio_enable %></p> </h5>
+            </div>
+
+
             <div class="field">
               <%= f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: "Текущий пароль (обязательно)" %>
             </div>
