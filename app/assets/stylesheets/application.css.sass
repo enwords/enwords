@@ -170,12 +170,18 @@ $dropDown       : false
     &:focus
       outline: none
 
+  input
+    width: 160px
+  form
+    width: 180px
+
   button
+    bottom: 22px
     border: 0
     background: none
     /** belows styles are working good */
     position: relative
-    right: 32px
+    left: 132px
     /* IE7-8 doesn't have border-radius, so don't indent the padding */
     margin-bottom: 0
     -webkit-border-radius: 3px
@@ -295,12 +301,16 @@ $dropDown       : false
 
 
 //Form
-.wrapper 
-  margin-top: 80px
-  margin-bottom: 80px
+.wrapper
+  @media (max-width: 767px)
+    margin-top: 15px
+    margin-bottom: 15px
+  @media (min-width: 768px)
+    margin-top: 80px
+    margin-bottom: 80px
   background-color: white
   padding: 15px 35px 45px
-  border: 1px solid rgba(0, 0, 0, 0.1)
+  box-shadow: 3px 3px 5px rgba(90,90,90,0.5)
   .field
     padding: 5px 0 5px 0
   .error
@@ -384,7 +394,7 @@ $dropDown       : false
     bottom: 0
     -webkit-transition: .4s
     transition: .4s
-    border-radius: 25px
+    border-radius: 13px
 
   .round
     box-shadow: 0px 1px 2px rgba(0,0,0,0.15)

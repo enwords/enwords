@@ -37,13 +37,14 @@
                   <% end %>
                 </li>
 
-                <li><%= link_to words_path do %>
+                <li><%= link_to words_path status: 'all' do %>
                       <span class="fa fa-book item"></span>Все
                   <% end %>
                 </li>
 
               </ul>
             </li>
+            <li><%= link_to "Коллекции", collections_path %></li>
             <li><%= link_to "Последняя тренировка", training_path %></li>
 
           </ul>
