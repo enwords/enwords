@@ -46,11 +46,17 @@
 
 
     <% else %>
+        <% unless current_page?(words_path status: 'unknown') || current_page?(words_path status: 'all') %>
         <div class="col-xs-12">
           <p class="title">В этом списке нет слов, вы можете найти новые слова
             <a href="<%= words_path status: 'unknown' %>">здесь</a></p>
         </div>
-
+            <% else %>
+            <div class="col-xs-12">
+              <p class="title">Пожалуйста, выберите изучаемый язык в
+                <a href="<%= edit_user_registration_path%>">настройках профиля</a></p>
+            </div>
+    <% end %>
 
     <% end %>
 

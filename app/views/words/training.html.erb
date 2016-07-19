@@ -10,7 +10,10 @@
                             autoplay: false, id: 'audio-play') %>
           <% end %>
           <%= sentence.sentence %> </h3>
-        <h4><%= sentence.translations.where(language: current_user.native_language).first.sentence %> </h4>
+        <% begin %>
+            <h4><%= sentence.translations.where(language: current_user.native_language).first.sentence %> </h4>
+        <% rescue %>
+        <% end %>
       </div>
 
 
@@ -23,6 +26,7 @@
                begin
                  current_bool = word.word_statuses.where(user_id: current_user.id).first.learned
               rescue
+
                end
                left_position = '3px'
                right_position = '30px'
@@ -50,7 +54,7 @@
                   <label class="switch">
                     <%= button_to name = nil, {
                         controller: 'words', action: 'create_or_update_word_status', bool: colors[:future_bool],
-                        word_id: word.id}, form: {class: "button_hide" , method: :post},
+                        word_id: word.id}, form: {class: "button_hide", method: :post},
                                   onclick: "setColor('#{ colors[:grey_background] }',
                       '#{colors[:orange_background]}', '#{colors[:green_background]}', #{n}, '#{left_position}', '#{right_position}')" %>
 
