@@ -24,14 +24,15 @@ ActiveRecord::Schema.define(version: 20160621081409) do
   create_table "collections", force: :cascade do |t|
     t.datetime "created_at",                                                                                        null: false
     t.datetime "updated_at",                                                                                        null: false
-    t.string   "name",       default: "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x5e58a90>", null: false
+    t.string   "name",       default: "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x5e00140>", null: false
     t.integer  "user_id"
     t.index ["user_id"], name: "index_collections_on_user_id", using: :btree
   end
 
   create_table "collections_words", id: false, force: :cascade do |t|
-    t.integer "word_id",       null: false
     t.integer "collection_id", null: false
+    t.integer "word_id",       null: false
+    t.index ["collection_id", "word_id"], name: "index_collections_words_on_collection_id_and_word_id", unique: true, using: :btree
   end
 
   create_table "links", id: false, force: :cascade do |t|
@@ -46,8 +47,9 @@ ActiveRecord::Schema.define(version: 20160621081409) do
   end
 
   create_table "sentences_words", id: false, force: :cascade do |t|
-    t.integer "word_id",     null: false
     t.integer "sentence_id", null: false
+    t.integer "word_id",     null: false
+    t.index ["sentence_id", "word_id"], name: "index_sentences_words_on_sentence_id_and_word_id", unique: true, using: :btree
   end
 
   create_table "trainings", id: false, force: :cascade do |t|
@@ -75,6 +77,7 @@ ActiveRecord::Schema.define(version: 20160621081409) do
     t.integer  "learning_language"
     t.integer  "sentences_number"
     t.boolean  "audio_enable"
+    t.boolean  "diversity_enable"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
