@@ -37,6 +37,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       t.integer :learning_language
       t.integer :sentences_number
       t.boolean :audio_enable
+      t.boolean :diversity_enable
     end
 
     add_index :users, :email,                unique: true
