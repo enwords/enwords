@@ -71,8 +71,10 @@
   <%= will_paginate @sentences, page_links: false, previous_label: '❬', next_label: '❭' %>
 </div>
 
-<script type="text/javascript" charset="utf-8">
-  //  $(document).ready(function () {
-  //    play();
-  //  });
-</script>
+<% if current_user.audio_enable %>
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function () {
+        play();
+      });
+    </script>
+<% end %>
