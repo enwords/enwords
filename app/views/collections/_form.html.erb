@@ -1,10 +1,10 @@
-<%= form_for(word_collection) do |f| %>
-  <% if word_collection.errors.any? %>
+<%= form_for(collection) do |f| %>
+  <% if collection.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(word_collection.errors.count, "error") %> prohibited this word_collection from being saved:</h2>
+      <h2><%= pluralize(collection.errors.count, "error") %> prohibited this collection from being saved:</h2>
 
       <ul>
-      <% word_collection.errors.full_messages.each do |message| %>
+      <% collection.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
