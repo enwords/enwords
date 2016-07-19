@@ -48,12 +48,22 @@ class WordsController < ApplicationController
     arr = []
     val = []
 
-    params[:words_ids].each do |wid|
-      arr << Sentence.select(:id).joins(:sentences_words).joins(:translations).left_joins(:audio).
-          where(sentences_words: {word_id: wid},
-                translations_sentences: {language: current_user.native_language}).
-          order('audios.sentence_id ASC').limit(current_user.sentences_number)
+    if current_user.diversity_enable
+      params[:words_ids].each do |wid|
+        arr << Sentence.select(:id).joins(:sentences_words).joins(:translations).where(sentences_words: {word_id: wid}).
+            where(sentences_words: {word_id: wid},
+                  translations_sentences: {language: current_user.native_language}).order("RANDOM()").
+            limit(current_user.sentences_number)
+      end
+    else
+      params[:words_ids].each do |wid|
+        arr << Sentence.select(:id).joins(:sentences_words).joins(:translations).left_joins(:audio).
+            where(sentences_words: {word_id: wid},
+                  translations_sentences: {language: current_user.native_language}).
+            order('audios.sentence_id ASC').limit(current_user.sentences_number)
+      end
     end
+
 
     arr.each do |sentences_arr|
       sentences_arr.each do |sen|
@@ -66,7 +76,7 @@ class WordsController < ApplicationController
   end
 
   def training
-    @sentences = Sentence.where(id: Training.select(:sentence_id).where(user: current_user)).includes(:audio).
+    @sentences = Sentence.where(id: Training.select(:sentence_id).where(user: current_user)).includes(:audio).group(:id).
         paginate(page: params[:page], per_page: 1)
   end
 
