@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Word Collections</h1>
+<h1>Collections</h1>
 
 <table>
   <thead>
@@ -11,12 +11,12 @@
   </thead>
 
   <tbody>
-    <% @word_collections.each do |word_collection| %>
+    <% @collections.each do |collection| %>
       <tr>
-        <td><%= word_collection.user %></td>
-        <td><%= link_to 'Show', word_collection %></td>
-        <td><%= link_to 'Edit', edit_word_collection_path(word_collection) %></td>
-        <td><%= link_to 'Destroy', word_collection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= collection.user %></td>
+        <td><%= link_to 'Show', collection %></td>
+        <td><%= link_to 'Edit', edit_collection_path(collection) %></td>
+        <td><%= link_to 'Destroy', collection, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Word Collection', new_word_collection_path %>
+<%= link_to 'New Word Collection', new_collection_path %>

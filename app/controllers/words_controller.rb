@@ -125,13 +125,13 @@ class WordsController < ApplicationController
         when 'unknown'
           @title = 'Неизвестные слова'
           unknown
+        when 'all'
+          @title = 'Все слова'
+          all
       end
     elsif params[:search]
       @title = 'Результат поиска'
       word_search
-    else
-      @title = 'Все слова'
-      @words = words_without_status.group(:id).order(:id).paginate(page: params[:page], per_page: 20)
     end
   end
 
@@ -140,6 +140,9 @@ class WordsController < ApplicationController
     @words = words_with_status(bool).order(:id).paginate(page: params[:page], per_page: 20)
   end
 
+  def all
+    @words = words_without_status.group(:id).order(:id).paginate(page: params[:page], per_page: 20)
+  end
 
   def unknown
     @words = words_without_status.where.not(id: WordStatus.select(:word_id).where(user: current_user)).group(:id).order(:id).
@@ -148,7 +151,7 @@ class WordsController < ApplicationController
 
 
   def word_search
-    @words = words_without_status.where('word LIKE ?', "#{params[:search].downcase}%").group(:id).order(:id).
+    @words = words_without_status.where('word LIKE ?', "%#{params[:search].downcase}%").group(:id).order(:id).
         paginate(page: params[:page], per_page: 20)
   end
 
