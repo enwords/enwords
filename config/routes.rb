@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   root to: 'static#index'
   resources :users
   resources :sentences
-
+  resources :collections
 
   resources :words do
     collection do
@@ -16,8 +16,7 @@ Rails.application.routes.draw do
       post :create_or_update_word_status
     end
   end
-  put '/words' => 'words#index'
 
-  resources :collections
-  get '/training' => 'words#training'
+  put '/words' => 'words#index'
+  get '/training' => 'words#training', as: :training
 end
