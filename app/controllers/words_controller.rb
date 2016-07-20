@@ -18,101 +18,12 @@ class WordsController < ApplicationController
     end
   end
 
-
-  # def set_training
-  #   Training.delete_all(user_id: current_user)
-  #   arr = []
-  #   val = []
-  #
-  #   params[:words_ids].each do |wid|
-  #     sentence_banch = Sentence.joins(:sentences_words).where(sentences_words: {word_id: wid}).joins(:translations).
-  #         where(translations_sentences: {language: current_user.native_language}).order("RANDOM()").
-  #         limit(current_user.sentences_number)
-  #     arr << sentence_banch.ids
-  #
-  #   end
-  #
-  #   arr.each do |sentences_arr|
-  #     sentences_arr.each do |sen|
-  #       val << {user_id: current_user.id, sentence_id: sen.id}
-  #     end
-  #   end
-  #   Training.create!(user_id: current_user.id, sentence_id: sentence_banch)
-  #
-  #   redirect_to(training_path)
-  # end
-
-
-  def set_training
-    Training.delete_all(user_id: current_user)
-    arr = []
-    val = []
-
-    if current_user.diversity_enable
-      params[:words_ids].each do |wid|
-        arr << Sentence.select(:id).joins(:sentences_words).joins(:translations).where(sentences_words: {word_id: wid}).
-            where(sentences_words: {word_id: wid},
-                  translations_sentences: {language: current_user.native_language}).order("RANDOM()").
-            limit(current_user.sentences_number)
-      end
-    else
-      params[:words_ids].each do |wid|
-        arr << Sentence.select(:id).joins(:sentences_words).joins(:translations).left_joins(:audio).
-            where(sentences_words: {word_id: wid},
-                  translations_sentences: {language: current_user.native_language}).
-            order('audios.sentence_id ASC').limit(current_user.sentences_number)
-      end
-    end
-
-
-    arr.each do |sentences_arr|
-      sentences_arr.each do |sen|
-        val << {user_id: current_user.id, sentence_id: sen.id}
-      end
-    end
-    Training.create! val
-
-    redirect_to(training_path)
-  end
-
   def training
     @sentences = Sentence.where(id: Training.select(:sentence_id).where(user: current_user)).includes(:audio).group(:id).
         paginate(page: params[:page], per_page: 1)
   end
 
-  def delete_word_status
-    WordStatus.delete_all(user_id: current_user, word_id: params[:words_ids])
-    redirect_to(:back)
-  end
-
-  def set_word_status(bool)
-    params[:words_ids].each do |wid|
-      create_or_update_word_status(wid, bool)
-    end
-    redirect_to(:back)
-  end
-
-  def create_or_update_word_status(word_id=params[:word_id], bool=params[:bool])
-    begin
-      WordStatus.create!(user_id: current_user.id, word_id: word_id, learned: bool)
-    rescue
-      WordStatus.where(user_id: current_user, word_id: word_id).update_all(learned: bool)
-    end
-  end
-
-  def words_with_status(bool)
-    current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: bool})
-  end
-
-
-  def words_without_status
-    Word.joins(sentences: :translations).where(words: {language: current_user.learning_language},
-                                               sentences: {language: current_user.learning_language},
-                                               translations_sentences: {language: current_user.native_language})
-  end
-
   # GET /words
-  # GET /words.json
   def index
     if params[:status]
       case params[:status]
@@ -135,6 +46,68 @@ class WordsController < ApplicationController
     end
   end
 
+  def create_or_update_word_status(word_id=params[:word_id], bool=params[:bool])
+    begin
+      WordStatus.create!(user_id: current_user.id, word_id: word_id, learned: bool)
+    rescue
+      WordStatus.where(user_id: current_user, word_id: word_id).update_all(learned: bool)
+    end
+  end
+
+  private
+
+  def set_word_status(bool)
+    params[:words_ids].each do |wid|
+      create_or_update_word_status(wid, bool)
+    end
+    redirect_to(:back)
+  end
+
+  def set_training
+    Training.delete_all(user_id: current_user)
+    arr = []
+    val = []
+
+    if current_user.diversity_enable
+      params[:words_ids].each do |wid|
+        arr << Sentence.select(:id).joins(:sentences_words).joins(:translations).where(sentences_words: {word_id: wid}).
+            where(sentences_words: {word_id: wid},
+                  translations_sentences: {language: current_user.native_language}).order("RANDOM()").
+            limit(current_user.sentences_number)
+      end
+    else
+      params[:words_ids].each do |wid|
+        arr << Sentence.select(:id).joins(:sentences_words).joins(:translations).left_joins(:audio).
+            where(sentences_words: {word_id: wid},
+                  translations_sentences: {language: current_user.native_language}).
+            order('audios.sentence_id ASC').limit(current_user.sentences_number)
+      end
+    end
+
+    arr.each do |sentences_arr|
+      sentences_arr.each do |sen|
+        val << {user_id: current_user.id, sentence_id: sen.id}
+      end
+    end
+    Training.create! val
+
+    redirect_to(training_path)
+  end
+
+  def delete_word_status
+    WordStatus.delete_all(user_id: current_user, word_id: params[:words_ids])
+    redirect_to(:back)
+  end
+
+  def words_with_status(bool)
+    current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: bool})
+  end
+
+  def words_without_status
+    Word.joins(sentences: :translations).where(words: {language: current_user.learning_language},
+                                               sentences: {language: current_user.learning_language},
+                                               translations_sentences: {language: current_user.native_language})
+  end
 
   def learned_and_learning(bool)
     @words = words_with_status(bool).order(:id).paginate(page: params[:page], per_page: 20)
@@ -149,14 +122,11 @@ class WordsController < ApplicationController
         paginate(page: params[:page], per_page: 20)
   end
 
-
   def word_search
     @words = words_without_status.where('word LIKE ?', "%#{params[:search].downcase}%").group(:id).order(:id).
         paginate(page: params[:page], per_page: 20)
   end
 
-
-  private
   # Never trust parameters from the scary internet, only allow the white list through.
   def word_params
     params.require(:word).permit(:id, :word)

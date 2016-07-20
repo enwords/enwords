@@ -1,7 +1,7 @@
 class Sentence < ApplicationRecord
+  has_one :audio
   belongs_to :training
   has_and_belongs_to_many :words
-  has_one :audio
   has_and_belongs_to_many :translations,
                           class_name: "Sentence",
                           join_table: "links",
