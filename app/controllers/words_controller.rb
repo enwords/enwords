@@ -43,6 +43,9 @@ class WordsController < ApplicationController
     elsif params[:search]
       @title = 'Результат поиска'
       word_search
+    elsif params[:book]
+      @title = 'Слова в тексте'
+      words_in_text
     end
   end
 
@@ -55,6 +58,14 @@ class WordsController < ApplicationController
   end
 
   private
+
+  def words_in_text
+    @words = Word.joins(sentences: :translations).where(words: {id: BooksWords.select(:word_id).where(book: params[:book]),
+                                                           language: current_user.learning_language},
+                                                   sentences: {language: current_user.learning_language},
+                                                   translations_sentences: {language: current_user.native_language}).
+        group(:id).paginate(page: params[:page], per_page: 20)
+  end
 
   def set_word_status(bool)
     params[:words_ids].each do |wid|
