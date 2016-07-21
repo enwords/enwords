@@ -37,6 +37,9 @@ class BooksController < ApplicationController
       if @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
+
+         count_words_in_text
+
       else
         format.html { render :new }
         format.json { render json: @book.errors, status: :unprocessable_entity }
@@ -69,7 +72,26 @@ class BooksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+  def count_words_in_text
+    text =  @book.content.downcase.gsub(/[[:punct:]\d]/, '')
+    words = text.split(" ")
+    frequencies = Hash.new(0)
+    words.each { |word| frequencies[word] += 1 }
+    frequencies = frequencies.sort_by{ |a, b| b}.collect{|a, b| a}.reverse!
+
+    frequencies.each { |word, frequency| puts word + " " + frequency.to_s }
+
+    create_words_books(frequencies)
+
+  end
+
+  def create_words_books(frequencies)
+    @book.words = Word.where(word: frequencies,
+    language: current_user.learning_language)
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
     end

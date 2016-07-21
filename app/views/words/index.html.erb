@@ -1,6 +1,9 @@
 <div class="container">
   <div class="row row-content">
     <div class="col-xs-12 title">
+      <% if params[:book] %>
+         <%= link_to "Назад", book_path(params[:book]) %>
+      <%end %>
       <h3><%= @title %></h3>
     </div>
     <% if @words.any? %>
