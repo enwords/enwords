@@ -30,29 +30,29 @@
 
             <div class="field">
               <h5>Родной язык
-                <p class="settings_item"> <%= f.select(:native_language, User.native_languages.keys
+                <p class="settings_ico"> <%= f.select(:native_language, User.native_languages.keys
                     .map { |native_language| [native_language.titleize, native_language] }) %></p></h5>
             </div>
 
             <div class="field">
               <h5>Изучаемый язык
-                <p class="settings_item"><%= f.select(:learning_language, User.learning_languages.keys
+                <p class="settings_ico"><%= f.select(:learning_language, User.learning_languages.keys
                     .map { |learning_language| [learning_language.titleize, learning_language] }) %></p></h5>
             </div>
 
             <div class="field">
               <h5>Количество предложений на одно слово
-                <p class="settings_item"><%= f.number_field :sentences_number, min: 1, max: 20 %></p></h5>
+                <p class="settings_ico"><%= f.number_field :sentences_number, min: 1, max: 20 %></p></h5>
             </div>
 
             <div class="field">
               <h5>Включить автовоспроизведение аудио?
-                <p class="settings_item"> <%= f.check_box :audio_enable %></p></h5>
+                <p class="settings_ico"> <%= f.check_box :audio_enable %></p></h5>
             </div>
 
             <div class="field">
               <h5>Предложения разнообразней, но меньше озвученных
-                <p class="settings_item"> <%= f.check_box :diversity_enable %></p></h5>
+                <p class="settings_ico"> <%= f.check_box :diversity_enable %></p></h5>
             </div>
 
 
