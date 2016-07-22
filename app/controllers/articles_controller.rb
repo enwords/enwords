@@ -2,6 +2,11 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
+  def delete_articles
+    Article.delete_all(id:  params[:articles_ids])
+    redirect_to(:back)
+  end
+
   # GET /articles
   # GET /articles.json
   def index
@@ -85,7 +90,7 @@ class ArticlesController < ApplicationController
 
   def create_words_articles(frequencies)
     @article.words = Word.where(word: frequencies.collect { |a, b| a },
-                             language: current_user.learning_language)
+                                language: current_user.learning_language)
     @article.words.each { |word| WordInArticle.where(article_id: @article.id, word_id: word.id).update_all(frequency: frequencies[word.word]) }
   end
 
