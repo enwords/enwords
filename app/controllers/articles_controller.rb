@@ -3,7 +3,7 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
   def delete_articles
-    Article.delete_all(id:  params[:articles_ids])
+    Article.delete_all(id:  params[:ids])
     redirect_to(:back)
   end
 

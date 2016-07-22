@@ -16,7 +16,7 @@
                 <% @words.each do |word| %>
                     <tr>
                       <td> <%= word.id %> </td>
-                      <td> <%= check_box_tag "words_ids[]", word.id %> </td>
+                      <td> <%= check_box_tag "ids[]", word.id %> </td>
                       <td> <%= word.word.capitalize %> </td>
                     </tr>
                 <% end %>
