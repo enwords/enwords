@@ -41,13 +41,6 @@
         <% end %>
 
 
-
-
-        <div class="hidden-xs col-sm-12 digg_pagination" id="pagination-desktop">
-          <%= will_paginate @words, previous_label: '❬', next_label: '❭', outer_window: 0 %>
-        </div>
-
-
     <% else %>
         <% unless current_page?(words_path status: 'unknown') || current_page?(words_path status: 'all') %>
         <div class="col-xs-12">
@@ -65,4 +58,8 @@
 
 
   </div>
+</div>
+
+<div class="hidden-xs col-sm-12 digg_pagination" id="pagination-desktop">
+  <%= will_paginate @words, previous_label: '❬', next_label: '❭', outer_window: 0 %>
 </div>

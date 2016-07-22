@@ -22,23 +22,23 @@
               <ul class="dropdown-menu">
 
                 <li><%= link_to words_path status: 'learned' do %>
-                      <span class="fa fa-check item"></span>Выученные (<%= current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: true}).count %>)
+                      <i class="fa fa-check ico"></i>Выученные (<%= current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: true}).count %>)
                   <% end %>
                 </li>
 
 
                 <li><%= link_to words_path status: 'learning' do %>
-                      <span class="fa fa-remove item"></span>Изучаемые (<%= current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: false}).count %>)
+                      <i class="fa fa-remove ico"></i>Изучаемые (<%= current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: false}).count %>)
                   <% end %>
                 </li>
 
                 <li><%= link_to words_path status: 'unknown' do %>
-                      <span class="fa fa-question item"></span>Неизвестные
+                      <i class="fa fa-question ico"></i>Неизвестные
                   <% end %>
                 </li>
 
                 <li><%= link_to words_path status: 'all' do %>
-                      <span class="fa fa-book item"></span>Все
+                      <i class="fa fa-book ico"></i>Все
                   <% end %>
                 </li>
 
@@ -54,7 +54,7 @@
               <%= form_tag words_path, method: 'get' do %>
                   <%= text_field_tag :search, params[:search], placeholder: "Поиск слов" %>
                   <%= button_tag type: "submit", name: nil do %>
-                      <span class="fa fa-search"></span>
+                      <i class="fa fa-search"></i>
                   <% end %>
               <% end %>
             </li>
@@ -64,12 +64,12 @@
               <ul class="dropdown-menu">
 
                 <li><%= link_to edit_user_registration_path do %>
-                      <span class="fa fa-cog item"></span>Настройки
+                      <i class="fa fa-cog ico"></i>Настройки
                   <% end %>
                 </li>
 
                 <li><%= link_to destroy_user_session_path, method: 'delete' do %>
-                      <span class="fa fa-sign-out item"></span>Выйти
+                      <i class="fa fa-sign-out ico"></i>Выйти
                   <% end %>
                 </li>
               </ul>
@@ -85,7 +85,7 @@
             </li>
 
             <li><%= link_to new_user_session_path do %>
-                  <span class="fa fa-sign-in item"></span>Войти
+                  <i class="fa fa-sign-in ico"></i>Войти
               <% end %>
             </li>
           </ul>
