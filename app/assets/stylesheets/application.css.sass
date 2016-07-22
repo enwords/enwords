@@ -72,8 +72,6 @@ $dropDown       : false
 .navbar-default
   background-color: $bgDefault
   border: none
-  .item
-    width: 20px
   .navbar-brand
     color: $colDefault
     &:hover, &:focus
@@ -240,6 +238,8 @@ $dropDown       : false
     width: 35px
 
 #pagination-desktop
+  position: absolute
+  bottom: 70px
   width: 100%
   .next_page, .previous_page
     height: 25.6px
@@ -266,8 +266,7 @@ $dropDown       : false
   @media (max-width: 360px)
   margin-bottom: 10px
   @media (min-width: 769px)
-    height: 534px
-    margin-bottom: 66px
+    margin-bottom: 80px
   td
     padding: 3px 20px 2px 0
 
@@ -293,9 +292,6 @@ $dropDown       : false
     color: $btnColActive
     background-color: $btnColHover
     outline: 0
-
-//.odd
-//  background: #fafafa
 
 ////
 
@@ -354,9 +350,6 @@ $dropDown       : false
     border-top-left-radius: 0
     border-top-right-radius: 0
 
-.settings_item
-  float: right
-
 ////
 
 //Audio
@@ -409,4 +402,24 @@ $dropDown       : false
     border-radius: 50%
     -webkit-transition: .4s
     transition: .4s
+////
+
+//Texts
+#articles_list
+  margin-bottom: 80px
+  a
+    color: #585858
+  td
+    padding: 3px 20px 2px 0
+
+  .link_as_button
+    color: $btnColActive
+////
+
+//icons
+.ico
+  width: 20px
+
+.settings_ico
+  float: right
 ////

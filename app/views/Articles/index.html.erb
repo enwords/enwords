@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row row-content">
+    <div class="col-xs-12 title">
+      <h3>Тексты</h3>
+    </div>
+    <%= form_tag delete_articles_articles_path, method: :put do %>
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3" id="articles_list">
+          <table>
+            <th><input type="checkbox" onclick="toggle(this)"/></th>
+            <th>Выбрать все</th>
+            <% @articles.each do |article| %>
+                <tr>
+                  <td> <%= check_box_tag "articles_ids[]", article.id %> </td>
+                  <td><%= link_to article.title, article %></td>
+                  <td><%= link_to edit_article_path(article) do %>
+                        <i class="fa fa-edit"></i>
+                    <% end %> </td>
+                  <td><%= link_to article, method: :delete, data: {confirm: 'Are you sure?'} do %>
+                        <i class="fa fa-trash"></i>
+                    <% end %>
+                  </td>
+
+                </tr>
+            <% end %>
+          </table>
+
+          <div style="text-align: center; margin-top: 20px">
+            <%= link_to new_article_path, class: "btn btn-default link_as_button" do %>
+                <i class="fa fa-plus ico"></i>Добавить текст
+            <% end %>
+
+            <%= button_tag(type: 'submit', value: 'delete_articles', class: "btn btn-default") do %>
+                <i class="fa fa-trash ico"></i>Удалить выбранные
+            <% end %>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="col-xs-12 digg_pagination" id="pagination-desktop">
+  <%= will_paginate @articles, previous_label: '❬', next_label: '❭', outer_window: 0 %>
+</div>
