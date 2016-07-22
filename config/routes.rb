@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   root to: 'static#index'
   resources :users
   resources :sentences
-  resources :books
+  resources :articles
 
   resources :words do
     collection do

@@ -1,6 +1,6 @@
-class CreateBooks < ActiveRecord::Migration[5.0]
+class CreateArticles < ActiveRecord::Migration[5.0]
   def change
-    create_table :books do |t|
+    create_table :articles do |t|
       t.references :user, foreign_key: true
       t.string :language
       t.text :content
