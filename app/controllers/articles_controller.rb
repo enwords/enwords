@@ -44,7 +44,7 @@ class ArticlesController < ApplicationController
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
         format.json { render :show, status: :created, location: @article }
 
-        count_words_in_text
+        word_frequency_in_text
 
       else
         format.html { render :new }
@@ -60,6 +60,7 @@ class ArticlesController < ApplicationController
       if @article.update(article_params)
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
         format.json { render :show, status: :ok, location: @article }
+        word_frequency_in_text
       else
         format.html { render :edit }
         format.json { render json: @article.errors, status: :unprocessable_entity }
@@ -79,16 +80,12 @@ class ArticlesController < ApplicationController
 
   private
 
-  def count_words_in_text
+  def word_frequency_in_text
     text = @article.content.downcase.gsub(/[[:punct:]\d]/, '')
     words = text.split(" ")
     frequencies = Hash.new(0)
     words.each { |word| frequencies[word] += 1 }
-    create_words_articles(frequencies)
 
-  end
-
-  def create_words_articles(frequencies)
     @article.words = Word.where(word: frequencies.collect { |a, b| a },
                                 language: current_user.learning_language)
     @article.words.each { |word| WordInArticle.where(article_id: @article.id, word_id: word.id).update_all(frequency: frequencies[word.word]) }
