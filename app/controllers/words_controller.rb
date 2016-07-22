@@ -1,6 +1,32 @@
 class WordsController < ApplicationController
   before_action :authenticate_user!
 
+  # GET /words
+  def index
+    if params[:status]
+      case params[:status]
+        when 'learning'
+          @title = 'Изучаемые слова'
+          learned_and_learning(false)
+        when 'learned'
+          @title = 'Выученные слова'
+          learned_and_learning(true)
+        when 'unknown'
+          @title = 'Неизвестные слова'
+          unknown
+        when 'all'
+          @title = 'Все слова'
+          all
+      end
+    elsif params[:search]
+      @title = 'Результат поиска'
+      word_search
+    elsif params[:article]
+      @title = 'Слова в тексте'
+      words_in_text
+    end
+  end
+
   def word_action
     if params[:words_ids]
       case params[:commit]
@@ -23,32 +49,6 @@ class WordsController < ApplicationController
         paginate(page: params[:page], per_page: 1)
   end
 
-  # GET /words
-  def index
-    if params[:status]
-      case params[:status]
-        when 'learning'
-          @title = 'Изучаемые слова'
-          learned_and_learning(false)
-        when 'learned'
-          @title = 'Выученные слова'
-          learned_and_learning(true)
-        when 'unknown'
-          @title = 'Неизвестные слова'
-          unknown
-        when 'all'
-          @title = 'Все слова'
-          all
-      end
-    elsif params[:search]
-      @title = 'Результат поиска'
-      word_search
-    elsif params[:book]
-      @title = 'Слова в тексте'
-      words_in_text
-    end
-  end
-
   def create_or_update_word_status(word_id=params[:word_id], bool=params[:bool])
     begin
       WordStatus.create!(user_id: current_user.id, word_id: word_id, learned: bool)
@@ -60,11 +60,11 @@ class WordsController < ApplicationController
   private
 
   def words_in_text
-    @words = Word.select('words.id', 'words.word', 'wordbooks.rate').joins(sentences: :translations).joins(:wordbooks).
+    @words = Word.select('words.id', 'words.word', 'word_in_articles.frequency').joins(sentences: :translations).joins(:word_in_articles).
         where(words: {language: current_user.learning_language},
               sentences: {language: current_user.learning_language},
               translations_sentences: {language: current_user.native_language},
-              wordbooks: {book_id: params[:book]}).group('words.id, wordbooks.rate').order('wordbooks.rate desc').
+              word_in_articles: {article_id: params[:article]}).group('words.id, word_in_articles.frequency').order('word_in_articles.frequency desc').
         paginate(page: params[:page], per_page: 20)
   end
 

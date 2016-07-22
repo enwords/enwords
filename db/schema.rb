@@ -11,28 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160621081409) do
+ActiveRecord::Schema.define(version: 20160721055643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "articles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "language"
+    t.text     "content"
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_articles_on_user_id", using: :btree
+  end
+
   create_table "audios", id: false, force: :cascade do |t|
     t.integer "sentence_id"
     t.index ["sentence_id"], name: "index_audios_on_sentence_id", using: :btree
-  end
-
-  create_table "collections", force: :cascade do |t|
-    t.datetime "created_at",                                                                                        null: false
-    t.datetime "updated_at",                                                                                        null: false
-    t.string   "name",       default: "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition:0x5e00140>", null: false
-    t.integer  "user_id"
-    t.index ["user_id"], name: "index_collections_on_user_id", using: :btree
-  end
-
-  create_table "collections_words", id: false, force: :cascade do |t|
-    t.integer "collection_id", null: false
-    t.integer "word_id",       null: false
-    t.index ["collection_id", "word_id"], name: "index_collections_words_on_collection_id_and_word_id", unique: true, using: :btree
   end
 
   create_table "links", id: false, force: :cascade do |t|
@@ -82,6 +78,15 @@ ActiveRecord::Schema.define(version: 20160621081409) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  create_table "word_in_articles", id: false, force: :cascade do |t|
+    t.integer "article_id"
+    t.integer "word_id"
+    t.integer "frequency"
+    t.index ["article_id", "word_id"], name: "index_word_in_articles_on_article_id_and_word_id", unique: true, using: :btree
+    t.index ["article_id"], name: "index_word_in_articles_on_article_id", using: :btree
+    t.index ["word_id"], name: "index_word_in_articles_on_word_id", using: :btree
+  end
+
   create_table "word_statuses", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "word_id"
@@ -96,6 +101,6 @@ ActiveRecord::Schema.define(version: 20160621081409) do
     t.string "language"
   end
 
+  add_foreign_key "articles", "users"
   add_foreign_key "audios", "sentences"
-  add_foreign_key "collections", "users"
 end
