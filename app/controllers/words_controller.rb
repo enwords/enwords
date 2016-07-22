@@ -60,11 +60,12 @@ class WordsController < ApplicationController
   private
 
   def words_in_text
-    @words = Word.joins(sentences: :translations).where(words: {id: BooksWords.select(:word_id).where(book: params[:book]),
-                                                           language: current_user.learning_language},
-                                                   sentences: {language: current_user.learning_language},
-                                                   translations_sentences: {language: current_user.native_language}).
-        group(:id).paginate(page: params[:page], per_page: 20)
+    @words = Word.select('words.id', 'words.word', 'wordbooks.rate').joins(sentences: :translations).joins(:wordbooks).
+        where(words: {language: current_user.learning_language},
+              sentences: {language: current_user.learning_language},
+              translations_sentences: {language: current_user.native_language},
+              wordbooks: {book_id: params[:book]}).group('words.id, wordbooks.rate').order('wordbooks.rate desc').
+        paginate(page: params[:page], per_page: 20)
   end
 
   def set_word_status(bool)
