@@ -38,7 +38,7 @@ class BooksController < ApplicationController
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
 
-         count_words_in_text
+        count_words_in_text
 
       else
         format.html { render :new }
@@ -74,30 +74,27 @@ class BooksController < ApplicationController
   private
 
   def count_words_in_text
-    text =  @book.content.downcase.gsub(/[[:punct:]\d]/, '')
+    text = @book.content.downcase.gsub(/[[:punct:]\d]/, '')
     words = text.split(" ")
     frequencies = Hash.new(0)
     words.each { |word| frequencies[word] += 1 }
-    frequencies = frequencies.sort_by{ |a, b| b}.collect{|a, b| a}.reverse!
-
-    frequencies.each { |word, frequency| puts word + " " + frequency.to_s }
-
     create_words_books(frequencies)
 
   end
 
   def create_words_books(frequencies)
-    @book.words = Word.where(word: frequencies,
-    language: current_user.learning_language)
+    @book.words = Word.where(word: frequencies.collect { |a, b| a },
+                             language: current_user.learning_language)
+    @book.words.each { |word| Wordbook.where(book_id: @book.id, word_id: word.id).update_all(rate: frequencies[word.word]) }
   end
 
   # Use callbacks to share common setup or constraints between actions.
-    def set_book
-      @book = Book.find(params[:id])
-    end
+  def set_book
+    @book = Book.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def book_params
-      params.require(:book).permit(:content, :title)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def book_params
+    params.require(:book).permit(:content, :title)
+  end
 end
