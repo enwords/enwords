@@ -28,7 +28,7 @@ class WordsController < ApplicationController
   end
 
   def word_action
-    if params[:words_ids]
+    if params[:ids]
       case params[:commit]
         when 'to_learning'
           set_word_status false
@@ -69,7 +69,7 @@ class WordsController < ApplicationController
   end
 
   def set_word_status(bool)
-    params[:words_ids].each do |wid|
+    params[:ids].each do |wid|
       create_or_update_word_status(wid, bool)
     end
     redirect_to(:back)
@@ -81,14 +81,14 @@ class WordsController < ApplicationController
     val = []
 
     if current_user.diversity_enable
-      params[:words_ids].each do |wid|
+      params[:ids].each do |wid|
         arr << Sentence.select(:id).joins(:sentences_words).joins(:translations).where(sentences_words: {word_id: wid}).
             where(sentences_words: {word_id: wid},
                   translations_sentences: {language: current_user.native_language}).order("RANDOM()").
             limit(current_user.sentences_number)
       end
     else
-      params[:words_ids].each do |wid|
+      params[:ids].each do |wid|
         arr << Sentence.select(:id).joins(:sentences_words).joins(:translations).left_joins(:audio).
             where(sentences_words: {word_id: wid},
                   translations_sentences: {language: current_user.native_language}).
@@ -107,7 +107,7 @@ class WordsController < ApplicationController
   end
 
   def delete_word_status
-    WordStatus.delete_all(user_id: current_user, word_id: params[:words_ids])
+    WordStatus.delete_all(user_id: current_user, word_id: params[:ids])
     redirect_to(:back)
   end
 
