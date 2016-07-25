@@ -8,14 +8,12 @@
     </div>
     <% if @words.any? %>
         <%= form_tag word_action_words_path, method: :put do %>
-            <div class="col-xs-6 col-sm-4 col-sm-offset-3" id="word_list">
+            <div class="col-xs-6 col-sm-3 col-sm-offset-3" id="word_list">
               <table>
-
                 <th><input type="checkbox" onclick="toggle(this)"/></th>
                 <th>Выбрать все</th>
                 <% @words.each do |word| %>
                     <tr>
-
                       <td> <%= check_box_tag "ids[]", word.id %> </td>
                       <td> <%= word.word.capitalize %> </td>
                     </tr>
@@ -24,14 +22,12 @@
 
             </div>
 
-            <div class="col-xs-6 col-sm-3 ">
-              <div class="btn-group-vertical" role="group">
+              <div class="col-xs-6 col-sm-3 btn-group-vertical" role="group">
                 <%= button_tag(type: 'submit', value: 'to_training', name: 'commit', class: "btn btn-default") { 'Тренировать выбранные' } %>
                 <%= button_tag(type: 'submit', value: 'to_learning', name: 'commit', class: "btn btn-default") { 'Добавить в изучаемые' } unless params[:status] == "learning" %>
                 <%= button_tag(type: 'submit', value: 'to_learned', name: 'commit', class: "btn btn-default") { 'Добавить в выученные' } unless params[:status] == "learned" %>
                 <%= button_tag(type: 'submit', value: 'to_unknown', name: 'commit', class: "btn btn-default") { 'Добавить в неизвестные' } unless params[:status] == "unknown" %>
               </div>
-            </div>
 
             <div class="col-xs-12 hidden-sm hidden-md hidden-lg digg_pagination" id="pagination-mobile">
               <%= will_paginate @words, previous_label: '❬', next_label: '❭', outer_window: 0%>

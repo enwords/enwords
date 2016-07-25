@@ -21,6 +21,7 @@
 $btnColHover  : #F5F5F5
 $btnColBack   :  white
 $btnColActive : #82adb0
+$bodyTextCol  : #585858
 
 
 html
@@ -32,7 +33,7 @@ body
   margin-bottom: 60px
   padding: 50px 0px 0px 0px
   background-color: rgb(252, 249, 242)
-  color: #585858
+  color: $bodyTextCol
   .title
     padding: 20px 0px 20px 0px
 
@@ -246,14 +247,20 @@ $dropDown       : false
     width: 35px
 ////
 
-//Words and training
+//Words, texts and training
 
 #word_list
-
   @media (min-width: 769px)
     margin-bottom: 80px
   td
     padding: 3px 20px 2px 0
+  a
+    color: $bodyTextCol
+  .myButtons
+    text-align: center
+    margin-top: 20px
+    a
+      color: $btnColActive !important
 
 .title
   text-align: center
@@ -277,7 +284,6 @@ $dropDown       : false
     color: $btnColActive
     background-color: $btnColHover
     outline: 0
-
 ////
 
 
@@ -389,19 +395,7 @@ $dropDown       : false
     transition: .4s
 ////
 
-//Texts
-#articles_list
-  margin-bottom: 80px
-  a
-    color: #585858
-  td
-    padding: 3px 20px 2px 0
-
-  .link_as_button
-    color: $btnColActive
-////
-
-//icons
+//Other
 .ico
   width: 20px
 
