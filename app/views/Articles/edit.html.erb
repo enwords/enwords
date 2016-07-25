@@ -1,6 +1,17 @@
-<h1>Editing Article</h1>
+<div class="container">
 
-<%= render 'form', article: @article %>
+  <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+    <div class="row row-content">
+      <div class="col-xs-12 wrapper">
+        <div class="col-xs-12 links-top">
+          <%= link_to 'Назад', :back %>
+        </div>
 
-<%= link_to 'Show', @article %> |
-<%= link_to 'Back', articles_path %>
+        <div class="col-xs-12">
+          <h2 class="form-signin-heading">Редактирование текста</h2>
+        </div>
+        <%= render 'form', article: @article %>
+      </div>
+    </div>
+  </div>
+</div>

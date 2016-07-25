@@ -1,15 +1,22 @@
-<p>
-  <strong>Title:</strong>
-  <%= @article.title %>
-</p>
+<div class="container">
+  <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+    <div class="row row-content">
+      <div class="col-xs-12 wrapper">
+        <div class="col-xs-12 links-top">
+          <%= link_to 'Назад', :back %>  |
+          <%= link_to 'Слова в тексте (кроме выученных)', words_path(article: @article) %> |
+          <%= link_to 'Редактировать', edit_article_path(@article) %>
+        </div>
+        <div class="col-xs-12">
+          <h3 class="form-signin-heading"><%= @article.title %></h3>
+        </div>
 
-<p>
-  <strong>Content:</strong>
-  <%= @article.content %>
-</p>
+        <div class="col-xs-12"> <%= @article.content %></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
-<%= link_to 'Слова из текста', words_path(article: @article) %> |
-<%= link_to 'Редактировать', edit_article_path(@article) %> |
-<%= link_to 'Назад', articles_path %>
+

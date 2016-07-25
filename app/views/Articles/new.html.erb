@@ -1,5 +1,17 @@
-<h1>New Articles</h1>
+<div class="container">
+  <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+    <div class="row row-content">
+      <div class="col-xs-12 wrapper">
+        <div class="col-xs-12 links-top" >
+          <%= link_to 'Назад', :back %>
+        </div>
 
-<%= render 'form', article: @article %>
+        <div class="col-xs-12">
+          <h2 class="form-signin-heading">Новый текст</h2>
+        </div>
 
-<%= link_to 'Back', articles_path %>
+        <%= render 'form', article: @article %>
+      </div>
+    </div>
+  </div>
+</div>
