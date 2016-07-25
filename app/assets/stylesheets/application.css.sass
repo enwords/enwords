@@ -34,8 +34,6 @@ body
   padding: 50px 0px 0px 0px
   background-color: rgb(252, 249, 242)
   color: $bodyTextCol
-  .title
-    padding: 20px 0px 20px 0px
 
 #footer
   position: absolute
@@ -249,21 +247,27 @@ $dropDown       : false
 
 //Words, texts and training
 
-#word_list
+.links-top
+  text-align: right
+
+.myButtons
+  text-align: center
+  a
+    color: $btnColActive !important
   @media (min-width: 769px)
     margin-bottom: 80px
+
+#word_list
+  margin-bottom: 20px
   td
     padding: 3px 20px 2px 0
   a
     color: $bodyTextCol
-  .myButtons
-    text-align: center
-    margin-top: 20px
-    a
-      color: $btnColActive !important
+
 
 .title
   text-align: center
+  padding: 20px 0px 20px 0px
   h3
     margin-top: 10px
 
@@ -290,19 +294,23 @@ $dropDown       : false
 //Form
 .wrapper
   @media (max-width: 767px)
-    margin-top: 15px
-    margin-bottom: 15px
+    margin-top: 20px
+    margin-bottom: 20px
   @media (min-width: 768px)
-    margin-top: 80px
-    margin-bottom: 80px
+    margin-top: 60px
+    margin-bottom: 60px
   background-color: white
   padding: 15px 35px 45px
   box-shadow: 3px 3px 5px rgba(90,90,90,0.5)
+  min-height: 400px
   .field
     padding: 5px 0 5px 0
   .error
     h2
       font-size: 15px
+.form-signin-heading
+  text-align: center
+  margin-bottom: 30px
 
 .form-signin 
   max-width: 380px
@@ -348,7 +356,7 @@ $dropDown       : false
   cursor: pointer
 
 .glyphicon-volume-off, .glyphicon-volume-up
-  color: #2E2F30
+  color: $bodyTextCol
   font-size: 25px
   top: 3px
 
@@ -396,6 +404,13 @@ $dropDown       : false
 ////
 
 //Other
+
+.alert
+  margin: 0
+  border: none
+  width: 100%
+  text-align: center
+
 .ico
   width: 20px
 
