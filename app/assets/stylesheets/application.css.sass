@@ -35,15 +35,6 @@ body
   color: #585858
   .title
     padding: 20px 0px 20px 0px
-    @media (max-height: 600px)
-      padding: 10px 0px 10px 0px
-    @media (max-height: 320px)
-      padding: 3px 0px 3px 0px
-      h3
-        margin-top: 10px
-
-  //.row
-  //  margin-right: 0px
 
 #footer
   position: absolute
@@ -52,8 +43,6 @@ body
   /* Set the fixed height of the footer here */
   height: 60px
   background-color: rgb(240, 237, 234)
-  @media (max-height: 380px)
-    display: none
   .container
     padding-right: 15px
     padding-left: 15px
@@ -231,20 +220,17 @@ $dropDown       : false
     overflow: hidden
 
 #pagination-mobile
-  font-size: 140%
-  bottom: 5px
-  .next_page, .previous_page
-    height: 35px
-    width: 35px
+  position: relative
 
 #pagination-desktop
   position: absolute
   bottom: 70px
   width: 100%
+
+#pagination-mobile, #pagination-desktop
   .next_page, .previous_page
     height: 25.6px
     width: 25.6px
-
 
 #pagination-training
   position: fixed
@@ -263,8 +249,7 @@ $dropDown       : false
 //Words and training
 
 #word_list
-  @media (max-width: 360px)
-  margin-bottom: 10px
+
   @media (min-width: 769px)
     margin-bottom: 80px
   td
