@@ -10,7 +10,7 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.where(user: current_user).order(:id).
+    @articles = Article.where(user: current_user, language: current_user.learning_language).order(:id).
         paginate(page: params[:page], per_page: 20)
   end
 
@@ -36,7 +36,6 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
     @article = Article.new(article_params)
-    @article.language = current_user.learning_language
     @article.user = current_user
 
     respond_to do |format|
@@ -81,13 +80,15 @@ class ArticlesController < ApplicationController
   private
 
   def word_frequency_in_text
-    text = @article.content.downcase.gsub(/[[:punct:]\d]/, '')
+    text = @article.content.downcase.gsub(/[[:punct:]\d\+\$\^\=\–\>\<\~\`\№]/, '')
     words = text.split(" ")
     frequencies = Hash.new(0)
     words.each { |word| frequencies[word] += 1 }
 
+    frequencies.each { |a, b| puts a }
+
     @article.words = Word.where(word: frequencies.collect { |a, b| a },
-                                language: current_user.learning_language)
+                                language: params[:language])
     @article.words.each { |word| WordInArticle.where(article_id: @article.id, word_id: word.id).update_all(frequency: frequencies[word.word]) }
   end
 
@@ -98,6 +99,6 @@ class ArticlesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def article_params
-    params.require(:article).permit(:content, :title)
+    params.require(:article).permit(:content, :title, :language)
   end
 end
