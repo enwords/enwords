@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :admin_only, :except => :show
 
   def index
-    @users = User.all
+    @users = User.all.order(:id).paginate(page: params[:page], per_page: 20)
   end
 
   def show
