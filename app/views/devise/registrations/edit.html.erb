@@ -6,7 +6,7 @@
         <%= form_for(resource, as: resource_name, url: update_user_registration_path, html: {method: :put}) do |f| %>
 
             <div class="col-xs-12 error">
-              <p><%= devise_error_messages! %> </p>
+              <%= devise_error_messages! %>
             </div>
 
             <div class="field">
