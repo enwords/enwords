@@ -64,8 +64,10 @@ class WordsController < ApplicationController
         where(words: {language: current_user.learning_language},
               sentences: {language: current_user.learning_language},
               translations_sentences: {language: current_user.native_language},
-              word_in_articles: {article_id: params[:article]}).group('words.id, word_in_articles.frequency').order('word_in_articles.frequency desc').
-        paginate(page: params[:page], per_page: 20)
+              word_in_articles: {article_id: params[:article]})
+                 .where.not(words: {id: WordStatus.select(:word_id).where(user_id: current_user.id,
+                                                                          learned: true)}).
+        group('words.id, word_in_articles.frequency').order('word_in_articles.frequency desc').paginate(page: params[:page], per_page: 20)
   end
 
   def set_word_status(bool)
