@@ -1,28 +1,38 @@
 <%= form_for(article) do |f| %>
-    <% if article.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
 
-          <ul>
-            <% article.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <div class="col-xs-12 error">
+      <p></p>
+      <% if article.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(article.errors.count, "error") %> prohibited this article from being saved:</h2>
 
-    <div class="field">
-      <%= f.label :title %>
-      <%= f.text_field :title %>
+            <ul>
+              <% article.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
     </div>
 
     <div class="field">
-      <%= f.label :content %>
-      <%= f.text_area :content %>
+      <%= f.text_field :title, class: 'form-control', placeholder: "Заголовок" %>
     </div>
 
-
-    <div class="actions">
-      <%= f.submit %>
+    <div class="field">
+      <%= f.text_area :content, class: 'form-control', placeholder: "Текст", style: "resize: vertical; min-height: 300px;" %>
     </div>
+
+    <div class="field">
+
+      <h5>Язык текста
+      <%= f.select(:language, User.learning_languages.keys.map { |lang| [lang.titleize, lang] }) %> (Текст будет доступен, только для изучаемого языка)
+      </h5>
+
+    </div>
+
+    <div class="field" style="padding-top: 20px">
+      <%= submit_tag "Сохранить", class: "btn btn-lg btn-primary" %>
+    </div>
+
 <% end %>
