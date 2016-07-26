@@ -1,4 +1,3 @@
-require 'language'
 class User < ActiveRecord::Base
   has_many :word_statuses, dependent: :delete_all
   has_many :words, through: :word_statuses
