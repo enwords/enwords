@@ -1,6 +1,6 @@
 <div class="container" style="padding-bottom: 20px">
   <% @sentences.each do |sentence| %>
-      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 title" style="margin-bottom: 20px;">
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2" id="training-sentence">
         <h3>
           <% if sentence.audio.nil? %>
               <span class="audioButton glyphicon glyphicon-volume-off"></span>
@@ -11,13 +11,14 @@
           <% end %>
           <%= sentence.sentence %> </h3>
         <% begin %>
-            <h4><%= sentence.translations.where(language: current_user.native_language).first.sentence %> </h4>
+            <button id="translate-btn">Показать перевод</button>
+            <h4 id="translate" style="display: none"><%= sentence.translations.where(language: current_user.native_language).first.sentence %> </h4>
         <% rescue %>
         <% end %>
       </div>
 
 
-      <div class="col-xs-12 col-sm-6 col-sm-offset-3" id="wordlist_training">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
         <table>
           <th></th>
           <th style="text-align: center">Знаете?</th>
@@ -75,10 +76,15 @@
   <%= will_paginate @sentences, page_links: false, previous_label: '❬', next_label: '❭' %>
 </div>
 
-<% if current_user.audio_enable %>
-    <script type="text/javascript" charset="utf-8">
-      $(document).ready(function () {
-        play();
-      });
-    </script>
-<% end %>
+<script>
+
+  $(document).ready(function () {
+    <% if current_user.audio_enable %>
+    play();
+    <% end %>
+    $("#translate-btn").click(function () {
+      $("#translate-btn").fadeOut(0);
+      $("#translate").fadeIn(750);
+    });
+  });
+</script>
