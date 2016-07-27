@@ -1,5 +1,37 @@
 class WordsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_word, only: [:show, :edit, :update, :destroy]
+
+
+  # GET /words/new
+  def new
+    @word = Word.new
+  end
+
+  # POST /words
+  # POST /words.json
+  def create
+    @word = Word.new(word_params)
+
+    respond_to do |format|
+      if @word.save
+        format.html { redirect_to @word, notice: 'Word was successfully created.' }
+        format.json { render :show, status: :created, location: @word }
+      else
+        format.html { render :new }
+        format.json { render json: @word.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # GET /words/1
+  # GET /words/1.json
+  def show
+  end
+
+  # GET /words/1/edit
+  def edit
+  end
 
   # GET /words
   def index
@@ -24,7 +56,26 @@ class WordsController < ApplicationController
     elsif params[:article]
       @title = 'Слова в тексте'
       words_in_text
+    elsif current_user.admin?
+      @words = Word.all.order(:id).paginate(page: params[:page], per_page: 20)
     end
+  end
+
+  def update
+    respond_to do |format|
+      if @word.update(word_params)
+        format.html { redirect_to @word, notice: 'Word was successfully updated.' }
+        format.json { render :show, status: :ok, location: @word }
+      else
+        format.html { render :edit }
+        format.json { render json: @word.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @word.destroy
+    redirect_to words_path, :notice => "Word deleted."
   end
 
   def word_action
@@ -143,6 +194,11 @@ class WordsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def word_params
-    params.require(:word).permit(:id, :word)
+    params.require(:word).permit(:id, :language, :word)
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_word
+    @word = Word.find(params[:id])
   end
 end

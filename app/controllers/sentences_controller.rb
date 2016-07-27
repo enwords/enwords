@@ -1,10 +1,12 @@
 class SentencesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_sentence, only: [:show, :edit, :update, :destroy]
 
   # GET /sentences
   # GET /sentences.json
   def index
-    @sentences = Sentence.all
+    @sentences = Sentence.all.order(:id).
+        paginate(page: params[:page], per_page: 20)
   end
 
   # GET /sentences/1
@@ -54,6 +56,7 @@ class SentencesController < ApplicationController
   # DELETE /sentences/1
   # DELETE /sentences/1.json
   def destroy
+    Audio.where(sentence_id: @sentence.id).delete_all
     @sentence.destroy
     respond_to do |format|
       format.html { redirect_to sentences_url, notice: 'Sentence was successfully destroyed.' }
@@ -62,13 +65,14 @@ class SentencesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_sentence
-      @sentence = Sentence.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def sentence_params
-      params.require(:sentence).permit(:id, :sentence)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_sentence
+    @sentence = Sentence.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def sentence_params
+    params.require(:sentence).permit(:id, :language, :sentence)
+  end
 end
