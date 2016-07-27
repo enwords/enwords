@@ -16,7 +16,12 @@
     <%= f.text_field :id %>
   </div>
 
-  <div class="field">
+    <div class="field">
+      <%= f.label :language %>
+      <%= f.select(:language, User.learning_languages.keys.map { |lang| [lang.titleize, lang] }) %>
+    </div>
+
+    <div class="field">
     <%= f.label :sentence %>
     <%= f.text_field :sentence %>
   </div>

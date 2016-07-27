@@ -1,6 +1,7 @@
 class Sentence < ApplicationRecord
-  has_one :audio, dependent: :delete
-  has_one :training, dependent: :delete
+  has_one :audio
+  has_many :trainings, dependent: :delete_all
+  has_many :users, through: :trainings
   has_and_belongs_to_many :words
   has_and_belongs_to_many :translations,
                           class_name: "Sentence",

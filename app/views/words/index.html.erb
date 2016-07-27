@@ -12,6 +12,20 @@
                   <tr>
                     <td> <%= check_box_tag "ids[]", word.id %> </td>
                     <td> <%= word.word.capitalize %> </td>
+
+                    <% if current_user.admin? %>
+                        <td><%= link_to word do %>
+                              <i class="fa fa-search"></i>
+                          <% end %> </td>
+
+                        <td><%= link_to edit_word_path(word) do %>
+                              <i class="fa fa-edit"></i>
+                          <% end %> </td>
+                        <td><%= link_to word, method: :delete, data: {confirm: 'Are you sure?'} do %>
+                              <i class="fa fa-trash"></i>
+                          <% end %>
+                        </td>
+                    <% end %>
                   </tr>
               <% end %>
             </table>
@@ -26,6 +40,10 @@
           </div>
 
           <div class="col-xs-12 myButtons"></div>
+
+          <% if current_user.admin? %>
+              <%= link_to 'New Word', new_word_path %>
+          <% end %>
 
           <div class="col-xs-12 hidden-sm hidden-md hidden-lg digg_pagination" id="pagination-mobile">
             <%= will_paginate @words, previous_label: '❬', next_label: '❭', outer_window: 0 %>
