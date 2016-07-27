@@ -85,10 +85,8 @@ class ArticlesController < ApplicationController
     frequencies = Hash.new(0)
     words.each { |word| frequencies[word] += 1 }
 
-    frequencies.each { |a, b| puts a }
-
     @article.words = Word.where(word: frequencies.collect { |a, b| a },
-                                language: params[:language])
+                                language: @article.language)
     @article.words.each { |word| WordInArticle.where(article_id: @article.id, word_id: word.id).update_all(frequency: frequencies[word.word]) }
   end
 
