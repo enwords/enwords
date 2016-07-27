@@ -1,32 +1,19 @@
 <div class="container">
   <div class="row row-content">
-    <div class="col-xs-12">
-      <%= link_to 'Выйти', destroy_user_session_path, :method => :delete, style: "float: right" %>
-      <%= link_to 'Войти', new_user_session_path, :method => :new, style: "float: right" %>
-      <%= link_to 'Регистрация', new_user_registration_path, style: "float: right" %>
-      <%= link_to 'users', users_path, style: "float: right" %>
-      <h1>Hello</h1>
+    <div class="col-xs-12 title">
+      <h1>Повысь свой словарный запас</h1>
 
-      <% if user_signed_in? %>
-          <li><%= link_to 'Edit account', edit_user_registration_path %></li>
-          <li><%= link_to 'Sign out', destroy_user_session_path, :method => 'delete' %></li>
-      <% else %>
-          <li><%= link_to 'Sign in', new_user_session_path %></li>
-          <li><%= link_to 'Sign up', new_user_registration_path %></li>
-      <% end %>
       <% if user_signed_in? %>
           <% if current_user.try(:vip?) %>
           <p>You are the vip</p>
               <% end %>
           <% if current_user.try(:admin?) %>
               <li><%= link_to 'Users', users_path %></li>
+              <li><%= link_to 'Words', words_path %></li>
+              <li><%= link_to 'Sentences', sentences_path %></li>
           <% end %>
       <% end %>
 
-      <% if user_signed_in? %>
-          <li><%= link_to 'texts', articles_path %></li>
-
-      <% end %>
     </div>
   </div>
 </div>
