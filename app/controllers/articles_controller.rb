@@ -12,6 +12,7 @@ class ArticlesController < ApplicationController
   def index
     @articles = Article.where(user: current_user, language: current_user.learning_language).order(:id).
         paginate(page: params[:page], per_page: 20)
+    respond_to :html, :json
   end
 
   # GET /articles/1
