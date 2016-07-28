@@ -1,12 +1,12 @@
 <div class="container">
   <div class="row row-content">
     <div class="col-xs-12 title">
-      <h1>Повысь свой словарный запас</h1>
+      <h2>Повысь свой словарный запас</h2>
 
       <% if user_signed_in? %>
           <% if current_user.try(:vip?) %>
-          <p>You are the vip</p>
-              <% end %>
+              <p>You are the vip</p>
+          <% end %>
           <% if current_user.try(:admin?) %>
               <li><%= link_to 'Users', users_path %></li>
               <li><%= link_to 'Words', words_path %></li>
