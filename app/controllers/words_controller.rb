@@ -98,6 +98,8 @@ class WordsController < ApplicationController
   def training
     @sentences = Sentence.where(id: Training.select(:sentence_id).where(user: current_user)).includes(:audio).group(:id).
         paginate(page: params[:page], per_page: 1)
+    @total_pages = @sentences.total_pages
+    @learned_words = current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: true}).count
   end
 
   def create_or_update_word_status(word_id=params[:word_id], bool=params[:bool])
@@ -129,6 +131,9 @@ class WordsController < ApplicationController
   end
 
   def set_training
+    learned_words_count = current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: true}).count
+    User.find(current_user.id).update(:learned_words_count => learned_words_count )
+
     Training.delete_all(user_id: current_user)
     arr = []
     val = []

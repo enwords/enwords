@@ -231,9 +231,9 @@ $dropDown       : false
     height: 25.6px
     width: 25.6px
 
-#pagination-training
+#pagination-training, #pagination-training-without_next_page
   position: fixed
-  bottom: 50px
+  bottom: 80px
   left: 50%
   -webkit-transform: translateX(-50%)
   -moz-transform: translateX(-50%)
@@ -243,6 +243,15 @@ $dropDown       : false
   .next_page, .previous_page
     height: 35px
     width: 35px
+
+#pagination-training-without_next_page
+  .disabled
+    display: none
+  #end_link
+    font-size: 75%
+    padding-top: 7px
+    height: 35px
+
 ////
 
 //Words, texts and training

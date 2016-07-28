@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
     self.sentences_number ||= 5
     self.audio_enable ||= true
     self.diversity_enable ||= false
+    self.learned_words_count  ||= 0
   end
 
   def update_with_password(params, *options)
