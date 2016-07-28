@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row row-content">
+    <div class="col-xs-12 title">
+      <h3>Результат тренировки:</h3>
+      <% before = current_user.learned_words_count %>
+      <% after = current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: true}).count %>
+      <h1><%= after - before %>   </h1>
+        <h3> Выученных слов</h3>
+
+
+    </div>
+  </div>
+</div>

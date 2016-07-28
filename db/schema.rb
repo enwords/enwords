@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20160721055643) do
     t.integer  "sentences_number"
     t.boolean  "audio_enable"
     t.boolean  "diversity_enable"
+    t.integer  "learned_words_count"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

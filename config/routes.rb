@@ -24,4 +24,5 @@ Rails.application.routes.draw do
 
   put '/words' => 'words#index'
   get '/training' => 'words#training', as: :training
+  get '/result' => 'static#result'
 end

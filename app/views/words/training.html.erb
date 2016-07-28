@@ -72,9 +72,17 @@
   <% end %>
 </div>
 
-<div class="digg_pagination" id="pagination-training">
-  <%= will_paginate @sentences, page_links: false, previous_label: '❬', next_label: '❭' %>
-</div>
+<% if params[:page] == @total_pages.to_s %>
+    <div class="digg_pagination" id="pagination-training-without_next_page">
+      <%= will_paginate @sentences, page_links: false, previous_label: '❬', next_label: '❭', container: false %>
+      <%= link_to 'Завершить', result_path, id: "end_link" %>
+    </div>
+
+<% else %>
+    <div class="digg_pagination" id="pagination-training">
+      <%= will_paginate @sentences, page_links: false, previous_label: '❬', next_label: '❭' , container: false%>
+    </div>
+<% end %>
 
 <script>
 
