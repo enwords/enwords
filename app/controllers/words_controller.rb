@@ -108,6 +108,7 @@ class WordsController < ApplicationController
     rescue
       WordStatus.where(user_id: current_user, word_id: word_id).update_all(learned: bool)
     end
+    head :no_content
   end
 
   private
