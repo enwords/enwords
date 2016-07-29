@@ -53,15 +53,12 @@
                 <td style="width: 100%; "><%= word.word.capitalize %></td>
                 <td>
                   <label class="switch">
-                    <%= button_to name = nil, {
-                        controller: 'words', action: 'create_or_update_word_status', bool: colors[:future_bool],
-                        word_id: word.id}, form: {class: "button_hide", method: :post},
-                                  onclick: "setColor('#{ colors[:grey_background] }',
-                      '#{colors[:orange_background]}', '#{colors[:green_background]}', #{n}, '#{left_position}', '#{right_position}')" %>
-
                     <div class="slider" style="background-color: <%= colors[:current_background] %>"></div>
                     <div class="round" style="left: <%= current_position %>"></div>
-
+                    <%= link_to '', {
+                        controller: 'words', action: 'create_or_update_word_status', bool: colors[:future_bool],
+                        word_id: word.id}, rel: "nofollow", method: :post, onclick: "setColor('#{ colors[:grey_background] }',
+                      '#{colors[:orange_background]}', '#{colors[:green_background]}', #{n}, '#{left_position}', '#{right_position}')" , class: "button_hide" %>
                   </label>
                 </td>
               </tr>
@@ -83,6 +80,10 @@
       <%= will_paginate @sentences, page_links: false, previous_label: '❬', next_label: '❭' , container: false%>
     </div>
 <% end %>
+
+<style>
+
+</style>
 
 <script>
 
