@@ -5,7 +5,7 @@
 
   <%= form_tag delete_articles_articles_path, method: :put do %>
       <% if @articles.any? %>
-      <div class="col-xs-12 col-sm-6 col-sm-offset-3" id="word_list">
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" id="word_list">
         <table>
           <th><input type="checkbox" onclick="toggle(this)"/></th>
           <th style="width: 100%;">Выбрать все</th>
@@ -36,12 +36,9 @@
             <% end %>
           </div>
 
-      <div class="col-xs-12 hidden-sm hidden-md hidden-lg digg_pagination" id="pagination-mobile">
-        <%= will_paginate @articles, previous_label: '❬', next_label: '❭', outer_window: 0 %>
+      <div class="col-xs-12 digg_pagination" id="pagination-mobile">
+        <%= will_paginate @articles, previous_label: '<i class="fa fa-angle-left"></i>',
+                          next_label: '<i class="fa fa-angle-right"></i>', outer_window: 0 %>
       </div>
   <% end %>
-</div>
-
-<div class="hidden-xs col-sm-12 digg_pagination" id="pagination-desktop">
-  <%= will_paginate @articles, previous_label: '❬', next_label: '❭', outer_window: 0 %>
 </div>
