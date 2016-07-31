@@ -102,14 +102,10 @@ class WordsController < ApplicationController
     @learned_words = current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: true}).count
   end
 
-  def create_or_update_word_status(word_id=params[:word_id], bool=params[:bool])
-    begin
-      WordStatus.create!(user_id: current_user.id, word_id: word_id, learned: bool)
-    rescue
-      WordStatus.where(user_id: current_user, word_id: word_id).update_all(learned: bool)
-    end
+  def set_word_status_training(word_id=params[:word_id], bool=params[:bool])
+    create_or_update_word_status(word_id, bool)
+    redirect_to :back
   end
-
   private
 
   def words_in_text
@@ -122,6 +118,15 @@ class WordsController < ApplicationController
                                                                           learned: true)}).
         group('words.id, word_in_articles.frequency').order('word_in_articles.frequency desc').paginate(page: params[:page], per_page: 20)
   end
+
+  def create_or_update_word_status(word_id, bool)
+    begin
+      WordStatus.create!(user_id: current_user.id, word_id: word_id, learned: bool)
+    rescue
+      WordStatus.where(user_id: current_user, word_id: word_id).update_all(learned: bool)
+    end
+  end
+
 
   def set_word_status(bool)
     params[:ids].each do |wid|
