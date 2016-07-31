@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   def set_default_settings
     self.role ||= :user
     self.sentences_number ||= 5
-    self.audio_enable ||= true
+    self.audio_enable ||= false
     self.diversity_enable ||= false
     self.learned_words_count  ||= 0
   end

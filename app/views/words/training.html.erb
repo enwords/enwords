@@ -19,7 +19,7 @@
 
 
       <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-        <table>
+        <table id="training_words">
           <th></th>
           <th style="text-align: center">Знаете?</th>
           <% n = 0
@@ -56,7 +56,7 @@
                     <div class="slider" style="background-color: <%= colors[:current_background] %>"></div>
                     <div class="round" style="left: <%= current_position %>"></div>
                     <%= link_to '', {
-                        controller: 'words', action: 'create_or_update_word_status', bool: colors[:future_bool],
+                        controller: 'words', action: 'set_word_status_training', bool: colors[:future_bool],
                         word_id: word.id}, rel: "nofollow", method: :post, onclick: "setColor('#{ colors[:grey_background] }',
                       '#{colors[:orange_background]}', '#{colors[:green_background]}', #{n}, '#{left_position}', '#{right_position}')" , class: "button_hide" %>
                   </label>
