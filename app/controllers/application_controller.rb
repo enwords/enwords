@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
 
   protected
+
+  #Allows to change a profile settings without entering a password
   def configure_devise_permitted_parameters
     registration_params = [:email, :password, :password_confirmation,
                            :learning_language, :native_language, :audio_enable,:diversity_enable, :sentences_number]

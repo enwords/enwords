@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   enum native_language: languages, _prefix: :native
   enum learning_language: languages, _prefix: :learning
 
+  #Set the default settings when registering a new user
   def set_default_settings
     self.role ||= :user
     self.sentences_number ||= 5
@@ -27,6 +28,7 @@ class User < ActiveRecord::Base
     self.learned_words_count  ||= 0
   end
 
+  #Allows to change a profile settings without entering a password
   def update_with_password(params, *options)
     current_password = params.delete(:current_password)
 

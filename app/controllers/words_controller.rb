@@ -78,6 +78,7 @@ class WordsController < ApplicationController
     redirect_to words_path, :notice => "Word deleted."
   end
 
+  #Actions for the buttons
   def word_action
     if params[:ids]
       case params[:commit]
@@ -95,6 +96,7 @@ class WordsController < ApplicationController
     end
   end
 
+  #The training page
   def training
     @sentences = Sentence.where(id: Training.select(:sentence_id).where(user: current_user)).includes(:audio).group(:id).
         paginate(page: params[:page], per_page: 1)
@@ -102,12 +104,15 @@ class WordsController < ApplicationController
     @learned_words = current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: true}).count
   end
 
-  def set_word_status_training(word_id=params[:word_id], bool=params[:bool])
-    create_or_update_word_status(word_id, bool)
+  #Action to the buttons on training page
+  def set_word_status_training
+    create_or_update_word_status(params[:word_id], params[:bool])
     redirect_to :back
   end
+
   private
 
+  #Words contained in the loaded text
   def words_in_text
     @words = Word.select('words.id', 'words.word', 'word_in_articles.frequency').joins(sentences: :translations).joins(:word_in_articles).
         where(words: {language: current_user.learning_language},
@@ -119,6 +124,7 @@ class WordsController < ApplicationController
         group('words.id, word_in_articles.frequency').order('word_in_articles.frequency desc').paginate(page: params[:page], per_page: 20)
   end
 
+  #Update word status
   def create_or_update_word_status(word_id, bool)
     begin
       WordStatus.create!(user_id: current_user.id, word_id: word_id, learned: bool)
@@ -127,7 +133,7 @@ class WordsController < ApplicationController
     end
   end
 
-
+  #Sends selected words into learned or learning
   def set_word_status(bool)
     params[:ids].each do |wid|
       create_or_update_word_status(wid, bool)
@@ -135,6 +141,7 @@ class WordsController < ApplicationController
     redirect_to(:back)
   end
 
+  #Sends selected words into training
   def set_training
     learned_words_count = current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: true}).count
     User.find(current_user.id).update(:learned_words_count => learned_words_count )
@@ -169,34 +176,41 @@ class WordsController < ApplicationController
     redirect_to(training_path)
   end
 
+  #Delete word_status
   def delete_word_status
     WordStatus.delete_all(user_id: current_user, word_id: params[:ids])
     redirect_to(:back)
   end
 
+  #Get learned and learning words of current learning language without pagination
   def words_with_status(bool)
     current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: bool})
   end
 
+  #Get unknown words of current learning language without pagination
   def words_without_status
     Word.joins(sentences: :translations).where(words: {language: current_user.learning_language},
                                                sentences: {language: current_user.learning_language},
                                                translations_sentences: {language: current_user.native_language})
   end
 
+  #Get learned and learning words of current learning language
   def learned_and_learning(bool)
     @words = words_with_status(bool).order(:id).paginate(page: params[:page], per_page: 20)
   end
 
+  #Get all words of current learning language
   def all
     @words = words_without_status.group(:id).order(:id).paginate(page: params[:page], per_page: 20)
   end
 
+  #Get unknown words of current learning language
   def unknown
     @words = words_without_status.where.not(id: WordStatus.select(:word_id).where(user: current_user)).group(:id).order(:id).
         paginate(page: params[:page], per_page: 20)
   end
 
+  #Get words of current learning language that a user is looking for
   def word_search
     @words = words_without_status.where('word LIKE ?', "%#{params[:search].downcase}%").group(:id).order(:id).
         paginate(page: params[:page], per_page: 20)
