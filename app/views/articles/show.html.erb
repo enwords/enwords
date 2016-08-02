@@ -3,9 +3,11 @@
     <div class="row row-content">
       <div class="col-xs-12 wrapper">
         <div class="col-xs-12 links-top">
-          <%= link_to 'Назад', :back %>  |
+
           <%= link_to 'Слова в тексте (кроме выученных)', words_path(article: @article) %> |
-          <%= link_to 'Редактировать', edit_article_path(@article) %>
+          <%= link_to 'Редактировать', edit_article_path(@article) %> |
+          <%= link_to 'Назад', :back %>
+
         </div>
         <div class="col-xs-12">
           <h3 class="form-signin-heading"><%= @article.title %></h3>
