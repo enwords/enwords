@@ -26,9 +26,14 @@
     <div class="field">
 
       <h5>Язык текста
-      <%= f.select(:language, User.learning_languages.keys.map { |lang| [lang.titleize, lang] }) %> (Текст будет доступен, только для изучаемого языка)
+      <%= f.select(:language, User.learning_languages.keys.map { |lang| [lang.titleize, lang] }) %>
+        (Текст будет доступен, только для изучаемого языка)
       </h5>
 
+
+      <% if current_user.learning_language == 'cmn' || current_user.learning_language == 'jpn' %>
+      <h5>Внимание! К сожалению, для поиска слов в китайских и японских текстах слова должны быть разделены пробелом</h5>
+      <% end %>
     </div>
 
     <div class="field center-btn">
