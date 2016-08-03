@@ -23,11 +23,11 @@
     </div>
 
     <div class="field">
-      <%= f.text_field :title, class: 'form-control', placeholder: "Заголовок" %>
+      <%= f.text_field :title, class: 'form-control', placeholder: "Заголовок", maxlength: 100%>
     </div>
 
     <div class="field">
-      <%= f.text_area :content, class: 'form-control', placeholder: "Текст", style: "resize: vertical; min-height: 300px;" %>
+      <%= f.text_area :content, class: 'form-control', placeholder: "Текст", maxlength: 100000, style: "resize: vertical; min-height: 300px;" %>
     </div>
 
     <div class="field">

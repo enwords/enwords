@@ -6,6 +6,7 @@
 
           <%= link_to 'Слова в тексте (кроме выученных)', words_path(article: @article) %> |
           <%= link_to 'Редактировать', edit_article_path(@article) %> |
+          <%= link_to 'Удалить', article_path(@article), method: :delete %> |
           <%= link_to 'Назад', :back %>
 
         </div>
