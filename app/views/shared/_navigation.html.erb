@@ -19,24 +19,21 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Слова<b class="caret"></b></a>
               <ul class="dropdown-menu">
 
-                <li><%= link_to words_path status: 'learned' do %>
+                <li id="learned"><%= link_to words_path status: 'learned' do %>
                       <i class="fa fa-check ico"></i>Выученные (<%= current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: true}).count %>)
                   <% end %>
                 </li>
 
 
-                <li><%= link_to words_path status: 'learning' do %>
+                <li id="learning"><%= link_to words_path status: 'learning' do %>
                       <i class="fa fa-remove ico"></i>Изучаемые (<%= current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: false}).count %>)
                   <% end %>
                 </li>
 
-                <li><%= link_to words_path status: 'unknown' do %>
-                      <i class="fa fa-question ico"></i>Неизвестные
-                  <% end %>
-                </li>
-
-                <li><%= link_to words_path status: 'all' do %>
-                      <i class="fa fa-book ico"></i>Все
+                <li id="unknown"><%= link_to words_path status: 'unknown' do %>
+                      <i class="fa fa-question ico"></i>Неизвестные (<%=Word.joins(sentences: :translations).where(words: {language: current_user.learning_language},
+                                                                                                                   sentences: {language: current_user.learning_language},
+                                                                                                                   translations_sentences: {language: current_user.native_language}).where.not(id: WordStatus.select(:word_id).where(user: current_user)).group(:id).length %>)
                   <% end %>
                 </li>
 
