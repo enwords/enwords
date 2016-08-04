@@ -1,8 +1,10 @@
+<% sentence_audio_nil = nil %>
 <div class="container" style="padding-bottom: 20px">
   <% @sentences.each do |sentence| %>
       <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2" id="training-sentence">
         <h3>
-          <% if sentence.audio.nil? %>
+          <% sentence_audio_nil = sentence.audio.nil? %>
+          <% if sentence_audio_nil %>
               <span class="audioButton glyphicon glyphicon-volume-off"></span>
           <% else %>
               <span class="audioButton glyphicon glyphicon-volume-up" onclick="play()"></span>
@@ -50,9 +52,9 @@
 
                if current_bool == false || current_bool == true
                  switch_on_class = "fa fa-remove"
-              else
-                switch_on_class = "fa fa-question"
-              end
+               else
+                 switch_on_class = "fa fa-question"
+               end
           %>
 
               <tr class='<%= cycle('odd', 'even') %>'>
@@ -93,13 +95,15 @@
 <% end %>
 
 <script>
+
+  <% if current_user.audio_enable && !sentence_audio_nil && request.original_url != request.referer %>
   $(document).ready(function () {
-    <% if current_user.audio_enable && request.original_url != request.referer %>
     play();
-    <% end %>
-    $("#translate-btn").click(function () {
-      $("#translate-btn").fadeOut(0);
-      $("#translate").fadeIn(750);
-    });
   });
+  <% end %>
+  $("#translate-btn").click(function () {
+    $("#translate-btn").fadeOut(0);
+    $("#translate").fadeIn(750);
+  });
+
 </script>
