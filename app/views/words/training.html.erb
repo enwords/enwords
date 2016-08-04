@@ -94,7 +94,7 @@
 
 <script>
   $(document).ready(function () {
-    <% if current_user.audio_enable %>
+    <% if current_user.audio_enable && request.original_url != request.referer %>
     play();
     <% end %>
     $("#translate-btn").click(function () {
