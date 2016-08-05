@@ -2,7 +2,7 @@
   <div class="row row-content">
     <div class="col-xs-12">
       <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 wrapper">
-        <h2 class="form-signin-heading">Вход</h2>
+        <h2 class="form-signin-heading"><%= t("devise.session.new.title") %></h2>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
             <div class="col-xs-12 error">
@@ -10,22 +10,22 @@
             </div>
 
             <div class="field">
-              <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: "Почта" %>
+              <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: t("email") %>
             </div>
 
             <div class="field">
-            <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: "Пароль" %>
+            <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: t("password") %>
             </div>
 
             <% if devise_mapping.rememberable? -%>
                 <div class="field" style="padding-top: 20px; padding-bottom: 20px">
                   <%= f.check_box :remember_me%>
-                  <%= f.label :remember_me,  "Запомнить" %>
+                  <%= f.label :remember_me,  t("devise.session.new.remember") %>
                 </div>
             <% end -%>
 
             <div class="field">
-              <%= submit_tag "Войти", class: "btn btn-lg btn-primary btn-block" %>
+              <%= submit_tag t("shared.navigation.user.sign_in"), class: "btn btn-lg btn-primary btn-block" %>
             </div>
 
         <% end %>

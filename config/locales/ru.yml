@@ -1,0 +1,172 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+ru:
+  hello: "Привет "
+  email: "Почта"
+  password: "Пароль"
+  password_minimum: "Пароль (минимум #{@minimum_password_length} символов)"
+  password_minimum_6: "Пароль (минимум 6 символов)"
+  new_password: "Новый пароль"
+  old_password: "Старый пароль"
+  confirm_password: "Подтвердите пароль"
+  confirm_new_password: "Повторите новый пароль"
+
+
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              too_short: "Пароль слишком короткий (минимум 6 символов)"
+            password_confirmation:
+              confirmation: "Пароли не совпадают"
+            current_password:
+              invalid: "Текущий пароль неверен"
+
+  devise:
+    confirmation:
+      new:
+        title: "Отправить инструкции еще раз"
+    mailer:
+      confirmation_instructions:
+        text: "Для подтверждения регистрации пройдите по ссылке:"
+        link: "Подтвердить"
+      password_change:
+        text: "Ваш пароль был изменен."
+      reset_password_instructions:
+        text1: "Кто-то решил изменить Ваш пароль. Если это Вы, то пройдите по ссылке."
+        link: "Изменить пароль"
+        text2: "Если Вы не хотите менять пароль, пожалуйста проигнорируйте это сообщение."
+      unlock_instructions:
+        text: "Ваш аккаунт был заблокирован из-за большого количества неудачных попыток входа. Пройдите пы ссылке чтобы разблокировать аккаунт:"
+        link: "Разблокировать"
+    passwords:
+      edit:
+        title: "Изменение пароля"
+        submit: "Изменить пароль"
+      new:
+        title: "Забыли пароль?"
+        submit: "Отправить инструкцию по смене пароля"
+    registration:
+      form:
+        title:  "Регистрация"
+        native_language: "Родной язык"
+        learning_language: "Изучаемый язык"
+      edit:
+        title: "Настройки пользователя"
+        unconfirmed_email: "Все еще ждем подтверждения для: "
+        sentences_number: "Количество предложений на одно слово "
+        audio_enable: "Включить автовоспроизведение аудио?"
+        diversity_enable: "Больше разнообразных предложений, но меньше озвученных"
+        submit:  "Сохранить изменения"
+        delete_user: "Удалить аккаунт"
+        confirm_delete_user: "Вы уверены? Восстановление аккаунта не возможно."
+    session:
+      new:
+        title: "Вход"
+        remember: "Запомнить"
+    shared:
+      links:
+        new_confirmation: "Не получили инструкции по подтверждению?"
+        new_unlock: "Не получили инструкции по разблокировке?"
+        sign_in_with: "Войти с помощью "
+    unlock:
+      new:
+        title:  "Отправить заново инструкцию по разблокировке"
+
+  shared:
+    navigation:
+      words:
+        dropdown: 'Слова'
+        learned: 'Выученные'
+        learning: 'Изучаемые'
+        unknown: 'Неизвестные'
+      texts: 'Тексты'
+      last_training: 'Последняя тренировка'
+      search: 'Поиск слов'
+      user:
+        settings: 'Настройки'
+        sign_out: 'Выйти'
+        sign_in: 'Войти'
+
+  static:
+    index:
+      sign_in:
+        title: "Для успешного обучения Вы можете:"
+        item_1:
+          link: "Найти слова"
+          text: ", которые хотите выучить и повторять их в разных предложениях (все слова отсортированы по частоте встречаемости)"
+        item_2:
+          link: "Добавить свой текст"
+          text: " с кучей неизвестных слов и учить слова оттуда (очень полезно если Вы слушаете аудиокурсы, у которых есть текстовая версия или если Вы читаете профессиональную литературу и не понимаете специфических слов)"
+      sign_out:
+        item1:
+          text: "Enwords – программа для повышения словарного запаса изучаемого языка"
+        item2:
+          text: "В разных предложениях слова имеют разный смысл, невозможно выучить все переводы всех слов, нужно научиться понимать их смысл в контексте. Enwords поможет Вам повысить словарный запас, но только если Вы уже знаете грамматический минимум"
+    result:
+      title: "Результат тренировки"
+      text: "Выученных слов"
+
+  texts:
+    title: "Тексты"
+    buttons:
+      add_text: "Добавить текст"
+      delete_selected: "Удалить выбранные"
+    links:
+      back: "Назад"
+      edit: "Редактировать"
+      delete: "Удалить"
+      words: "Слова из текста (кроме выученных)"
+    new_text: "Новый текст"
+    edit_text: "Редактирование текста"
+    form:
+      title: "Заголовок"
+      text: "Текст"
+      language: "Язык текста (текст будет доступен, только для изучаемого языка) "
+      warning: "Внимание! К сожалению, для поиска слов в китайских и японских текстах слова должны быть разделены пробелом"
+      submit: "Сохранить"
+
+  training:
+    show_translation: "Показать перевод"
+    know: "Знаете?"
+    end: "Завершить"
+
+  words:
+    learned: 'Выученные слова'
+    learning: 'Изучаемые слова'
+    unknown: 'Неизвестные слова'
+    all: "Все слова"
+    search_result: "Результат поиска"
+    words_of_text: "Слова из текста"
+    warning:
+      text1: "В этом списке нет слов, вы можете найти новые слова "
+      link1: "здесь"
+      text2: "Пожалуйста, выберите изучаемый язык в "
+      link2: "настройках профиля"
+    buttons:
+      train_selected:  'Тренировать выбранные'
+      add_to_learning: 'Добавить в изучаемые'
+      add_to_learned:  'Добавить в выученные'
+      add_to_unknown:  'Добавить в неизвестные'
+    select_all: 'Выбрать все'

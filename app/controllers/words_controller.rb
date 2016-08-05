@@ -38,23 +38,17 @@ class WordsController < ApplicationController
     if params[:status]
       case params[:status]
         when 'learning'
-          @title = 'Изучаемые слова'
           learned_and_learning(false)
         when 'learned'
-          @title = 'Выученные слова'
           learned_and_learning(true)
         when 'unknown'
-          @title = 'Неизвестные слова'
           unknown
         when 'all'
-          @title = 'Все слова'
           all
       end
     elsif params[:search]
-      @title = 'Результат поиска'
       word_search
     elsif params[:article]
-      @title = 'Слова в тексте'
       words_in_text
     elsif current_user.admin?
       @words = Word.all.order(:id).paginate(page: params[:page], per_page: 20)

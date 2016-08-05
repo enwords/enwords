@@ -1,5 +1,5 @@
-<p>Привет <%= @email %>!</p>
+<p><%= t("hello") %> <%= @email %>!</p>
 
-<p>Для подтверждения регистрации пройдите по ссылке:</p>
+<p><%= t("devise.mailer.confirmation_instructions.text") %></p>
 
-<p><%= link_to 'Подтвердить', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p><%= link_to t("devise.mailer.confirmation_instructions.link"), confirmation_url(@resource, confirmation_token: @token) %></p>

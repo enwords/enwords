@@ -20,4 +20,140 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  hello: "Hello "
+  email: "Email"
+  password: "Password"
+  password_minimum: "Password (minimum #{@minimum_password_length} symbols)"
+  password_minimum_6: "Password (minimum 6 symbols)"
+  new_password: "New password"
+  old_password: "Old password"
+  confirm_password: "Confirm password"
+  confirm_new_password: "Confirm new password"
+
+  devise:
+    confirmation:
+      new:
+        title: "Resend confirmation instructions"
+    mailer:
+      confirmation_instructions:
+        text: "To confirm your registration click on the link:"
+        link: "Submit"
+      password_change:
+        text: "Your password has been changed."
+      reset_password_instructions:
+        text1: "Someone decided to change your password if this is you, then click on the link."
+        link: "Change password"
+        text2: "If you do not want to change your password, please ignore this message."
+      unlock_instructions:
+        text: "Your account has been suspended due to the large number of failed login attempts . Go Py link to unlock the account:"
+        link: "Unlock"
+    passwords:
+      edit:
+        title: "Change password"
+        submit: "Change password"
+      new:
+        title: "Forgot your password?"
+        submit: "Send instructions to reset your password"
+    registration:
+      form:
+        title:  "Registration"
+        native_language: "Native language"
+        learning_language: "Learning language"
+      edit:
+        title: "User settings"
+        unconfirmed_email: "Still waiting confirmation for: "
+        sentences_number: "Number of sentences for one word"
+        audio_enable: "Turn on audio autoplay?"
+        diversity_enable: "More diversity of sentences but without audio"
+        submit:  "Submit"
+        delete_user: "Delete account"
+        confirm_delete_user: "Are you sure? Account recovery is not possible"
+    session:
+      new:
+        title: "Sign In"
+        remember: "Remember"
+    shared:
+      links:
+        new_confirmation: "Not received confirmation instructions?"
+        new_unlock: "Did not receive unlock instructions?"
+        sign_in_with: "Sign in with "
+    unlock:
+      new:
+        title:  "Send new unlock instruction"
+
+  shared:
+    navigation:
+      words:
+        dropdown: 'Words'
+        learned: 'Learned'
+        learning: 'Learning'
+        unknown: 'Unknown'
+      texts: 'Texts'
+      last_training: 'Last training'
+      search: 'Word search'
+      user:
+        settings: 'Settings'
+        sign_out: 'Sign Out'
+        sign_in: 'Sign In'
+
+  static:
+    index:
+      sign_in:
+        title: "For successful training you can:"
+        item_1:
+          link: "Find words"
+          text: " to learn and repeat them in different sentences (all words are sorted by frequency)"
+        item_2:
+          link: "Add your own text"
+          text: " with a bunch of unknown words and learn them (very useful if you listen to audio courses that have a text version, or if you read the professional literature and don't understand the specific words)"
+      sign_out:
+        item1:
+          text: "Enwords - an application created to improve your vocabulary of studied language"
+        item2:
+          text: "In different sentences words have different meanings, it's impossible to learn all translations of all words, you need to learn to understand their meaning in the context. Enwords will help you improve your vocabulary, but only if you already know the grammatical minimum"
+    result:
+      title: "Result of training:"
+      text: "Learned words"
+
+  texts:
+    title: "Texts"
+    buttons:
+      add_text: "Add text"
+      delete_selected: "Delete selected"
+    links:
+      back: "Back"
+      edit: "Edit"
+      delete: "Delete"
+      words: "Words of text (except learned)"
+    new_text: "New text"
+    edit_text: "Edit text"
+    form:
+      title: "Title"
+      text: "Text"
+      language: "Text language (the text will be available only for the target language) "
+      warning: "Attention! Unfortunately for word search in Chinese and Japanese texts the words should be separated by a space"
+      submit: "Save"
+
+  training:
+    show_translation: "Show translation"
+    know: "Know?"
+    end: "End"
+
+  words:
+    learned: 'Learned words'
+    learning: 'Learning words'
+    unknown: 'Unknown words'
+    all: "All words"
+    search_result: "Search result"
+    words_of_text: "Words in text"
+    warning:
+      text1: "There are no words in this list, you can find new words "
+      link1: "here"
+      text2: "Please select the language in the "
+      link2: "profile settings"
+    buttons:
+      train_selected:  'To train selected'
+      add_to_learning: 'Add to learning'
+      add_to_learned:  'Add to learned'
+      add_to_unknown:  'Add to unknown'
+    select_all: 'Select all'

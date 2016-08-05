@@ -13,7 +13,7 @@
           <% end %>
           <%= sentence.sentence %> </h3>
         <% begin %>
-            <button id="translate-btn">Показать перевод</button>
+            <button id="translate-btn"><%= t "training.show_translation" %></button>
             <h4 id="translate" style="display: none"><%= sentence.translations.where(language: current_user.native_language).first.sentence %> </h4>
         <% rescue %>
         <% end %>
@@ -23,7 +23,7 @@
       <div class="col-xs-12 col-sm-6 col-sm-offset-3">
         <table id="training_words">
           <th></th>
-          <th style="text-align: center">Знаете?</th>
+          <th style="text-align: center"><%= t 'training.know' %></th>
           <% n = 0
              sentence.words.each do |word|
                begin
@@ -84,7 +84,7 @@
     <div class="digg_pagination" id="pagination-training-without_next_page">
       <%= will_paginate @sentences, page_links: false, previous_label: '<i class="fa fa-angle-left"></i>',
                         next_label: '<i class="fa fa-angle-right"></i>', container: false %>
-      <%= link_to 'Завершить', result_path, id: "end_link" %>
+      <%= link_to t("training.end"), result_path, id: "end_link" %>
     </div>
 
 <% else %>

@@ -17,26 +17,25 @@
 
 
     <div class="field">
-      <%= f.text_field :title, class: 'form-control', placeholder: "Заголовок", maxlength: 100%>
+      <%= f.text_field :title, class: 'form-control', placeholder: t("texts.form.title"), maxlength: 100%>
     </div>
 
     <div class="field">
-      <%= f.text_area :content, class: 'form-control', placeholder: "Текст", maxlength: 100000, style: "resize: vertical; min-height: 300px;" %>
+      <%= f.text_area :content, class: 'form-control', placeholder: t("texts.form.text"), maxlength: 100000, style: "resize: vertical; min-height: 300px;" %>
     </div>
 
     <div class="field">
-      <h5>Язык текста
+      <h5><%= t("texts.form.language") %>
         <%= f.select :language, User.learning_languages.keys.map { |lang| [lang.titleize, lang] }, selected: current_user.learning_language %>
-        (Текст будет доступен, только для изучаемого языка)
       </h5>
 
       <% if current_user.learning_language == 'cmn' || current_user.learning_language == 'jpn' %>
-      <h5>Внимание! К сожалению, для поиска слов в китайских и японских текстах слова должны быть разделены пробелом</h5>
+      <h5><%= t("texts.form.warning") %></h5>
       <% end %>
     </div>
 
     <div class="field center-btn">
-      <%= submit_tag "Сохранить", class: "btn btn-lg btn-primary" %>
+      <%= submit_tag t("texts.form.submit"), class: "btn btn-lg btn-primary" %>
     </div>
 
 <% end %>

@@ -2,7 +2,7 @@
   <div class="row row-content">
     <div class="col-xs-12">
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 wrapper">
-        <h2 class="form-signin-heading">Настройки пользователя</h2>
+        <h2 class="form-signin-heading"><%=t("shared.navigation.user.settings") %></h2>
         <%= form_for(resource, as: resource_name, url: update_user_registration_path, html: {method: :put}) do |f| %>
 
             <div class="col-xs-12 error">
@@ -10,59 +10,59 @@
             </div>
 
             <div class="field">
-              <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: "Почта" %>
+              <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: t("email") %>
               <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-                  <div>Все еще ждем поддтверждения для: <%= resource.unconfirmed_email %></div>
+                  <div><%= t("devise.registration.edit.unconfirmed_email") %> <%= resource.unconfirmed_email %></div>
               <% end %>
             </div>
 
 
             <div class="field">
-              <%= f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: "Старый пароль" %>
+              <%= f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: t("old_password") %>
             </div>
             <div class="field">
-              <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: "Новый пароль" %>
-            </div>
-
-            <div class="field">
-              <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: "Повторите новый пароль" %>
+              <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: t("new_password") %>
             </div>
 
             <div class="field">
-              <h5>Родной язык
+              <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: t("confirm_new_password") %>
+            </div>
+
+            <div class="field">
+              <h5><%= t("devise.registration.form.native_language") %>
                 <p class="settings_ico"> <%= f.select(:native_language, User.native_languages.keys
                     .map { |native_language| [native_language.titleize, native_language] }) %></p></h5>
             </div>
 
             <div class="field">
-              <h5>Изучаемый язык
+              <h5><%= t("devise.registration.form.learning_language") %>
                 <p class="settings_ico"><%= f.select(:learning_language, User.learning_languages.keys
                     .map { |learning_language| [learning_language.titleize, learning_language] }) %></p></h5>
             </div>
 
             <div class="field">
-              <h5>Количество предложений на одно слово (в тренировке)
+              <h5><%= t("devise.registration.edit.sentences_number") %>
                 <p class="settings_ico"><%= f.number_field :sentences_number, min: 1, max: 20 %></p></h5>
             </div>
 
             <div class="field">
-              <h5>Включить автовоспроизведение аудио?
+              <h5><%= t("devise.registration.edit.audio_enable") %>
                 <p class="settings_ico"> <%= f.check_box :audio_enable %></p></h5>
             </div>
 
             <div class="field">
-              <h5>Больше разнообразных предложений, но меньше озвученных
+              <h5><%= t("devise.registration.edit.diversity_enable") %>
                 <p class="settings_ico"> <%= f.check_box :diversity_enable %></p></h5>
             </div>
 
 
             <div class="field" style="padding-top: 20px">
-              <%= submit_tag "Сохранить изменения", class: "btn btn-lg btn-primary btn-block" %>
+              <%= submit_tag t("devise.registration.edit.submit"), class: "btn btn-lg btn-primary btn-block" %>
             </div>
 
         <% end %>
-        <%= button_to "Удалить аккаунт", registration_path(resource_name),
-                      data: {confirm: "Вы уверены? Восстановление аккаунта не возможно."},
+        <%= button_to t("devise.registration.edit.delete_user"), registration_path(resource_name),
+                      data: {confirm: t("devise.registration.edit.confirm_delete_user")},
                       method: :delete, class: "btn btn-lg btn-danger btn-block" %>
 
       </div>

@@ -16,22 +16,22 @@
           <ul class="nav navbar-nav">
 
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Слова<b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t "shared.navigation.words.dropdown" %><b class="caret"></b></a>
               <ul class="dropdown-menu">
 
-                <li id="learned"><%= link_to words_path status: 'learned' do %>
-                      <i class="fa fa-check ico"></i>Выученные (<%= current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: true}).count %>)
-                  <% end %>
-                </li>
-
-
                 <li id="learning"><%= link_to words_path status: 'learning' do %>
-                      <i class="fa fa-remove ico"></i>Изучаемые (<%= current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: false}).count %>)
+                      <i class="fa fa-remove ico"></i><%= t "shared.navigation.words.learning" %> (<%= current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: false}).count %>)
                   <% end %>
                 </li>
+
+                <li id="learned"><%= link_to words_path status: 'learned' do %>
+                      <i class="fa fa-check ico"></i><%= t "shared.navigation.words.learned" %> (<%= current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: true}).count %>)
+                  <% end %>
+                </li>
+
 
                 <li id="unknown"><%= link_to words_path status: 'unknown' do %>
-                      <i class="fa fa-question ico"></i>Неизвестные (<%=Word.joins(sentences: :translations).where(words: {language: current_user.learning_language},
+                      <i class="fa fa-question ico"></i><%= t "shared.navigation.words.unknown" %> (<%=Word.joins(sentences: :translations).where(words: {language: current_user.learning_language},
                                                                                                                    sentences: {language: current_user.learning_language},
                                                                                                                    translations_sentences: {language: current_user.native_language}).where.not(id: WordStatus.select(:word_id).where(user: current_user)).group(:id).length %>)
                   <% end %>
@@ -39,15 +39,15 @@
 
               </ul>
             </li>
-            <li><%= link_to "Тексты", articles_path %></li>
-            <li><%= link_to "Последняя тренировка", training_path %></li>
+            <li><%= link_to t("shared.navigation.texts"), articles_path %></li>
+            <li><%= link_to t("shared.navigation.last_training"), training_path %></li>
 
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
             <li class="search">
               <%= form_tag words_path, method: 'get' do %>
-                  <%= text_field_tag :search, params[:search], placeholder: "Поиск слов" %>
+                  <%= text_field_tag :search, params[:search], placeholder: t("shared.navigation.search")  %>
                   <%= button_tag type: "submit", name: nil do %>
                       <i class="fa fa-search"></i>
                   <% end %>
@@ -59,12 +59,12 @@
               <ul class="dropdown-menu">
 
                 <li><%= link_to edit_user_registration_path do %>
-                      <i class="fa fa-cog ico"></i>Настройки
+                      <i class="fa fa-cog ico"></i><%= t "shared.navigation.user.settings" %>
                   <% end %>
                 </li>
 
                 <li><%= link_to destroy_user_session_path, method: 'delete' do %>
-                      <i class="fa fa-sign-out ico"></i>Выйти
+                      <i class="fa fa-sign-out ico"></i><%= t "shared.navigation.user.sign_out" %>
                   <% end %>
                 </li>
               </ul>
@@ -76,7 +76,7 @@
           <ul class="nav navbar-nav navbar-right">
 
             <li><%= link_to new_user_session_path do %>
-                  <i class="fa fa-sign-in ico"></i>Войти
+                  <i class="fa fa-sign-in ico"></i><%= t "shared.navigation.user.sign_in"  %>
               <% end %>
             </li>
           </ul>
