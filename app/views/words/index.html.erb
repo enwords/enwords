@@ -1,13 +1,30 @@
 <div class="container">
   <div class="col-xs-12 title">
-    <h3><%= @title %></h3>
+
+    <h3><%= if params[:status]
+             case params[:status]
+               when 'learning'
+                 t "words.learning"
+               when 'learned'
+                 t "words.learned"
+               when 'unknown'
+                 t "words.unknown"
+               when 'all'
+                 t "words.all"
+             end
+           elsif params[:search]
+             t "words.search_result"
+           elsif params[:article]
+             t 'words.words_of_text'
+           end %>
+    </h3>
   </div>
   <% if @words.any? %>
       <%= form_tag word_action_words_path, method: :put do %>
           <div class="col-xs-6 col-sm-5 col-sm-offset-2 col-md-3 col-md-offset-3" id="word_list">
             <table>
               <th><input type="checkbox" onclick="toggle(this)"/></th>
-              <th>Выбрать все</th>
+              <th><%= t "words.select_all" %></th>
               <% @words.each do |word| %>
                   <tr>
                     <td> <%= check_box_tag "ids[]", word.id %> </td>
@@ -33,10 +50,10 @@
           </div>
 
           <div class="col-xs-6 col-sm-3 btn-group-vertical" role="group">
-            <%= button_tag(type: 'submit', value: 'to_training', name: 'commit', class: "btn btn-default") { 'Тренировать выбранные' } %>
-            <%= button_tag(type: 'submit', value: 'to_learning', name: 'commit', class: "btn btn-default") { 'Добавить в изучаемые' } unless params[:status] == "learning" %>
-            <%= button_tag(type: 'submit', value: 'to_learned', name: 'commit', class: "btn btn-default") { 'Добавить в выученные' } unless params[:status] == "learned" %>
-            <%= button_tag(type: 'submit', value: 'to_unknown', name: 'commit', class: "btn btn-default") { 'Добавить в неизвестные' } unless params[:status] == "unknown" %>
+            <%= button_tag(type: 'submit', value: 'to_training', name: 'commit', class: "btn btn-default") { t "words.buttons.train_selected" } %>
+            <%= button_tag(type: 'submit', value: 'to_learning', name: 'commit', class: "btn btn-default") { t "words.buttons.add_to_learning" } unless params[:status] == "learning" %>
+            <%= button_tag(type: 'submit', value: 'to_learned', name: 'commit', class: "btn btn-default") { t "words.buttons.add_to_learned"} unless params[:status] == "learned" %>
+            <%= button_tag(type: 'submit', value: 'to_unknown', name: 'commit', class: "btn btn-default") { t "words.buttons.add_to_unknown" } unless params[:status] == "unknown" %>
           </div>
 
           <% if current_user.admin? %>
@@ -53,13 +70,13 @@
   <% else %>
       <% unless current_page?(words_path status: 'unknown') || current_page?(words_path status: 'all') %>
           <div class="col-xs-12">
-            <p class="title">В этом списке нет слов, вы можете найти новые слова
-              <a href="<%= words_path status: 'unknown' %>">здесь</a></p>
+            <p class="title"><%= t "words.warning.text1" %>
+              <a href="<%= words_path status: 'unknown' %>"><%= t "words.warning.link1" %></a></p>
           </div>
       <% else %>
           <div class="col-xs-12">
-            <p class="title">Пожалуйста, выберите изучаемый язык в
-              <a href="<%= edit_user_registration_path %>">настройках профиля</a></p>
+            <p class="title"><%= t "words.warning.text2" %>
+              <a href="<%= edit_user_registration_path %>"><%= t "words.warning.link2" %></a></p>
           </div>
       <% end %>
 

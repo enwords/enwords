@@ -4,11 +4,11 @@
     <div class="row row-content">
       <div class="col-xs-12 wrapper">
         <div class="col-xs-12 links-top">
-          <%= link_to 'Назад', :back %>
+          <%= link_to t("texts.links.back"), :back %>
         </div>
 
         <div class="col-xs-12">
-          <h2 class="form-signin-heading">Редактирование текста</h2>
+          <h2 class="form-signin-heading"><%= t("texts.edit_text") %></h2>
         </div>
         <%= render 'form', article: @article %>
       </div>

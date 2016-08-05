@@ -1,7 +1,5 @@
-<p>Привет <%= @resource.email %>!</p>
+<p><%= t("hello") %> <%= @resource.email %>!</p>
 
-<p>Ваш аккаунт был заблокирован из-за большого количества неудачных попыток входа.</p>
+<p><%= t("devise.mailer.unlock_instructions.text") %></p>
 
-<p>Пройдите пы ссылке чтобы разблокировать аккаунт:</p>
-
-<p><%= link_to 'Разблокировать', unlock_url(@resource, unlock_token: @token) %></p>
+<p><%= link_to t("devise.mailer.unlock_instructions.link") %>, unlock_url(@resource, unlock_token: @token) %></p>
