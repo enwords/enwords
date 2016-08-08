@@ -152,7 +152,7 @@ en:
       text2: "Please select the language in the "
       link2: "profile settings"
     buttons:
-      train_selected:  'To train selected'
+      train_selected:  'Train selected'
       add_to_learning: 'Add to learning'
       add_to_learned:  'Add to learned'
       add_to_unknown:  'Add to unknown'

@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -18,11 +17,11 @@ ActiveRecord::Schema.define(version: 20160721055643) do
 
   create_table "articles", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "language"
-    t.text     "content"
-    t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "language",   limit: 4
+    t.string   "content",    limit: 100000
+    t.string   "title",      limit: 100
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.index ["user_id"], name: "index_articles_on_user_id", using: :btree
   end
 
@@ -39,7 +38,7 @@ ActiveRecord::Schema.define(version: 20160721055643) do
 
   create_table "sentences", id: :integer, force: :cascade do |t|
     t.string "sentence"
-    t.string "language"
+    t.string "language", limit: 4
   end
 
   create_table "sentences_words", id: false, force: :cascade do |t|
@@ -56,22 +55,22 @@ ActiveRecord::Schema.define(version: 20160721055643) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                            default: "", null: false
+    t.string   "encrypted_password",               default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",                    default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.integer  "role"
-    t.integer  "native_language"
-    t.integer  "learning_language"
-    t.integer  "sentences_number"
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.integer  "role",                   limit: 2
+    t.integer  "native_language",        limit: 2
+    t.integer  "learning_language",      limit: 2
+    t.integer  "sentences_number",       limit: 2
     t.boolean  "audio_enable"
     t.boolean  "diversity_enable"
     t.integer  "learned_words_count"
@@ -99,7 +98,7 @@ ActiveRecord::Schema.define(version: 20160721055643) do
 
   create_table "words", id: :integer, force: :cascade do |t|
     t.string "word"
-    t.string "language"
+    t.string "language", limit: 4
   end
 
   add_foreign_key "articles", "users"
