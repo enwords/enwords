@@ -42,6 +42,8 @@ ru:
               confirmation: "Пароли не совпадают"
             current_password:
               invalid: "Текущий пароль неверен"
+            email:
+              taken:  "Почтовый адрес уже занят"
 
   devise:
     confirmation:
