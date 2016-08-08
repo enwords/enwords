@@ -32,10 +32,10 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       # t.datetime :locked_at
       t.timestamps null: false
 
-      t.integer :role
-      t.integer :native_language
-      t.integer :learning_language
-      t.integer :sentences_number
+      t.integer :role, limit: 2
+      t.integer :native_language, limit: 2
+      t.integer :learning_language, limit: 2
+      t.integer :sentences_number, limit: 2
       t.boolean :audio_enable
       t.boolean :diversity_enable
       t.integer :learned_words_count
