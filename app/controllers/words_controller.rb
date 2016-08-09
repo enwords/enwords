@@ -90,12 +90,12 @@ class WordsController < ApplicationController
     end
   end
 
-  #The training page
+  #TrainingWord page
   def training
-    @sentences = Sentence.where(id: Training.select(:sentence_id).where(user: current_user)).includes(:audio).group(:id).
-        paginate(page: params[:page], per_page: 1)
-    @total_pages = @sentences.total_pages
-    @learned_words = current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: true}).count
+    # @words = current_user.studying_words
+
+    @sentences= current_user.studying_sentences.order(:id).paginate(page: params[:page], per_page: 1)
+    @page_sum = @sentences.total_pages
   end
 
   #Action to the buttons on training page
@@ -135,39 +135,50 @@ class WordsController < ApplicationController
     redirect_to(:back)
   end
 
+  def update_learned_words_count
+    learned_words_count = current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: true}).count
+    User.find(current_user.id).update(:learned_words_count => learned_words_count)
+  end
+
   #Sends selected words into training
   def set_training
-    learned_words_count = current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: true}).count
-    User.find(current_user.id).update(:learned_words_count => learned_words_count )
+    update_learned_words_count
+    set_training_words
+    set_training_sentences
+    redirect_to(training_path)
+  end
 
-    Training.delete_all(user_id: current_user)
-    arr = []
-    val = []
+  def set_training_words
+    current_user.studying_words = Word.where(id: params[:ids])
+  end
+
+  def set_training_sentences
+    words = current_user.studying_words
+
+    sentences = []
 
     if current_user.diversity_enable
-      params[:ids].each do |wid|
-        arr << Sentence.select(:id).joins(:sentences_words).joins(:translations).where(sentences_words: {word_id: wid}).
-            where(sentences_words: {word_id: wid},
+      words.each do |word|
+
+        sentences_arr << word.sentences.joins(:sentences_words).joins(:translations).
+            where(sentences_words: {word_id: word},
                   translations_sentences: {language: current_user.native_language}).order("RANDOM()").
             limit(current_user.sentences_number)
+        sentences_arr.each { |x| sentences << x }
+
       end
     else
-      params[:ids].each do |wid|
-        arr << Sentence.select(:id).joins(:sentences_words).joins(:translations).left_joins(:audio).
-            where(sentences_words: {word_id: wid},
-                  translations_sentences: {language: current_user.native_language}).
+      words.each do |word|
+
+        sentences_arr = word.sentences.joins(:sentences_words).joins(:translations).left_joins(:audio).
+            where(sentences_words: {word_id: word},
+                  translations_sentences: {language: current_user.native_language}).group('sentences.id, audios.sentence_id').
             order('audios.sentence_id ASC').limit(current_user.sentences_number)
+        sentences_arr.each { |x| sentences << x }
       end
     end
 
-    arr.each do |sentences_arr|
-      sentences_arr.each do |sen|
-        val << {user_id: current_user.id, sentence_id: sen.id}
-      end
-    end
-    Training.create! val
-
-    redirect_to(training_path)
+    current_user.studying_sentences = sentences.uniq
   end
 
   #Delete word_status
