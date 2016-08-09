@@ -47,11 +47,18 @@ ActiveRecord::Schema.define(version: 20160721055643) do
     t.index ["sentence_id", "word_id"], name: "index_sentences_words_on_sentence_id_and_word_id", unique: true, using: :btree
   end
 
-  create_table "trainings", id: false, force: :cascade do |t|
+  create_table "training_sentences", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "sentence_id"
-    t.index ["sentence_id"], name: "index_trainings_on_sentence_id", using: :btree
-    t.index ["user_id"], name: "index_trainings_on_user_id", using: :btree
+    t.index ["sentence_id"], name: "index_training_sentences_on_sentence_id", using: :btree
+    t.index ["user_id"], name: "index_training_sentences_on_user_id", using: :btree
+  end
+
+  create_table "training_words", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "word_id"
+    t.index ["user_id"], name: "index_training_words_on_user_id", using: :btree
+    t.index ["word_id"], name: "index_training_words_on_word_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

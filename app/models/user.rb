@@ -1,7 +1,10 @@
 class User < ActiveRecord::Base
   has_many :word_statuses, dependent: :delete_all
   has_many :words, through: :word_statuses
-  has_many :sentences, through: :trainings
+  has_many :studying_words, through: :training_words, source: :word
+  has_many :training_words
+  has_many :studying_sentences, through: :training_sentences, source: :sentence
+  has_many :training_sentences
   has_many :articles, dependent: :delete_all
   # has_one :native_language, class_name: "Language"
   # has_one :learning_language,  class_name: "Language"

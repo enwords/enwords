@@ -80,7 +80,7 @@
   <% end %>
 </div>
 
-<% if params[:page] == @total_pages.to_s %>
+<% if params[:page] == @page_sum.to_s %>
     <div class="digg_pagination" id="pagination-training-without_next_page">
       <%= will_paginate @sentences, page_links: false, previous_label: '<i class="fa fa-angle-left"></i>',
                         next_label: '<i class="fa fa-angle-right"></i>', container: false %>
@@ -89,7 +89,9 @@
 
 <% else %>
     <div class="digg_pagination" id="pagination-training">
-      <%= will_paginate @sentences, page_links: false, previous_label: '<i class="fa fa-angle-left"></i>',
+      <%= will_paginate @sentences,
+                        page_links: false,
+                        previous_label: '<i class="fa fa-angle-left"></i>',
                         next_label: '<i class="fa fa-angle-right"></i>', container: false %>
     </div>
 <% end %>
