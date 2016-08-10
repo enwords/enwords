@@ -1,0 +1,71 @@
+<div class="col-xs-12 col-sm-6 col-sm-offset-3">
+  <table id="training_words">
+    <th></th>
+    <th id="know-th"><%= t 'training.know' %></th>
+    <% n = 0
+       @words_in_sentence.each do |word|
+
+         unless @words.include? word
+           begin
+             current_bool = word.word_statuses.where(user_id: current_user.id).first.learned
+          rescue
+
+           end
+           left_position = '3px'
+           right_position = '30px'
+           current_position = left_position
+           colors = {
+               future_bool: true.to_s,
+               current_background: 'rgb(183, 183, 183)',
+               grey_background: 'rgb(183, 183, 183)',
+               orange_background: 'rgb(240, 173, 78)',
+               green_background: 'rgb(92, 184, 92)'}
+           if current_bool.equal?(false)
+             colors[:future_bool]= true.to_s
+             colors[:current_background] = colors[:orange_background]
+             current_position = left_position
+           elsif current_bool.equal?(true)
+             colors[:future_bool] = false.to_s
+             colors[:current_background]= colors[:green_background]
+             current_position = right_position
+           end
+
+           if current_bool == false || current_bool == true
+             switch_on_class = "fa fa-remove"
+           else
+             switch_on_class = "fa fa-question"
+           end
+    %>
+
+            <tr>
+              <td class="word_td"><%= word.word.capitalize %></td>
+              <td>
+                <label class="switch">
+                  <div class="slider" style="background-color: <%= colors[:current_background] %>">
+                    <i class="fa fa-check" id="switch-off"></i>
+                    <i class="<%= switch_on_class %>" id="switch-on"></i>
+                  </div>
+                  <div class="round" style="left: <%= current_position %>"></div>
+                  <%= link_to '', {
+                      controller: 'words', action: 'set_word_status_training', bool: colors[:future_bool],
+                      word_id: word.id}, rel: "nofollow", method: :post, onclick: "setColor('#{ colors[:grey_background] }',
+                      '#{colors[:orange_background]}', '#{colors[:green_background]}', #{n}, '#{left_position}', '#{right_position}')", class: "button_hide" %>
+                </label>
+              </td>
+            </tr>
+            <% n = n + 1 %>
+        <% end %>
+    <% end %>
+  </table>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+
+  function isEmpty(el) {
+    return !$.trim(el.html())
+  }
+  if (isEmpty($('.word_td'))) {
+    $('#know-th').hide();
+  }
+
+</script>

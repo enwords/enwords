@@ -153,6 +153,8 @@ ru:
     show_translation: "Показать перевод"
     know: "Знаете?"
     end: "Завершить"
+    replace: "Замените *** на правильное слово"
+    check: "Проверить"
 
   words:
     learned: 'Выученные слова'
@@ -171,4 +173,5 @@ ru:
       add_to_learning: 'Добавить в изучаемые'
       add_to_learned:  'Добавить в выученные'
       add_to_unknown:  'Добавить в неизвестные'
+      train_selected_spelling: "Тренировать правописание"
     select_all: 'Выбрать все'
