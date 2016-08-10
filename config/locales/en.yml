@@ -138,6 +138,8 @@ en:
     show_translation: "Show translation"
     know: "Know?"
     end: "End"
+    replace: "Replace *** to the right word"
+    check: "Check"
 
   words:
     learned: 'Learned words'
@@ -156,4 +158,5 @@ en:
       add_to_learning: 'Add to learning'
       add_to_learned:  'Add to learned'
       add_to_unknown:  'Add to unknown'
+      train_selected_spelling: "Train spelling"
     select_all: 'Select all'

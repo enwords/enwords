@@ -241,7 +241,7 @@ $dropDown       : false
     height: 25.6px
     width: 25.6px
 
-#pagination-training, #pagination-training-without_next_page
+#pagination-training, #pagination-training-without_disabled_links
   position: fixed
   bottom: 80px
   left: 50%
@@ -254,7 +254,23 @@ $dropDown       : false
     height: 35px
     width: 35px
 
-#pagination-training-without_next_page
+#pagination-training-spelling
+  left: 50%
+  -webkit-transform: translateX(-50%)
+  -moz-transform: translateX(-50%)
+  -ms-transform: translateX(-50%)
+  transform: translateX(-50%)
+  font-size: 140%
+  position: absolute
+  display: none
+  .next_page, .previous_page
+    height: 35px
+    width: 35px
+
+
+
+
+#pagination-training-without_disabled_links
   .disabled
     display: none
   #end_link
@@ -283,6 +299,10 @@ $dropDown       : false
   a
     color: $bodyTextCol
 
+#know-th
+  text-align: center
+.word_td
+  width: 100%
 
 .title
   text-align: center
@@ -290,15 +310,35 @@ $dropDown       : false
   h3
     margin-top: 10px
 
-#training-sentence
+#training-sentence-translate
   text-align: center
-  margin-top: 25px
+  margin-top: 40px
   min-height: 162px
+
+#training-sentence, #audioButton
+  display: inline
 
 #translate-btn
   border: none
   background-color: transparent
   outline: none
+  margin: 10px
+
+#refresh-btn
+  text-decoration: none
+  color: #585858
+  top: 5px
+  font-size: 20px
+  padding: 0
+
+#compare-btn-div
+  padding: 20px
+  margin-bottom: 80px
+  text-align: center
+
+#training-help
+  font-size: 70%
+  float: right
 
 .btn
   margin-bottom: 4px
@@ -334,6 +374,10 @@ $dropDown       : false
 #switch-on
   float: right
   right: 7px
+
+.result-page
+  text-align: center
+  padding: 50px 0px 50px 0px
 
 ////
 
@@ -404,11 +448,11 @@ $dropDown       : false
 
 ////
 
-//Audio
-.audioButton
+//Training buttons
+.audioButton, #giveup
   cursor: pointer
 
-.glyphicon-volume-off, .glyphicon-volume-up
+.glyphicon-volume-off, .glyphicon-volume-up, .glyphicon-flag
   color: $bodyTextCol
   font-size: 25px
   top: 3px
@@ -485,3 +529,4 @@ $dropDown       : false
 .alert-danger, .alert-alert
   color: #C32221
 ////
+
