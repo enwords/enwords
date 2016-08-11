@@ -1,5 +1,5 @@
 <% sentence_audio_nil = nil %>
-<div class="container" style="padding-bottom: 20px">
+<div class="container training-div">
   <% @sentences.each do |sentence| %>
       <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2" id="training-sentence-translate">
           <% sentence_audio_nil = sentence.audio.nil? %>
@@ -19,7 +19,7 @@
         <% end %>
       </div>
 
-      <div class="col-xs-12">
+      <div class="col-xs-12" id="compare-btn-div">
         <% if params[:page] == @page_sum.to_s %>
             <div class="digg_pagination" id="pagination-training-without_disabled_links">
               <%= will_paginate @sentences, page_links: false, previous_label: '<i class="fa fa-angle-left"></i>',

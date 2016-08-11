@@ -1,5 +1,5 @@
 <% sentence_audio_nil = nil %>
-<div class="container" style="padding-bottom: 20px">
+<div class="container training-div">
   <% @sentences.each do |sentence| %>
       <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2" id="training-sentence-translate">
         <% sentence_audio_nil = sentence.audio.nil?
@@ -8,9 +8,9 @@
            @words.each do |word_active_record|
              word = word_active_record.word
              if sentence.language == 'cmn' || sentence.language == 'jpn'
-               current_sentence_without_words = current_sentence_without_words.gsub(/#{word}/i, '***')
+               current_sentence_without_words = current_sentence_without_words.gsub(/#{word}/i, '{  }')
                else
-             current_sentence_without_words = current_sentence_without_words.gsub(/\b#{word}\b/i, '***')
+             current_sentence_without_words = current_sentence_without_words.gsub(/\b#{word}\b/i, '{  }')
                end
            end %>
 
