@@ -63,7 +63,7 @@ en:
         title: "User settings"
         unconfirmed_email: "Still waiting confirmation for: "
         sentences_number: "Number of sentences for one word"
-        audio_enable: "Turn on audio autoplay?"
+        audio_enable: "Turn on autoplay audio? (doesn't work on mobile devices)"
         diversity_enable: "More diversity of sentences but without audio"
         submit:  "Submit"
         delete_user: "Delete account"
