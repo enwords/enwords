@@ -31,7 +31,7 @@
           </div>
 
           <div class="col-xs-10">
-            <%= text_field_tag 'sentence', current_sentence_without_words, id: "training-sentence", autocomplete: "off", class: 'form-control' %>
+            <%= text_field_tag 'sentence', current_sentence_without_words, id: "training-sentence-text", autocomplete: "off", class: 'form-control' %>
             <p id="training-help"><%= t('training.replace') %></p>
           </div>
           <div class="col-xs-1" style="padding: 0">
@@ -73,7 +73,7 @@
   <% end %>
 
   $("#compare-btn").click(function () {
-    var user_answer = deletePunctuation($("#training-sentence").val());
+    var user_answer = deletePunctuation($("#training-sentence-text").val());
     var correct_answer = deletePunctuation($("#correct-answer").text());
     if (user_answer == correct_answer) {
       $("#pagination-training-spelling").delay(50).fadeIn(300);
@@ -86,7 +86,7 @@
   });
 
   $("#giveup").click(function () {
-    $("#training-sentence").val($("#correct-answer").text());
+    $("#training-sentence-text").val($("#correct-answer").text());
   });
 
   function deletePunctuation(string) {
