@@ -1,54 +1,68 @@
 <% sentence_audio_nil = nil %>
-<div class="container" style="padding-bottom: 20px"></div>
-<% @sentences.each do |sentence| %>
-    <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2" id="training-sentence-translate">
-      <% sentence_audio_nil = sentence.audio.nil?
-         current_sentence = sentence.sentence
-         current_sentence_without_words = current_sentence
-         @words.each do |word_active_record|
-           word = word_active_record.word
-           current_sentence_without_words = current_sentence_without_words.gsub(/\b#{word}\b/i, '***')
-         end %>
+<div class="container" style="padding-bottom: 20px">
+  <% @sentences.each do |sentence| %>
+      <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2" id="training-sentence-translate">
+        <% sentence_audio_nil = sentence.audio.nil?
+           current_sentence = sentence.sentence
+           current_sentence_without_words = current_sentence
+           @words.each do |word_active_record|
+             word = word_active_record.word
+             if sentence.language == 'cmn' || sentence.language == 'jpn'
+               current_sentence_without_words = current_sentence_without_words.gsub(/#{word}/i, '***')
+               else
+             current_sentence_without_words = current_sentence_without_words.gsub(/\b#{word}\b/i, '***')
+               end
+           end %>
 
-      <h3 id="correct-answer" style="display: none"><%= sentence.sentence %> </h3>
+        <h3 id="correct-answer" style="display: none"><%= sentence.sentence %> </h3>
 
-      <div class="col-xs-12 field">
-        <div class="col-xs-1" style="padding: 0">
-          <% if sentence_audio_nil %>
-              <span class="audioButton glyphicon glyphicon-volume-off"></span>
-          <% else %>
-              <span class="audioButton glyphicon glyphicon-volume-up" onclick="play()"></span>
-              <%= audio_tag("https://audio.tatoeba.org/sentences/#{sentence.language}/#{sentence.id}.mp3",
-                            autoplay: false, id: 'audio-play') %>
+        <div class="col-xs-12 field">
+          <div class="col-xs-1" style="padding: 0">
+            <% if sentence_audio_nil %>
+                <span class="audioButton glyphicon glyphicon-volume-off"></span>
+            <% else %>
+                <span class="audioButton glyphicon glyphicon-volume-up" onclick="play()"></span>
+                <%= audio_tag("https://audio.tatoeba.org/sentences/#{sentence.language}/#{sentence.id}.mp3",
+                              autoplay: false, id: 'audio-play') %>
+            <% end %>
+          </div>
+
+          <div class="col-xs-10">
+            <%= text_field_tag 'sentence', current_sentence_without_words, id: "training-sentence", autocomplete: "off", class: 'form-control' %>
+            <p id="training-help"><%= t('training.replace') %></p>
+          </div>
+          <div class="col-xs-1" style="padding: 0">
+            <span id="giveup" class="glyphicon glyphicon-flag"></span>
+          </div>
+        </div>
+
+        <div class="col-xs-12 field">
+          <% begin %>
+              <h4 id="translate"><%= sentence.translations.where(language: current_user.native_language).first.sentence %> </h4>
+          <% rescue %>
           <% end %>
         </div>
-
-        <div class="col-xs-10">
-          <%= text_field_tag 'sentence', current_sentence_without_words, id: "training-sentence", autocomplete: "off", class: 'form-control' %>
-          <p id="training-help"><%= t('training.replace') %></p>
-        </div>
-        <div class="col-xs-1" style="padding: 0">
-          <span id="giveup" class="glyphicon glyphicon-flag"></span>
-        </div>
       </div>
 
-      <div class="col-xs-12 field">
-        <% begin %>
-            <h4 id="translate"><%= sentence.translations.where(language: current_user.native_language).first.sentence %> </h4>
-        <% rescue %>
+      <div class="col-xs-12" id="compare-btn-div">
+        <%= button_tag t("check"), id: 'compare-btn', class: "btn btn-md btn-success" %>
+        <% if params[:page] == @page_sum.to_s %>
+            <div class="digg_pagination" id="pagination-training-spelling-without_disabled_links">
+              <%= will_paginate @sentences, page_links: false, previous_label: '<i class="fa fa-angle-left"></i>',
+                                next_label: '<i class="fa fa-angle-right"></i>', container: false %>
+              <%= link_to t("training.end"), result_path, id: "end_link" %>
+            </div>
+
+        <% else %>
+            <div class="digg_pagination" id="pagination-training-spelling">
+              <%= will_paginate @sentences, page_links: false, previous_label: '<i class="fa fa-angle-left"></i>',
+                                next_label: '<i class="fa fa-angle-right"></i>', container: false %>
+            </div>
         <% end %>
       </div>
-    </div>
-
-    <div class="col-xs-12" id="compare-btn-div">
-      <%= button_tag t("check"), id: 'compare-btn', class: "btn btn-md btn-success" %>
-      <div class="digg_pagination" id="pagination-training-spelling">
-        <%= will_paginate @sentences, page_links: false, previous_label: '<i class="fa fa-angle-left"></i>',
-                          next_label: '<i class="fa fa-angle-right"></i>', container: false %>
-      </div>
-    </div>
-
-<% end %>
+      <%= render 'words_in_sentence' %>
+  <% end %>
+</div>
 
 <script>
   <% if current_user.audio_enable && !sentence_audio_nil && request.original_url != request.referer %>
@@ -62,6 +76,7 @@
     var correct_answer = deletePunctuation($("#correct-answer").text());
     if (user_answer == correct_answer) {
       $("#pagination-training-spelling").delay(50).fadeIn(300);
+      $("#pagination-training-spelling-without_disabled_links").delay(50).fadeIn(300);
       $("#compare-btn").fadeOut(0);
     } else {
       $(this).addClass("btn-danger");
