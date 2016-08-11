@@ -138,7 +138,7 @@ en:
     show_translation: "Show translation"
     know: "Know?"
     end: "End"
-    replace: "Replace *** to the right word"
+    replace: "Replace or insert into {  } the right word"
     check: "Check"
 
   words:

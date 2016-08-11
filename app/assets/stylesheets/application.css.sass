@@ -268,6 +268,14 @@ $dropDown       : false
 
 //Words, texts and training
 
+.training-div
+  @media (max-width: 767px)
+    margin-top: 40px
+  @media (min-width: 768px)
+    margin-top: 80px
+  padding-bottom: 20px
+
+
 .links-top
   text-align: right
 
@@ -285,9 +293,6 @@ $dropDown       : false
   a
     color: $bodyTextCol
 
-.training_words_div
-  margin-top: 40px
-
 #know-th
   text-align: center
 .word_td
@@ -301,8 +306,7 @@ $dropDown       : false
 
 #training-sentence-translate
   text-align: center
-  margin-top: 40px
-  @media (max-width: 768px)
+  @media (max-width: 767px)
     min-height: 162px
   @media (min-width: 768px)
     min-height: 114px
