@@ -1,4 +1,8 @@
 <% sentence_audio_nil = nil %>
+<div id="training-alerts"  style="text-align: center">
+  <p id="wrong_alert"><%= t('training.wrong') %></p>
+  <p id="right_alert"><%= t('training.right') %></p>
+</div>
 <div class="container training-div">
   <% @sentences.each do |sentence| %>
       <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2" id="training-sentence-translate">
@@ -45,7 +49,7 @@
       </div>
 
       <div class="col-xs-12" id="compare-btn-div">
-        <%= button_tag t("check"), id: 'compare-btn', class: "btn btn-md btn-success" %>
+        <%= button_tag t("training.check"), id: 'compare-btn', class: "btn btn-md btn-success" %>
         <% if params[:page] == @page_sum.to_s %>
             <div class="digg_pagination" id="pagination-training-spelling-without_disabled_links">
               <%= will_paginate @sentences, page_links: false, previous_label: '<i class="fa fa-angle-left"></i>',
@@ -66,9 +70,7 @@
 
 <script>
   <% if current_user.audio_enable && !sentence_audio_nil && request.original_url != request.referer %>
-  $(document).ready(function () {
-    play();
-  });
+  $("#audio-play")[0].play();
   <% end %>
 
   $("#compare-btn").click(function () {
@@ -76,18 +78,17 @@
     var correct_answer = deletePunctuation($("#correct-answer").text());
     if (user_answer == correct_answer) {
       $("#pagination-training-spelling").delay(50).fadeIn(300);
-      $("#pagination-training-spelling-without_disabled_links").delay(50).fadeIn(300);
+      $("#pagination-training-spelling-without_disabled_links").delay(100).fadeIn(300);
       $("#compare-btn").fadeOut(0);
+      $("#right_alert").fadeIn(800).fadeOut(800);
     } else {
-      $(this).addClass("btn-danger");
+      $("#wrong_alert").fadeIn(800).fadeOut(800);
     }
   });
 
-
   $("#giveup").click(function () {
-    document.getElementById("training-sentence").value = $("#correct-answer").text();
+    $("#training-sentence").val($("#correct-answer").text());
   });
-
 
   function deletePunctuation(string) {
     return string.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()\s]/g, '');

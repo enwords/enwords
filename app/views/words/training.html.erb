@@ -42,9 +42,7 @@
 <script>
 
   <% if current_user.audio_enable && !sentence_audio_nil && request.original_url != request.referer %>
-  $(document).ready(function () {
-    play();
-  });
+  $("#audio-play")[0].play();
   <% end %>
   $("#translate-btn").click(function () {
     $("#translate-btn").fadeOut(0);

@@ -269,12 +269,24 @@ $dropDown       : false
 //Words, texts and training
 
 .training-div
+  padding-bottom: 20px
   @media (max-width: 767px)
     margin-top: 40px
   @media (min-width: 768px)
     margin-top: 80px
-  padding-bottom: 20px
 
+
+#right_alert, #wrong_alert
+  position: absolute
+  left: 0
+  right: 0
+  margin-left: auto
+  margin-right: auto
+  display: none
+  @media (max-width: 767px)
+    top: 60px
+  @media (min-width: 768px)
+    top: 80px
 
 .links-top
   text-align: right
@@ -518,10 +530,10 @@ $dropDown       : false
 
 
 ////
-.alert-success, .alert-notice
+.alert-success, .alert-notice, #right_alert
   color: #5cb85c
 
-.alert-danger, .alert-alert
+.alert-danger, .alert-alert, #wrong_alert
   color: #C32221
 ////
 

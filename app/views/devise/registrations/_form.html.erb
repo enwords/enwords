@@ -19,17 +19,16 @@
       </div>
 
       <div class="field">
-        <h5><%= t("devise.registration.form.native_language") %>
-          <p class="settings_ico"> <%= f.select :native_language, User.native_languages.keys
-              .map { |native_language| [native_language.titleize, native_language] }, selected: :rus %></p></h5>
-      </div>
-
-      <div class="field">
         <h5><%= t("devise.registration.form.learning_language") %>
           <p class="settings_ico"><%= f.select :learning_language, User.learning_languages.keys
               .map { |learning_language| [learning_language.titleize, learning_language] }, selected: :eng %></p></h5>
       </div>
 
+      <div class="field">
+        <h5><%= t("devise.registration.form.native_language") %>
+          <p class="settings_ico"> <%= f.select :native_language, User.native_languages.keys
+              .map { |native_language| [native_language.titleize, native_language] }, selected: :rus %></p></h5>
+      </div>
 
       <div class="field" style="padding-top: 20px">
         <%= submit_tag t("devise.registration.form.title"), class: "btn btn-lg btn-primary btn-block" %>
