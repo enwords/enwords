@@ -96,6 +96,7 @@ class WordsController < ApplicationController
 
   #TrainingWord page
   def training
+    set_last_training(:training)
     @words = []
     @sentences= current_user.studying_sentences.order(:id).paginate(page: params[:page], per_page: 1)
     @words_in_sentence = @sentences.first.words
@@ -103,6 +104,7 @@ class WordsController < ApplicationController
   end
 
   def training_spelling
+    set_last_training(:training_spelling)
     @words = current_user.studying_words
     @sentences= current_user.studying_sentences.order(:id).paginate(page: params[:page], per_page: 1)
     @words_in_sentence = @sentences.first.words
@@ -148,7 +150,7 @@ class WordsController < ApplicationController
 
   def update_learned_words_count
     learned_words_count = current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: true}).count
-    User.find(current_user.id).update(:learned_words_count => learned_words_count)
+    current_user.update(:learned_words_count => learned_words_count)
   end
 
   #Sends selected words into training
@@ -156,6 +158,10 @@ class WordsController < ApplicationController
     update_learned_words_count
     set_training_words
     set_training_sentences
+  end
+
+  def set_last_training(arg)
+    current_user.update(last_training: arg)
   end
 
   def set_training_words

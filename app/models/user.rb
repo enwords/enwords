@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
   enum native_language: languages, _prefix: :native
   enum learning_language: languages, _prefix: :learning
 
+  enum last_training: [:training, :training_spelling]
+
   #Set the default settings when registering a new user
   def set_default_settings
     self.role ||= :user
