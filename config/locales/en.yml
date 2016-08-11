@@ -140,6 +140,8 @@ en:
     end: "End"
     replace: "Replace or insert into {  } the right word"
     check: "Check"
+    right: "You're right!"
+    wrong: "You're wrong"
 
   words:
     learned: 'Learned words'
