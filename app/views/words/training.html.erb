@@ -18,25 +18,26 @@
         <% rescue %>
         <% end %>
       </div>
+
+      <div class="col-xs-12">
+        <% if params[:page] == @page_sum.to_s %>
+            <div class="digg_pagination" id="pagination-training-without_disabled_links">
+              <%= will_paginate @sentences, page_links: false, previous_label: '<i class="fa fa-angle-left"></i>',
+                                next_label: '<i class="fa fa-angle-right"></i>', container: false %>
+              <%= link_to t("training.end"), result_path, id: "end_link" %>
+            </div>
+
+        <% else %>
+            <div class="digg_pagination" id="pagination-training">
+              <%= will_paginate @sentences, page_links: false, previous_label: '<i class="fa fa-angle-left"></i>',
+                                next_label: '<i class="fa fa-angle-right"></i>', container: false %>
+            </div>
+        <% end %>
+      </div>
       <%= render 'words_in_sentence' %>
   <% end %>
 </div>
 
-<% if params[:page] == @page_sum.to_s %>
-    <div class="digg_pagination" id="pagination-training-without_next_page">
-      <%= will_paginate @sentences, page_links: false, previous_label: '<i class="fa fa-angle-left"></i>',
-                        next_label: '<i class="fa fa-angle-right"></i>', container: false %>
-      <%= link_to t("training.end"), result_path, id: "end_link" %>
-    </div>
-
-<% else %>
-    <div class="digg_pagination" id="pagination-training">
-      <%= will_paginate @sentences,
-                        page_links: false,
-                        previous_label: '<i class="fa fa-angle-left"></i>',
-                        next_label: '<i class="fa fa-angle-right"></i>', container: false %>
-    </div>
-<% end %>
 
 <script>
 

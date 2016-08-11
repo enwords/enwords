@@ -241,20 +241,7 @@ $dropDown       : false
     height: 25.6px
     width: 25.6px
 
-#pagination-training, #pagination-training-without_disabled_links
-  position: fixed
-  bottom: 80px
-  left: 50%
-  -webkit-transform: translateX(-50%)
-  -moz-transform: translateX(-50%)
-  -ms-transform: translateX(-50%)
-  transform: translateX(-50%)
-  font-size: 140%
-  .next_page, .previous_page
-    height: 35px
-    width: 35px
-
-#pagination-training-spelling
+#pagination-training, #pagination-training-without_disabled_links, #pagination-training-spelling, #pagination-training-spelling-without_disabled_links
   left: 50%
   -webkit-transform: translateX(-50%)
   -moz-transform: translateX(-50%)
@@ -262,15 +249,14 @@ $dropDown       : false
   transform: translateX(-50%)
   font-size: 140%
   position: absolute
-  display: none
   .next_page, .previous_page
     height: 35px
     width: 35px
 
+#pagination-training-spelling, #pagination-training-spelling-without_disabled_links
+  display: none
 
-
-
-#pagination-training-without_disabled_links
+#pagination-training-without_disabled_links, #pagination-training-spelling-without_disabled_links
   .disabled
     display: none
   #end_link
@@ -299,6 +285,9 @@ $dropDown       : false
   a
     color: $bodyTextCol
 
+.training_words_div
+  margin-top: 40px
+
 #know-th
   text-align: center
 .word_td
@@ -313,8 +302,10 @@ $dropDown       : false
 #training-sentence-translate
   text-align: center
   margin-top: 40px
-  min-height: 162px
-
+  @media (max-width: 768px)
+    min-height: 162px
+  @media (min-width: 768px)
+    min-height: 114px
 #training-sentence, #audioButton
   display: inline
 
@@ -333,8 +324,8 @@ $dropDown       : false
 
 #compare-btn-div
   padding: 20px
-  margin-bottom: 80px
   text-align: center
+  min-height: 80px
 
 #training-help
   font-size: 70%
