@@ -26,8 +26,7 @@
                 <span class="audioButton glyphicon glyphicon-volume-off"></span>
             <% else %>
                 <span class="audioButton glyphicon glyphicon-volume-up" onclick="play()"></span>
-                <%= audio_tag("https://audio.tatoeba.org/sentences/#{sentence.language}/#{sentence.id}.mp3",
-                              autoplay: false, id: 'audio-play') %>
+                <%= audio_tag("https://audio.tatoeba.org/sentences/#{sentence.language}/#{sentence.id}.mp3", id: 'audio-play') %>
             <% end %>
           </div>
 
