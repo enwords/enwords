@@ -17,7 +17,7 @@
 
 
     <div class="field">
-      <%= f.text_field :title, class: 'form-control', placeholder: t("texts.form.title"), maxlength: 100%>
+      <%= f.text_field :title, class: 'form-control', placeholder: t("texts.form.title"), maxlength: 100 %>
     </div>
 
     <div class="field">
@@ -26,11 +26,13 @@
 
     <div class="field">
       <h5><%= t("texts.form.language") %>
-        <%= f.select :language, User.learning_languages.keys.map { |lang| [lang.titleize, lang] }, selected: current_user.learning_language %>
+        <p class="settings_ico"><%= f.select :language, User.full_languages.keys.map { |lang| [lang[1], lang[0]] }, selected: current_user.learning_language %></p>
       </h5>
+    </div>
 
+    <div class="field">
       <% if current_user.learning_language == 'cmn' || current_user.learning_language == 'jpn' %>
-      <h5><%= t("texts.form.warning") %></h5>
+          <h5><%= t("texts.form.warning") %></h5>
       <% end %>
     </div>
 

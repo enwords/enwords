@@ -130,7 +130,7 @@ en:
     form:
       title: "Title"
       text: "Text"
-      language: "Text language (the text will be available only for the target language) "
+      language: "Text language (the text will be unavailable when learning other languages) "
       warning: "Attention! Unfortunately for word search in Chinese and Japanese texts the words should be separated by a space"
       submit: "Save"
 

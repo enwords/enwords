@@ -18,7 +18,18 @@ class User < ActiveRecord::Base
 
   enum role: [:user, :vip, :admin]
 
-  languages = %w(eng rus deu spa jpn cmn ara)
+  languages = {eng: 0, epo: 1, tur: 2, ita: 3, rus: 4, deu: 5, fra: 6, spa: 7, por: 8, jpn: 9, hun: 10, heb: 11, ber: 12,
+               pol: 13, mkd: 14, fin: 15, nld: 16, cmn: 17, mar: 18, ukr: 19, swe: 20, dan: 21, srp: 22, bul: 23, ces: 24,
+               ina: 25, lat: 26, ara: 27, nds: 28, lit: 29, pes: 30}
+
+  enum full_languages: [["ara", "Arabic"], ["ber", "Berber"], ["bul", "Bulgarian"], ["ces", "Czech"], ["cmn", "Chinese (Mandarin)"],
+                        ["dan", "Danish"], ["deu", "German"], ["eng", "English"], ["epo", "Esperanto"], ["fin", "Finnish"],
+                        ["fra", "French"], ["heb", "Hebrew"], ["hun", "Hungarian"], ["ina", "Interlingua"], ["ita", "Italian"],
+                        ["jpn", "Japanese"], ["lat", "Latin"], ["lit", "Lithuanian"], ["mar", "Marathi"], ["mkd", "Macedonian"],
+                        ["nds", "Low Saxon"], ["nld", "Dutch"], ["pes", "Persian"], ["pol", "Polish"], ["por", "Portuguese"],
+                        ["rus", "Russian"], ["spa", "Spanish"], ["srp", "Serbian"], ["swe", "Swedish"], ["tur", "Turkish"],
+                        ["ukr", "Ukrainian"]]
+
   enum native_language: languages, _prefix: :native
   enum learning_language: languages, _prefix: :learning
 
@@ -30,7 +41,7 @@ class User < ActiveRecord::Base
     self.sentences_number ||= 5
     self.audio_enable ||= true
     self.diversity_enable ||= false
-    self.learned_words_count  ||= 0
+    self.learned_words_count ||= 0
   end
 
   #Allows to change a profile settings without entering a password
