@@ -5,5 +5,6 @@ class CreateSentences < ActiveRecord::Migration[5.0]
       t.string :language, limit: 4
       t.string :sentence
     end
+    add_index :sentences, :language
   end
 end
