@@ -5,5 +5,6 @@ class CreateWords < ActiveRecord::Migration[5.0]
       t.string :language, limit: 4
       t.string :word, unique: true
     end
+    add_index :words, :language
   end
 end
