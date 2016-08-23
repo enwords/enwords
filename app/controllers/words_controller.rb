@@ -94,21 +94,26 @@ class WordsController < ApplicationController
     end
   end
 
-  #TrainingWord page
+  #Training page
   def training
     set_last_training(:training)
     @words = []
     @sentences= current_user.studying_sentences.order(:id).paginate(page: params[:page], per_page: 1)
-    @words_in_sentence = @sentences.first.words
-    @page_sum = @sentences.total_pages
+    if @sentences.any?
+      @words_in_sentence = @sentences.first.words
+      @page_sum = @sentences.total_pages
+    end
   end
 
+  #Training spelling page
   def training_spelling
     set_last_training(:training_spelling)
     @words = current_user.studying_words
     @sentences= current_user.studying_sentences.order(:id).paginate(page: params[:page], per_page: 1)
-    @words_in_sentence = @sentences.first.words
-    @page_sum = @sentences.total_pages
+    if @sentences.any?
+      @words_in_sentence = @sentences.first.words
+      @page_sum = @sentences.total_pages
+    end
   end
 
   #Action to the buttons on training page
@@ -160,41 +165,39 @@ class WordsController < ApplicationController
     set_training_sentences
   end
 
+  #Set type of training there will be a link on the navigation bar
   def set_last_training(arg)
     current_user.update(last_training: arg)
   end
 
+  #Insert into database words that the user has selected for the study
   def set_training_words
     current_user.studying_words = Word.where(id: params[:ids])
   end
 
+  #Find a appropriate sentences to the studied words
   def set_training_sentences
-    words = current_user.studying_words
-
-    sentences = []
+    lim ||= current_user.sentences_number
 
     if current_user.diversity_enable
-      words.each do |word|
-
-        sentences_arr << word.sentences.joins(:sentences_words).joins(:translations).
-            where(sentences_words: {word_id: word},
-                  translations_sentences: {language: current_user.native_language}).order("RANDOM()").
-            limit(current_user.sentences_number)
-        sentences_arr.each { |x| sentences << x }
-
-      end
+      arr = Sentence.select("(array_agg(DISTINCT(sentences.id)))[1:100]").joins(:sentences_words).
+          where(sentences_words: {word_id: current_user.studying_words}).group('sentences_words.word_id')
     else
-      words.each do |word|
+      arr = Sentence.select("(array_agg(DISTINCT(sentences.id)))[1:100]").joins(:sentences_words).joins(:translations).
+          # where(sentences_words: {word_id: TrainingWord.select(:word_id).where(user: current_user)},
+          where(sentences_words: {word: current_user.studying_words},
+                translations_sentences: {language: current_user.native_language}).group('sentences_words.word_id')
+    end
 
-        sentences_arr = word.sentences.joins(:sentences_words).joins(:translations).left_joins(:audio).
-            where(sentences_words: {word_id: word},
-                  translations_sentences: {language: current_user.native_language}).group('sentences.id, audios.sentence_id').
-            order('audios.sentence_id ASC').limit(current_user.sentences_number)
-        sentences_arr.each { |x| sentences << x }
+    sentences_ids = []
+    arr.each do |row|
+      row['array_agg'].sample(lim).each do |id|
+        sentences_ids << id
       end
     end
 
-    current_user.studying_sentences = sentences.uniq
+    current_user.studying_sentences.delete_all
+    sentences_ids.uniq.each { |id| TrainingSentence.create!(user: current_user, sentence_id: id) }
   end
 
   #Delete word_status
@@ -210,13 +213,15 @@ class WordsController < ApplicationController
 
   #Get unknown words of current learning language without pagination
   def words_without_status
-    Word.joins(sentences: :translations).where(words: {language: current_user.learning_language},
-                                               sentences: {language: current_user.learning_language},
-                                               translations_sentences: {language: current_user.native_language})
+    # Word.joins(sentences: :translations).where(words: {language: current_user.learning_language},
+    #                                            translations_sentences: {language: current_user.native_language})
+
+    Word.where(words: {language: current_user.learning_language})
   end
 
   #Get learned and learning words of current learning language
   def learned_and_learning(bool)
+    @count = current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: bool}).count
     @words = words_with_status(bool).order(:id).paginate(page: params[:page], per_page: 20)
   end
 
