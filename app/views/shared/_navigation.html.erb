@@ -31,9 +31,7 @@
 
 
                 <li id="unknown"><%= link_to words_path status: 'unknown' do %>
-                      <i class="fa fa-question ico"></i><%= t "shared.navigation.words.unknown" %> (<%=Word.joins(sentences: :translations).where(words: {language: current_user.learning_language},
-                                                                                                                   sentences: {language: current_user.learning_language},
-                                                                                                                   translations_sentences: {language: current_user.native_language}).where.not(id: WordStatus.select(:word_id).where(user: current_user)).group(:id).length %>)
+                      <i class="fa fa-question ico"></i><%= t "shared.navigation.words.unknown" %> (<%=Word.where(language: current_user.learning_language).where.not(id: WordStatus.select(:word_id).where(user: current_user)).group(:id).length %>)
                   <% end %>
                 </li>
 
