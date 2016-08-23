@@ -12,8 +12,9 @@
         <h3 id="training-sentence" onclick="play()"><%= sentence.sentence %> </h3>
         <br>
         <% begin %>
+            <% trans = sentence.translations.where(language: current_user.native_language).first.sentence  %>
             <button id="translate-btn"><%= t "training.show_translation" %></button>
-            <h4 id="translate" style="display: none"><%= sentence.translations.where(language: current_user.native_language).first.sentence %> </h4>
+            <h4 id="translate" style="display: none"><%= trans %> </h4>
         <% rescue %>
         <% end %>
       </div>
