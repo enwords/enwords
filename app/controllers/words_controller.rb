@@ -97,23 +97,30 @@ class WordsController < ApplicationController
   #Training page
   def training
     set_last_training(:training)
-    @words = []
     @sentences= current_user.studying_sentences.order(:id).paginate(page: params[:page], per_page: 1)
-    if @sentences.any?
-      @words_in_sentence = @sentences.first.words
-      @page_sum = @sentences.total_pages
-    end
+    @page_sum = @sentences.total_pages
+
   end
 
   #Training spelling page
   def training_spelling
     set_last_training(:training_spelling)
-    @words = current_user.studying_words
     @sentences= current_user.studying_sentences.order(:id).paginate(page: params[:page], per_page: 1)
-    if @sentences.any?
-      @words_in_sentence = @sentences.first.words
-      @page_sum = @sentences.total_pages
+    @page_sum = @sentences.total_pages
+    @words = current_user.studying_words
+  end
+
+  def words_in_sentence
+    current_training = current_user.last_training
+    case current_training
+      when 'training'
+        @words = []
+      when 'training_spelling'
+        @words = current_user.studying_words
     end
+    sentence = Sentence.find(params[:id])
+    @words_in_sentence = sentence.words
+    render :layout => false
   end
 
   #Action to the buttons on training page
