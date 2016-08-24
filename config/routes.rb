@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   # default_url_options :host => "localhost:3000"
+  get 'words_in_sentence/:id' => 'words#words_in_sentence'
 
   as :user do
     put ':locale/users/sign_up' => 'devise/registrations#update', as: :update_user_registration

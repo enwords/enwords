@@ -1,10 +1,13 @@
 <% sentence_audio_nil = nil %>
+<% sentence_id = nil %>
 <div id="training-alerts"  style="text-align: center">
   <p id="wrong_alert"><%= t('training.wrong') %></p>
   <p id="right_alert"><%= t('training.right') %></p>
 </div>
 <div class="container training-div">
   <% @sentences.each do |sentence| %>
+      <div class="words_in_sentence"></div>
+      <% sentence_id = sentence.id %>
       <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2" id="training-sentence-translate">
         <% sentence_audio_nil = sentence.audio.nil?
            current_sentence = sentence.sentence
@@ -63,11 +66,18 @@
             </div>
         <% end %>
       </div>
-      <%= render 'words_in_sentence' %>
   <% end %>
+
+  <div id="words_in_sentence"></div>
 </div>
 
 <script>
+  $.ajax({
+    url: "/words_in_sentence/" + <%= sentence_id %>
+  }).done(function(html) {
+    return $("#words_in_sentence").replaceWith(html);
+  });
+
   <% if current_user.audio_enable && !sentence_audio_nil && request.original_url != request.referer %>
   $("#audio-play")[0].play();
   <% end %>
