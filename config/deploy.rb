@@ -2,83 +2,49 @@
 # config valid only for Capistrano 3
 lock '3.6.0'
 
-# Project configuration options
-# ------------------------------
+set :application, "enwords"
+set :repository,  "file:///home/sadedv/enwords"
 
-set :application,    'enwords'
-set :login,          'sadedv'
-set :user,           'hosting_sadedv'
 
-set :deploy_to,      "/home/#{fetch(:user)}/projects/#{fetch(:application)}"
-set :unicorn_conf,   "/etc/unicorn/#{fetch(:application)}.#{fetch(:login)}.rb"
-set :unicorn_pid,    "/var/run/unicorn/#{fetch(:user)}/" \
-                     "#{fetch(:application)}.#{fetch(:login)}.pid"
-set :bundle_without, %w{development test}.join(' ')             # this is default
-set :use_sudo,       false
+set :deploy_via, :copy
 
-set :repo_url,       "#{fetch(:user)}@chromium.locum.ru:" \
-                     "git/#{fetch(:application)}.git"
+dpath = "/home/hosting_sadedv/projects/enwords"
 
-# Default branch is :master
-# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
+set :user, "hosting_sadedv"
+set :use_sudo, false
+set :deploy_to, dpath
 
 set :scm, :git
-set :format, :pretty
-set :pty, true
 
-# Change the verbosity level
-set :log_level, :info
+role :web, "chromium.locum.ru"                          # Your HTTP server, Apache/etc
+role :app, "chromium.locum.ru"                          # This may be the same as your `Web` server
+role :db,  "chromium.locum.ru", :primary => true # This is where Rails migrations will run
 
-# Default value for :linked_files is []
-# set :linked_files, %w{config/database.yml}
+after "deploy:update_code", :copy_database_config
 
-# Default value for linked_dirs is []
-set :linked_dirs, %w(log tmp/cache tmp/pids vendor/bundle public/system)
+task :copy_database_config, roles => :app do
+  db_config = "#{shared_path}/database.yml"
+  run "cp #{db_config} #{release_path}/config/database.yml"
+end
 
-# Default value for keep_releases is 5
-# set :keep_releases, 5
-
-# Configure RVM
-set :rvm_ruby_version, '2.3'
-
-# You unlikely have to change below this line
-# -----------------------------------------------------------------------------
-
-# Configure RVM
-set :rake,            "rvm use #{fetch(:rvm_ruby_version)} do bundle exec rake"
-set :bundle_cmd,      "rvm use #{fetch(:rvm_ruby_version)} do bundle"
-
-set :assets_roles, [:web, :app]
-
-set :unicorn_start_cmd,
-    "(cd #{fetch(:deploy_to)}/current; rvm use #{fetch(:rvm_ruby_version)} " \
-    "do bundle exec unicorn_rails -Dc #{fetch(:unicorn_conf)})"
+set :unicorn_rails, "/var/lib/gems/1.8/bin/unicorn_rails"
+set :unicorn_conf, "/etc/unicorn/enwords.sadedv.rb"
+set :unicorn_pid, "/var/run/unicorn/enwords.sadedv.pid"
 
 # - for unicorn - #
 namespace :deploy do
-  desc 'Start application'
-  task :start do
-    on roles(:app) do
-      execute unicorn_start_cmd
-    end
+  desc "Start application"
+  task :start, :roles => :app do
+    run "#{unicorn_rails} -Dc #{unicorn_conf}"
   end
 
-  desc 'Stop application'
-  task :stop do
-    on roles(:app) do
-      execute "[ -f #{fetch(:unicorn_pid)} ] && " \
-              "kill -QUIT `cat #{fetch(:unicorn_pid)}`"
-    end
+  desc "Stop application"
+  task :stop, :roles => :app do
+    run "[ -f #{unicorn_pid} ] && kill -QUIT `cat #{unicorn_pid}`"
   end
 
-  after :publishing, :restart
-
-  desc 'Restart Application'
-  task :restart do
-    on roles(:app) do
-      execute "[ -f #{fetch(:unicorn_pid)} ] && " \
-              "kill -USR2 `cat #{fetch(:unicorn_pid)}` || " \
-              "#{fetch(:unicorn_start_cmd)}"
-    end
+  desc "Restart Application"
+  task :restart, :roles => :app do
+    run "[ -f #{unicorn_pid} ] && kill -USR2 `cat #{unicorn_pid}` || #{unicorn_rails} -Dc #{unicorn_conf}"
   end
 end
