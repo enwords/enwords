@@ -126,7 +126,7 @@ class WordsController < ApplicationController
   #Action to the buttons on training page
   def set_word_status_training
     create_or_update_word_status(params[:word_id], params[:bool])
-    redirect_to :back
+    # redirect_to :back
   end
 
   private
