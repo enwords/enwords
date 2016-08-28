@@ -30,11 +30,7 @@
              current_position = right_position
            end
 
-           if current_bool == false || current_bool == true
-             switch_on_class = "fa fa-remove"
-           else
-             switch_on_class = "fa fa-question"
-           end
+
     %>
 
             <tr>
@@ -43,13 +39,12 @@
                 <label class="switch">
                   <div class="slider" style="background-color: <%= colors[:current_background] %>">
                     <i class="fa fa-check" id="switch-off"></i>
-                    <i class="<%= switch_on_class %>" id="switch-on"></i>
                   </div>
                   <div class="round" style="left: <%= current_position %>"></div>
                   <%= link_to '', {
                       controller: 'words', action: 'set_word_status_training', bool: colors[:future_bool],
-                      word_id: word.id}, rel: "nofollow", method: :post, onclick: "setColor('#{ colors[:grey_background] }',
-                      '#{colors[:orange_background]}', '#{colors[:green_background]}', #{n}, '#{left_position}', '#{right_position}')", class: "button_hide" %>
+                      word_id: word.id}, {rel: "nofollow", remote: true, method: :post, onclick: "setColor('#{ colors[:grey_background] }',
+                      '#{colors[:orange_background]}', '#{colors[:green_background]}', #{n}, '#{left_position}', '#{right_position}')", class: "button_hide"} %>
                 </label>
               </td>
             </tr>
