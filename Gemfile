@@ -44,6 +44,13 @@ group :development do
 
 end
 
+group :development do
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rvm'
+end
+
 group :production do
   gem 'rails_12factor'
   gem 'unicorn'
