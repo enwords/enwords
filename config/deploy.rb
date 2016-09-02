@@ -59,6 +59,10 @@ namespace :deploy do
       execute "mkdir #{shared_path}/system"
       sudo "ln -s /var/log/upstart /var/www/log/upstart"
 
+      sudo %{rm -f "#{shared_path}/config/database.yml"}
+      sudo %{rm -f "#{shared_path}/config/secrets.yml"}
+      sudo %{rm -f "#{shared_path}/config/initializers/devise.rb"}
+
       upload!('shared/database.yml', "#{shared_path}/config/database.yml")
       upload!('shared/secrets.yml', "#{shared_path}/config/secrets.yml")
       upload!('shared/devise.rb', "#{shared_path}/config/initializers/devise.rb")
