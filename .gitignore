@@ -27,3 +27,4 @@ lib/capistrano/
 .env
 Procfile
 log/
+shared/
