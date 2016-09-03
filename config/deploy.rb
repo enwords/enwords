@@ -52,16 +52,16 @@ namespace :deploy do
   desc 'Setup'
   task :setup do
     on roles(:all) do
-      execute "mkdir  #{shared_path}/config/"
+      execute "mkdir -p  #{shared_path}/config/initializers/"
       execute "mkdir  /var/www/apps/#{application}/run/"
       execute "mkdir  /var/www/apps/#{application}/log/"
       execute "mkdir  /var/www/apps/#{application}/socket/"
       execute "mkdir #{shared_path}/system"
       sudo "ln -s /var/log/upstart /var/www/log/upstart"
 
-      upload!('shared/database.yml', "#{shared_path}/config/database.yml")
-      upload!('shared/secrets.yml', "#{shared_path}/config/secrets.yml")
-      upload!('shared/devise.rb', "#{shared_path}/config/initializers/devise.rb")
+      upload!('shared/config/database.yml', "#{shared_path}/config/database.yml")
+      upload!('shared/config/secrets.yml', "#{shared_path}/config/secrets.yml")
+      upload!('shared/config/initializers/devise.rb', "#{shared_path}/config/initializers/devise.rb")
 
       upload!('shared/Procfile', "#{shared_path}/Procfile")
 
