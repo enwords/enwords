@@ -24,7 +24,7 @@
 config/production/
 lib/capistrano/
 
-.env
+.env.local
 Procfile
 log/
 shared/
