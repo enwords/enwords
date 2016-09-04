@@ -24,7 +24,7 @@
 config/production/
 lib/capistrano/
 
-.env.local
-Procfile
-log/
 shared/
+
+config/database.yml
+config/secrets.yml
