@@ -30,19 +30,24 @@
                 <a href="<%= articles_path %>"><%= t 'static.index.sign_in.item_2.link' %></a><%= t 'static.index.sign_in.item_2.text' %>
               </h4>
             </li>
+            <li>
+              <h4>
+                <a href="<%= edit_user_registration_path %>"><%= t 'static.index.sign_in.item_3.link' %></a><%= t 'static.index.sign_in.item_3.text' %>
+              </h4>
+            </li>
           </ul>
         </div>
 
     <% else %>
         <div class="col-xs-12 title">
           <h3>
-            <%= t 'static.index.sign_out.item1.text'%>
+            <%= t 'static.index.sign_out.item1.text' %>
           </h3>
         </div>
 
         <div class="col-xs-12" style="text-align: center">
           <h4>
-            <%= t 'static.index.sign_out.item2.text'%>
+            <%= t 'static.index.sign_out.item2.text' %>
           </h4>
 
         </div>

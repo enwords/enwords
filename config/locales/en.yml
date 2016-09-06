@@ -101,11 +101,14 @@ en:
       sign_in:
         title: "For successful training you can:"
         item_1:
-          link: "Find words"
+          link: "Select words"
           text: " to learn and repeat them in different sentences (all words are sorted by frequency)"
         item_2:
           link: "Add your own text"
           text: " with a bunch of unknown words and learn them (very useful if you listen to audio courses that have a text version, or if you read the professional literature and don't understand the specific words)"
+        item_3:
+          link: "Configure training:"
+          text: " increase the number of sentences, turn on autoplay audio or making training more diverse sacrificing translation (unfortunately not all sentences translated)"
       sign_out:
         item1:
           text: "Enwords - an application created to improve your vocabulary of studied language"
