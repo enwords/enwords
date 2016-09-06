@@ -64,7 +64,7 @@ en:
         unconfirmed_email: "Still waiting confirmation for: "
         sentences_number: "Number of sentences for one word"
         audio_enable: "Turn on autoplay audio? (doesn't work on mobile devices)"
-        diversity_enable: "More diversity of sentences but without audio and translation"
+        diversity_enable: "More diversity of sentences but without audio and translation (turn on if you don't need to translate sentences)"
         submit:  "Submit"
         delete_user: "Delete account"
         confirm_delete_user: "Are you sure? Account recovery is not possible"
@@ -142,6 +142,8 @@ en:
     check: "Check"
     right: "You're right!"
     wrong: "You're wrong"
+    no_translate: "Unfortunately, we do not have the translated sentences of your studying word, you can turn on the option"
+    in_settings: "in settings"
 
   words:
     learned: 'Learned words'
