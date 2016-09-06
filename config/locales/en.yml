@@ -102,7 +102,7 @@ en:
         title: "For successful training you can:"
         item_1:
           link: "Select words"
-          text: " to learn and repeat them in different sentences (all words are sorted by frequency)"
+          text: " to learn and repeat them in different sentences and also to mark the words that you know to make them disappear from the list (all words are sorted by frequency)"
         item_2:
           link: "Add your own text"
           text: " with a bunch of unknown words and learn them (very useful if you listen to audio courses that have a text version, or if you read the professional literature and don't understand the specific words)"
