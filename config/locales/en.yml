@@ -102,18 +102,23 @@ en:
         title: "For successful training you can:"
         item_1:
           link: "Select words"
-          text: " to learn and repeat them in different sentences and also to mark the words that you know to make them disappear from the list (all words are sorted by frequency)"
+          text: " to learn and repeat them in different sentences that will give you Enwords and also to mark the words that you know to make them disappear from the list (all words arranged in order of their frequency in speech, it is recommended for study the word order, so the first words you probably know)"
         item_2:
           link: "Add your own text"
-          text: " with a bunch of unknown words and learn them (very useful if you listen to audio courses that have a text version, or if you read the professional literature and don't understand the specific words)"
+          text: " from audiocourses or thematic articles (if you are a cook then upload the recipes, if you are a driver then upload the traffic rules) in the learning language, all words will be arranged in order of their frequency in this text"
         item_3:
           link: "Configure training:"
           text: " increase the number of sentences, turn on autoplay audio or making training more diverse sacrificing translation (unfortunately not all sentences translated)"
+        item_4:
+          text_1: "If it difficult for you without the word translation, add extension from Google for your browser "
+          text_2: " two clicks and the word translated"
+
       sign_out:
         item1:
-          text: "Enwords - an application created to improve your vocabulary of studied language"
+          text: "Enwords - a free application created to improve your vocabulary of studied language, here represented about 0.5 million words and 3.5 million sentences in 30 languages"
         item2:
-          text: "In different sentences words have different meanings, it's impossible to learn all translations of all words, you need to learn to understand their meaning in the context. Enwords will help you improve your vocabulary, but only if you already know the grammatical minimum"
+          text: "In different sentences words have different meanings, it's impossible to learn all translations of all words, you need to learn to understand their meaning in the context"
+          text_2: "Your task is to choose words and Enwords will give you sentences with these words, repeat them at least 10 minutes a day and in a month you will see result. Don't forget to read books, to take audio courses and to watch movies in the learning language, you need to take words exactly from there"
     result:
       title: "Result of training:"
       text: "Learned words"
