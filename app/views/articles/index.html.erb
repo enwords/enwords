@@ -7,8 +7,8 @@
       <% if @articles.any? %>
           <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3" id="word_list">
             <table>
-              <th><input type="checkbox" onclick="toggle(this)"/></th>
-              <th style="width: 100%;"><%= t("words.select_all") %></th>
+              <th><input type="checkbox" id="checkbox_select_all"onclick="toggle(this)"></th>
+              <th style="width: 100%;"><label for="checkbox_select_all" class="checkbox_label"><b><%= t "words.select_all" %></b></label></th>
               <% @articles.each do |article| %>
                   <tr>
                     <td> <%= check_box_tag "ids[]", article.id %> </td>

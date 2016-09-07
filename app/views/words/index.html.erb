@@ -23,13 +23,21 @@
       <%= form_tag word_action_words_path, method: :put do %>
           <div class="col-xs-6 col-sm-5 col-sm-offset-2 col-md-3 col-md-offset-3" id="word_list">
             <table>
-              <th><input type="checkbox" onclick="toggle(this)"/></th>
-              <th><%= t "words.select_all" %></th>
+              <th>
+                <label>
+                  <input type="checkbox" class="words_checkbox" onclick="toggle(this)"> <%= t "words.select_all" %>
+                </label>
+              </th>
+
               <% @words.each do |word| %>
                   <tr>
-                    <td> <%= check_box_tag "ids[]", word.id %> </td>
-                    <td> <%= word.word.capitalize %> </td>
+                   <td>
+                     <label class="checkbox_label">
+                       <%= check_box_tag "ids[#{word.id}]", word.id, false, class: "words_checkbox"%>
+                       <%= word.word.capitalize %>
+                     </label>
 
+                   </td>
                     <% if current_user.admin? %>
                         <td><%= link_to word do %>
                               <i class="fa fa-search"></i>

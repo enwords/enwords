@@ -137,7 +137,7 @@ class WordsController < ApplicationController
         where(words: {language: current_user.learning_language},
               word_in_articles: {article_id: params[:article]})
                  .where.not(words: {id: WordStatus.select(:word_id).where(user: current_user, learned: true)})
-        .order('word_in_articles.frequency desc').paginate(page: params[:page], per_page: 20)
+                 .order('word_in_articles.frequency desc').paginate(page: params[:page], per_page: 20)
   end
 
   #Update word status
@@ -151,7 +151,7 @@ class WordsController < ApplicationController
 
   #Sends selected words into learned or learning
   def set_word_status(bool)
-    params[:ids].each do |wid|
+    params[:ids].values.each do |wid|
       create_or_update_word_status(wid, bool)
     end
     redirect_to(:back)
@@ -176,7 +176,7 @@ class WordsController < ApplicationController
 
   #Insert into database words that the user has selected for the study
   def set_training_words
-    current_user.studying_words = Word.where(id: params[:ids])
+    current_user.studying_words = Word.where(id: params[:ids].values)
   end
 
   #Find a appropriate sentences to the studied words
@@ -206,7 +206,7 @@ class WordsController < ApplicationController
 
   #Delete word_status
   def delete_word_status
-    WordStatus.delete_all(user_id: current_user, word_id: params[:ids])
+    WordStatus.delete_all(user_id: current_user, word_id: params[:ids].values)
     redirect_to(:back)
   end
 
