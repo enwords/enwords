@@ -2,9 +2,12 @@
   <div class="col-xs-12 col-sm-8 col-sm-offset-2">
     <div class="row row-content">
       <div class="col-xs-12 wrapper">
-        <div class="col-xs-12 links-top">
+        <div class="col-xs-6">
+          <b><%= link_to t("texts.links.words"), words_path(article: @article) %> </b>
 
-          <%= link_to t("texts.links.words"), words_path(article: @article) %> |
+        </div>
+        <div class="col-xs-6 links-top">
+
           <%= link_to t("texts.links.edit"), edit_article_path(@article) %> |
           <%= link_to t("texts.links.delete"), article_path(@article), method: :delete %> |
           <%= link_to t("texts.links.back"), articles_path %>
