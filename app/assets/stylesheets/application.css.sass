@@ -18,6 +18,10 @@
 @import "font-awesome-sprockets"
 @import "font-awesome"
 
+$learnedColor  : #5CB85C
+$learningColor : #F0AD4E
+$unknownColor  : #B7B7B7
+
 $btnColHover  : #F5F5F5
 $btnColBack   :  white
 $btnColActive : #82adb0
@@ -79,13 +83,13 @@ $dropDown       : false
         background-color: white
         #learned
           a
-            color: rgb(92, 184, 92)
+            color: $learnedColor
         #learning
           a
-            color: rgb(240, 173, 78)
+            color: $learningColor
         #unknown
           a
-            color: rgb(183, 183, 183)
+            color: $unknownColor
         li
           a
             color: $bgDefault
@@ -306,6 +310,7 @@ $dropDown       : false
     color: $bodyTextCol
 
 #know-th
+  font-style: italic
   text-align: center
 .word_td
   width: 100%
@@ -330,6 +335,7 @@ $dropDown       : false
   background-color: transparent
   outline: none
   margin: 10px
+  font-style: italic
 
 #refresh-btn
   text-decoration: none
@@ -381,6 +387,31 @@ $dropDown       : false
 #switch-on
   float: right
   right: 7px
+  
+//training legend
+.training-legend-icon 
+  width: 10px
+  height: 10px
+  float: left
+  border-radius: 5px
+  margin: 3px 5px 0 20px
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15)
+
+#training-legend 
+  text-align: center
+  font-size: 80%
+  font-style: italic
+  margin-top: 50px
+
+.unknown_color
+  color: $unknownColor
+
+.learned_color
+  color: $learnedColor
+
+.learning_color
+  color: $learningColor
+//
 
 .result-page
   text-align: center
@@ -493,7 +524,7 @@ $dropDown       : false
     border-radius: 13px
 
   .round
-    box-shadow: 0px 1px 2px rgba(0,0,0,0.15)
+    //box-shadow: 0px 1px 2px rgba(0,0,0,0.15)
     cursor: pointer
     position: absolute
     content: ""

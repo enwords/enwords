@@ -1,4 +1,4 @@
-<div class="col-xs-12 col-sm-6 col-sm-offset-3 training_words_div">
+<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 training_words_div">
   <table id="training_words">
     <th></th>
     <th id="know-th"><%= t 'training.know' %></th>
@@ -52,6 +52,23 @@
         <% end %>
     <% end %>
   </table>
+
+  <div id="training-legend">
+    <div class="col-xs-4">
+      <i class="fa fa-circle unknown_color" aria-hidden="true"></i>
+      <p class="training-legend-text"><%= t "shared.navigation.words.unknown" %></p>
+    </div>
+
+    <div class="col-xs-4">
+      <i class="fa fa-circle learning_color" aria-hidden="true"></i>
+      <p class="training-legend-text"><%= t "shared.navigation.words.learning" %></p>
+    </div>
+
+    <div class="col-xs-4">
+      <i class="fa fa-circle learned_color" aria-hidden="true"></i>
+      <p class="training-legend-text"><%= t "shared.navigation.words.learned" %></p>
+    </div>
+  </div>
 </div>
 
 <script type="text/javascript" charset="utf-8">
