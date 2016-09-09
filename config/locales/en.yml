@@ -99,7 +99,7 @@ en:
   static:
     index:
       sign_in:
-        title: "For successful training you can:"
+        title: "Recommendations for successful learning:"
         item_1:
           link: "Select words"
           text: " to learn and repeat them in different sentences that will give you Enwords and also to mark the words that you know to make them disappear from the list (all words arranged in order of their frequency in speech, it is recommended for study the word order, so the first words you probably know)"
@@ -112,6 +112,8 @@ en:
         item_4:
           text_1: "If it difficult for you without the word translation, add extension from Google for your browser "
           text_2: " two clicks and the word translated"
+        item_5:
+          text: "Don't forget to add Enwords to bookmarks and add the bookmark to your home screen on your mobile device"
 
       sign_out:
         item1:
