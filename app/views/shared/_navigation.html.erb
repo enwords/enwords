@@ -19,6 +19,11 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t "shared.navigation.words.dropdown" %><b class="caret"></b></a>
               <ul class="dropdown-menu">
 
+                <li id="unknown"><%= link_to words_path status: 'unknown' do %>
+                      <i class="fa fa-question ico"></i><%= t "shared.navigation.words.unknown" %> (<%=Word.where(language: current_user.learning_language).where.not(id: WordStatus.select(:word_id).where(user: current_user)).group(:id).length %>)
+                  <% end %>
+                </li>
+
                 <li id="learning"><%= link_to words_path status: 'learning' do %>
                       <i class="fa fa-remove ico"></i><%= t "shared.navigation.words.learning" %> (<%= current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: false}).count %>)
                   <% end %>
@@ -26,12 +31,6 @@
 
                 <li id="learned"><%= link_to words_path status: 'learned' do %>
                       <i class="fa fa-check ico"></i><%= t "shared.navigation.words.learned" %> (<%= current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: true}).count %>)
-                  <% end %>
-                </li>
-
-
-                <li id="unknown"><%= link_to words_path status: 'unknown' do %>
-                      <i class="fa fa-question ico"></i><%= t "shared.navigation.words.unknown" %> (<%=Word.where(language: current_user.learning_language).where.not(id: WordStatus.select(:word_id).where(user: current_user)).group(:id).length %>)
                   <% end %>
                 </li>
 
