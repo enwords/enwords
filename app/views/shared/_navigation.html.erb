@@ -38,11 +38,7 @@
             </li>
             <li><%= link_to t("shared.navigation.texts"), articles_path %></li>
             <li>
-              <% if current_user.last_training == 'training' %>
-                  <%= link_to t("shared.navigation.last_training"), training_path %>
-              <% elsif current_user.last_training == 'training_spelling'%>
-                  <%= link_to t("shared.navigation.last_training"), training_spelling_path %>
-              <% end %>
+              <%= link_to t("shared.navigation.last_training"), training_path %>
             </li>
 
           </ul>

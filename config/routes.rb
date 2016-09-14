@@ -14,7 +14,6 @@ Rails.application.routes.draw do
     root to: 'static#index'
     put '/words' => 'words#index'
     get '/training' => 'words#training', as: :training
-    get '/training_spelling' => 'words#training_spelling', as: :training_spelling
     get '/result' => 'static#result'
 
     resources :users

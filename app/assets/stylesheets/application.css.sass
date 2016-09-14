@@ -245,7 +245,7 @@ $dropDown       : false
     height: 25.6px
     width: 25.6px
 
-#pagination-training, #pagination-training-without_disabled_links, #pagination-training-spelling, #pagination-training-spelling-without_disabled_links
+#pagination-training, #pagination-training-without_disabled_links
   left: 50%
   -webkit-transform: translateX(-50%)
   -moz-transform: translateX(-50%)
@@ -257,10 +257,8 @@ $dropDown       : false
     height: 35px
     width: 35px
 
-#pagination-training-spelling, #pagination-training-spelling-without_disabled_links
-  display: none
 
-#pagination-training-without_disabled_links, #pagination-training-spelling-without_disabled_links
+#pagination-training-without_disabled_links
   .disabled
     display: none
   #end_link
@@ -405,13 +403,13 @@ $dropDown       : false
   font-style: italic
   margin-top: 50px
 
-.unknown_color
+.unknown_color, .unknown_color:hover, .unknown_color:focus, .unknown_color:active:focus
   color: $unknownColor
 
-.learned_color
+.learned_color, .learned_color:hover, .learned_color:focus, .learned_color:active:focus
   color: $learnedColor
 
-.learning_color
+.learning_color, .learning_color:hover, .learning_color:focus, .learning_color:active:focus
   color: $learningColor
 //
 
