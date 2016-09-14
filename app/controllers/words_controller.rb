@@ -137,7 +137,7 @@ class WordsController < ApplicationController
         where(words: {language: current_user.learning_language},
               word_in_articles: {article_id: params[:article]})
                  .where.not(words: {id: WordStatus.select(:word_id).where(user: current_user, learned: true)})
-                 .order('word_in_articles.frequency desc').paginate(page: params[:page], per_page: 20)
+                 .order('word_in_articles.frequency desc, words.id asc').paginate(page: params[:page], per_page: 20)
   end
 
   #Update word status
