@@ -83,11 +83,11 @@ class WordsController < ApplicationController
         when 'to_unknown'
           delete_word_status
         when 'to_training'
+          set_last_training(:training)
           set_training
-          redirect_to(training_path)
         when 'to_training_spelling'
+          set_last_training(:training_spelling)
           set_training
-          redirect_to(training_spelling_path)
         else
           redirect_to(root_path)
       end
@@ -96,15 +96,6 @@ class WordsController < ApplicationController
 
   #Training page
   def training
-    set_last_training(:training)
-    @sentences= current_user.studying_sentences.order(:id).paginate(page: params[:page], per_page: 1)
-    @page_sum = @sentences.total_pages
-
-  end
-
-  #Training spelling page
-  def training_spelling
-    set_last_training(:training_spelling)
     @sentences= current_user.studying_sentences.order(:id).paginate(page: params[:page], per_page: 1)
     @page_sum = @sentences.total_pages
     @words = current_user.studying_words
@@ -167,6 +158,7 @@ class WordsController < ApplicationController
     update_learned_words_count
     set_training_words
     set_training_sentences
+    redirect_to(training_path)
   end
 
   #Set type of training there will be a link on the navigation bar
