@@ -26,19 +26,24 @@
           </div>
 
           <div class="col-xs-12" id="compare-btn-div">
-            <% if params[:page] == @page_sum.to_s %>
-                <div class="digg_pagination" id="pagination-training-without_disabled_links">
-                  <%= will_paginate @sentences, page_links: false, previous_label: '<i class="fa fa-angle-left"></i>',
-                                    next_label: '<i class="fa fa-angle-right"></i>', container: false %>
-                  <%= link_to t("training.end"), result_path, id: "end_link" %>
-                </div>
-
-            <% else %>
-                <div class="digg_pagination" id="pagination-training">
-                  <%= will_paginate @sentences, page_links: false, previous_label: '<i class="fa fa-angle-left"></i>',
-                                    next_label: '<i class="fa fa-angle-right"></i>', container: false %>
-                </div>
-            <% end %>
+            <div class="digg_pagination">
+              <% if params[:page] == @page_sum.to_s %>
+                  <div id="pagination-training-without_disabled_links">
+                    <%= will_paginate @sentences, page_links: false, previous_label: '<i class="fa fa-angle-left"></i>',
+                                      next_label: '<i class="fa fa-angle-right"></i>', container: false %>
+                    <%= link_to t("training.end"), result_path, id: "end_link" %>
+                  </div>
+              <% elsif @page_sum == 1 %>
+                  <div id="pagination-training">
+                    <%= link_to t("training.end"), result_path, id: "end_link" %>
+                  </div>
+              <% else %>
+                  <div id="pagination-training">
+                    <%= will_paginate @sentences, page_links: false, previous_label: '<i class="fa fa-angle-left"></i>',
+                                      next_label: '<i class="fa fa-angle-right"></i>', container: false %>
+                  </div>
+              <% end %>
+            </div>
           </div>
       <% end %>
   <% end %>
@@ -62,5 +67,4 @@
   }).done(function (html) {
     return $("#words_in_sentence").replaceWith(html);
   });
-
 </script>
