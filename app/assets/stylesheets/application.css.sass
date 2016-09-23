@@ -301,13 +301,19 @@ $dropDown       : false
     margin-bottom: 80px
 
 #word_list
+  padding: 0
   margin-bottom: 20px
   td
     padding: 3px 20px 2px 0
+    &:last-child
+      padding-right: 0
   a
     color: $bodyTextCol
   label, input[type="checkbox"]
     cursor: pointer
+
+.btn-group-vertical
+  padding: 0
 
 #know-th
   font-style: italic

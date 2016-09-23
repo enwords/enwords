@@ -21,7 +21,7 @@
   </div>
   <% if @words.any? %>
       <%= form_tag word_action_words_path, method: :put do %>
-          <div class="col-xs-6 col-sm-5 col-sm-offset-2 col-md-3 col-md-offset-3" id="word_list">
+          <div class="col-xs-7 col-sm-5 col-sm-offset-2 col-md-3 col-md-offset-3" id="word_list">
             <table>
               <th>
                 <label>
@@ -57,7 +57,7 @@
 
           </div>
 
-          <div class="col-xs-6 col-sm-3 btn-group-vertical" role="group">
+          <div class="col-xs-5 col-sm-3 btn-group-vertical" role="group">
             <%= button_tag(type: 'submit', value: 'to_training', name: 'commit', class: "btn btn-default") { t "words.buttons.train_selected" } %>
             <%= button_tag(type: 'submit', value: 'to_training_spelling', name: 'commit', class: "btn btn-default") { t 'words.buttons.train_selected_spelling' } %>
             <%= button_tag(type: 'submit', value: 'to_learning', name: 'commit', class: "btn btn-default learning_color") { t "words.buttons.add_to_learning" } unless params[:status] == "learning" %>
@@ -71,7 +71,7 @@
 
           <div class="col-xs-12 digg_pagination" id="pagination-mobile">
             <%= will_paginate @words, previous_label: '<i class="fa fa-angle-left"></i>',
-                              next_label: '<i class="fa fa-angle-right"></i>', outer_window: 0 %>
+                              next_label: '<i class="fa fa-angle-right"></i>', outer_window: 0, inner_window: 2 %>
           </div>
       <% end %>
 
