@@ -39,7 +39,9 @@
                      end %>
 
                   <div class="col-xs-10">
-                    <%= text_field_tag 'sentence', current_sentence_without_words, id: "training-sentence-text", autocomplete: "off", class: 'form-control' %>
+                    <%= text_area_tag 'sentence', current_sentence_without_words, id: "training-sentence-text",
+                                      autocomplete: "off", class: 'form-control', maxlength: 200,
+                                      style: "resize: none; height: 100%;" %>
                     <p id="training-help"><%= t('training.replace') %></p>
                   </div>
 
