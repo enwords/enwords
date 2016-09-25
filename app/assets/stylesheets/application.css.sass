@@ -328,11 +328,10 @@ $dropDown       : false
     margin-top: 10px
 
 #training-sentence-translate
+  padding: 0
   text-align: center
-  @media (max-width: 767px)
-    min-height: 162px
-  @media (min-width: 768px)
-    min-height: 116px
+  min-height: 127px
+
 #training-sentence, #audioButton
   display: inline
 
@@ -356,6 +355,7 @@ $dropDown       : false
   min-height: 80px
 
 #training-help
+  margin: 0
   font-size: 70%
   float: right
 
@@ -431,17 +431,19 @@ $dropDown       : false
   @media (max-width: 767px)
     margin-top: 35px
     margin-bottom: 20px
+    padding: 15px 15px 45px
   @media (min-width: 768px)
     margin-top: 60px
     margin-bottom: 60px
+    padding: 15px 35px 45px
 
 .wrapper-registration
   margin-top: 35px
   margin-bottom: 35px
+  padding: 15px 35px 45px
 
 .wrapper, .wrapper-registration
   background-color: white
-  padding: 15px 35px 45px
   box-shadow: 3px 3px 5px rgba(90,90,90,0.5)
   min-height: 400px
   .field
@@ -499,7 +501,7 @@ $dropDown       : false
 .glyphicon-volume-off, .glyphicon-volume-up, .glyphicon-flag
   color: $bodyTextCol
   font-size: 25px
-  top: 3px
+  top: 6px
 
 .glyphicon-volume-off
   opacity: 0.3
