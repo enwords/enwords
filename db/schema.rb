@@ -37,14 +37,15 @@ ActiveRecord::Schema.define(version: 20160721055643) do
   end
 
   create_table "sentences", id: :integer, force: :cascade do |t|
-    t.string "sentence"
     t.string "language", limit: 4
+    t.string "sentence"
+    t.index ["language"], name: "index_sentences_on_language", using: :btree
   end
 
   create_table "sentences_words", id: false, force: :cascade do |t|
-    t.integer "sentence_id", null: false
     t.integer "word_id",     null: false
-    t.index ["sentence_id", "word_id"], name: "index_sentences_words_on_sentence_id_and_word_id", unique: true, using: :btree
+    t.integer "sentence_id", null: false
+    t.index ["word_id", "sentence_id"], name: "index_sentences_words_on_word_id_and_sentence_id", unique: true, using: :btree
   end
 
   create_table "training_sentences", id: false, force: :cascade do |t|
@@ -82,6 +83,7 @@ ActiveRecord::Schema.define(version: 20160721055643) do
     t.boolean  "diversity_enable"
     t.integer  "learned_words_count"
     t.integer  "last_training"
+    t.integer  "training_page"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
@@ -105,8 +107,9 @@ ActiveRecord::Schema.define(version: 20160721055643) do
   end
 
   create_table "words", id: :integer, force: :cascade do |t|
-    t.string "word"
     t.string "language", limit: 4
+    t.string "word"
+    t.index ["language"], name: "index_words_on_language", using: :btree
   end
 
   add_foreign_key "articles", "users"

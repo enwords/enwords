@@ -6,6 +6,8 @@
       <% after = current_user.words.where(language: current_user.learning_language).where(word_statuses: {learned: true}).count %>
       <h1><%= after - before %>   </h1>
         <h3><%= t "static.result.text" %></h3>
+      <br>
+      <%= link_to t("training.repeat"), training_path, class: "btn btn-default"%>
     </div>
   </div>
 </div>
