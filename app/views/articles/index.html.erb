@@ -13,10 +13,18 @@
                   <tr>
                     <td> <%= check_box_tag "ids[]", article.id %> </td>
                     <td><%= link_to article.title, article %></td>
-                    <td><%= link_to edit_article_path(article) do %>
+                    <td>
+                      <%= link_to words_path(article: article) do %>
+                          <i class="fa fa-book"></i>
+                      <% end %>
+                    </td>
+                    <td>
+                      <%= link_to edit_article_path(article) do %>
                           <i class="fa fa-edit"></i>
-                      <% end %> </td>
-                    <td><%= link_to article, method: :delete do %>
+                      <% end %>
+                    </td>
+                    <td>
+                      <%= link_to article, method: :delete do %>
                           <i class="fa fa-trash"></i>
                       <% end %>
                     </td>
