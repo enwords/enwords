@@ -40,6 +40,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       t.boolean :diversity_enable
       t.integer :learned_words_count
       t.integer :last_training
+      t.integer :training_page
     end
 
     add_index :users, :email,                unique: true

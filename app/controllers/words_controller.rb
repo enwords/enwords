@@ -96,6 +96,7 @@ class WordsController < ApplicationController
 
   #Training page
   def training
+    current_user.update(training_page: params[:page])
     @sentences= current_user.studying_sentences.order(:id).paginate(page: params[:page], per_page: 1)
     @page_sum = @sentences.total_pages
     @words = current_user.studying_words

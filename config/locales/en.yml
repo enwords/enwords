@@ -89,7 +89,7 @@ en:
         learning: 'Learning'
         unknown: 'Unknown'
       texts: 'Texts'
-      last_training: 'Last training'
+      last_training: 'Continue training'
       search: 'Word search'
       user:
         settings: 'Settings'
@@ -154,7 +154,7 @@ en:
     wrong: "You're wrong"
     no_translate: "Unfortunately, we do not have the translated sentences of your studying word, you can turn on the option"
     in_settings: "in settings"
-
+    repeat: "Repeat training"
   words:
     learned: 'Learned words'
     learning: 'Learning words'
