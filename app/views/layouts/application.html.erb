@@ -34,9 +34,7 @@
 
 <body>
 <%= render 'shared/navigation' %>
-<% flash.each do |key, value| %>
-    <div class="alert alert-<%= key %>"><%= value %></div>
-<% end %>
+<%= render 'layouts/flash_messages' %>
 <%= yield %>
 <%= render 'shared/footer' %>
 </body>

@@ -143,6 +143,10 @@ en:
       language: "Text language (the text will be unavailable when learning other languages) "
       warning: "Attention! Unfortunately for word search in Chinese and Japanese texts the words should be separated by a space"
       submit: "Save"
+    text_created: 'Text was successfully created'
+    text_updated:  'Text was successfully updated'
+    text_deleted:  'Text was successfully deleted'
+
 
   training:
     show_translation: "Show translation"
@@ -169,8 +173,12 @@ en:
       link2: "profile settings"
     buttons:
       train_selected:  'Train selected'
-      add_to_learning: 'Add to learning'
-      add_to_learned:  'Add to learned'
-      add_to_unknown:  'Add to unknown'
+      add_to_learning: 'Add to "Learning"'
+      add_to_learned:  'Add to "Learned"'
+      add_to_unknown:  'Add to "Unknown"'
       train_selected_spelling: "Train spelling"
+
+      added_to_learning: 'Added to "Learning"'
+      added_to_learned:  'Added to "Learned"'
+      added_to_unknown:  'Added to "Unknown"'
     select_all: 'Select all'
