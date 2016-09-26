@@ -58,11 +58,16 @@
           </div>
 
           <div class="col-xs-5 col-sm-3 btn-group-vertical" role="group">
-            <%= button_tag(type: 'submit', value: 'to_training', name: 'commit', class: "btn btn-default") { t "words.buttons.train_selected" } %>
-            <%= button_tag(type: 'submit', value: 'to_training_spelling', name: 'commit', class: "btn btn-default") { t 'words.buttons.train_selected_spelling' } %>
-            <%= button_tag(type: 'submit', value: 'to_learning', name: 'commit', class: "btn btn-default learning_color") { t "words.buttons.add_to_learning" } unless params[:status] == "learning" %>
-            <%= button_tag(type: 'submit', value: 'to_learned', name: 'commit', class: "btn btn-default learned_color") { t "words.buttons.add_to_learned"} unless params[:status] == "learned" %>
-            <%= button_tag(type: 'submit', value: 'to_unknown', name: 'commit', class: "btn btn-default unknown_color") { t "words.buttons.add_to_unknown" } unless params[:status] == "unknown" %>
+            <%= button_tag(type: 'submit', value: 'to_training', name: 'commit', class: "btn btn-default",
+                           data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> " + t("loading")}) { t "words.buttons.train_selected" } %>
+            <%= button_tag(type: 'submit', value: 'to_training_spelling', name: 'commit', class: "btn btn-default",
+                           data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> " + t("loading")})  { t 'words.buttons.train_selected_spelling' } %>
+            <%= button_tag(type: 'submit', value: 'to_learning', name: 'commit', class: "btn btn-default learning_color",
+                           data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> " + t("loading")}) { t "words.buttons.add_to_learning" } unless params[:status] == "learning" %>
+            <%= button_tag(type: 'submit', value: 'to_learned', name: 'commit', class: "btn btn-default learned_color",
+                           data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> " + t("loading")})  { t "words.buttons.add_to_learned"} unless params[:status] == "learned" %>
+            <%= button_tag(type: 'submit', value: 'to_unknown', name: 'commit', class: "btn btn-default unknown_color",
+                           data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> " + t("loading")})  { t "words.buttons.add_to_unknown" } unless params[:status] == "unknown" %>
           </div>
 
           <% if current_user.admin? %>

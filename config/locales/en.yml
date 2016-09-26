@@ -29,6 +29,7 @@ en:
   old_password: "Old password"
   confirm_password: "Confirm password"
   confirm_new_password: "Confirm new password"
+  loading: "Please wait..."
 
   devise:
     confirmation:
@@ -145,6 +146,7 @@ en:
       language: "Text language (the text will be unavailable when learning other languages) "
       warning: "Attention! Unfortunately for word search in Chinese and Japanese texts the words should be separated by a space"
       submit: "Save"
+      saving: "Saving..."
     text_created: 'Text was successfully created'
     text_updated:  'Text was successfully updated'
     text_deleted:  'Text was successfully deleted'
