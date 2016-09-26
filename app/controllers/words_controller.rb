@@ -240,7 +240,7 @@ class WordsController < ApplicationController
 
   #Get words of current learning language that a user is looking for
   def word_search
-    @words = words_without_status.where('word LIKE ?', "%#{params[:search].downcase}%").group(:id).order(:id).
+    @words = words_without_status.where('word LIKE ?', "%#{params[:search].downcase.strip}%").group(:id).order(:id).
         paginate(page: params[:page], per_page: 20)
   end
 
