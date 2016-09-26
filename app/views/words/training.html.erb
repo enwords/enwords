@@ -22,7 +22,7 @@
                     <% if sentence_audio_nil %>
                         <span class="audioButton glyphicon glyphicon-volume-off"></span>
                     <% else %>
-                        <span class="audioButton glyphicon glyphicon-volume-up" onclick="play()"></span>
+                        <span class="audioButton glyphicon glyphicon-volume-up training-glyphs" onclick="play()"></span>
                         <%= audio_tag("https://audio.tatoeba.org/sentences/#{sentence.language}/#{sentence.id}.mp3", id: 'audio-play') %>
                     <% end %>
                   </div>
@@ -46,7 +46,7 @@
                   </div>
 
                   <div class="col-xs-1" style="padding: 0">
-                    <span id="giveup" class="glyphicon glyphicon-flag"></span>
+                    <span id="giveup" class="glyphicon glyphicon-flag training-glyphs"></span>
                   </div>
 
                   <h3 id="correct-answer" style="display: none"><%= sentence.sentence %> </h3>
