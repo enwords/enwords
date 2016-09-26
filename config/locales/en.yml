@@ -56,7 +56,7 @@ en:
         submit: "Send instructions to reset your password"
     registration:
       form:
-        title:  "Registration"
+        title:  "Sign up"
         native_language: "Native language"
         learning_language: "Learning language"
       edit:
@@ -95,6 +95,8 @@ en:
         settings: 'Settings'
         sign_out: 'Sign Out'
         sign_in: 'Sign In'
+        signing_in: "Signing in..."
+        signing_up: "Signing up..."
 
   static:
     index:
