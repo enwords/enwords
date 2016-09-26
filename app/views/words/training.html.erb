@@ -105,6 +105,8 @@
 </div>
 
 <script>
+  $(".training_words_div").remove();
+
   $.ajax({
     url: "/words_in_sentence/" + <%= sentence_id %>
   }).done(function (html) {
