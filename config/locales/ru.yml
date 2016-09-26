@@ -110,6 +110,8 @@ ru:
         settings: 'Настройки'
         sign_out: 'Выйти'
         sign_in: 'Войти'
+        signing_in: "Вход..."
+        signing_up: "Регистрация..."
 
   static:
     index:

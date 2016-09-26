@@ -25,7 +25,8 @@
             <% end -%>
 
             <div class="field">
-              <%= submit_tag t("shared.navigation.user.sign_in"), class: "btn btn-lg btn-primary btn-block" %>
+              <%= f.button t("shared.navigation.user.sign_in"), class: "btn btn-lg btn-primary btn-block",
+                           data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> " + t("shared.navigation.user.signing_in")} %>
             </div>
 
         <% end %>

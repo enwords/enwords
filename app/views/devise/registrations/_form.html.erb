@@ -31,13 +31,12 @@
       </div>
 
       <div class="field" style="padding-top: 20px">
-        <%= submit_tag t("devise.registration.form.title"), class: "btn btn-lg btn-primary btn-block" %>
+        <%= f.button t("devise.registration.form.title"), class: "btn btn-lg btn-primary btn-block",
+                     data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> " + t("shared.navigation.user.signing_up")} %>
       </div>
 
   <% end %>
 
   <%= link_to t("shared.navigation.user.sign_in"), new_user_session_path %>
-  <%=
-    # render "devise/shared/links"
-  %>
+
 </div>
