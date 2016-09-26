@@ -55,9 +55,9 @@
                 <p class="settings_ico"> <%= f.check_box :diversity_enable %></p></h5>
             </div>
 
-
             <div class="field" style="padding-top: 20px">
-              <%= submit_tag t("devise.registration.edit.submit"), class: "btn btn-lg btn-primary btn-block" %>
+              <%= f.button t("devise.registration.edit.submit"), class: "btn btn-lg btn-primary btn-block",
+                           data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> " + t("loading")} %>
             </div>
 
         <% end %>

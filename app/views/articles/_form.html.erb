@@ -37,7 +37,8 @@
     </div>
 
     <div class="field center-btn">
-      <%= submit_tag t("texts.form.submit"), class: "btn btn-lg btn-primary" %>
+      <%= f.button t("texts.form.submit"), class: "btn btn-lg btn-primary",
+                   data: {disable_with: "<i class='fa fa-spinner fa-spin'></i> " + t("texts.form.saving")} %>
     </div>
 
 <% end %>

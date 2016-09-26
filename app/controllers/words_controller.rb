@@ -91,6 +91,8 @@ class WordsController < ApplicationController
         else
           redirect_to(root_path)
       end
+    else
+      redirect_to :back
     end
   end
 
