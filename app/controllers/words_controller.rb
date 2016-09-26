@@ -146,7 +146,10 @@ class WordsController < ApplicationController
     params[:ids].values.each do |wid|
       create_or_update_word_status(wid, bool)
     end
-    redirect_to(:back)
+
+    redirect_to :back, notice: t("words.buttons.added_to_learning") if !bool
+    redirect_to :back, notice: t("words.buttons.added_to_learned") if bool
+
   end
 
   def update_learned_words_count
@@ -200,7 +203,7 @@ class WordsController < ApplicationController
   #Delete word_status
   def delete_word_status
     WordStatus.delete_all(user_id: current_user, word_id: params[:ids].values)
-    redirect_to(:back)
+    redirect_to :back, notice: t("words.buttons.added_to_unknown")
   end
 
   #Get learned and learning words of current learning language without pagination
