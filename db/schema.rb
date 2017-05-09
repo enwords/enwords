@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160721055643) do
+ActiveRecord::Schema.define(version: 20170509095917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,26 +63,26 @@ ActiveRecord::Schema.define(version: 20160721055643) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                            default: "", null: false
-    t.string   "encrypted_password",               default: "", null: false
+    t.string   "email",                            default: "",    null: false
+    t.string   "encrypted_password",               default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                    default: 0,  null: false
+    t.integer  "sign_in_count",                    default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
-    t.integer  "role",                   limit: 2
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+    t.integer  "role",                   limit: 2, default: 0,     null: false
     t.integer  "native_language",        limit: 2
     t.integer  "learning_language",      limit: 2
-    t.integer  "sentences_number",       limit: 2
-    t.boolean  "audio_enable"
-    t.boolean  "diversity_enable"
-    t.integer  "learned_words_count"
-    t.integer  "last_training"
+    t.integer  "sentences_number",       limit: 2, default: 5,     null: false
+    t.boolean  "audio_enable",                     default: false
+    t.boolean  "diversity_enable",                 default: false
+    t.integer  "learned_words_count",              default: 0,     null: false
+    t.integer  "last_training_type"
     t.integer  "training_page"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
