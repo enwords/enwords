@@ -37,7 +37,7 @@
               </ul>
             </li>
             <li><%= link_to t("shared.navigation.texts"), articles_path %></li>
-            <% if current_user.last_training %>
+            <% if current_user.last_training_type %>
                 <li>
                   <%= link_to t("shared.navigation.last_training"), training_path(page: current_user.training_page) %>
                 </li>
