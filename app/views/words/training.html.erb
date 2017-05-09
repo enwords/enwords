@@ -16,7 +16,7 @@
           <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2" id="training-sentence-translate">
             <% sentence_audio_nil = sentence.audio.nil? %>
 
-            <% if current_user.last_training == 'training_spelling' %>
+            <% if current_user.last_training_type == 'training_spelling' %>
                 <div class="col-xs-12 field" style="padding: 0;">
                   <div class="col-xs-1" style="padding: 0">
                     <% if sentence_audio_nil %>
@@ -51,7 +51,7 @@
 
                   <h3 id="correct-answer" style="display: none"><%= sentence.sentence %> </h3>
                 </div>
-            <% elsif current_user.last_training == 'training' %>
+            <% elsif current_user.last_training_type == 'training' %>
                 <% if sentence_audio_nil %>
                     <span class="audioButton glyphicon glyphicon-volume-off"></span>
                 <% else %>
@@ -75,7 +75,7 @@
 
           <div class="col-xs-12" id="compare-btn-div">
             <%displ = "" %>
-            <% if current_user.last_training == 'training_spelling' %>
+            <% if current_user.last_training_type == 'training_spelling' %>
                 <%= button_tag t("training.check"), id: 'compare-btn', class: "btn btn-md btn-success" %>
                 <% displ = "display: none" %>
             <% end %>
