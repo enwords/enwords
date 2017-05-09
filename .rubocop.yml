@@ -1,0 +1,25 @@
+AllCops:
+  TargetRubyVersion: 2.1
+  Exclude:
+    - db/schema.rb
+    - bin/*
+    - vendor/bundle/**/*
+    - provision/**/*
+
+Rails:
+  Enabled: true
+
+Metrics/LineLength:
+  Max: 120
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
