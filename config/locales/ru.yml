@@ -199,4 +199,5 @@ ru:
       added_to_learning: 'Добавлено в "Изучаемые"'
       added_to_learned:  'Добавлено в "Выученные"'
       added_to_unknown:  'Добавлено в "Неизвестные"'
+      state_changed: "Состояние слов успешно изменено"
     select_all: 'Выбрать все'

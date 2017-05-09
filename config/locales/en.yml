@@ -185,4 +185,5 @@ en:
       added_to_learning: 'Added to "Learning"'
       added_to_learned:  'Added to "Learned"'
       added_to_unknown:  'Added to "Unknown"'
+      state_changed: "Status of words successfully changed"
     select_all: 'Select all'
