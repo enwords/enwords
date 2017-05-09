@@ -1,3 +1,1 @@
-class Links < ApplicationRecord
-
-end
+class Links < ApplicationRecord; end
