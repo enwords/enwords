@@ -2,29 +2,19 @@ class SentencesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_sentence, only: [:show, :edit, :update, :destroy]
 
-  # GET /sentences
-  # GET /sentences.json
   def index
     @sentences = Sentence.all.order(:id).
-        paginate(page: params[:page], per_page: 20)
+      paginate(page: params[:page], per_page: 20)
   end
 
-  # GET /sentences/1
-  # GET /sentences/1.json
-  def show
-  end
+  def show; end
 
-  # GET /sentences/new
   def new
     @sentence = Sentence.new
   end
 
-  # GET /sentences/1/edit
-  def edit
-  end
+  def edit; end
 
-  # POST /sentences
-  # POST /sentences.json
   def create
     @sentence = Sentence.new(sentence_params)
 
@@ -39,8 +29,6 @@ class SentencesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /sentences/1
-  # PATCH/PUT /sentences/1.json
   def update
     respond_to do |format|
       if @sentence.update(sentence_params)
@@ -53,8 +41,6 @@ class SentencesController < ApplicationController
     end
   end
 
-  # DELETE /sentences/1
-  # DELETE /sentences/1.json
   def destroy
     Audio.where(sentence_id: @sentence.id).delete_all
     @sentence.destroy
@@ -66,12 +52,10 @@ class SentencesController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_sentence
     @sentence = Sentence.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def sentence_params
     params.require(:sentence).permit(:id, :language, :sentence)
   end
