@@ -25,24 +25,17 @@ class WordsController < ApplicationController
   def edit; end
 
   def index
-    if params[:status]
-      case params[:status]
-      when 'learning'
-        learned_and_learning(false)
-      when 'learned'
-        learned_and_learning(true)
-      when 'unknown'
-        unknown
-      when 'all'
-        all
-      end
-    elsif params[:search]
-      word_search
-    elsif params[:article]
-      words_in_text
-    elsif current_user.admin?
-      @words = Word.all.order(:id).paginate(page: params[:page], per_page: 20)
-    end
+    @words = if params[:status]
+               case params[:status]
+               when 'learning'  then learning
+               when 'learned'   then learned
+               when 'unknown'   then unknown
+               when 'available' then available
+               end
+             elsif params[:search]     then searching
+             elsif params[:article]    then words_from_article
+             elsif current_user.admin? then admining
+             end
   end
 
   def update
@@ -63,74 +56,59 @@ class WordsController < ApplicationController
   end
 
   def word_action
-    if params[:ids] && params[:commit] =~ /training/
-      Word::SetTraining.run(word_ids: params[:ids], training_type: params[:commit], user: current_user)
+    if params[:ids] && params[:commit] =~ /to_training/
+      Training::Create.run(word_ids:      params[:ids],
+                           training_type: params[:commit].gsub(/to_training_/, ''),
+                           user:          current_user,
+                           words_learned: @learned_words_count)
       redirect_to training_path
-    elsif params[:ids] && params[:commit] =~ /state/
-      Word::UpdateState.run(ids: params[:ids], to_state: params[:commit], user: current_user)
+    elsif params[:ids] && params[:commit] =~ /to_state/
+      Word::UpdateState.run(ids:      params[:ids],
+                            to_state: params[:commit].gsub(/to_state_/, ''),
+                            user:     current_user)
       redirect_to :back, notice: t('words.buttons.state_changed')
     else
       redirect_to :back
     end
   end
 
-  def training
-    current_user.update(training_page: params[:page])
-    @sentences = current_user.studying_sentences.order(:id).paginate(page: params[:page], per_page: 1)
-    @page_sum  = @sentences.total_pages
-    @words     = current_user.studying_words
-  end
-
-  def words_in_sentence
-    @words             = []
-    @word              = current_user.studying_words if current_user.last_training_type == 'training_spelling'
-    @words_in_sentence = Sentence.find(params[:id]).words
-    render layout: false
-  end
-
-  def set_word_status_training
-    to_state = case params[:bool]
-               when 'true'  then 'to_learned_state'
-               when 'false' then 'to_learning_state'
-               else 'to_unknown_state'
-               end
-    Word::UpdateState.run(ids: [params[:word_id]], to_state: to_state, user: current_user)
-  end
-
   private
 
-  def words_in_text
-    @words = Word.joins(:word_in_articles).where(words: { language: current_user.learning_language },
-                                                 word_in_articles: { article_id: params[:article] })
-                 .where.not(words: { id: WordStatus.select(:word_id).where(user: current_user, learned: true) })
-                 .order('word_in_articles.frequency desc, words.id asc').paginate(page: params[:page], per_page: 20)
+  def words_from_article
+    word_ids = Hash[Article.find(params[:article]).frequency.sort_by { |k, v| v }.reverse].keys
+    @words   = Word.where(id: word_ids)
+                   .where.not(id: WordStatus.select(:word_id).where(user: current_user, learned: true))
+                   .order("position(id::text in '#{word_ids.join(', ')}')").paginate(page: params[:page], per_page: 10)
   end
 
-  def words_with_status(bool)
-    current_user.words.where(language: current_user.learning_language).where(word_statuses: { learned: bool })
+  def available
+    Word.where(language: current_user.learning_language)
+        .group(:id).order(:id).paginate(page: params[:page], per_page: 10)
   end
 
-  def words_without_status
-    Word.where(words: { language: current_user.learning_language })
+  def learned
+    current_user.words.where(language: current_user.learning_language).where(word_statuses: { learned: true })
+                .order(:id).paginate(page: params[:page], per_page: 10)
   end
 
-  def learned_and_learning(bool)
-    @count = current_user.words.where(language: current_user.learning_language).where(word_statuses: { learned: bool }).count
-    @words = words_with_status(bool).order(:id).paginate(page: params[:page], per_page: 20)
-  end
-
-  def all
-    @words = words_without_status.group(:id).order(:id).paginate(page: params[:page], per_page: 20)
+  def learning
+    current_user.words.where(language: current_user.learning_language).where(word_statuses: { learned: false })
+                .order(:id).paginate(page: params[:page], per_page: 10)
   end
 
   def unknown
-    @words = words_without_status.where.not(id: WordStatus.select(:word_id).where(user: current_user)).group(:id)
-                                 .order(:id).paginate(page: params[:page], per_page: 20)
+    Word.where(words: { language: current_user.learning_language })
+        .where.not(id: WordStatus.select(:word_id).where(user: current_user)).group(:id)
+        .order(:id).paginate(page: params[:page], per_page: 10)
   end
 
-  def word_search
-    @words = words_without_status.where('word LIKE ?', "%#{params[:search].downcase.strip}%").group(:id).order(:id).
-      paginate(page: params[:page], per_page: 20)
+  def searching
+    Word.where(language: current_user.learning_language).where('word LIKE ?', "%#{params[:search].strip.downcase}%")
+        .group(:id).order(:id).paginate(page: params[:page], per_page: 10)
+  end
+
+  def admining
+    Word.all.order(:id).paginate(page: params[:page], per_page: 10)
   end
 
   def word_params
