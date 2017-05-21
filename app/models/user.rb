@@ -1,24 +1,22 @@
 class User < ActiveRecord::Base
-  has_many :word_statuses, dependent: :delete_all
-  has_many :words, through: :word_statuses
-  has_many :studying_words, through: :training_words, source: :word
-  has_many :training_words
-  has_many :studying_sentences, through: :training_sentences, source: :sentence
-  has_many :training_sentences
-  has_many :articles, dependent: :delete_all
-  # has_one :native_language, class_name: Language
-  # has_one :learning_language,  class_name: Language
+  has_many :word_statuses,
+           dependent: :delete_all
+  has_many :words,
+           through: :word_statuses
+  has_many :articles,
+           dependent: :delete_all
+  has_one :training
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   enum role: %i[user vip admin]
 
-  languages = { eng: 0, epo: 1, tur: 2, ita: 3, rus: 4, deu: 5, fra: 6, spa: 7, por: 8, jpn: 9, hun: 10, heb: 11, ber: 12,
-                pol: 13, mkd: 14, fin: 15, nld: 16, cmn: 17, mar: 18, ukr: 19, swe: 20, dan: 21, srp: 22, bul: 23, ces: 24,
-                ina: 25, lat: 26, ara: 27, nds: 28, lit: 29 }
+  languages = {
+    eng: 0, epo: 1, tur: 2, ita: 3, rus: 4, deu: 5, fra: 6, spa: 7, por: 8, jpn: 9, hun: 10, heb: 11, ber: 12, pol: 13,
+    mkd: 14, fin: 15, nld: 16, cmn: 17, mar: 18, ukr: 19, swe: 20, dan: 21, srp: 22, bul: 23, ces: 24, ina: 25, lat: 26,
+    ara: 27, nds: 28, lit: 29
+  }
 
   enum full_languages:
          [

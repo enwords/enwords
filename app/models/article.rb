@@ -1,10 +1,31 @@
 class Article < ApplicationRecord
   belongs_to :user
-  has_many :word_in_articles, dependent: :delete_all
-  has_many :words, through: :word_in_articles
 
-  validates :user, presence: true
-  validates :language, presence: true
-  validates :title, presence: true
-  validates :content, presence: true
+  validates :user, :language, :title, :content, presence: true
+  before_save :word_frequency
+
+  store_accessor :words_data,
+                 :frequency
+
+  private
+
+  def word_frequency
+    text            = self.content.downcase.gsub(/[[:punct:]\d\+\$\^\=\–\>\<\~\`\№]/, '')
+    words           = text.split(' ')
+    words_from_text = words.each_with_object({}) do |word, frequencies|
+      begin
+        frequencies[word] += 1
+      rescue
+        frequencies[word] = 1
+      end
+    end
+
+    words_from_db  = Word.where(word: words_from_text.map(&:first), language: self.language)
+
+    xx = words_from_db.each_with_object({}) do |word, hsh|
+      hsh[word.id] = words_from_text[word.word]
+    end
+
+    self.words_data['frequency'] = xx
+  end
 end
