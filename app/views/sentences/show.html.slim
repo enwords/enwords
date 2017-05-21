@@ -1,0 +1,13 @@
+p#notice= notice
+p
+  strong Id:
+  = @sentence.id
+p
+  strong Language:
+  = @sentence.language
+p
+  strong Sentence:
+  = @sentence.sentence
+= link_to 'Edit', edit_sentence_path(@sentence)
+|
+= link_to 'Back', sentences_path

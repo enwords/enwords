@@ -1,0 +1,8 @@
+p
+  = t('hello')
+  = @resource.email
+  | \!
+p= t('devise.mailer.unlock_instructions.text')
+p
+  = link_to t('devise.mailer.unlock_instructions.link')
+  | , unlock_url(@resource, unlock_token: @token) %&gt;

@@ -1,0 +1,85 @@
+- sentence_audio_nil = nil
+#training-alerts style=('text-align: center')
+  p#wrong_alert= t('training.wrong')
+  p#right_alert= t('training.right')
+.container.training-block
+  - if @sentences.empty?
+    == t 'training.no_translate'
+    == t 'devise.registration.edit.diversity_enable'
+    = link_to t('training.in_settings'), edit_user_registration_path
+  - else
+    - @sentences.each do |sentence|
+      #training-sentence-translate.col-xs-12.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
+        - sentence_audio_nil = sentence.audio.nil?
+        - if current_user.last_training_type == 'training_spelling'
+          .col-xs-12.field style=('padding: 0;')
+            .col-xs-1 style=('padding: 0')
+              - if sentence_audio_nil
+                span.btn-audio.glyphicon.glyphicon-volume-off
+              - else
+                span.btn-audio.glyphicon.glyphicon-volume-up.training-glyphs onclick='play()'
+                = audio_tag "https://audio.tatoeba.org/sentences/#{sentence.language}/#{sentence.id}.mp3", id: 'audio-play'
+            - current_sentence = sentence.sentence
+            - current_sentence_without_words = current_sentence
+            - @words.each do |word_active_record|
+            - word = word_active_record.word
+            - if sentence.language == 'cmn' || sentence.language == 'jpn'
+              - current_sentence_without_words = current_sentence_without_words.gsub(/#{word}/i, '{  }')
+            - else
+              - current_sentence_without_words = current_sentence_without_words.gsub(/\b#{word}\b/i, '{  }')
+
+            .col-xs-10
+              = text_area_tag 'sentence',
+                      current_sentence_without_words,
+                      id:           'training-sentence-text',
+                      autocomplete: 'off',
+                      class:        'form-control',
+                      maxlength:    200,
+                      style:        'resize: none; height: 100%;'
+              p#training-help= t('training.replace')
+            .col-xs-1 style=('padding: 0')
+              span#give-up.glyphicon.glyphicon-flag.training-glyphs
+            h3#correct-answer style=('display: none')
+              = sentence.sentence
+        - elsif current_user.last_training_type == 'training'
+          - if sentence_audio_nil
+            span.btn-audio.glyphicon.glyphicon-volume-off
+          - else
+            span.btn-audio.glyphicon.glyphicon-volume-up onclick='play()'
+            = audio_tag "https://audio.tatoeba.org/sentences/#{sentence.language}/#{sentence.id}.mp3", id: 'audio-play'
+          h4#training-sentence onclick='play()' data-sentence-id="#{sentence.id}" = sentence.sentence
+        .col-xs-12.field style=('padding: 0;')
+          - begin
+            - trans = sentence.translations.where(language: current_user.native_language).first.sentence
+            button#translate-btn= t 'training.show_translation'
+            h4#translate style=('display: none')
+            = trans
+          - rescue
+      #compare-btn-div.col-xs-12
+        - displ = ''
+        - if current_user.last_training_type == 'training_spelling'
+          = button_tag t('training.check'), id: 'compare-btn', class: 'btn btn-md btn-success'
+          - displ = 'display: none'
+        .digg_pagination style=displ
+          - if params[:page] == @page_count.to_s
+            #pagination-training-without_disabled_links
+              = will_paginate @sentences,
+                      page_links: false,
+                      previous_label: '<i class="fa fa-angle-left"></i>',
+                      next_label: '<i class="fa fa-angle-right"></i>',
+                      container: false
+              = link_to t('training.end'), result_path, id: 'end_link'
+          - elsif @page_count == 1
+            #pagination-training
+              = link_to t('training.end'), result_path, id: 'end_link'
+          - else
+            #pagination-training
+              = will_paginate @sentences,
+                      page_links: false,
+                      previous_label: '<i class="fa fa-angle-left"></i>',
+                      next_label: '<i class="fa fa-angle-right"></i>',
+                      container: false
+  #words_in_sentence
+
+- content_for :footer_js do
+  - javascript_include_tag 'separated/training'

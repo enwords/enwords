@@ -1,0 +1,15 @@
+doctype html
+html lang="ru" 
+  head
+    title Enwords
+    = render 'layouts/meta'
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+  body
+    = render 'layouts/navigation'
+    = render 'layouts/flash_messages'
+    = yield
+    = render 'layouts/footer'
+
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = yield :footer_js

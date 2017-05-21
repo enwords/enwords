@@ -1,0 +1,40 @@
+.container
+  .col-xs-12.title
+    h3
+      = t('texts.title')
+  = form_tag delete_selected_articles_path, method: :post do
+    - if @articles.any?
+      .col-xs-12.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3.word-list
+        table
+          thead
+            tr
+              th
+                input#select-all[type='checkbox']
+              th[style='width: 100%;']
+                label.checkbox_label[for='select-all']
+                  b = t 'words.select_all'
+          tbody
+            - @articles.each do |article|
+              tr
+                td = check_box_tag 'ids[]', article.id
+                td = link_to article.title, article_path(article)
+                td = link_to icon('book'), words_path(article: article)
+                td = link_to icon('edit'), edit_article_path(article)
+                td = link_to icon('trash'), article_path(article), method: :delete
+
+    .col-xs-12.btn-articles
+      = link_to new_article_path, class: 'btn btn-default' do
+        i.fa.fa-plus.ico
+        = t('texts.buttons.add_text')
+      - if @articles.any?
+        = button_tag type: 'submit', value: 'delete_articles', class: 'btn btn-default'  do
+          i.fa.fa-trash.ico
+          = t('texts.buttons.delete_selected')
+
+    .row
+      .col-xs-12.digg_pagination
+        = will_paginate @words,
+                previous_label: '<i class="fa fa-angle-left"></i>',
+                next_label:     '<i class="fa fa-angle-right"></i>',
+                outer_window:   0,
+                inner_window:   2

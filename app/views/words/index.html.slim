@@ -1,0 +1,69 @@
+.container
+  .col-xs-12.title
+    h3 = words_page_title
+  - if @words.any?
+    = form_tag word_action_words_path, method: :put do
+      .col-xs-7.col-sm-5.col-sm-offset-2.col-md-3.col-md-offset-3.word-list
+        table
+          th
+            label
+              input.words_checkbox#select-all type='checkbox' == t 'words.select_all'
+          - @words.each do |word|
+            tr
+              td
+                label.checkbox_label
+                  = check_box_tag 'ids[]', word.id, false, class: 'words_checkbox'
+                  = word.word.capitalize
+
+      .col-xs-5.col-sm-3.btn-group-vertical
+        = button_tag t('words.buttons.train_selected'),
+                type:  'submit',
+                value: 'to_training_repeating',
+                name:  'commit',
+                class: 'btn btn-default',
+                data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+        = button_tag t('words.buttons.train_selected_spelling'),
+                type:  'submit',
+                value: 'to_training_spelling',
+                name:  'commit',
+                class: 'btn btn-default',
+                data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+        - unless params[:status] == 'learning'
+          = button_tag t('words.buttons.add_to_learning'),
+                  type:  'submit',
+                  value: 'to_state_learning',
+                  name:  'commit',
+                  class: 'btn btn-default learning_color',
+                  data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+        - unless params[:status] == 'learned'
+          = button_tag t('words.buttons.add_to_learned'),
+                  type:  'submit',
+                  value: 'to_state_learned',
+                  name:  'commit',
+                  class: 'btn btn-default learned_color',
+                  data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+        - unless params[:status] == 'unknown'
+          = button_tag t('words.buttons.add_to_unknown'),
+                  type:  'submit',
+                  value: 'to_state_unknown',
+                  name:  'commit',
+                  class: 'btn btn-default unknown_color',
+                  data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+    .row
+      .col-xs-12.digg_pagination
+        = will_paginate @words,
+                previous_label: '<i class="fa fa-angle-left"></i>',
+                next_label:     '<i class="fa fa-angle-right"></i>',
+                outer_window:   0,
+                inner_window:   2
+  - else
+    - unless current_page?(words_path status: 'unknown') || current_page?(words_path status: 'all')
+      .col-xs-12
+        p.title
+          = t 'words.warning.text1'
+          a href=words_path(status: 'unknown') = t 'words.warning.link1'
+    - else
+      .col-xs-12
+        p.title
+          = t 'words.warning.text2'
+          a href=edit_user_registration_path = t 'words.warning.link2'
