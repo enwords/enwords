@@ -1,0 +1,17 @@
+.container
+  .col-xs-12.col-md-8.col-md-offset-2
+    .row.row-content
+      .col-xs-12.wrapper
+        .col-xs-6.col-xs-offset-6.links-top
+          = link_to t('texts.links.words'), words_path(article: @article)
+          = ' / '
+          = link_to t('texts.links.edit'), edit_article_path(@article)
+          = ' / '
+          = link_to t('texts.links.delete'), article_path(@article), method: :delete
+          = ' / '
+          = link_to t('texts.links.back'), articles_path
+        .col-xs-12
+          h3.form-signin-heading
+            = @article.title
+        .col-xs-12
+          = @article.content

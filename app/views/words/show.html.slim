@@ -1,0 +1,13 @@
+p#notice= notice
+p
+  strong Id:
+  = @word.id
+p
+  strong Language:
+  = @word.language
+p
+  strong Word:
+  = @word.word
+= link_to 'Edit', edit_word_path(@word)
+|
+= link_to 'Back', words_path

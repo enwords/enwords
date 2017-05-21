@@ -1,0 +1,8 @@
+.container
+  .row.row-content
+    .col-xs-12.result-page
+      h3 == t 'static.result.title'
+      h1 = @learned_words_count_training
+      h3 == t 'static.result.text'
+      br
+      = link_to t('training.repeat'), training_path, class: 'btn btn-default'

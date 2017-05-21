@@ -86,9 +86,9 @@ en:
     navigation:
       words:
         dropdown: 'Words'
-        learned: 'Learned'
-        learning: 'Learning'
-        unknown: 'Unknown'
+        learned: 'Learned '
+        learning: 'Learning '
+        unknown: 'Unknown '
       texts: 'Texts'
       last_training: 'Continue training'
       search: 'Word search'
@@ -104,26 +104,35 @@ en:
       sign_in:
         title: "Recommendations for successful learning:"
         item_1:
-          link: "Select words"
-          text: " to learn and repeat them in different sentences that will give you Enwords and also to mark the words that you know to make them disappear from the list (all words arranged in order of their frequency in speech, it is recommended for study the word order, so the first words you probably know)"
+          text: "<a href=%{words_path}>Select words</a> to learn and repeat them in different sentences that will give
+          you Enwords and also to mark the words that you know to make them disappear from the list (all words arranged
+          in order of their frequency in speech, it is recommended for study the word order, so the first words you
+          probably know)"
         item_2:
-          link: "Add your own text"
-          text: " from audiocourses or thematic articles (if you are a cook then upload the recipes, if you are a driver then upload the traffic rules) in the learning language, all words will be arranged in order of their frequency in this text"
+          text: "<a href=%{articles_path}>Add your own text</a> from audiocourses or thematic articles (if you are a
+          cook then upload the recipes, if you are a driver then upload the traffic rules) in the learning language,
+          all words will be arranged in order of their frequency in this text"
         item_3:
-          link: "Configure training:"
-          text: " increase the number of sentences, turn on autoplay audio or making training more diverse sacrificing translation (unfortunately not all sentences translated)"
+          text: "Configure training: increase the number of sentences, turn on autoplay audio or making training
+          more diverse sacrificing translation (unfortunately not all sentences translated)"
         item_4:
-          text_1: "If it difficult for you without the word translation, add extension from Google for your browser "
-          text_2: " two clicks and the word translated"
+          text: "If it difficult for you without the word translation, add extension from Google for your browser
+          (<a href='https://chrome.google.com/webstore/detail/google-translate/aapbdbdomjkkjkaonfhkkikfgjllcleb?hl'>Chrome</a>,
+          <a href='https://addons.mozilla.org/ru/firefox/addon/google-translator-for-firefox/'>Firefox</a>,
+          <a href='https://addons.opera.com/ru/extensions/details/googletm-translator/'>Opera</a>) two clicks and the word translated"
         item_5:
           text: "Don't forget to add Enwords to bookmarks and add the bookmark to your home screen on your mobile device"
 
       sign_out:
         item1:
-          text: "Enwords - a free application created to improve your vocabulary of studied language, here represented about 0.5 million words and 3.5 million sentences in 30 languages"
+          text: "Enwords - a free application created to improve your vocabulary of studied language, here represented
+          about 0.5 million words and 3.5 million sentences in 30 languages"
         item2:
-          text: "In different sentences words have different meanings, it's impossible to learn all translations of all words, you need to learn to understand their meaning in the context"
-          text_2: "Your task is to choose words and Enwords will give you sentences with these words, repeat them at least 10 minutes a day and in a month you will see result. Don't forget to read books, to take audio courses and to watch movies in the learning language, you need to take words exactly from there"
+          text: "In different sentences words have different meanings, it's impossible to learn all translations of all
+          words, you need to learn to understand their meaning in the context"
+          text_2: "Your task is to choose words and Enwords will give you sentences with these words, repeat them at
+          least 10 minutes a day and in a month you will see result. Don't forget to read books, to take audio courses
+          and to watch movies in the learning language, you need to take words exactly from there"
     result:
       title: "Result of training:"
       text: "Learned words"
@@ -137,7 +146,8 @@ en:
       back: "Back"
       edit: "Edit"
       delete: "Delete"
-      words: "Words in the text (except learned)"
+      words: "Words"
+      cancel: "Cancel"
     new_text: "New text"
     edit_text: "Edit text"
     form:
@@ -147,6 +157,7 @@ en:
       warning: "Attention! Unfortunately for word search in Chinese and Japanese texts the words should be separated by a space"
       submit: "Save"
       saving: "Saving..."
+      wait: "Please wait..."
     text_created: 'Text was successfully created'
     text_updated:  'Text was successfully updated'
     text_deleted:  'Text was successfully deleted'
@@ -176,14 +187,16 @@ en:
       text2: "Please select the language in the "
       link2: "profile settings"
     buttons:
-      train_selected:  'Train selected'
+      train_selected:  '"Repeating" Training'
       add_to_learning: 'Add to "Learning"'
       add_to_learned:  'Add to "Learned"'
       add_to_unknown:  'Add to "Unknown"'
-      train_selected_spelling: "Train spelling"
+      train_selected_spelling: '"Spelling" Training'
 
       added_to_learning: 'Added to "Learning"'
       added_to_learned:  'Added to "Learned"'
       added_to_unknown:  'Added to "Unknown"'
       state_changed: "Status of words successfully changed"
     select_all: 'Select all'
+  articles:
+    delete: "Successfully deleted"

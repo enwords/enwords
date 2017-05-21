@@ -22,10 +22,10 @@ $learnedColor  : #5CB85C
 $learningColor : #F0AD4E
 $unknownColor  : #B7B7B7
 
-$btnColHover  : #F5F5F5
-$btnColBack   :  white
-$btnColActive : #82adb0
-$bodyTextCol  : #585858
+$btnColHover   : #F5F5F5
+$btnColBack    : white
+$btnColActive  : #82adb0
+$bodyTextCol   : #585858
 
 
 html
@@ -35,24 +35,25 @@ html
 body
   font-family: "Lato", Calibri, Arial, sans-serif
   margin-bottom: 60px
-  padding: 50px 0px 0px 0px
+  padding: 50px 0 0 0
   background-color: rgb(252, 249, 242)
   color: $bodyTextCol
 
-#footer
+.footer
   position: absolute
   bottom: 0
   width: 100%
-  /* Set the fixed height of the footer here */
   height: 60px
   background-color: rgb(240, 237, 234)
+  color: $text-muted
+  a
+    color: $text-muted
   .container
     padding-right: 15px
     padding-left: 15px
-    .text-muted
+    .copyright
+      display: block
       margin: 20px 0
-    a
-      color: $text-muted
 
 
 //NAVBAR
@@ -198,6 +199,8 @@ $dropDown       : false
   cursor: default
   border: none
   a, span, em
+    min-height: 25.6px
+    min-width: 25.6px
     padding: 0.2em 0.5em
     display: block
     float: left
@@ -214,6 +217,7 @@ $dropDown       : false
   a
     text-decoration: none
     color: $bgHighlight
+
     &:hover, &:focus
       color: $bgHighlight
       background-color: $btnColHover
@@ -232,51 +236,39 @@ $dropDown       : false
   *:first-child+html &
     overflow: hidden
 
-#pagination-mobile
-  position: relative
 
 #pagination-desktop
   position: absolute
   bottom: 70px
   width: 100%
 
-#pagination-mobile, #pagination-desktop
-  .next_page, .previous_page
-    height: 25.6px
-    width: 25.6px
-
-#pagination-training, #pagination-training-without_disabled_links
-  left: 50%
-  -webkit-transform: translateX(-50%)
-  -moz-transform: translateX(-50%)
-  -ms-transform: translateX(-50%)
-  transform: translateX(-50%)
+.pagination-training
   font-size: 140%
-  position: absolute
-  .next_page, .previous_page
-    height: 35px
-    width: 35px
+  a, span
+    min-height: 35px
+    min-width:  35px
 
-
-#pagination-training-without_disabled_links
-  .disabled
-    display: none
-  #end_link
-    font-size: 75%
-    padding-top: 7px
-    height: 35px
-
-////
+  &__last-link-off
+    .disabled
+      display: none
+    #link-result
+      font-size:   75%
+      padding-top: 7px
+      height:      35px
 
 //Words, texts and training
 
-.training-div
+.training-block
+  text-align: center
   padding-bottom: 20px
   @media (max-width: 767px)
     margin-top: 40px
   @media (min-width: 768px)
     margin-top: 80px
 
+#original-sentence
+  display: inline
+  margin: 10px 5px
 
 #right_alert, #wrong_alert
   position: absolute
@@ -293,14 +285,12 @@ $dropDown       : false
 .links-top
   text-align: right
 
-.myButtons
+.btn-articles
   text-align: center
   a
     color: $btnColActive !important
-  @media (min-width: 769px)
-    margin-bottom: 80px
 
-#word_list
+.word-list
   padding: 0
   margin-bottom: 20px
   td
@@ -315,35 +305,36 @@ $dropDown       : false
 .btn-group-vertical
   padding: 0
 
-#know-th
-  font-style: italic
-  text-align: center
-.word_td
-  width: 100%
+
+// words from sentence
+.table__words-from-sentence
+  td
+    padding: 5px 0
+  .td__word
+    width: 100%
+  #know-th
+    font-style: italic
+    text-align: center
 
 .title
+  margin-top: 10px
   text-align: center
-  padding: 20px 0px 20px 0px
+  padding: 20px 0
   h3
     margin-top: 10px
 
-#training-sentence-translate
-  padding: 0
-  text-align: center
-  min-height: 127px
+#translation
+  min-height: 20px
+  display: none
 
-#training-sentence, #audioButton
-  display: inline
-
-.training-glyphs
-  width: 100%
+#btn-show-translation
   height: 100%
-
-#translate-btn
+  width: 100%
+  margin: 0
+  padding: 10px
   border: none
   background-color: transparent
   outline: none
-  margin: 10px
   font-style: italic
 
 #refresh-btn
@@ -381,25 +372,8 @@ $dropDown       : false
     background-color: $btnColHover
     outline: 0
 
-.button_hide
-  position: absolute
-  width: 100%
-  height: 100%
-
-#switch-off, #switch-on
-  color: white
-  top: 5px
-  position: relative
-
-#switch-off
-  float: left
-  left: 7px
-#switch-on
-  float: right
-  right: 7px
-  
 //training legend
-.training-legend-icon 
+.training-legend-icon
   width: 10px
   height: 10px
   float: left
@@ -407,7 +381,7 @@ $dropDown       : false
   margin: 3px 5px 0 20px
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15)
 
-#training-legend 
+#training-legend
   text-align: center
   font-size: 80%
   font-style: italic
@@ -425,7 +399,7 @@ $dropDown       : false
 
 .result-page
   text-align: center
-  padding: 50px 0px 50px 0px
+  padding: 50px 0
 
 ////
 
@@ -499,7 +473,7 @@ $dropDown       : false
 ////
 
 //Training buttons
-.audioButton, #giveup, #training-sentence
+.glyphicon-volume-up, #give-up, #training-sentence
   cursor: pointer
 
 .glyphicon-volume-off, .glyphicon-volume-up, .glyphicon-flag
@@ -511,47 +485,46 @@ $dropDown       : false
   opacity: 0.3
 ////
 
-//Switch
-.switch
-  position: relative
-  display: inline-block
-  width: 52px
+//Switcher
+@mixin trans($del)
+  -webkit-transition: $del
+  -moz-transition: $del
+  -o-transition: $del
+  transition: $del
+
+.switcher
+  padding: 2px
+  box-shadow: 0px 1px 2px rgba(0,0,0,0.15)
+  cursor: pointer
+  border-radius: 13px
+  width: 50px
   height: 25px
-  top: 5px
+  background: $learningColor
+  @include trans(0.4s)
+  .icon-check
+    color: white
+    bottom: 21px
+    position: relative
+    left: 4px
 
-  /* Hide default HTML checkbox */
-  input
-    display: none
-
-  .slider
-    box-shadow: 0px 1px 2px rgba(0,0,0,0.15)
-    position: absolute
-    cursor: pointer
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
-    -webkit-transition: .4s
-    transition: .4s
-    border-radius: 13px
-
-  .round
-    //box-shadow: 0px 1px 2px rgba(0,0,0,0.15)
-    cursor: pointer
-    position: absolute
-    content: ""
-    height: 19px
-    width: 19px
-    /*left: 3px changed in html */
-    bottom: 3px
-    background-color: white
+  &-round
+    margin-left: 0
+    position: relative
+    background: white
     border-radius: 50%
-    -webkit-transition: .4s
-    transition: .4s
+    height: 100%
+    width:  47%
+    @include trans(0.4s)
+  &__learned
+    background: $learnedColor
+    .switcher-round
+      margin-left: 54%
+  &__unknown
+    background: $unknownColor
+
 ////
 
 //Other
-
 .alert
   padding-top: 10px
   position: absolute
@@ -566,7 +539,7 @@ $dropDown       : false
 .settings_ico
   float: right
 
-.center-btn
+.align-center
   text-align: center
   padding-top: 20px
 
@@ -580,6 +553,23 @@ $dropDown       : false
   margin-right: 15px  !important
 ////
 
+.main--languages
+  padding: 5px
+  float: right
+
+ul
+  margin: 0
+  padding-left: 0
+  &.main--list
+    list-style-type: none
+    li
+      font-size: 2rem
+      margin-bottom: 20px
+      text-indent: -5px
+      &:before
+        content: "— "
+        text-indent: -5px
+
 
 ////
 .alert-success, .alert-notice, #right_alert
@@ -588,4 +578,9 @@ $dropDown       : false
 .alert-danger, .alert-alert, #wrong_alert
   color: #C32221
 ////
+
+.vcenter
+  display: inline-block
+  vertical-align: middle
+  float: none
 

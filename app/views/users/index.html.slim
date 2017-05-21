@@ -1,0 +1,22 @@
+.container
+  .row
+    h3 Users
+    table.table style="overflow-x:auto;" 
+      tbody
+        - @users.each do |user|
+          tr
+            td
+              = user.id
+            td
+              = link_to user.email, user
+            td
+              = form_for(user) do |f|
+                = f.select :role, User.roles.keys.map { |role| [role.titleize, role] }
+                = f.submit 'Change Role', class: 'button-xs'
+            td
+              = link_to 'Delete user', user_path(user), data: { confirm: 'Are you sure?' }, method: :delete, class: 'button-xs'
+
+    #pagination-mobile.col-xs-12.hidden-sm.hidden-md.hidden-lg.digg_pagination
+      = will_paginate @users, previous_label: '❬', next_label: '❭', outer_window: 0
+    #pagination-desktop.hidden-xs.col-sm-12.digg_pagination
+      = will_paginate @users, previous_label: '❬', next_label: '❭', outer_window: 0

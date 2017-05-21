@@ -1,0 +1,49 @@
+.row.words-from-sentence-after style='display: none;'
+  .col-xs-12.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
+    table.table__words-from-sentence
+      thead
+        tr
+          th
+          th#know-th = t 'training.know'
+      tbody
+        - @words_from_sentence.each do |word_hash|
+          tr
+            td.td__word = word_hash['word'].capitalize
+            td
+              .switcher data-id="#{word_hash['id']}" data-status="#{word_hash['learned'].nil? ? 'unknown' : word_hash['learned']}"
+                .switcher-round
+                = icon 'check', class: 'icon-check'
+
+    #training-legend
+      .col-xs-4
+        i.fa.fa-circle.unknown_color aria-hidden='true'
+        p.training-legend-text = t 'shared.navigation.words.unknown'
+      .col-xs-4
+        i.fa.fa-circle.learning_color aria-hidden='true'
+        p.training-legend-text = t 'shared.navigation.words.learning'
+      .col-xs-4
+        i.fa.fa-circle.learned_color aria-hidden='true'
+        p.training-legend-text = t 'shared.navigation.words.learned'
+
+javascript:
+  $(function () {
+    'use strict';
+
+    $('.words-from-sentence-after').hide().fadeIn(500);
+
+    // switcher
+    var $switcher = $('.switcher');
+
+    $('[data-status="true"]').addClass('switcher__learned');
+    $('[data-status="unknown"]').addClass('switcher__unknown');
+
+    $switcher.on('click', function () {
+      $.ajax({
+        url: '/change_status/' + $(this).data('id') + '/' + $(this).attr('data-status'),
+      }).done(function (responce) {
+        var $thisButton = $('[data-id=' + responce[0].word_id + ']');
+        $thisButton.attr('data-status', responce[0].learned);
+        $thisButton.removeClass('switcher__unknown').toggleClass('switcher__learned');
+      });
+    });
+  });

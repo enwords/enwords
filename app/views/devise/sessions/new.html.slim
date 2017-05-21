@@ -1,0 +1,21 @@
+.container
+  .row.row-content
+    .col-xs-12
+      .col-xs-12.col-sm-6.col-sm-offset-3.col-md-4.col-md-offset-4.wrapper
+        h2.form-signin-heading= t('devise.session.new.title')
+        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          .col-xs-12.error
+            p
+              = devise_error_messages!
+          .field
+            = f.email_field :email, autofocus: true, class: 'form-control', placeholder: t('email')
+          .field
+            = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: t('password')
+          - if devise_mapping.rememberable?
+            .field style=('padding-top: 20px; padding-bottom: 20px') 
+              = f.check_box :remember_me
+              = f.label :remember_me,  t('devise.session.new.remember')
+          .field
+            = f.button t('shared.navigation.user.sign_in'), class: 'btn btn-lg btn-primary btn-block',
+                    data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('shared.navigation.user.signing_in') }
+        = render 'devise/shared/links'

@@ -1,0 +1,4 @@
+- if @training.training_type == 'repeating'
+  = render 'trainings/repeating'
+- elsif @training.training_type == 'spelling'
+  = render 'trainings/spelling'
