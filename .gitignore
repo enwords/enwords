@@ -24,7 +24,7 @@
 config/production/
 lib/capistrano/
 
-shared/
+/shared/
 
 config/database.yml
 config/secrets.yml
