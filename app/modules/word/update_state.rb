@@ -7,15 +7,13 @@ class Word::UpdateState < ActiveInteraction::Base
 
   def execute
     case to_state
-    when 'to_learning_state'
-      change_learning_state false
-    when 'to_learned_state'
-      change_learning_state true
-    when 'to_unknown_state'
-      update_state_to_unknown
+    when 'learning' then change_learning_state false
+    when 'learned'  then change_learning_state true
+    when 'unknown'  then update_state_to_unknown
     else
       raise "Unknown state #{to_state}"
     end
+    WordStatus.where(user_id: user, word_id: ids)
   end
 
   private

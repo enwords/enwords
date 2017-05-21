@@ -4,8 +4,18 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
   before_action :set_locale
+  before_action :word_statistic, if: :current_user
 
   private
+
+  def word_statistic
+    @learning_words_count = current_user.words.where(language: current_user.learning_language,
+                                                     word_statuses: { learned: false }).count
+    @learned_words_count  = current_user.words.where(language: current_user.learning_language,
+                                                     word_statuses: { learned: true }).count
+    @unknown_words_count  = Word.where(language: current_user.learning_language).count \
+                            - (@learning_words_count + @learned_words_count)
+  end
 
   def set_locale
     I18n.locale = params[:locale] if params[:locale].present?
