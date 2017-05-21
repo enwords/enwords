@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170509095917) do
+ActiveRecord::Schema.define(version: 20170520182509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,8 +20,9 @@ ActiveRecord::Schema.define(version: 20170509095917) do
     t.string   "language",   limit: 4
     t.string   "content",    limit: 100000
     t.string   "title",      limit: 100
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.jsonb    "words_data",                default: {}
     t.index ["user_id"], name: "index_articles_on_user_id", using: :btree
   end
 
@@ -48,18 +49,14 @@ ActiveRecord::Schema.define(version: 20170509095917) do
     t.index ["word_id", "sentence_id"], name: "index_sentences_words_on_word_id_and_sentence_id", unique: true, using: :btree
   end
 
-  create_table "training_sentences", id: false, force: :cascade do |t|
+  create_table "trainings", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "sentence_id"
-    t.index ["sentence_id"], name: "index_training_sentences_on_sentence_id", using: :btree
-    t.index ["user_id"], name: "index_training_sentences_on_user_id", using: :btree
-  end
-
-  create_table "training_words", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "word_id"
-    t.index ["user_id"], name: "index_training_words_on_user_id", using: :btree
-    t.index ["word_id"], name: "index_training_words_on_word_id", using: :btree
+    t.integer "word_ids",      default: [],              array: true
+    t.integer "sentence_ids",  default: [],              array: true
+    t.string  "training_type",              null: false
+    t.integer "words_learned", default: 0,  null: false
+    t.integer "current_page",  default: 1,  null: false
+    t.index ["user_id"], name: "index_trainings_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -81,20 +78,8 @@ ActiveRecord::Schema.define(version: 20170509095917) do
     t.integer  "sentences_number",       limit: 2, default: 5,     null: false
     t.boolean  "audio_enable",                     default: false
     t.boolean  "diversity_enable",                 default: false
-    t.integer  "learned_words_count",              default: 0,     null: false
-    t.integer  "last_training_type"
-    t.integer  "training_page"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  end
-
-  create_table "word_in_articles", id: false, force: :cascade do |t|
-    t.integer "article_id"
-    t.integer "word_id"
-    t.integer "frequency"
-    t.index ["article_id", "word_id"], name: "index_word_in_articles_on_article_id_and_word_id", unique: true, using: :btree
-    t.index ["article_id"], name: "index_word_in_articles_on_article_id", using: :btree
-    t.index ["word_id"], name: "index_word_in_articles_on_word_id", using: :btree
   end
 
   create_table "word_statuses", id: false, force: :cascade do |t|
@@ -114,4 +99,5 @@ ActiveRecord::Schema.define(version: 20170509095917) do
 
   add_foreign_key "articles", "users"
   add_foreign_key "audios", "sentences"
+  add_foreign_key "trainings", "users"
 end
