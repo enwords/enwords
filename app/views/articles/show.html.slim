@@ -8,10 +8,9 @@
           = link_to t('texts.links.edit'), edit_article_path(@article)
           = ' / '
           = link_to t('texts.links.delete'), article_path(@article), method: :delete
-          = ' / '
-          = link_to t('texts.links.back'), articles_path
         .col-xs-12
           h3.form-signin-heading
             = @article.title
         .col-xs-12
-          = @article.content
+          pre
+            = @article.content
