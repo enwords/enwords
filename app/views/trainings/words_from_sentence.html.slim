@@ -34,8 +34,8 @@ javascript:
     // switcher
     var $switcher = $('.switcher');
 
-    $('[data-status="true"]').addClass('switcher__learned');
-    $('[data-status="unknown"]').addClass('switcher__unknown');
+    $('[data-status="true"]').addClass('switcher_learned');
+    $('[data-status="unknown"]').addClass('switcher_unknown');
 
     $switcher.on('click', function () {
       $.ajax({
@@ -43,7 +43,7 @@ javascript:
       }).done(function (responce) {
         var $thisButton = $('[data-id=' + responce[0].word_id + ']');
         $thisButton.attr('data-status', responce[0].learned);
-        $thisButton.removeClass('switcher__unknown').toggleClass('switcher__learned');
+        $thisButton.removeClass('switcher_unknown').toggleClass('switcher_learned');
       });
     });
   });

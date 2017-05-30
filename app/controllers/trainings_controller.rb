@@ -3,8 +3,8 @@ class TrainingsController < ApplicationController
   before_action :current_training, only: %i[show change_status result]
 
   def show
-    @sentences  = Sentence.where(id: current_training.sentence_ids).order(:id)
-                          .paginate(page: params[:page], per_page: 1)
+    @sentences = Sentence.where(id: current_training.sentence_ids).order(:id)
+                         .paginate(page: params[:page], per_page: 1)
     current_training.update_attributes(current_page: (params[:page] || 1))
     @page_count = @sentences.total_pages
   end
