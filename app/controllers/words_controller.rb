@@ -78,37 +78,37 @@ class WordsController < ApplicationController
     word_ids = Hash[Article.find(params[:article]).frequency.sort_by { |k, v| v }.reverse].keys
     @words   = Word.where(id: word_ids)
                    .where.not(id: WordStatus.select(:word_id).where(user: current_user, learned: true))
-                   .order("position(id::text in '#{word_ids.join(', ')}')").paginate(page: params[:page], per_page: 10)
+                   .order("position(id::text in '#{word_ids.join(', ')}')").paginate(page: params[:page], per_page: 20)
   end
 
   def available
     Word.where(language: current_user.learning_language)
-        .group(:id).order(:id).paginate(page: params[:page], per_page: 10)
+        .group(:id).order(:id).paginate(page: params[:page], per_page: 20)
   end
 
   def learned
     current_user.words.where(language: current_user.learning_language).where(word_statuses: { learned: true })
-                .order(:id).paginate(page: params[:page], per_page: 10)
+                .order(:id).paginate(page: params[:page], per_page: 20)
   end
 
   def learning
     current_user.words.where(language: current_user.learning_language).where(word_statuses: { learned: false })
-                .order(:id).paginate(page: params[:page], per_page: 10)
+                .order(:id).paginate(page: params[:page], per_page: 20)
   end
 
   def unknown
     Word.where(words: { language: current_user.learning_language })
         .where.not(id: WordStatus.select(:word_id).where(user: current_user)).group(:id)
-        .order(:id).paginate(page: params[:page], per_page: 10)
+        .order(:id).paginate(page: params[:page], per_page: 20)
   end
 
   def searching
     Word.where(language: current_user.learning_language).where('word LIKE ?', "%#{params[:search].strip.downcase}%")
-        .group(:id).order(:id).paginate(page: params[:page], per_page: 10)
+        .group(:id).order(:id).paginate(page: params[:page], per_page: 20)
   end
 
   def admining
-    Word.all.order(:id).paginate(page: params[:page], per_page: 10)
+    Word.all.order(:id).paginate(page: params[:page], per_page: 20)
   end
 
   def word_params
