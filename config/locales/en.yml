@@ -167,13 +167,14 @@ en:
     show_translation: "Show translation"
     know: "Know?"
     end: "End"
-    replace: "Replace or insert into {  } the right word"
+    replace: "Reprint text above"
     check: "Check"
     right: "You're right!"
     wrong: "You're wrong"
     no_translate: "Unfortunately, we do not have the translated sentences of your studying word, you can turn on the option"
     in_settings: "in settings"
     repeat: "Repeat training"
+    spell_check: "Next"
   words:
     learned: 'Learned words'
     learning: 'Learning words'

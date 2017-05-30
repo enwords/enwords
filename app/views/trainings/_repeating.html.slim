@@ -25,7 +25,7 @@
         .col-xs-12
           .digg_pagination.pagination-training
             - if params[:page] == @page_count.to_s
-              .pagination-training__last-link-off
+              .pagination-training_last-link-off
                 = will_paginate @sentences,
                         page_links: false,
                         previous_label: '<i class="fa fa-angle-left"></i>',

@@ -12,4 +12,5 @@ Rails.application.config.assets.version = '1.0'
 
 Rails.application.config.assets.precompile += %w[
   separated/training.js
+  separated/spelling.js
 ]
