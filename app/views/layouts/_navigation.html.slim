@@ -12,17 +12,17 @@ header
                 = t 'shared.navigation.words.dropdown'
                 b.caret
               ul.dropdown-menu
-                li#unknown
-                  = link_to words_path(status: 'unknown'), class: 'nav-link' do
-                    i.fa.fa-question
+                li
+                  = link_to words_path(status: 'unknown'), class: 'nav-link unknown' do
+                    i.fa.fa-question.unknown
                     = "#{t('shared.navigation.words.unknown')} (#{@unknown_words_count})"
-                li#learning
-                  = link_to words_path(status: 'learning'), class: 'nav-link' do
-                    i.fa.fa-remove
+                li
+                  = link_to words_path(status: 'learning'), class: 'nav-link learning' do
+                    i.fa.fa-remove.learning
                     = "#{t('shared.navigation.words.learning')} (#{@learning_words_count})"
-                li#learned
-                  = link_to words_path(status: 'learned'), class: 'nav-link' do
-                    i.fa.fa-check
+                li
+                  = link_to words_path(status: 'learned'), class: 'nav-link learned' do
+                    i.fa.fa-check.learned
                     = "#{t('shared.navigation.words.learned')} (#{@learned_words_count})"
 
             li.nav-item = link_to t('shared.navigation.texts'), articles_path, class: 'nav-link'

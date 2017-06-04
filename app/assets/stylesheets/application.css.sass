@@ -56,8 +56,6 @@ html
   min-height: 100%
 
 body
-  font-family: "Lato", Calibri, Arial, sans-serif
-  //background-color: rgb(252, 249, 242)
   color: $bodyTextCol
 
 .footer
@@ -81,16 +79,6 @@ body
 .dropdown-menu
   li > a
     white-space: nowrap
-  #learned
-    a
-      color: $learnedColor
-  #learning
-    a
-      color: $learningColor
-  #unknown
-    a
-      color: $unknownColor
-
 
 //Paginate
 .digg_pagination
@@ -159,11 +147,13 @@ body
   min-width: 100%
   text-align: center
   &_wrong
+    border: none
     animation-name: shadowPulseRed
     animation-duration: .8s
     animation-iteration-count: 1
     animation-timing-function: linear
   &_right
+    border: none
     animation-name: shadowPulseGreen
     animation-duration: .8s
     animation-iteration-count: 1
@@ -312,14 +302,14 @@ pre
   font-style: italic
   margin-top: 50px
 
-.unknown_color, .unknown_color:hover, .unknown_color:focus, .unknown_color:active:focus
-  color: $unknownColor
+.unknown, .unknown:hover, .unknown:focus, .unknown:active:focus
+  color: $unknownColor !important
 
-.learned_color, .learned_color:hover, .learned_color:focus, .learned_color:active:focus
-  color: $learnedColor
+.learned, .learned:hover, .learned:focus, .learned:active:focus
+  color: $learnedColor !important
 
-.learning_color, .learning_color:hover, .learning_color:focus, .learning_color:active:focus
-  color: $learningColor
+.learning, .learning:hover, .learning:focus, .learning:active:focus
+  color: $learningColor !important
 //
 
 .result-page
