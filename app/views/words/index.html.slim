@@ -3,7 +3,7 @@
 - if @words.any?
   = form_tag word_action_words_path, method: :put do
     .row
-      .col-7.col-sm-5.offset-sm-2.col-md-4.offset-md-3.word-list
+      .col-6.col-sm-5.offset-sm-2.col-md-4.offset-md-3.word-list
         table
           thead
             tr
@@ -16,40 +16,40 @@
                 label.checkbox-label
                   = check_box_tag 'ids[]', word.id, false, class: 'check'
                   = word.word.capitalize
-      .col-5.col-sm-3.col-md-2
+      .col-6.col-sm-3.col-md-2
         .btn-group-vertical
           = button_tag t('words.buttons.train_selected'),
                   type:  'submit',
                   value: 'to_training_repeating',
                   name:  'commit',
-                  class: 'btn btn-raised btn-sm btn-primary',
+                  class: 'btn btn-raised btn-sm btn-link',
                   data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
           = button_tag t('words.buttons.train_selected_spelling'),
                   type:  'submit',
                   value: 'to_training_spelling',
                   name:  'commit',
-                  class: 'btn btn-raised btn-sm btn-primary',
+                  class: 'btn btn-raised btn-sm btn-link',
                   data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
           - unless params[:status] == 'learning'
             = button_tag t('words.buttons.add_to_learning'),
                     type:  'submit',
                     value: 'to_state_learning',
                     name:  'commit',
-                    class: 'btn btn-raised btn-sm btn-primary learning_color',
+                    class: 'btn btn-raised btn-sm btn-link learning',
                     data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
           - unless params[:status] == 'learned'
             = button_tag t('words.buttons.add_to_learned'),
                     type:  'submit',
                     value: 'to_state_learned',
                     name:  'commit',
-                    class: 'btn btn-raised btn-sm btn-primary learned_color',
+                    class: 'btn btn-raised btn-sm btn-link learned',
                     data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
           - unless params[:status] == 'unknown'
             = button_tag t('words.buttons.add_to_unknown'),
                     type:  'submit',
                     value: 'to_state_unknown',
                     name:  'commit',
-                    class: 'btn btn-raised btn-sm btn-primary unknown_color',
+                    class: 'btn btn-raised btn-sm btn-link unknown',
                     data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
   .row
     .col-12.digg_pagination
