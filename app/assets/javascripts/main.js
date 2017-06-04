@@ -2,13 +2,35 @@ $(function () {
   'use strict';
 
   //checkboxes
-  var $selectAll = $('#select-all');
+  var $checkAll        = $('#check-all');
+  var $check           = $('.check');
+  var triggeredByChild = false;
 
-  $selectAll.on('click', function() {
-    var $checkboxes = $(':input[name^=ids]');
+  $('input').iCheck({
+    checkboxClass: 'icheckbox_minimal-orange',
+  });
 
-    for (var i = 0, n = $checkboxes.length; i < n; i++) {
-      $checkboxes[i].checked = this.checked;
+  $checkAll.on('ifChecked', function () {
+    $check.iCheck('check');
+    triggeredByChild = false;
+  });
+
+  $checkAll.on('ifUnchecked', function () {
+    if (!triggeredByChild) {
+      $check.iCheck('uncheck');
+    }
+
+    triggeredByChild = false;
+  });
+
+  $check.on('ifUnchecked', function () {
+    triggeredByChild = true;
+    $checkAll.iCheck('uncheck');
+  });
+
+  $check.on('ifChecked', function () {
+    if ($check.filter(':checked').length === $check.length) {
+      $checkAll.iCheck('check');
     }
   });
 

@@ -1,49 +1,49 @@
 .container
   .row.row-content
-    .col-xs-12
-      .col-xs-12.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3.wrapper
-        h2.form-signin-heading= t('shared.navigation.user.settings')
-        = form_for(resource, as: resource_name, url: update_user_registration_path, html: { method: :put }) do |f|
-          .col-xs-12.error
-            = devise_error_messages!
-          .field
-            = f.email_field :email, autofocus: true, class: 'form-control', placeholder: t('email')
-            - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-              div
-                = t('devise.registration.edit.unconfirmed_email')
-                = resource.unconfirmed_email
-          .field
-            = f.password_field :current_password, autocomplete: 'off', class: 'form-control', placeholder: t('old_password')
-          .field
-            = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: t('new_password')
-          .field
-            = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', placeholder: t('confirm_new_password')
-          .field
-            h5
-              = t('devise.registration.form.learning_language')
-              .settings_ico
-                = f.select :learning_language,
-                        User.full_languages.keys.map { |learning_language| [learning_language[1], learning_language[0]] }
-          .field
-            h5
-              = t('devise.registration.form.native_language')
-              .settings_ico
-                = f.select :native_language,
-                        User.full_languages.keys.map { |native_language| [native_language[1], native_language[0]] }
-          .field
-            h5
-              = t('devise.registration.edit.sentences_number')
-              .settings_ico = f.number_field :sentences_number, min: 1, max: 20
-          .field
-            h5
-              = t('devise.registration.edit.audio_enable')
-              .settings_ico = f.check_box :audio_enable
-          .field
-            h5
-              = t('devise.registration.edit.diversity_enable')
-              .settings_ico = f.check_box :diversity_enable
-
-          .field style=('padding-top: 20px') 
-            = f.button t('devise.registration.edit.submit'),
-                    class: 'btn btn-lg btn-primary btn-block',
-                    data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+    .col-12.col-sm-8.offset-sm-2.col-md-8.offset-md-2.jumbotron
+      h2.form-signin-heading= t('shared.navigation.user.settings')
+      = form_for(resource, as: resource_name, url: update_user_registration_path, html: { method: :put }) do |f|
+        .col-12.error
+          = devise_error_messages!
+        .field
+          = f.email_field :email, autofocus: true, class: 'form-control', placeholder: t('email')
+          - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+            div
+              = t('devise.registration.edit.unconfirmed_email')
+              = resource.unconfirmed_email
+        .field
+          = f.password_field :current_password, autocomplete: 'off', class: 'form-control', placeholder: t('old_password')
+        .field
+          = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: t('new_password')
+        .field
+          = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', placeholder: t('confirm_new_password')
+        .field
+          h5
+            = t('devise.registration.form.learning_language')
+            .settings-item
+              = f.select :learning_language,
+                      options_for_select(User::FULL_LANGUAGE_NAME, current_user.learning_language),
+                      {}, { class: 'form-control' }
+        .field
+          h5
+            = t('devise.registration.form.native_language')
+            .settings-item
+              = f.select :native_language,
+                      options_for_select(User::FULL_LANGUAGE_NAME, current_user.native_language),
+                      {}, { class: 'form-control' }
+        .field
+          h5
+            = t('devise.registration.edit.sentences_number')
+            .settings-item = f.number_field :sentences_number, min: 1, max: 20
+        .field
+          h5
+            = t('devise.registration.edit.audio_enable')
+            .settings-item = f.check_box :audio_enable
+        .field
+          h5
+            = t('devise.registration.edit.diversity_enable')
+            .settings-item = f.check_box :diversity_enable
+        .field style=('padding-top: 20px')
+          = f.button t('devise.registration.edit.submit'),
+                  class: 'btn btn-lg btn-primary btn-block',
+                  data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }

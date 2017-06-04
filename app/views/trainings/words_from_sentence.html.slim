@@ -1,5 +1,5 @@
 .row.words-from-sentence-after style='display: none;'
-  .col-xs-12.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
+  .col-12.col-sm-8.offset-sm-2.col-md-6.offset-md-3
     table.table__words-from-sentence
       thead
         tr
@@ -14,14 +14,14 @@
                 .switcher-round
                 = icon 'check', class: 'icon-check'
 
-    #training-legend
-      .col-xs-4
+    .row#training-legend
+      .col-4
         i.fa.fa-circle.unknown_color aria-hidden='true'
         p.training-legend-text = t 'shared.navigation.words.unknown'
-      .col-xs-4
+      .col-4
         i.fa.fa-circle.learning_color aria-hidden='true'
         p.training-legend-text = t 'shared.navigation.words.learning'
-      .col-xs-4
+      .col-4
         i.fa.fa-circle.learned_color aria-hidden='true'
         p.training-legend-text = t 'shared.navigation.words.learned'
 
