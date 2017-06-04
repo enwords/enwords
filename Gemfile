@@ -27,7 +27,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # front
-gem 'bootstrap-sass', '~> 3.3.6'
 gem 'font-awesome-sass', '4.6.2'
 gem 'simple_form'
 gem 'slim'
@@ -71,3 +70,10 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'devise'
 gem 'foreman'
 gem 'will_paginate', '~> 3.1.0'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-iCheck'
+  gem 'rails-assets-jquery-migrate'
+  gem 'rails-assets-MDBootstrap', '4.3.2'
+  gem 'rails-assets-tether'
+end

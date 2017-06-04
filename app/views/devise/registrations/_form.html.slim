@@ -1,7 +1,7 @@
-.col-xs-12.col-sm-6.col-sm-offset-3.col-md-4.col-md-offset-4.wrapper-registration
+.col-12.col-sm-6.offset-sm-3.jumbotron
   h2.form-signin-heading= t('devise.registration.form.title')
   = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-    .col-xs-12.error
+    .col-12.error
       = devise_error_messages!
     .field
       = f.email_field :email, autofocus: true, class: 'form-control', placeholder: t('email')
@@ -12,15 +12,17 @@
     .field
       h5
         = t('devise.registration.form.learning_language')
-      p.settings_ico= f.select :learning_language, User.full_languages.keys.map { |learning_language| [learning_language[1], learning_language[0]] }, selected: :eng
+        .settings-item
+          = f.select :learning_language, options_for_select(User::FULL_LANGUAGE_NAME, :eng), {},
+                  { class: 'form-control' }
     .field
       h5
         = t('devise.registration.form.native_language')
-      p.settings_ico
-        = f.select :native_language,
-                User.full_languages.keys.map { |native_language| [native_language[1], native_language[0]] }, selected: :rus
-    .field style=('padding-top: 20px') 
-      = f.button t('devise.registration.form.title'),
-              class: 'btn btn-lg btn-primary btn-block',
-              data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('shared.navigation.user.signing_up') }
+        .settings-item
+          = f.select :native_language,
+                  options_for_select(User::FULL_LANGUAGE_NAME, :rus), {},
+                  { class: 'form-control' }
+    = f.button t('devise.registration.form.title'),
+            class: 'btn btn-lg btn-primary btn-block',
+            data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('shared.navigation.user.signing_up') }
     = link_to t('shared.navigation.user.sign_in'), new_user_session_path

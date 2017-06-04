@@ -1,13 +1,13 @@
 .container
   .row
-    .col-xs-12
+    .col-12
       .main--languages
         = link_to_unless_current 'English', locale: 'en'
         = ' | '
         = link_to_unless_current 'Русский', locale: 'ru'
   .row
     - if user_signed_in?
-      .col-xs-12
+      .col-12
         h1.main--title == t 'static.index.sign_in.title'
         ul.main--list
           li == t 'static.index.sign_in.item_1.text', words_path: words_path(status: 'unknown')
@@ -16,9 +16,9 @@
           li == t 'static.index.sign_in.item_4.text'
           li == t 'static.index.sign_in.item_5.text'
     - else
-      .col-xs-12
+      .col-12
         h3 == t 'static.index.sign_out.item1.text'
         h4 == t 'static.index.sign_out.item2.text'
         h4 == t 'static.index.sign_out.item2.text_2'
-      .col-xs-12
+      .col-12
         = render 'devise/registrations/form'

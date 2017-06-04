@@ -1,6 +1,6 @@
 .container
   .row
-    .col-xs-12.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
+    .col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2
       .row.training-block
         - if @sentences.empty?
           = t 'training.no_translate'
@@ -9,20 +9,20 @@
           = link_to t('training.in_settings'), edit_user_registration_path
 
         - @sentences.each do |sentence|
-          .col-xs-12
+          .col-12
             - if sentence.audio
-              span.btn-audio.glyphicon.glyphicon-volume-up#btn-play-audio
+              span.fa.fa-volume-up#btn-play-audio
                 = audio_tag "https://audio.tatoeba.org/sentences/#{sentence.language}/#{sentence.id}.mp3"
             - else
-              span.glyphicon.glyphicon-volume-off
+              span.fa.fa-volume-off
             h4#original-sentence data-sentence-id="#{sentence.id}" = sentence.sentence
           - translate = sentence.translations.where(language: current_user.native_language).first.try(:sentence)
           - if translate
-            .col-xs-12
+            .col-12
               button#btn-show-translation = t 'training.show_translation'
-              h4#translation = translate
+              h5#translation = translate
       .row
-        .col-xs-12
+        .col-12
           .digg_pagination.pagination-training
             - if params[:page] == @page_count.to_s
               .pagination-training_last-link-off
