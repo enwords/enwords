@@ -13,5 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require bootstrap-sprockets
+//= require mdb
+//= require iCheck/icheck.min.js
+//= require qTip2
 //= require main
+//= require skyeng

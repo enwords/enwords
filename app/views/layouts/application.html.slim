@@ -5,11 +5,13 @@ html lang="ru"
     = render 'layouts/meta'
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-  body
+  body.light-blue-skin class=body_class
     = render 'layouts/navigation'
     = render 'layouts/flash_messages'
-    = yield
-    = render 'layouts/footer'
+    .container.mt-5
+      = yield
+    .mt-5
+      = render 'layouts/footer'
 
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = yield :footer_js

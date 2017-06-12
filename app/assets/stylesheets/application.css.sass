@@ -10,20 +10,23 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
+ *= require MDBootstrap/bootstrap
+ *= require mdb_private/style
+ *= require web/site_style
+ *= require iCheck/skins/minimal/orange
+ *= require qTip2
  */
-@import "bootstrap-sprockets"
-@import "bootstrap"
+
 @import "font-awesome-sprockets"
 @import "font-awesome"
 
 $learnedColor  : #5CB85C
 $learningColor : #F0AD4E
 $unknownColor  : #B7B7B7
-
+$text-muted    : #777777
+$bgHighlight   : #5da4b5
 $btnColHover   : #F5F5F5
-$btnColBack    : white
+$btnColBack    : #FFFFFF
 $btnColActive  : #82adb0
 $bodyTextCol   : #585858
 
@@ -54,10 +57,6 @@ html
   min-height: 100%
 
 body
-  font-family: "Lato", Calibri, Arial, sans-serif
-  margin-bottom: 60px
-  padding: 50px 0 0 0
-  background-color: rgb(252, 249, 242)
   color: $bodyTextCol
 
 .footer
@@ -78,141 +77,9 @@ body
 
 
 //NAVBAR
-$bgDefault      : #5cafb5
-$bgHighlight    : #5cafb5
-$colDefault     : #FCF9F2
-$colHighlight   : white
-$dropDown       : false
-.navbar-default
-  background-color: $bgDefault
-  border: none
-  .navbar-brand
-    color: $colDefault
-    &:hover, &:focus
-      color: $colDefault
-  .navbar-text
-    color: $colDefault
-  .navbar-nav
-    > li
-      > a
-        color: $colDefault
-        &:hover, &:focus
-          color: $colHighlight
-
-    @media (min-width: 768px)
-      .dropdown-menu
-        border: none
-        background-color: white
-        #learned
-          a
-            color: $learnedColor
-        #learning
-          a
-            color: $learningColor
-        #unknown
-          a
-            color: $unknownColor
-        li
-          a
-            color: $bgDefault
-      .active
-        a
-          background-color: white
-          &:hover
-            background-color: $btnColHover
-
-      @if $dropDown
-        > .dropdown-menu
-          background-color: $bgDefault
-          > li
-            > a
-              color: $colDefault
-              &:hover, &:focus
-                color: $colHighlight
-                background-color: $bgHighlight
-            > .divider
-              background-color: $bgHighlight
-    @if $dropDown
-      .open .dropdown-menu > .active
-        > a, > a:hover, > a:focus
-          color: $colHighlight
-          background-color: $bgHighlight
-    > .active
-      > a, > a:hover, > a:focus
-        color: $colHighlight
-        background-color: $bgHighlight
-    > .open
-      > a, > a:hover, > a:focus
-        color: $colHighlight
-        background-color: $bgHighlight
-  .navbar-toggle
-    border: none
-    &:hover, &:focus
-      background-color: $bgDefault
-    .icon-bar
-      background-color: $colDefault
-  .navbar-collapse,
-  .navbar-form
-    border: none
-  .navbar-link
-    color: $colDefault
-    &:hover
-      color: $colHighlight
-@media (max-width: 767px)
-  .navbar-default .navbar-nav .open .dropdown-menu
-    > li > a
-      color: $colDefault
-      &:hover, &:focus
-        color: $colHighlight
-    > .active
-      > a, > a:hover, > a:focus
-        color: $colHighlight
-        background-color: $bgHighlight
-
-////
-
-//search
-.search
-  color: $bgHighlight
-
-  @media (max-width: 767px)
-    left: 8px
-  @media (min-width: 768px)
-    top: 14px
-
-  input, button, select, textarea
-    padding-left: 10px
-    padding-right: 3px
-    /* IE7-8 doesn't have border-radius, so don't indent the padding */
-    margin-bottom: 0
-    -webkit-border-radius: 3px
-    -moz-border-radius: 3px
-    border-radius: 13px
-    border: transparent
-    &:focus
-      outline: none
-
-  input
-    width: 160px
-  form
-    height: 25px
-    width: 180px
-
-  button
-    bottom: 22px
-    border: 0
-    background: none
-    /** belows styles are working good */
-    position: relative
-    left: 132px
-    /* IE7-8 doesn't have border-radius, so don't indent the padding */
-    margin-bottom: 0
-    -webkit-border-radius: 3px
-    -moz-border-radius: 3px
-    border-radius: 13px
-
-////
-
+.dropdown-menu
+  li > a
+    white-space: nowrap
 
 //Paginate
 .digg_pagination
@@ -258,17 +125,11 @@ $dropDown       : false
   *:first-child+html &
     overflow: hidden
 
-
-#pagination-desktop
-  position: absolute
-  bottom: 70px
-  width: 100%
-
 .pagination-training
   font-size: 140%
   a, span
-    min-height: 35px
-    min-width:  35px
+    min-height: 42px
+    min-width:  42px
 
   &_last-link-off
     .disabled
@@ -277,6 +138,9 @@ $dropDown       : false
       font-size:   75%
       padding-top: 7px
       height:      35px
+.pagination
+  display: inline-block
+  margin: 20px 0
 
 //Words, texts and training
 .input-sentence
@@ -284,27 +148,17 @@ $dropDown       : false
   min-width: 100%
   text-align: center
   &_wrong
+    border: none
     animation-name: shadowPulseRed
     animation-duration: .8s
     animation-iteration-count: 1
     animation-timing-function: linear
   &_right
+    border: none
     animation-name: shadowPulseGreen
     animation-duration: .8s
     animation-iteration-count: 1
     animation-timing-function: linear
-
-.training-block
-  text-align: center
-  padding-bottom: 20px
-  @media (max-width: 767px)
-    margin-top: 40px
-  @media (min-width: 768px)
-    margin-top: 80px
-
-#original-sentence
-  display: inline
-  margin: 10px 5px
 
 #right_alert, #wrong_alert
   position: absolute
@@ -336,13 +190,10 @@ pre
   word-break: normal
   word-wrap: normal
 
-.word-list
-  padding: 0
+.table-main
   margin-bottom: 20px
-  td
-    padding: 3px 20px 2px 0
-    &:last-child
-      padding-right: 0
+  i
+    padding-left: 20px
   a
     color: $bodyTextCol
   label, input[type="checkbox"]
@@ -350,6 +201,41 @@ pre
 
 .btn-group-vertical
   padding: 0
+
+.original-sentence-block
+  #original-sentence
+    display: inline
+    margin: 10px 5px
+  .fa-volume-up
+    cursor: pointer
+
+  .fa-volume-off
+    opacity: 0.3
+
+  .fa-volume-up, .fa-volume-off
+    color: $bodyTextCol
+    font-size: 25px
+    top: 6px
+
+.translation-block
+  min-height: 64px
+  color: $bodyTextCol
+  padding-top: 8px
+  text-align: center
+  a, span
+    width: 100%
+    height: 100%
+  a
+    text-decoration: none
+    font-style: italic
+    display: block
+    width: 100%
+    height: 100%
+  span
+    display: none
+    font-size: 1.25rem
+    font-weight: 300
+
 
 
 // words from sentence
@@ -368,37 +254,6 @@ pre
   padding: 20px 0
   h3
     margin-top: 10px
-
-#translation
-  min-height: 20px
-  display: none
-
-#btn-show-translation
-  height: 40px
-  width: 100%
-  margin: 0
-  padding: 10px
-  border: none
-  background-color: transparent
-  outline: none
-  font-style: italic
-
-#refresh-btn
-  text-decoration: none
-  color: #585858
-  top: 5px
-  font-size: 20px
-  padding: 0
-
-#compare-btn-div
-  padding: 20px
-  text-align: center
-  min-height: 80px
-
-#training-help
-  margin: 0
-  font-size: 70%
-  float: right
 
 .btn
   margin-bottom: 4px
@@ -433,14 +288,14 @@ pre
   font-style: italic
   margin-top: 50px
 
-.unknown_color, .unknown_color:hover, .unknown_color:focus, .unknown_color:active:focus
-  color: $unknownColor
+.unknown, .unknown:hover, .unknown:focus, .unknown:active:focus
+  color: $unknownColor !important
 
-.learned_color, .learned_color:hover, .learned_color:focus, .learned_color:active:focus
-  color: $learnedColor
+.learned, .learned:hover, .learned:focus, .learned:active:focus
+  color: $learnedColor !important
 
-.learning_color, .learning_color:hover, .learning_color:focus, .learning_color:active:focus
-  color: $learningColor
+.learning, .learning:hover, .learning:focus, .learning:active:focus
+  color: $learningColor !important
 //
 
 .result-page
@@ -451,30 +306,6 @@ pre
 
 
 //Form
-.wrapper
-  @media (max-width: 767px)
-    margin-top: 35px
-    margin-bottom: 20px
-    padding: 15px 15px 45px
-  @media (min-width: 768px)
-    margin-top: 60px
-    margin-bottom: 60px
-    padding: 15px 35px 45px
-
-.wrapper-registration
-  margin-top: 35px
-  margin-bottom: 35px
-  padding: 15px 35px 45px
-
-.wrapper, .wrapper-registration
-  background-color: white
-  box-shadow: 3px 3px 5px rgba(90,90,90,0.5)
-  min-height: 400px
-  .field
-    padding: 5px 0 5px 0
-  .error
-    h2
-      font-size: 15px
 .form-signin-heading
   text-align: center
   margin-bottom: 30px
@@ -503,8 +334,6 @@ pre
     &:focus
       z-index: 2
 
-
-
   input[type="text"]
     margin-bottom: -1px
     border-bottom-left-radius: 0
@@ -516,19 +345,6 @@ pre
     border-top-left-radius: 0
     border-top-right-radius: 0
 
-////
-
-//Training buttons
-.glyphicon-volume-up, #give-up, #training-sentence
-  cursor: pointer
-
-.glyphicon-volume-off, .glyphicon-volume-up, .glyphicon-flag
-  color: $bodyTextCol
-  font-size: 25px
-  top: 6px
-
-.glyphicon-volume-off
-  opacity: 0.3
 ////
 
 //Switcher
@@ -543,7 +359,7 @@ pre
   @include trans(0.4s)
   .icon-check
     color: white
-    bottom: 21px
+    bottom: 22px
     position: relative
     left: 4px
 
@@ -573,23 +389,16 @@ pre
   width: 100%
   text-align: center
 
-.ico
-  width: 18px
-
-.settings_ico
+.settings-item
   float: right
 
-.align-center
-  text-align: center
-  padding-top: 20px
-
-.checkbox_label
+.checkbox-label
   display: inline-block
   width: 100%
   font-weight: normal
   margin-bottom: 0
 
-.words_checkbox
+.check
   margin-right: 15px  !important
 ////
 
@@ -603,13 +412,15 @@ ul
   &.main--list
     list-style-type: none
     li
-      font-size: 2rem
       margin-bottom: 20px
       text-indent: -5px
       &:before
         content: "— "
         text-indent: -5px
 
+.btn-group-vertical
+  .btn:first-child
+    margin-left: 0
 
 ////
 .alert-success, .alert-notice, #right_alert
@@ -624,3 +435,30 @@ ul
   vertical-align: middle
   float: none
 
+.icheckbox_minimal-orange
+  margin-right: 10px
+
+table
+  th
+    padding: 0
+  label
+    margin-bottom: 0
+
+.field
+  min-height: 40px
+  margin: 10px 0
+
+.btn
+  &-colored
+    color: $bgHighlight !important
+  &-link
+    &:hover
+      text-decoration: none
+
+.eng-rus
+  .word-skyeng
+    padding: 2px
+    &:hover
+      cursor: pointer
+      border: dashed 1px $learningColor
+      border-radius: 4px

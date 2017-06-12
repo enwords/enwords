@@ -12,7 +12,7 @@
     = f.text_field :id
   .field
     = f.label :language
-    = f.select :language, User.learning_languages.keys.map { |lang| [lang.titleize, lang] }
+    = f.select :language, User.learning_languages.keys.map { |lang| [lang.titleize, lang] }, {}, { class: 'form-control' }
   .field
     = f.label :word
     = f.text_field :word
