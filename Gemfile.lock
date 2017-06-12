@@ -158,10 +158,16 @@ GEM
     rails-assets-bootstrap (4.0.0.alpha.6)
       rails-assets-jquery (>= 1.9.1)
       rails-assets-tether (>= 1.4.0, < 2)
+    rails-assets-ev-emitter (1.0.3)
     rails-assets-iCheck (1.0.2)
       rails-assets-jquery (>= 1.7)
+    rails-assets-imagesloaded (4.1.2)
+      rails-assets-ev-emitter (~> 1.0.0)
     rails-assets-jquery (3.1.1)
     rails-assets-jquery-migrate (3.0.0)
+    rails-assets-qTip2 (3.0.2)
+      rails-assets-imagesloaded (>= 3.0.0)
+      rails-assets-jquery (>= 1.6.0)
     rails-assets-tether (1.4.0)
     rails-dom-testing (2.0.1)
       activesupport (>= 4.2.0, < 6.0)
@@ -265,6 +271,7 @@ DEPENDENCIES
   rails-assets-MDBootstrap (= 4.3.2)!
   rails-assets-iCheck!
   rails-assets-jquery-migrate!
+  rails-assets-qTip2!
   rails-assets-tether!
   rails_12factor
   rubocop

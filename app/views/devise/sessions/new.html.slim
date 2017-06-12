@@ -15,6 +15,6 @@
             = f.check_box :remember_me
             = f.label :remember_me,  t('devise.session.new.remember')
         .field
-          = f.button t('shared.navigation.user.sign_in'), class: 'btn btn-lg btn-primary btn-block',
+          = f.button t('shared.navigation.user.sign_in'), class: 'btn btn-lg btn-secondary btn-block',
                   data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('shared.navigation.user.signing_in') }
       = render 'devise/shared/links'

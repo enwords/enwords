@@ -15,4 +15,6 @@
 //= require turbolinks
 //= require mdb
 //= require iCheck/icheck.min.js
+//= require qTip2
 //= require main
+//= require skyeng
