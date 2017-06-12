@@ -40,10 +40,9 @@
                     next_label: '<i class="fa fa-angle-right"></i>'
     .words-from-sentence-before
 
-- content_for :footer_js do
-  - javascript_include_tag 'separated/training'
-- content_for :footer_js do
-  - javascript_include_tag 'separated/repeating'
+= content_for :footer_js do
+  = javascript_include_tag 'separated/training', 'data-turbolinks-track' => true
+  = javascript_include_tag 'separated/repeating', 'data-turbolinks-track' => true
 
 - if current_user.audio_enable
   javascript:

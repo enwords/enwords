@@ -38,10 +38,9 @@
                     next_label: t('training.spell_check')
     .words-from-sentence-before
 
-- content_for :footer_js do
-  - javascript_include_tag 'separated/training'
-- content_for :footer_js do
-  - javascript_include_tag 'separated/spelling'
+= content_for :footer_js do
+  = javascript_include_tag 'separated/training'
+  = javascript_include_tag 'separated/spelling'
 
 css:
   .previous_page {
