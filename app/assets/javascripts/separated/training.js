@@ -1,7 +1,7 @@
 $(function () {
   'use strict';
 
-  var $btnShowTranslation = $('#btn-show-translation');
+  var $btnShowTranslation = $('.translation-block a');
 
   $.ajax({
     url: '/words_from_sentence/' + $('#original-sentence').data('sentence-id'),
@@ -9,9 +9,10 @@ $(function () {
     $('.words-from-sentence-before').replaceWith(data);
   });
 
-  $btnShowTranslation.on('click', function () {
+  $btnShowTranslation.on('click', function (e) {
+    e.preventDefault();
     $(this).fadeOut(0);
-    $('#translation').fadeIn(750);
+    $('.translation-block span').fadeIn(750);
   });
 
   $('#btn-play-audio').on('click', function () {

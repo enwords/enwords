@@ -159,14 +159,6 @@ body
     animation-iteration-count: 1
     animation-timing-function: linear
 
-.training-block
-  text-align: center
-  padding-bottom: 20px
-  @media (max-width: 767px)
-    margin-top: 40px
-  @media (min-width: 768px)
-    margin-top: 80px
-
 #original-sentence
   display: inline
   margin: 10px 5px
@@ -231,41 +223,22 @@ pre
   h3
     margin-top: 10px
 
-#translation
-  padding: 8px 0
-  margin-bottom: 0
-  min-height: 60px
-  display: none
-
-#btn-show-translation
-  height: 60px
-  width: 100%
-  margin: 0
-  padding: 10px
-  border: none
-  background-color: transparent
-  outline: none
-  font-style: italic
-
-#translation, #btn-show-translation
+.translation-block
+  min-height: 64px
   color: $bodyTextCol
-
-#refresh-btn
-  text-decoration: none
-  color: #585858
-  top: 5px
-  font-size: 20px
-  padding: 0
-
-#compare-btn-div
-  padding: 20px
+  padding-top: 8px
   text-align: center
-  min-height: 80px
+  a, span
+    width: 100%
+    height: 100%
+  a
+    text-decoration: none
+    font-style: italic
+  span
+    display: none
+    font-size: 1.25rem
+    font-weight: 300
 
-#training-help
-  margin: 0
-  font-size: 70%
-  float: right
 
 .btn
   margin-bottom: 4px
@@ -386,7 +359,7 @@ pre
   @include trans(0.4s)
   .icon-check
     color: white
-    bottom: 23px
+    bottom: 22px
     position: relative
     left: 4px
 
@@ -418,10 +391,6 @@ pre
 
 .settings-item
   float: right
-
-.align-center
-  text-align: center
-  padding-top: 20px
 
 .checkbox-label
   display: inline-block
