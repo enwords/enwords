@@ -41,6 +41,7 @@ $(function () {
   $('.dropdown-toggle').dropdown();
 
   window.onerror = function (e) {
+    alert(e);
     if (e === 'Uncaught Error: Collapse is transitioning') {
       location.reload();
     }
