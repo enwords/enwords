@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   def words_page_title
     if params[:status]
       case params[:status]
@@ -13,5 +12,10 @@ module ApplicationHelper
     elsif params[:article]
       t 'words.words_of_text'
     end
+  end
+
+  def body_class
+    return if current_user.blank?
+    "#{current_user.learning_language}-#{current_user.native_language}"
   end
 end

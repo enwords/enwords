@@ -1,16 +1,16 @@
 .container
-  .col-xs-12.col-md-8.col-md-offset-2
+  .col-12.col-md-8.offset-md-2
     .row.row-content
-      .col-xs-12.wrapper
-        .col-xs-6.col-xs-offset-6.links-top
+      .col-12.jumbotron
+        .col-6.offset-6.links-top
           = link_to t('texts.links.words'), words_path(article: @article)
           = ' / '
           = link_to t('texts.links.edit'), edit_article_path(@article)
           = ' / '
           = link_to t('texts.links.delete'), article_path(@article), method: :delete
-        .col-xs-12
+        .col-12
           h3.form-signin-heading
             = @article.title
-        .col-xs-12
+        .col-12
           pre
             = @article.content

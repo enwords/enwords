@@ -1,0 +1,43 @@
+.help-block {
+  color: #aaa!important;
+  font-size: 0.7rem!important;
+}
+.error-block {
+  color: #F44336!important;
+  font-size: 0.7rem!important;
+}
+.form-control {
+  margin-bottom: 0;
+}
+.btn-submit {
+  font-size: 1rem;
+  padding: 0;
+}
+.form-inline.radio-as-checkbox {
+  align-items: baseline;
+
+  .form-group {
+    margin-right: 0;
+    label {
+      margin-top: 0;
+      margin-left: 0;
+      margin-right: 0;
+      &.first-label{
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+      }
+      &.center-label {
+        border-radius: 0;
+        border-right:0;
+        border-left:0;
+      }
+      &.last-label {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+      }
+    }
+    &:last-child {
+      margin-right: 3px;
+    }
+  }
+}
