@@ -76,4 +76,5 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jquery-migrate'
   gem 'rails-assets-MDBootstrap', '4.3.2'
   gem 'rails-assets-tether'
+  gem 'rails-assets-qTip2'
 end

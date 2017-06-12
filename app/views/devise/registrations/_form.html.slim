@@ -23,6 +23,6 @@
                   options_for_select(User::FULL_LANGUAGE_NAME, :rus), {},
                   { class: 'form-control' }
     = f.button t('devise.registration.form.title'),
-            class: 'btn btn-lg btn-primary btn-block',
+            class: 'btn btn-lg btn-secondary btn-block',
             data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('shared.navigation.user.signing_up') }
     = link_to t('shared.navigation.user.sign_in'), new_user_session_path

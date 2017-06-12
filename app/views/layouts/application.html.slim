@@ -5,7 +5,7 @@ html lang="ru"
     = render 'layouts/meta'
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-  body.light-blue-skin
+  body.light-blue-skin class=body_class
     = render 'layouts/navigation'
     = render 'layouts/flash_messages'
     .container.mt-5
