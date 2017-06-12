@@ -40,6 +40,12 @@ $(function () {
   // bugfix dropdown
   $('.dropdown-toggle').dropdown();
 
+  window.onerror = function (e) {
+    if (e === 'Uncaught Error: Collapse is transitioning') {
+      location.reload();
+    }
+  };
+
   // other
   String.prototype.capitalize = function () {
     return this.charAt(0).toUpperCase() + this.slice(1);
