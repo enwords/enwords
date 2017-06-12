@@ -3,7 +3,7 @@
 - if @words.any?
   = form_tag word_action_words_path, method: :put do
     .row
-      .col-6.col-sm-5.offset-sm-2.col-md-4.offset-md-3.word-list
+      .col-6.col-sm-5.offset-sm-2.col-md-4.offset-md-3.table-main
         table
           thead
             tr
@@ -22,13 +22,13 @@
                   type:  'submit',
                   value: 'to_training_repeating',
                   name:  'commit',
-                  class: 'btn btn-raised btn-sm btn-link',
+                  class: 'btn btn-raised btn-sm btn-link btn-colored',
                   data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
           = button_tag t('words.buttons.train_selected_spelling'),
                   type:  'submit',
                   value: 'to_training_spelling',
                   name:  'commit',
-                  class: 'btn btn-raised btn-sm btn-link',
+                  class: 'btn btn-raised btn-sm btn-link btn-colored',
                   data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
           - unless params[:status] == 'learning'
             = button_tag t('words.buttons.add_to_learning'),
