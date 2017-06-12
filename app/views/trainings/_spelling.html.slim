@@ -1,45 +1,42 @@
-.container
-  .row
-    .col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2
-      .row.training-block
-        - if @sentences.empty?
-          = t 'training.no_translate'
-          |  "#{t 'devise.registration.edit.diversity_enable'}"
-          = ' '
-          = link_to t('training.in_settings'), edit_user_registration_path
-        - @sentences.each do |sentence|
-          .col-12
-            - if sentence.audio
-              span.fa.fa-volume-up#btn-play-audio
-                = audio_tag "https://audio.tatoeba.org/sentences/#{sentence.language}/#{sentence.id}.mp3"
-            - else
-              span.fa.fa-volume-off
-            h4#original-sentence data-sentence-id=sentence.id = sentence.sentence
-
-          .col-10.offset-1 style='margin-top: 10px'
-            = text_area_tag 'input-sentence', '',
-                    autocomplete: 'off',
-                    class: 'form-control input-sentence',
-                    maxlength: 200,
-                    autofocus: true
-            p#training-help = t('training.replace')
-
-          - translate = sentence.translations.where(language: current_user.native_language).first.try(:sentence)
-          - if translate
-            .col-12
-              button#btn-show-translation = t 'training.show_translation'
-              h5#translation = translate
-      .row
+.row.pt-2
+  .col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2
+    .row.text-center
+      - if @sentences.empty?
+        = t 'training.no_translate'
+        |  "#{t 'devise.registration.edit.diversity_enable'}"
+        = ' '
+        = link_to t('training.in_settings'), edit_user_registration_path
+      - @sentences.each do |sentence|
         .col-12
-          .digg_pagination.pagination-training
-            - if params[:page] == @page_count.to_s || @page_count == 1
-              .pagination
-                = link_to t('training.end'), result_training_path, id: 'link-result', class: 'next_page'
-            - else
-              = will_paginate @sentences,
-                      page_links: false,
-                      next_label: t('training.spell_check')
-      .words-from-sentence-before
+          - if sentence.audio
+            span.fa.fa-volume-up#btn-play-audio
+              = audio_tag "https://audio.tatoeba.org/sentences/#{sentence.language}/#{sentence.id}.mp3"
+          - else
+            span.fa.fa-volume-off
+          h4#original-sentence data-sentence-id=sentence.id = sentence.sentence
+        .col-10.offset-1 style='margin-top: 10px'
+          = text_area_tag 'input-sentence', '',
+                  autocomplete: 'off',
+                  class: 'form-control input-sentence',
+                  maxlength: 200,
+                  autofocus: true
+          span style="float: right" = t('training.replace')
+        - translate = sentence.translations.where(language: current_user.native_language).first.try(:sentence)
+        - if translate
+          .col-12.translation-block
+            a = t 'training.show_translation'
+            span = translate
+    .row
+      .col-12
+        .digg_pagination.pagination-training
+          - if params[:page] == @page_count.to_s || @page_count == 1
+            .pagination
+              = link_to t('training.end'), result_training_path, id: 'link-result', class: 'next_page'
+          - else
+            = will_paginate @sentences,
+                    page_links: false,
+                    next_label: t('training.spell_check')
+    .words-from-sentence-before
 
 - content_for :footer_js do
   - javascript_include_tag 'separated/training'
