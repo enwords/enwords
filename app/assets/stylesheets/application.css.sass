@@ -23,7 +23,7 @@ $learnedColor  : #5CB85C
 $learningColor : #F0AD4E
 $unknownColor  : #B7B7B7
 $text-muted    : #777777
-$bgHighlight   : #5cafb5
+$bgHighlight   : #5da4b5
 $btnColHover   : #F5F5F5
 $btnColBack    : #FFFFFF
 $btnColActive  : #82adb0
@@ -201,12 +201,10 @@ pre
   word-break: normal
   word-wrap: normal
 
-.word-list
+.table-main
   margin-bottom: 20px
-  td
-    padding: 3px 20px 2px 0
-    &:last-child
-      padding-right: 0
+  i
+    padding-left: 20px
   a
     color: $bodyTextCol
   label, input[type="checkbox"]
@@ -234,13 +232,13 @@ pre
     margin-top: 10px
 
 #translation
-  padding: 9px 0
+  padding: 8px 0
   margin-bottom: 0
-  min-height: 20px
+  min-height: 60px
   display: none
 
 #btn-show-translation
-  height: 40px
+  height: 60px
   width: 100%
   margin: 0
   padding: 10px
@@ -480,3 +478,10 @@ table
 .field
   min-height: 40px
   margin: 10px 0
+
+.btn
+  &-colored
+    color: $bgHighlight !important
+  &-link
+    &:hover
+      text-decoration: none
