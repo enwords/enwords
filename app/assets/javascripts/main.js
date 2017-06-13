@@ -41,7 +41,9 @@ $(function () {
   $('.dropdown-toggle').dropdown();
 
   window.onerror = function (e) {
-    if (e.match(/Collapse is transitioning/gi)) {
+    if (e.match(/Collapse is transitioning/gi) ||
+      e.match(/dropdown is not a function/gi)  ||
+      e.match(/has already been loaded/gi)) {
       location.reload();
     }
   };
