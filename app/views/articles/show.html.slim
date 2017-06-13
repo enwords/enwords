@@ -6,14 +6,21 @@
       = link_to t('texts.links.edit'), edit_article_path(@article)
       = ' / '
       = link_to t('texts.links.delete'), article_path(@article), method: :delete
-    .col-12
-      h3.form-signin-heading
-        - @article.title.split.each do |w|
+    - if body_class == 'eng-rus'
+      .col-12
+        h3.form-signin-heading
+          - @article.title.split.each do |w|
+            span.word-skyeng = w
+      .col-12
+        - @article.content.split("\r\n").each do |sen|
+          - sen.split.each do |w|
+            span.word-skyeng = w
+          br
+        - @article.content.split.each do |w|
           span.word-skyeng = w
-    .col-12
-      - @article.content.split("\r\n").each do |sen|
-        - sen.split.each do |w|
-          span.word-skyeng = w
-        br
-      - @article.content.split.each do |w|
-        span.word-skyeng = w
+    - else
+      .col-12
+        h3.form-signin-heading = @article.title
+      .col-12
+        pre = @article.content
+
