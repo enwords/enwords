@@ -1,4 +1,4 @@
-.row.pt-2
+.row.pt-3
   .col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2
     .row.text-center
       - if @sentences.empty?
@@ -13,7 +13,9 @@
               = audio_tag "https://audio.tatoeba.org/sentences/#{sentence.language}/#{sentence.id}.mp3"
           - else
             span.fa.fa-volume-off
-          h4#original-sentence data-sentence-id=sentence.id = sentence.sentence
+          h4#original-sentence data-sentence-id=sentence.id
+            - sentence.sentence.split.each do |w|
+              span.word-skyeng = w
         .col-10.offset-1 style='margin-top: 10px'
           = text_area_tag 'input-sentence', '',
                   autocomplete: 'off',
