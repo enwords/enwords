@@ -14,8 +14,11 @@
           - else
             span.fa.fa-volume-off
           h4#original-sentence data-sentence-id=sentence.id
-            - sentence.sentence.split.each do |w|
-              span.word-skyeng = w
+            - if body_class == 'eng-rus'
+              - sentence.sentence.split.each do |w|
+                span.word-skyeng = w
+            - else
+              = sentence.sentence
         .col-10.offset-1 style='margin-top: 10px'
           = text_area_tag 'input-sentence', '',
                   autocomplete: 'off',
