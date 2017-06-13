@@ -5,8 +5,12 @@ $(function () {
 
   $selectedWord.qtip({
     position: {
-      my: 'center left',  // Position my top left...
-      at: 'center right', // at the bottom right of...
+      my: 'bottom left',
+      at: 'top right',
+      viewport: true,
+    },
+    show: {
+      event: 'click',
     },
     hide:     {
       fixed: true,

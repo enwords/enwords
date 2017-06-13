@@ -1,16 +1,19 @@
-.container
-  .col-12.col-md-8.offset-md-2
-    .row.row-content
-      .col-12.jumbotron
-        .col-6.offset-6.links-top
-          = link_to t('texts.links.words'), words_path(article: @article)
-          = ' / '
-          = link_to t('texts.links.edit'), edit_article_path(@article)
-          = ' / '
-          = link_to t('texts.links.delete'), article_path(@article), method: :delete
-        .col-12
-          h3.form-signin-heading
-            = @article.title
-        .col-12
-          pre
-            = @article.content
+.col-12.col-md-8.offset-md-2.jumbotron
+  .row.row-content
+    .col-12.links-top.mb-1
+      = link_to t('texts.links.words'), words_path(article: @article)
+      = ' / '
+      = link_to t('texts.links.edit'), edit_article_path(@article)
+      = ' / '
+      = link_to t('texts.links.delete'), article_path(@article), method: :delete
+    .col-12
+      h3.form-signin-heading
+        - @article.title.split.each do |w|
+          span.word-skyeng = w
+    .col-12
+      - @article.content.split("\r\n").each do |sen|
+        - sen.split.each do |w|
+          span.word-skyeng = w
+        br
+      - @article.content.split.each do |w|
+        span.word-skyeng = w
