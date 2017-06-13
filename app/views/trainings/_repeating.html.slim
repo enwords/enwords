@@ -15,8 +15,12 @@
           - else
             span.fa.fa-volume-off
           h4#original-sentence data-sentence-id=sentence.id
-            - sentence.sentence.split.each do |w|
-              span.word-skyeng = w
+            - if body_class == 'eng-rus'
+              - sentence.sentence.split.each do |w|
+                span.word-skyeng = w
+            - else
+              = sentence.sentence
+
         - translate = sentence.translations.where(language: current_user.native_language).first.try(:sentence)
         - if translate
           .col-12.translation-block
