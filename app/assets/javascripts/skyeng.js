@@ -1,4 +1,4 @@
-$(function () {
+$(document).on('turbolinks:load', function () {
   'use strict';
 
   var $selectedWord = $('.eng-rus .word-skyeng');
