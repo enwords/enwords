@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require mdb
 //= require iCheck/icheck.min.js
 //= require qTip2

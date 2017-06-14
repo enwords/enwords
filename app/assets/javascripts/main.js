@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function () {
+$(function () {
   'use strict';
 
   //checkboxes
@@ -36,17 +36,6 @@ $(document).on('turbolinks:load', function () {
 
   // flash
   $('.alert-success, .alert-notice').fadeOut(3000);
-
-  // bugfix dropdown
-  $('.dropdown-toggle').dropdown();
-
-  window.onerror = function (e) {
-    if (e.match(/Collapse is transitioning/gi) ||
-      e.match(/dropdown is not a function/gi)  ||
-      e.match(/has already been loaded/gi)) {
-      location.reload();
-    }
-  };
 
   // other
   String.prototype.capitalize = function () {
@@ -124,5 +113,4 @@ $(document).on('turbolinks:load', function () {
       },
     },
   });
-
 });
