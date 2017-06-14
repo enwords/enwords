@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function () {
+$(function () {
   'use strict';
 
   var $btnShowTranslation = $('.translation-block a');
