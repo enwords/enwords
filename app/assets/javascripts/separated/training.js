@@ -1,4 +1,4 @@
-$(function () {
+$(document).on('turbolinks:load', function () {
   'use strict';
 
   var $btnShowTranslation = $('.translation-block a');
@@ -9,7 +9,7 @@ $(function () {
     $('.words-from-sentence-before').replaceWith(html);
     $.getScript('/assets/skyeng.js');
 
-    $('.words-from-sentence-after').hide().fadeIn(500);
+    $('.words-from-sentence-after').fadeIn(500);
 
     // switcher
     var $switcher = $('.switcher');
