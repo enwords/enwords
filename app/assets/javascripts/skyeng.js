@@ -13,6 +13,7 @@ $(function () {
       event: 'click',
     },
     hide:     {
+      event: 'unfocus',
       fixed: true,
       delay: 500,
     },
@@ -40,11 +41,14 @@ $(function () {
 
             var content = (
             '<div style="font-size: 1.25rem; font-weight: 100">' +
-            '<span class="fa fa-volume-up" onclick="$(this).children(\'audio\')[0].play();" style="cursor: pointer">' +
-            '<audio src="' + soundUrl + '"></audio>' +
+            '<span> ' +
+              '<span class="fa fa-volume-up" onclick="$(this).children(\'audio\')[0].play();" style="cursor: pointer">' +
+                '<audio src="' + soundUrl + '"></audio>' +
+              '</span>' +
+              '<span> ' + word.capitalize() + '</span>' +
             '</span>' +
-            '<span style="color: #b9b9b9"> [' + transcription + ']</span>' +
-            '<span> ' + translation + '</span>' +
+              '<span style="color: #b9b9b9"> [' + transcription + ']</span>' +
+              '<span> ' + translation + '</span>' +
             '</div>');
 
             api.set('content.text', content);
