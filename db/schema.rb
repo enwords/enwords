@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170520182509) do
+ActiveRecord::Schema.define(version: 20170629200430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(version: 20170520182509) do
   create_table "audios", id: false, force: :cascade do |t|
     t.integer "sentence_id"
     t.index ["sentence_id"], name: "index_audios_on_sentence_id", using: :btree
+  end
+
+  create_table "authentication_providers", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_name_on_authentication_providers", using: :btree
   end
 
   create_table "links", id: false, force: :cascade do |t|
@@ -57,6 +64,19 @@ ActiveRecord::Schema.define(version: 20170520182509) do
     t.integer "words_learned", default: 0,  null: false
     t.integer "current_page",  default: 1,  null: false
     t.index ["user_id"], name: "index_trainings_on_user_id", using: :btree
+  end
+
+  create_table "user_authentications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "authentication_provider_id"
+    t.string   "uid"
+    t.string   "token"
+    t.datetime "token_expires_at"
+    t.text     "params"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["authentication_provider_id"], name: "index_user_authentications_on_authentication_provider_id", using: :btree
+    t.index ["user_id"], name: "index_user_authentications_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

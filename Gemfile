@@ -68,6 +68,15 @@ gem 'active_interaction'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'devise'
+gem 'domp'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-vkontakte'
+gem 'omniauth-google'
+
+gem 'figaro'
+
 gem 'foreman'
 gem 'will_paginate', '~> 3.1.0'
 

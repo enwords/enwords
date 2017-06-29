@@ -1,4 +1,14 @@
 class User < ActiveRecord::Base
+  def self.create_from_omniauth(params)
+    attributes = {
+      email: params['info']['email'],
+      password: Devise.friendly_token
+    }
+
+    create(attributes)
+  end
+
+  has_many :authentications, class_name: 'UserAuthentication', dependent: :destroy
   has_many :word_statuses,
            dependent: :delete_all
   has_many :words,
@@ -7,7 +17,7 @@ class User < ActiveRecord::Base
            dependent: :delete_all
   has_one :training
 
-  devise :database_authenticatable, :registerable,
+  devise :omniauthable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   enum role: %i[user vip admin]
