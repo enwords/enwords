@@ -98,6 +98,7 @@ en:
         sign_in: 'Sign In'
         signing_in: "Signing in..."
         signing_up: "Signing up..."
+        select_languages: "Select languages"
 
   static:
     index:
