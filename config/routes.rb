@@ -7,8 +7,17 @@ Rails.application.routes.draw do
     get ':locale/users/password' => 'devise/passwords#edit', as: :edit_password
   end
 
+  get 'dev' => 'development#index'
+
+  devise_for :users,
+             only:        :omniauth_callbacks,
+             controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
   scope ':locale', locale: /#{I18n.available_locales.join('|')}/ do
-    devise_for :users, controllers: { registrations: 'registrations' }
+    devise_for :users,
+               skip:        :omniauth_callbacks,
+               controllers: { registrations: 'registrations' }
+
 
     root to: 'static#index'
 
