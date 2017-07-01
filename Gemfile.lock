@@ -86,7 +86,6 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
-    domp (0.0.7)
     erubis (2.7.0)
     exception_notification (4.2.1)
       actionmailer (>= 4.0, < 6)
@@ -234,6 +233,7 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.8.1)
+    ruby_dig (0.0.2)
     sass (3.4.22)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -296,7 +296,6 @@ DEPENDENCIES
   capistrano-rvm
   coffee-rails (~> 4.1.0)
   devise
-  domp
   exception_notification
   figaro
   font-awesome-sass (= 4.6.2)
@@ -319,6 +318,7 @@ DEPENDENCIES
   rails-assets-tether!
   rails_12factor
   rubocop
+  ruby_dig
   sass-rails (~> 5.0)
   simple_form
   slim

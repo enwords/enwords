@@ -1,13 +1,4 @@
 class User < ActiveRecord::Base
-  def self.create_from_omniauth(params)
-    attributes = {
-      email: params['info']['email'] || "#{Devise.friendly_token}@#{params['provider']}.com",
-      password: Devise.friendly_token
-    }
-
-    create(attributes)
-  end
-
   has_many :authentications, class_name: 'UserAuthentication', dependent: :destroy
   has_many :word_statuses,
            dependent: :delete_all
