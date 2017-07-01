@@ -45,8 +45,8 @@ class TrainingsController < ApplicationController
      JOIN sentences_words ON sentences_words.word_id = words.id
      JOIN sentences ON sentences.id = sentences_words.sentence_id
      LEFT JOIN word_statuses ON word_statuses.word_id = words.id
-     WHERE sentences.id = #{params[:id]}
      AND (word_statuses.user_id = #{current_user.id} OR word_statuses.user_id IS NULL)
+     WHERE sentences.id = #{params[:id]}
      ORDER BY words.id"
   end
 end
