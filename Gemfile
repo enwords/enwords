@@ -68,7 +68,6 @@ gem 'active_interaction'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'devise'
-gem 'domp'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
@@ -87,3 +86,5 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-tether'
   gem 'rails-assets-qTip2'
 end
+
+gem 'ruby_dig'
