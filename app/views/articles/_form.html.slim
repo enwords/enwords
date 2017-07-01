@@ -12,7 +12,7 @@
   .field
     .settings-item
       = f.select :language,
-              options_for_select(User::FULL_LANGUAGE_NAME, current_user.learning_language),
+              options_for_select(User::FULL_LANGUAGE_NAMES, current_user.learning_language),
               {}, { class: 'form-control' }
 
   - if current_user.learning_language == 'cmn' || current_user.learning_language == 'jpn'
