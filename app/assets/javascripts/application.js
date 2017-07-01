@@ -17,3 +17,4 @@
 //= require qTip2
 //= require main
 //= require skyeng
+//= require facebook
