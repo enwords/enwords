@@ -213,6 +213,7 @@ en:
       added_to_unknown:  'Added to "Unknown"'
       state_changed: "Status of words successfully changed"
     select_all: 'Select all'
+    skyeng: "Skyeng"
   articles:
     delete: "Successfully deleted"
   skyeng_settings:

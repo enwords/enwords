@@ -6,6 +6,7 @@ module ApplicationHelper
       when 'learned'  then t 'words.learned'
       when 'unknown'  then t 'words.unknown'
       when 'all'      then t 'words.all'
+      when 'skyeng'   then t 'words.skyeng'
       end
     elsif params[:search]
       t 'words.search_result'
