@@ -23,7 +23,8 @@ $(function () {
     content:  {
       text: function (event, api) {
         $.ajax({
-          url:      '//dictionary.skyeng.ru/api/public/v1/words/search?search=' + $(this).text(),
+          url:      '//dictionary.skyeng.ru/api/public/v1/words/search',
+          data:     { search: $(this).text().toLowerCase() },
           type:     'GET',
           dataType: 'json',
         })
@@ -57,7 +58,7 @@ $(function () {
             api.set('content.text', status + ': ' + error);
           });
 
-        return 'Loading...';
+        return '...';
       },
     },
   });
