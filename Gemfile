@@ -88,3 +88,4 @@ source 'https://rails-assets.org' do
 end
 
 gem 'ruby_dig'
+gem 'aasm'

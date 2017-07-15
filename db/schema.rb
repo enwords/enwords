@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170629200430) do
+ActiveRecord::Schema.define(version: 20170715110921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,14 @@ ActiveRecord::Schema.define(version: 20170629200430) do
     t.integer "word_id",     null: false
     t.integer "sentence_id", null: false
     t.index ["word_id", "sentence_id"], name: "index_sentences_words_on_word_id_and_sentence_id", unique: true, using: :btree
+  end
+
+  create_table "skyeng_settings", force: :cascade do |t|
+    t.integer "user_id"
+    t.string  "aasm_state"
+    t.string  "email",      null: false
+    t.string  "token"
+    t.index ["user_id"], name: "index_skyeng_settings_on_user_id", using: :btree
   end
 
   create_table "trainings", force: :cascade do |t|

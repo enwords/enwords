@@ -9,12 +9,23 @@ class ApplicationController < ActionController::Base
   private
 
   def word_statistic
-    @learning_words_count = current_user.words.where(language: current_user.learning_language,
+    @learning_words_count = current_user.words.where(language:      current_user.learning_language,
                                                      word_statuses: { learned: false }).count
-    @learned_words_count  = current_user.words.where(language: current_user.learning_language,
+    @learned_words_count  = current_user.words.where(language:      current_user.learning_language,
                                                      word_statuses: { learned: true }).count
     @unknown_words_count  = Word.where(language: current_user.learning_language).count \
                             - (@learning_words_count + @learned_words_count)
+
+    skyeng_setting = current_user.skyeng_setting
+    if skyeng_setting.present?
+      begin
+        @skyeng_words_count = Api::Skyeng.learning_word_ids(email: skyeng_setting.email,
+                                                            token: skyeng_setting.token)
+                                .count
+      rescue
+        0
+      end
+    end
   end
 
   def set_locale

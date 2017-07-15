@@ -23,6 +23,12 @@ module Api
         result.map { |i| i['text'] }.uniq
       end
 
+      def learning_words(email:, token:)
+        ids = learning_word_ids(email: email, token: token)
+        return [] unless ids.is_a?(Array)
+        words(ids: ids)
+      end
+
       def first_meaning(word:)
         result = build_get_response('http://dictionary.skyeng.ru/api/public/v1/words/search',
                                     search: word)
