@@ -1,10 +1,5 @@
 .container
-  .row
-    .col-12
-      .main--languages
-        = link_to_unless_current 'English', locale: 'en'
-        = ' | '
-        = link_to_unless_current 'Русский', locale: 'ru'
+  = render 'layouts/locale_switcher'
   .row
     - if user_signed_in?
       - unless current_user.learning_language.present?

@@ -1,0 +1,12 @@
+.container
+  = render 'layouts/locale_switcher'
+  .col-12
+    h2.main--title = t('skyeng_settings.finished')
+
+  .col-12.col-sm-10.offset-sm-1.col-md-6.offset-md-3.jumbotron.mt-4
+    .field
+      = link_to t('skyeng_settings.study_words'), words_path(status: :skyeng),
+              class: 'btn btn-lg btn-secondary btn-block'
+    .field
+      = link_to t('skyeng_settings.change'), edit_skyeng_setting_path,
+              class: 'btn btn-lg btn-secondary btn-block'
