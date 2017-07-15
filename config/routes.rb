@@ -38,6 +38,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resource :skyeng_setting do
+    put :add_token
+  end
+
+  get 'first_meaning' => 'skyeng#first_meaning'
+
   match '*path', to: redirect("/#{I18n.default_locale}/%{path}%"), via: [:get]
   match '', to: redirect("/#{I18n.default_locale}"), via: [:get]
 end

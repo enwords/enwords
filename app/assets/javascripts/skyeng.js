@@ -23,22 +23,17 @@ $(function () {
     content:  {
       text: function (event, api) {
         $.ajax({
-          url:      '//dictionary.skyeng.ru/api/public/v1/words/search',
-          data:     { search: $(this).text().toLowerCase() },
+          url:      '/first_meaning',
+          data:     { word: $(this).text() },
           type:     'GET',
           dataType: 'json',
         })
           .done(function (data) {
-
-            data = data.sort(function (a, b) {
-              return parseFloat(a.id) - parseFloat(b.id);
-            });
-
-            var word          = data[0].text;
-            var translation   = data[0].meanings[0].translation.text.capitalize();
-            var transcription = data[0].meanings[0].transcription;
-            var previewUrl    = data[0].meanings[0].previewUrl;
-            var soundUrl      = data[0].meanings[0].soundUrl;
+            var word          = data.text;
+            var translation   = data.translation.text.capitalize();
+            var transcription = data.transcription;
+            var previewUrl    = data.previewUrl;
+            var soundUrl      = data.soundUrl;
 
             var content = (
             '<div style="font-size: 1.25rem; font-weight: 100">' +

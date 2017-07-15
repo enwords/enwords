@@ -82,6 +82,17 @@ en:
       new:
         title:  "Send new unlock instruction"
 
+  active_interaction:
+    errors:
+      models:
+        skyeng_setting/create:
+          attributes:
+            email:
+              email_invalid: 'Email is incorrect'
+        skyeng_setting/add_token:
+          attributes:
+            token:
+              blank: 'Token can`t be blank'
   shared:
     navigation:
       words:
@@ -89,6 +100,7 @@ en:
         learned: 'Learned '
         learning: 'Learning '
         unknown: 'Unknown '
+        skyeng: "Skyeng"
       texts: 'Texts'
       last_training: 'Continue training'
       search: 'Word search'
@@ -99,6 +111,7 @@ en:
         signing_in: "Signing in..."
         signing_up: "Signing up..."
         select_languages: "Select languages"
+      skyeng_setting: "Skyeng Settings"
 
   static:
     index:
@@ -200,5 +213,17 @@ en:
       added_to_unknown:  'Added to "Unknown"'
       state_changed: "Status of words successfully changed"
     select_all: 'Select all'
+    skyeng: "Skyeng"
   articles:
     delete: "Successfully deleted"
+  skyeng_settings:
+    errors:
+      did_not_save: "Settings did not save"
+    add_email: "Enter email from your skyeng account"
+    main: "Now you can study the words added to the skyeng.ru, for this you need to fill the following fields"
+    submit: "Submit"
+    add_token: "Add a secret key, we sent it to %{email}"
+    token_example: "Add token here"
+    finished: "Now you can see the words added to the site skyeng.ru"
+    study_words: "Study words from Skyeng"
+    change: "Change skyeng email or token"
