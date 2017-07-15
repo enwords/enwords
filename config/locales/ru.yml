@@ -228,6 +228,7 @@ ru:
       added_to_unknown:  'Добавлено в "Неизвестные"'
       state_changed: "Состояние слов успешно изменено"
     select_all: 'Выбрать все'
+    skyeng: "Skyeng"
   articles:
     delete: "Удалено успешно"
 

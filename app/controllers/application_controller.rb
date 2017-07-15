@@ -9,23 +9,11 @@ class ApplicationController < ActionController::Base
   private
 
   def word_statistic
-    @learning_words_count = current_user.words.where(language:      current_user.learning_language,
-                                                     word_statuses: { learned: false }).count
-    @learned_words_count  = current_user.words.where(language:      current_user.learning_language,
-                                                     word_statuses: { learned: true }).count
+    @skyeng_words_count   = Word::GetByStatus.run(status: 'skyeng',   user: current_user).result.count
+    @learning_words_count = Word::GetByStatus.run(status: 'learning', user: current_user).result.count
+    @learned_words_count  = Word::GetByStatus.run(status: 'learned',  user: current_user).result.count
     @unknown_words_count  = Word.where(language: current_user.learning_language).count \
                             - (@learning_words_count + @learned_words_count)
-
-    skyeng_setting = current_user.skyeng_setting
-    if skyeng_setting.present?
-      begin
-        @skyeng_words_count = Api::Skyeng.learning_word_ids(email: skyeng_setting.email,
-                                                            token: skyeng_setting.token)
-                                .count
-      rescue
-        0
-      end
-    end
   end
 
   def set_locale
