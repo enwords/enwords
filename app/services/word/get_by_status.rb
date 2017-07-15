@@ -60,8 +60,10 @@ class Word::GetByStatus < ActiveInteraction::Base
     skyeng_setting = user.skyeng_setting
     skyeng_words = Api::Skyeng.learning_words(email: skyeng_setting.try(:email),
                                               token: skyeng_setting.try(:token))
+    split_words = skyeng_words.flat_map(&:split).uniq
     Word.where(language: user.learning_language,
-               word:     skyeng_words)
+               word:     split_words)
+        .where.not(id: 1..100)
         .order(:id)
   end
 end
