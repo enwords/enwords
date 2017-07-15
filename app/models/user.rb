@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
            dependent: :delete_all
   has_one :training
 
+  has_one :skyeng_setting
+
   devise :omniauthable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 

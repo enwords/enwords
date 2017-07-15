@@ -25,17 +25,8 @@ class WordsController < ApplicationController
   def edit; end
 
   def index
-    @words = if params[:status]
-               case params[:status]
-               when 'learning'  then learning
-               when 'learned'   then learned
-               when 'unknown'   then unknown
-               when 'available' then available
-               end
-             elsif params[:search]     then searching
-             elsif params[:article]    then words_from_article
-             elsif current_user.admin? then admining
-             end
+    @words = Word::GetByStatus.run(params.merge(user: current_user)).result
+                              .paginate(page: params[:page], per_page: 20)
   end
 
   def update
@@ -73,43 +64,6 @@ class WordsController < ApplicationController
   end
 
   private
-
-  def words_from_article
-    word_ids = Hash[Article.find(params[:article]).frequency.sort_by { |k, v| v }.reverse].keys
-    @words   = Word.where(id: word_ids)
-                   .where.not(id: WordStatus.select(:word_id).where(user: current_user, learned: true))
-                   .order("position(id::text in '#{word_ids.join(', ')}')").paginate(page: params[:page], per_page: 20)
-  end
-
-  def available
-    Word.where(language: current_user.learning_language)
-        .group(:id).order(:id).paginate(page: params[:page], per_page: 20)
-  end
-
-  def learned
-    current_user.words.where(language: current_user.learning_language).where(word_statuses: { learned: true })
-                .order(:id).paginate(page: params[:page], per_page: 20)
-  end
-
-  def learning
-    current_user.words.where(language: current_user.learning_language).where(word_statuses: { learned: false })
-                .order(:id).paginate(page: params[:page], per_page: 20)
-  end
-
-  def unknown
-    Word.where(words: { language: current_user.learning_language })
-        .where.not(id: WordStatus.select(:word_id).where(user: current_user)).group(:id)
-        .order(:id).paginate(page: params[:page], per_page: 20)
-  end
-
-  def searching
-    Word.where(language: current_user.learning_language).where('word LIKE ?', "%#{params[:search].strip.downcase}%")
-        .group(:id).order(:id).paginate(page: params[:page], per_page: 20)
-  end
-
-  def admining
-    Word.all.order(:id).paginate(page: params[:page], per_page: 20)
-  end
 
   def word_params
     params.require(:word).permit(:id, :language, :word)

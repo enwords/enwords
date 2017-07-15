@@ -46,6 +46,18 @@ ru:
             email:
               taken:  "Почтовый адрес уже занят"
 
+  active_interaction:
+    errors:
+      models:
+        skyeng_setting/create:
+          attributes:
+            email:
+              email_invalid: 'Проверте правильность email'
+        skyeng_setting/add_token:
+          attributes:
+            token:
+              blank: 'Токен не может быть пустым'
+
   devise:
     confirmation:
       new:
@@ -104,6 +116,7 @@ ru:
         learned: 'Выученные '
         learning: 'Изучаемые '
         unknown: 'Неизвестные '
+        skyeng: "Skyeng"
       texts: 'Тексты'
       last_training: 'Продолжить тренировку'
       search: 'Поиск слов'
@@ -114,6 +127,7 @@ ru:
         signing_in: "Вход..."
         signing_up: "Регистрация..."
         select_languages: "Выберете языки"
+      skyeng_setting: "Настройки Skyeng"
 
   static:
     index:
@@ -214,8 +228,21 @@ ru:
       added_to_unknown:  'Добавлено в "Неизвестные"'
       state_changed: "Состояние слов успешно изменено"
     select_all: 'Выбрать все'
+    skyeng: "Skyeng"
   articles:
     delete: "Удалено успешно"
 
   will_paginate:
     page_gap: '...'
+  skyeng_settings:
+    errors:
+      did_not_save: "Настройки не сохранены"
+    add_email: "Введите email от вашей учетной записи skyeng"
+    main: "Теперь вы можете изучать слова, добавленные на сайте skyeng.ru, для этого вам необходимо заполнить следующие поля"
+    submit: "Подтвердить"
+    add_token: "Добавьте секретный ключ, мы отправили его вам на %{email}"
+    token_example: "Добавьте токен сюда"
+    finished: "Теперь вам доступны слова, добавленные на сайте skyeng.ru"
+    study_words: "Начать изучать слова с сайта Skyeng"
+    change: "Изменить email или токен skyeng"
+
