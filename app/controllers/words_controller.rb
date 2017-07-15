@@ -31,6 +31,7 @@ class WordsController < ApplicationController
                when 'learned'   then learned
                when 'unknown'   then unknown
                when 'available' then available
+               when 'skyeng'    then skyeng
                end
              elsif params[:search]     then searching
              elsif params[:article]    then words_from_article
@@ -109,6 +110,20 @@ class WordsController < ApplicationController
 
   def admining
     Word.all.order(:id).paginate(page: params[:page], per_page: 20)
+  end
+
+  def skyeng
+    skyeng_words = Api::Skyeng.learning_words(email: current_user.skyeng_setting.email,
+                                              token: current_user.skyeng_setting.token)
+
+    x = skyeng_words.flat_map { |word| word.downcase.split }.uniq
+
+    Word.where(language: current_user.learning_language,
+               word: x)
+        .where.not(id: learned.pluck(:id))
+        .group(:id)
+        .order(:id)
+        .paginate(page: params[:page], per_page: 20)
   end
 
   def word_params
