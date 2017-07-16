@@ -87,13 +87,11 @@ Rails.application.configure do
   config.i18n.default_locale                          = :en
   config.i18n.fallbacks                               = true
 
-  # Password reset
-  config.action_mailer.default_url_options            = { host: 'enwords.tk' }
-  Rails.application.routes.default_url_options[:host] = 'enwords.tk'
-
-  config.action_mailer.delivery_method       = :smtp
-
+  # smtp settings
   config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_caching       = false
+  config.action_mailer.default_url_options   = { host: 'enwords.tk' }
+  config.action_mailer.delivery_method       = :smtp
   config.action_mailer.default charset: 'utf-8'
 
   config.action_mailer.smtp_settings = {
