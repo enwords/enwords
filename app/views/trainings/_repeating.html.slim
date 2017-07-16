@@ -47,8 +47,8 @@
     .words-from-sentence-before
 
 = content_for :footer_js do
-  = javascript_include_tag 'separated/training', 'data-turbolinks-track' => true
-  = javascript_include_tag 'separated/repeating', 'data-turbolinks-track' => true
+  = javascript_include_tag 'training/main'
+  = javascript_include_tag 'training/repeating'
 
 - if current_user.audio_enable
   javascript:
