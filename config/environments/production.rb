@@ -88,12 +88,12 @@ Rails.application.configure do
   config.i18n.fallbacks                               = true
 
   # Password reset
-  config.action_mailer.default_url_options            = { host: 'ewords.herokuapp.com' }
-  Rails.application.routes.default_url_options[:host] = 'ewords.herokuapp.com'
+  config.action_mailer.default_url_options            = { host: 'enwords.tk' }
+  Rails.application.routes.default_url_options[:host] = 'enwords.tk'
 
   config.action_mailer.delivery_method       = :smtp
-  config.action_mailer.perform_deliveries    = true
-  config.action_mailer.raise_delivery_errors = false
+
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default charset: 'utf-8'
 
   config.action_mailer.smtp_settings = {
@@ -105,4 +105,11 @@ Rails.application.configure do
     user_name:            ENV['GMAIL_USERNAME'],
     password:             ENV['GMAIL_PASSWORD']
   }
+
+  Rails.application.config.middleware.use ExceptionNotification::Rack,
+                                          email: {
+                                            email_prefix:         '[Enwords][ERROR] ',
+                                            sender_address:       %('Enwords Notifier' <noreply@enwords.tk>),
+                                            exception_recipients: %w[sadedv@mail.ru]
+                                          }
 end
