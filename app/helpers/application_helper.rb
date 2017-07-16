@@ -19,4 +19,8 @@ module ApplicationHelper
     return if current_user.blank?
     "#{current_user.learning_language}-#{current_user.native_language}"
   end
+
+  def actual_skyeng_setting_path
+    current_user.skyeng_setting.present? ? skyeng_setting_path : new_skyeng_setting_path
+  end
 end

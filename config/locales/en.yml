@@ -130,23 +130,22 @@ en:
           text: "Configure training: increase the number of sentences, turn on autoplay audio or making training
           more diverse sacrificing translation (unfortunately not all sentences translated)"
         item_4:
-          text: "If it difficult for you without the word translation, add extension from Google for your browser
-          (<a href='https://chrome.google.com/webstore/detail/google-translate/aapbdbdomjkkjkaonfhkkikfgjllcleb?hl'>Chrome</a>,
-          <a href='https://addons.mozilla.org/ru/firefox/addon/google-translator-for-firefox/'>Firefox</a>,
-          <a href='https://addons.opera.com/ru/extensions/details/googletm-translator/'>Opera</a>) two clicks and the word translated"
+          text: "Do you study English words on the site skyeng.ru? <a href=%{skyeng_setting_path}>Add your email</a>
+          from the skyeng account and you will be able to continue learning on our website"
         item_5:
           text: "Don't forget to add Enwords to bookmarks and add the bookmark to your home screen on your mobile device"
 
       sign_out:
         item1:
           text: "Enwords - a free application created to improve your vocabulary of studied language, here represented
-          about 0.5 million words and 3.5 million sentences in 30 languages"
+          about 0.5 million words and 3.5 million sentences in 30 languages."
         item2:
           text: "In different sentences words have different meanings, it's impossible to learn all translations of all
-          words, you need to learn to understand their meaning in the context"
-          text_2: "Your task is to choose words and Enwords will give you sentences with these words, repeat them at
-          least 10 minutes a day and in a month you will see result. Don't forget to read books, to take audio courses
-          and to watch movies in the learning language, you need to take words exactly from there"
+          words, you need to learn to understand their meaning in the context.<br><br>
+          Your task is to choose words and Enwords will give you sentences with these words, repeat them at
+          least 10 minutes a day and in a month you will see the result.<br><br>
+          Don't forget to read books, listen to audio
+          courses and watch movies in the studied language, you need to take the words from there."
     result:
       title: "Result of training:"
       text: "Learned words"
@@ -225,5 +224,5 @@ en:
     add_token: "Add a secret key, we sent it to %{email}"
     token_example: "Add token here"
     finished: "Now you can see the words added to the site skyeng.ru"
-    study_words: "Study words from Skyeng"
+    study_words: "Learn words from Skyeng"
     change: "Change skyeng email or token"

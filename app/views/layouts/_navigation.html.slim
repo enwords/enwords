@@ -38,14 +38,9 @@ header
                       training_path(page: current_user.training.current_page),
                       class: 'nav-link'
             - if body_class == 'eng-rus'
-              - if current_user.skyeng_setting.present?
-                li.nav-item = link_to t('shared.navigation.skyeng_setting'),
-                        skyeng_setting_path,
-                        class: 'nav-link'
-              - else
-                li.nav-item = link_to t('shared.navigation.skyeng_setting'),
-                        new_skyeng_setting_path,
-                        class: 'nav-link'
+              li.nav-item = link_to t('shared.navigation.skyeng_setting'),
+                      actual_skyeng_setting_path,
+                      class: 'nav-link'
 
           = form_tag words_path, method: 'get',
                   class: 'navbar-form navbar-right' do
