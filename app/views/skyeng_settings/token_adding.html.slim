@@ -1,15 +1,14 @@
-.container
-  = render 'layouts/locale_switcher'
-  .col-12
-    h2.main--title == t('skyeng_settings.main')
+= render 'layouts/locale_switcher'
+.col-12
+  h2.main--title.text-center == t('skyeng_settings.main')
 
-  .col-12.col-sm-10.offset-sm-1.col-md-6.offset-md-3.jumbotron.mt-4
-    h2.form-signin-heading = t('skyeng_settings.add_token', email: @skyeng_setting.email)
-    = form_tag add_token_skyeng_setting_path, method: :put do |f|
-      .field
-        = text_field_tag 'skyeng_setting[token]', '',
-                placeholder: t('skyeng_settings.token_example')
-      .field.pt-2
-        = button_tag t('skyeng_settings.submit'),
-                class: 'btn btn-lg btn-secondary btn-block',
-                data: { disable_with: t('loading') }
+.col-12.col-sm-10.offset-sm-1.col-md-6.offset-md-3.jumbotron.mt-4
+  h2.form-signin-heading = t('skyeng_settings.add_token', email: @skyeng_setting.email)
+  = form_tag add_token_skyeng_setting_path, method: :put do |f|
+    .field
+      = text_field_tag 'skyeng_setting[token]', '',
+              placeholder: t('skyeng_settings.token_example')
+    .field.pt-2
+      = button_tag t('skyeng_settings.submit'),
+              class: 'btn btn-lg btn-secondary btn-block',
+              data: { disable_with: t('loading') }
