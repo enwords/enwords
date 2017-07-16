@@ -8,15 +8,18 @@
           thead
             tr
               th
-                label
-                  input.check#check-all type='checkbox' == t 'words.select_all'
+                input.check#check-all type='checkbox'
+              th[style='width: 100%;']
+                label.checkbox-label[for='check-all']
+                  b = t 'words.select_all'
           - @words.each do |word|
             tr
               td
-                label.checkbox-label
+                span style='display: block; padding-bottom: 3px'
                   = check_box_tag 'ids[]', word.id, false, class: 'check'
-                  span.word-skyeng
-                    = word.word.capitalize
+              td
+                span.word-skyeng
+                  = word.word.capitalize
       .col-6.col-sm-3.col-md-2
         .btn-group-vertical
           = button_tag t('words.buttons.train_selected'),

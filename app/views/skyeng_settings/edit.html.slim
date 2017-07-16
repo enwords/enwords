@@ -1,15 +1,14 @@
-.container
-  = render 'layouts/locale_switcher'
+= render 'layouts/locale_switcher'
 
-  .col-12.col-sm-10.offset-sm-1.col-md-6.offset-md-3.jumbotron.mt-4
-    = form_for @skyeng_setting, url: skyeng_setting_path, method: :put do |f|
-      .field
-        = f.label :email
-        = f.text_field :email, placeholder: 'example@gmail.com'
-      .field
-        = f.label :token
-        = f.text_field :token
-      .field.pt-2
-        = f.button t('skyeng_settings.submit'),
-                class: 'btn btn-lg btn-secondary btn-block',
-                data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+.col-12.col-sm-10.offset-sm-1.col-md-6.offset-md-3.jumbotron.mt-4
+  = form_for @skyeng_setting, url: skyeng_setting_path, method: :put do |f|
+    .field
+      = f.label :email
+      = f.text_field :email, placeholder: 'example@gmail.com'
+    .field
+      = f.label :token
+      = f.text_field :token
+    .field.pt-2
+      = f.button t('skyeng_settings.submit'),
+              class: 'btn btn-lg btn-secondary btn-block',
+              data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
