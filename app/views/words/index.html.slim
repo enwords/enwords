@@ -4,18 +4,18 @@
   = form_tag word_action_words_path, method: :put do
     .row
       .col-6.col-sm-5.offset-sm-2.col-md-4.offset-md-3.table-main
-        table
+        table.table__words
           thead
             tr
               th
                 input.check#check-all type='checkbox'
-              th[style='width: 100%;']
-                label.checkbox-label[for='check-all']
+              th.max-width
+                label.checkbox-label for='check-all'
                   b = t 'words.select_all'
           - @words.each do |word|
             tr
               td
-                span style='display: block; padding-bottom: 3px'
+                span.check-box-wrapper
                   = check_box_tag 'ids[]', word.id, false, class: 'check'
               td
                 span.word-skyeng

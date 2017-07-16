@@ -38,13 +38,15 @@ ru:
         user:
           attributes:
             password:
+              blank: "Пароль не может быть пустым"
               too_short: "Пароль слишком короткий (минимум 6 символов)"
             password_confirmation:
               confirmation: "Пароли не совпадают"
             current_password:
               invalid: "Текущий пароль неверен"
             email:
-              taken:  "Почтовый адрес уже занят"
+              blank: "Почтовый не может быть пустым"
+              taken: "Почтовый адрес уже занят"
 
   active_interaction:
     errors:

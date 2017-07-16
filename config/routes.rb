@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   as :user do
     put ':locale/users/sign_up' => 'devise/registrations#update', as: :update_user_registration
-    get ':locale/users/password' => 'devise/passwords#edit', as: :edit_password
+    get ':id/users/password' => 'devise/passwords#edit', as: :edit_password
   end
 
   get 'dev' => 'development#index'

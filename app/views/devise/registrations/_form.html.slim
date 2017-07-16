@@ -1,28 +1,40 @@
-.col-12.col-sm-6.offset-sm-3.jumbotron.mt-5
-  h2.form-signin-heading= t('devise.registration.form.title')
-  = render 'devise/shared/omniouth'
-  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-    .col-12.error
-      = devise_error_messages!
-    .field
-      = f.email_field :email, autofocus: true, class: 'form-control', placeholder: t('email')
-    .field
-      = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: t('password_minimum_6')
-    .field
-      = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', placeholder: t('confirm_password')
-    .field
-      h5
-        = t('devise.registration.form.learning_language')
-        .settings-item
-          = f.select :learning_language, options_for_select(User::FULL_LANGUAGE_NAMES, :eng), {},
-                  { class: 'form-control' }
-    .field
-      h5
-        = t('devise.registration.form.native_language')
-        .settings-item
-          = f.select :native_language,
-                  options_for_select(User::FULL_LANGUAGE_NAMES, :rus), {},
-                  { class: 'form-control' }
-    = f.button t('devise.registration.form.title'),
-            class: 'btn btn-lg btn-secondary btn-block',
-            data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('shared.navigation.user.signing_up') }
+.row
+  .col-12
+    span.text-center.devise-error == resource.errors.full_messages.join('<br>')
+.row
+  .col-12.col-sm-6.offset-sm-3.jumbotron.mt-4
+    h2.form-signin-heading= t('devise.registration.form.title')
+    = render 'devise/shared/omniouth'
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      .field
+        = f.email_field :email, autofocus: true, class: 'form-control', placeholder: t('email')
+      .field
+        = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: t('password_minimum_6')
+      .field
+        = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', placeholder: t('confirm_password')
+      .field
+        table.table__form
+          tbody
+            tr
+              td.first-column
+                span
+                  = t('devise.registration.form.learning_language')
+              td.second-column
+                span
+                  = f.select :learning_language, options_for_select(User::FULL_LANGUAGE_NAMES, :eng), {},
+                          { class: 'form-control' }
+      .field
+        table.table__form
+          tbody
+            tr
+              td.first-column
+                span
+                  = t('devise.registration.form.native_language')
+              td.second-column
+                span
+                  = f.select :native_language, options_for_select(User::FULL_LANGUAGE_NAMES, :rus), {},
+                          { class: 'form-control' }
+
+      = f.button t('devise.registration.form.title'),
+              class: 'btn btn-lg btn-secondary btn-block',
+              data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('shared.navigation.user.signing_up') }
