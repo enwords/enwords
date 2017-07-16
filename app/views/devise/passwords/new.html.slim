@@ -1,7 +1,7 @@
 .container
   .row.row-content
     .col-12
-      .col-12.col-sm-6.offset-sm-3.jumbotron
+      .col-12.col-sm-6.offset-sm-3.jumbotron.mt-3
         h2.form-signin-heading= t('devise.passwords.new.title')
         = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
           .col-12.error
@@ -10,5 +10,4 @@
           .field
             = f.email_field :email, autofocus: true, class: 'form-control', placeholder: t('email')
           .field style=('padding-top: 20px') 
-            = f.submit t('devise.passwords.new.submit') ,class: 'btn btn-lg btn-secondary btn-block'
-        = render 'devise/shared/links'
+            = f.button t('devise.passwords.new.submit') ,class: 'btn btn-lg btn-secondary btn-block'
