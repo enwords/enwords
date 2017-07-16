@@ -16,8 +16,9 @@ class SkyengSettingsController < ApplicationController
     creating = SkyengSetting::Create.run(user: current_user, email: skyeng_setting_params[:email])
 
     if creating.valid?
-      Api::Skyeng.send_token(email: creating.result.email)
-      redirect_to skyeng_setting_path, notice: t('skyeng_settings.add_token')
+      skyeng_setting = creating.result
+      Api::Skyeng.send_token(email: skyeng_setting.email)
+      redirect_to skyeng_setting_path, notice: t('skyeng_settings.add_token', email: skyeng_setting.email)
     else
       redirect_to :back, alert: creating.errors.messages.values.join('<br>')
     end
