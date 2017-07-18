@@ -14,7 +14,7 @@ courses and watch movies in the studied language, you need to take the words fro
 
 Suggestions for the improvement of the project write to sadovnikov.js@gmail.com
 
-The project's website: enwords.tk/en
+The project's website: http://enwords.tk/en
 
 # README на русском
 
@@ -32,4 +32,4 @@ Enwords – бесплатная программа для повышения с
 
 Предложения по улучшению проекта пишите на почту sadovnikov.js@gmail.com
 
-Проект расположен по адресу: enwords.tk/en
+Проект расположен по адресу: http://enwords.tk/en
