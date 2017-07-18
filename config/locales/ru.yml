@@ -245,5 +245,5 @@ ru:
     token_example: "Добавьте токен сюда"
     finished: "Теперь вам доступны слова, добавленные на сайте skyeng.ru"
     study_words: "Начать изучать слова с сайта Skyeng"
-    change: "Изменить email или токен skyeng"
+    change: "Изменить email и токен skyeng"
 
