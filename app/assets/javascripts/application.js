@@ -18,3 +18,4 @@
 //= require main
 //= require skyeng
 //= require facebook
+//= require me-talk
