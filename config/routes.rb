@@ -44,6 +44,6 @@ Rails.application.routes.draw do
 
   get 'first_meaning' => 'skyeng#first_meaning'
 
-  match '*path', to: redirect("/#{I18n.default_locale}/%{path}%"), via: [:get]
+  get '*unmatched_route', to: redirect('/', status: 302)
   match '', to: redirect("/#{I18n.default_locale}"), via: [:get]
 end
