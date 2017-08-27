@@ -93,8 +93,8 @@ ru:
         title: "Настройки пользователя"
         unconfirmed_email: "Все еще ждем подтверждения для: "
         sentences_number: "Количество предложений на одно слово "
-        audio_enable: "Включить автовоспроизведение аудио? (не работает на мобилных устройствах)"
-        diversity_enable: "Больше разнообразных предложений (включите, если вам не нужены озвучка и перевод предложений)"
+        audio_enable: "Включить автовоспроизведение аудио?"
+        diversity_enable: "Больше разнообразных предложений, но без озвучка и перевода"
         submit:  "Сохранить изменения"
         delete_user: "Удалить аккаунт"
         confirm_delete_user: "Вы уверены? Восстановление аккаунта не возможно."
@@ -129,6 +129,7 @@ ru:
         signing_in: "Вход..."
         signing_up: "Регистрация..."
         select_languages: "Выберете языки"
+        proficiency_level: "Уровень владения языком"
       skyeng_setting: "Настройки Skyeng"
 
   static:
@@ -230,6 +231,7 @@ ru:
       state_changed: "Состояние слов успешно изменено"
     select_all: 'Выбрать все'
     skyeng: "Skyeng"
+    very_easy_words: "Слишком простые слова?"
   articles:
     delete: "Удалено успешно"
 
@@ -246,4 +248,10 @@ ru:
     finished: "Теперь вам доступны слова, добавленные на сайте skyeng.ru"
     study_words: "Начать изучать слова с сайта Skyeng"
     change: "Изменить email и токен skyeng"
-
+  user:
+    proficiency_level: "Я знаю %{num} первых слов"
+    select_proficiency_level: "Выберете уровень владения языком"
+  word:
+    proficiency_level:
+      hide: "Скрыть "
+      first_words: " первых слов из общего списка"

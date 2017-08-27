@@ -64,8 +64,8 @@ en:
         title: "User settings"
         unconfirmed_email: "Still waiting confirmation for: "
         sentences_number: "Number of sentences for one word"
-        audio_enable: "Turn on autoplay audio? (doesn't work on mobile devices)"
-        diversity_enable: "More diversity of sentences but without audio and translation (turn on if you don't need to translate sentences)"
+        audio_enable: "Turn on autoplay audio?"
+        diversity_enable: "More diversity of sentences but without audio and translation"
         submit:  "Submit"
         delete_user: "Delete account"
         confirm_delete_user: "Are you sure? Account recovery is not possible"
@@ -111,6 +111,7 @@ en:
         signing_in: "Signing in..."
         signing_up: "Signing up..."
         select_languages: "Select languages"
+        proficiency_level: "Level of language proficiency"
       skyeng_setting: "Skyeng Settings"
 
   static:
@@ -213,6 +214,7 @@ en:
       state_changed: "Status of words successfully changed"
     select_all: 'Select all'
     skyeng: "Skyeng"
+    very_easy_words: "Very easy words?"
   articles:
     delete: "Successfully deleted"
   skyeng_settings:
@@ -226,3 +228,7 @@ en:
     finished: "Now you can see the words added to the site skyeng.ru"
     study_words: "Learn words from Skyeng"
     change: "Change skyeng email and token"
+  word:
+    proficiency_level:
+      hide: "Hide first "
+      first_words: " words from the general word list"

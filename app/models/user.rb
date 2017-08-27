@@ -19,6 +19,9 @@ class User < ActiveRecord::Base
   enum native_language: SHORT_LANGUAGE_NAMES, _prefix: :native
   enum learning_language: SHORT_LANGUAGE_NAMES, _prefix: :learning
 
+  store_accessor :additional_info,
+                 :proficiency_levels
+
   # Allows to change a profile settings without entering a password
   def update_with_password(params, *options)
     current_password = params.delete(:current_password)
@@ -38,5 +41,9 @@ class User < ActiveRecord::Base
              end
     clean_up_passwords
     result
+  end
+
+  def proficiency_level
+    proficiency_levels.try(:[], learning_language) || 0
   end
 end

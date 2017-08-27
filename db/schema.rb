@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170715110921) do
+ActiveRecord::Schema.define(version: 20170722133710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(version: 20170715110921) do
     t.integer  "sentences_number",       limit: 2, default: 5,     null: false
     t.boolean  "audio_enable",                     default: false
     t.boolean  "diversity_enable",                 default: false
+    t.jsonb    "additional_info",                  default: {}
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

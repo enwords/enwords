@@ -10,7 +10,10 @@ class TrainingsController < ApplicationController
   end
 
   def words_from_sentence
-    @words_from_sentence = ActiveRecord::Base.connection.execute(words_from_sentence_sql)
+    @words_from_sentence = Word::FromSentence.run!(
+      user:     current_user,
+      sentence: Sentence.find(params[:id])
+    )
     render layout: false
   rescue
     render nothing: true
@@ -38,15 +41,5 @@ class TrainingsController < ApplicationController
 
   def current_training
     @training ||= current_user.training
-  end
-
-  def words_from_sentence_sql
-    "SELECT words.*, learned FROM words
-     JOIN sentences_words ON sentences_words.word_id = words.id
-     JOIN sentences ON sentences.id = sentences_words.sentence_id
-     LEFT JOIN word_statuses ON word_statuses.word_id = words.id
-     AND (word_statuses.user_id = #{current_user.id} OR word_statuses.user_id IS NULL)
-     WHERE sentences.id = #{params[:id]}
-     ORDER BY words.id"
   end
 end

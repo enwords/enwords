@@ -2,7 +2,7 @@ class Training::Create < ActiveInteraction::Base
   array   :word_ids
   string  :training_type
   object  :user
-  integer :words_learned
+  integer :words_learned, default: 0
 
   validates :word_ids, :training_type, :user, :words_learned, presence: true
   validate :check_training_type

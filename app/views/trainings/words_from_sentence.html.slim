@@ -1,27 +1,28 @@
 .row.words-from-sentence-after style='display: none;'
   .col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2.col-lg-6.offset-lg-3
-    table.table__words-from-sentence
-      thead
-        tr
-          th
-          th#know-th = t 'training.know'
-      tbody
-        - @words_from_sentence.each do |word_hash|
+    - if @words_from_sentence.any?
+      table.table__words-from-sentence
+        thead
           tr
-            td.td__word
-              span.word-skyeng = word_hash['word'].capitalize
-            td
-              .switcher data-id="#{word_hash['id']}" data-status="#{word_hash['learned'].nil? ? 'unknown' : word_hash['learned']}"
-                .switcher-round
-                = icon 'check', class: 'icon-check'
+            th
+            th#know-th = t 'training.know'
+        tbody
+          - @words_from_sentence.each do |word_hash|
+            tr
+              td.td__word
+                span.word-skyeng = word_hash['word'].capitalize
+              td
+                .switcher data-id="#{word_hash['id']}" data-status="#{word_hash['learned'].nil? ? 'unknown' : word_hash['learned']}"
+                  .switcher-round
+                  = icon 'check', class: 'icon-check'
 
-    .row#training-legend
-      .col-4
-        i.fa.fa-circle.unknown aria-hidden='true'
-        p.training-legend-text = t 'shared.navigation.words.unknown'
-      .col-4
-        i.fa.fa-circle.learning aria-hidden='true'
-        p.training-legend-text = t 'shared.navigation.words.learning'
-      .col-4
-        i.fa.fa-circle.learned aria-hidden='true'
-        p.training-legend-text = t 'shared.navigation.words.learned'
+      .row#training-legend
+        .col-4
+          i.fa.fa-circle.unknown aria-hidden='true'
+          p.training-legend-text = t 'shared.navigation.words.unknown'
+        .col-4
+          i.fa.fa-circle.learning aria-hidden='true'
+          p.training-legend-text = t 'shared.navigation.words.learning'
+        .col-4
+          i.fa.fa-circle.learned aria-hidden='true'
+          p.training-legend-text = t 'shared.navigation.words.learned'

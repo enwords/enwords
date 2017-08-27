@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resource :training do
       get :result
     end
+
     resources :articles do
       post :delete_selected, on: :collection
     end
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
     resources :words do
       collection do
         put :word_action
+        put :update_proficiency_level
       end
     end
   end

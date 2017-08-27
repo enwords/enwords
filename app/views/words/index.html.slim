@@ -55,6 +55,13 @@
                     name:  'commit',
                     class: 'btn btn-raised btn-sm btn-link unknown',
                     data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+          - if params[:status] == 'unknown'
+            span style='text-align: center; width: 100%;'
+              = link_to t('words.very_easy_words'), '#',
+                        class: 'link',
+                        style: 'opacity: .8',
+                        data:  { target: '#select-proficiency_level', toggle: 'modal' }
+
   .row
     .col-12.digg_pagination
       = will_paginate @words,
@@ -73,3 +80,26 @@
       p.title
         = t 'words.warning.text2'
         a href=edit_user_registration_path = t 'words.warning.link2'
+      p style='text-align: center; width: 100%;'
+        = link_to t('words.very_easy_words'), '#',
+            class: 'link',
+            style: 'opacity: .8',
+            data: { target: '#select-proficiency_level', toggle: 'modal' }
+
+#select-proficiency_level.modal.fade
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        h5.modal-title=t('words.very_easy_words')
+        button.close aria-label="Close" data-dismiss="modal" type="button"
+          span aria-hidden="true"  &times;
+      = form_tag update_proficiency_level_words_path, method: :put do
+        .modal-body
+          span
+            = t('word.proficiency_level.hide')
+            = text_field_tag :proficiency_level,
+                current_user.proficiency_level,
+                style: 'max-width: 100px'
+            = t('word.proficiency_level.first_words')
+        .modal-footer
+          = button_tag t('texts.form.submit'), class: 'btn btn-secondary'

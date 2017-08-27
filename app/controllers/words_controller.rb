@@ -25,7 +25,7 @@ class WordsController < ApplicationController
   def edit; end
 
   def index
-    @words = Word::GetByStatus.run(params.merge(user: current_user)).result
+    @words = Word::GetByStatus.run!(params.merge(user: current_user))
                               .paginate(page: params[:page], per_page: 20)
   end
 
@@ -61,6 +61,12 @@ class WordsController < ApplicationController
     else
       redirect_to :back
     end
+  end
+
+  def update_proficiency_level
+    Word::UpdateProficiencyLevel.run(user: current_user,
+                                     limit: params[:proficiency_level])
+    redirect_back(fallback_location: root_path)
   end
 
   private

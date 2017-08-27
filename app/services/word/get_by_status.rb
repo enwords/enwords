@@ -24,32 +24,44 @@ class Word::GetByStatus < ActiveInteraction::Base
   private
 
   def words_from_article
-    word_ids = Hash[Article.find(article).frequency.sort_by { |k, v| v }.reverse].keys
-    Word.where(id: word_ids)
-        .where.not(id: WordStatus.select(:word_id).where(user: user, learned: true))
-        .order("position(id::text in '#{word_ids.join(', ')}')")
+    @_words_from_article ||= begin
+      word_ids = Hash[Article.find(article).frequency.sort_by { |_k, v| v }.reverse].keys
+
+      available.where(id: word_ids)
+               .where.not(id: learned)
+               .order("position(id::text in '#{word_ids.join(', ')}')")
+    end
   end
 
   def available
-    Word.where(language: user.learning_language).group(:id).order(:id)
+    @_available ||=
+      Word.where(language: user.learning_language).where.not(id: offset_words)
   end
 
   def learned
-    user.words.where(language: user.learning_language).where(word_statuses: { learned: true }).order(:id)
+    @_learned ||=
+      available.where(id: WordStatus.select(:word_id).where(user: user, learned: true)).order(:id)
   end
 
   def learning
-    user.words.where(language: user.learning_language).where(word_statuses: { learned: false }).order(:id)
+    @_learning ||=
+      available.where(id: WordStatus.select(:word_id).where(user: user, learned: false)).order(:id)
   end
 
   def unknown
-    Word.where(language: user.learning_language)
-        .where.not(id: WordStatus.select(:word_id).where(user: user)).group(:id).order(:id)
+    @_unknown ||=
+      available.where.not(id: WordStatus.select(:word_id).where(user: user)).order(:id)
   end
 
   def searching
-    Word.where(language: user.learning_language)
-        .where('word LIKE ?', "%#{search.strip.downcase}%").group(:id).order(:id)
+    @_searching ||=
+      available.where('word LIKE ?', "#{search.strip.downcase}%").order(:id)
+  end
+
+  def offset_words
+    @_offset_words ||= Word.where(language: user.learning_language)
+                           .order(:id)
+                           .limit(user.proficiency_level)
   end
 
   def admining
@@ -57,13 +69,10 @@ class Word::GetByStatus < ActiveInteraction::Base
   end
 
   def skyeng
-    skyeng_setting = user.skyeng_setting
-    skyeng_words = Api::Skyeng.learning_words(email: skyeng_setting.try(:email),
-                                              token: skyeng_setting.try(:token))
-    split_words = skyeng_words.flat_map(&:split).uniq
-    Word.where(language: user.learning_language,
-               word:     split_words)
-        .where.not(id: 1..100)
-        .order(:id)
+    skyeng_words = Api::Skyeng.learning_words(
+      email: user.skyeng_setting.email,
+      token: user.skyeng_setting.token
+    )
+    available.where(word: skyeng_words.flat_map(&:split).uniq).order(:id)
   end
 end

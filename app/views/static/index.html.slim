@@ -2,31 +2,8 @@
   = render 'layouts/locale_switcher'
   .row
     - if user_signed_in?
-      - unless current_user.learning_language.present?
-        .container
-          .row.row-content
-            .col-12.col-sm-10.offset-sm-1.col-md-6.offset-md-3.jumbotron
-              h2.form-signin-heading = t('shared.navigation.user.select_languages')
-              = form_for(resource, as: resource_name, url: update_user_registration_path, html: { method: :put }) do |f|
-                .field
-                  h5
-                    = t('devise.registration.form.learning_language')
-                    .settings-item
-                      = f.select :learning_language,
-                              options_for_select(User::FULL_LANGUAGE_NAMES, :eng),
-                              {}, { class: 'form-control' }
-                .field
-                  h5
-                    = t('devise.registration.form.native_language')
-                    .settings-item
-                      = f.select :native_language,
-                              options_for_select(User::FULL_LANGUAGE_NAMES, :rus),
-                              {}, { class: 'form-control' }
-
-                .field style=('padding-top: 20px')
-                  = f.button t('devise.registration.edit.submit'),
-                          class: 'btn btn-lg btn-secondary btn-block',
-                          data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+      - if current_user.learning_language.blank?
+        = render 'static/select_languages'
       - else
         .col-12
           h1.main--title == t 'static.index.sign_in.title'
