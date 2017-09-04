@@ -6,7 +6,7 @@ class SkyengSetting::Create < ActiveInteraction::Base
   validates :user, presence: true
 
   def execute
-    skyeng_setting      = SkyengSetting.new(email: email)
+    skyeng_setting      = SkyengSetting.new(email: email.downcase)
     user.skyeng_setting = skyeng_setting
 
     if user.save
