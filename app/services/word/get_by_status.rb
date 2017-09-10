@@ -73,6 +73,7 @@ class Word::GetByStatus < ActiveInteraction::Base
       email: user.skyeng_setting.email,
       token: user.skyeng_setting.token
     )
-    available.where(word: skyeng_words.flat_map(&:split).uniq).order(:id)
+    available.where(word: skyeng_words.flat_map(&:split).uniq)
+             .where.not(id: 1..100).order(:id)
   end
 end
