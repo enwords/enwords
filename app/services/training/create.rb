@@ -8,15 +8,18 @@ class Training::Create < ActiveInteraction::Base
   validate :check_training_type
 
   def execute
-    user.training = Training.create(
+    training.update_attributes\
       training_type: training_type,
       word_ids:      word_ids,
       sentence_ids:  sentence_ids,
       words_learned: words_learned
-    )
   end
 
   private
+
+  def training
+    @_training ||= Training.where(user: user).first_or_initialize
+  end
 
   def check_training_type
     errors.add :training, 'Unknown training type' unless Training::TRAINING_TYPES.include? training_type
