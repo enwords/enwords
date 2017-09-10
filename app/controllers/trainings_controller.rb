@@ -1,6 +1,6 @@
 class TrainingsController < ApplicationController
   before_action :authenticate_user!
-  before_action :current_training, only: %i[show change_status result]
+  before_action :current_training, only: %i[show change_status result reset_word_count]
 
   def show
     @sentences = Sentence.where(id: current_training.sentence_ids).order(:id)
@@ -35,6 +35,11 @@ class TrainingsController < ApplicationController
 
   def result
     @learned_words_count_training = [0, @learned_words_count - current_training.words_learned].max
+  end
+
+  def repeat
+    current_training.update(words_learned: @learned_words_count)
+    redirect_to training_path
   end
 
   private

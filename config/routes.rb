@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :users
     resource :training do
       get :result
+      put :repeat
     end
 
     resources :articles do
