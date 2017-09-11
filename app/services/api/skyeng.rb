@@ -16,11 +16,18 @@ module Api
       end
 
       def words(ids:)
-        result = build_get_response('http://dictionary.skyeng.ru/api/public/v1/meanings',
-                                    ids: ids.join(','))
+        threads = []
+        result  = []
 
-        return :invalid_params unless result.is_a?(Array)
-        result.map { |i| i['text'] }.uniq
+        ids.each_slice(100) do |sliced_ids|
+          threads << Thread.new do
+            result << build_get_response('http://dictionary.skyeng.ru/api/public/v1/meanings',
+                                         ids: sliced_ids.join(','))
+          end
+        end
+
+        threads.each(&:join)
+        result.flatten.map { |i| i['text'] }.uniq
       end
 
       def learning_words(email:, token:)
