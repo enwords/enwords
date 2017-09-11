@@ -75,5 +75,7 @@ class Word::GetByStatus < ActiveInteraction::Base
     )
     available.where(word: skyeng_words.flat_map(&:split).uniq)
              .where.not(id: 1..100).order(:id)
+  rescue
+    available.limit(0)
   end
 end
