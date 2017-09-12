@@ -40,22 +40,22 @@ class Word::GetByStatus < ActiveInteraction::Base
 
   def learned
     @_learned ||=
-      available.where(id: WordStatus.select(:word_id).where(user: user, learned: true)).order(:id)
+      available.where(id: WordStatus.select(:word_id).where(user: user, learned: true)).order(:id).to_a
   end
 
   def learning
     @_learning ||=
-      available.where(id: WordStatus.select(:word_id).where(user: user, learned: false)).order(:id)
+      available.where(id: WordStatus.select(:word_id).where(user: user, learned: false)).order(:id).to_a
   end
 
   def unknown
     @_unknown ||=
-      available.where.not(id: WordStatus.select(:word_id).where(user: user)).order(:id)
+      available.where.not(id: WordStatus.select(:word_id).where(user: user)).order(:id).to_a
   end
 
   def searching
     @_searching ||=
-      available.where('word LIKE ?', "#{search.strip.downcase}%").order(:id)
+      available.where('word LIKE ?', "#{search.strip.downcase}%").order(:id).to_a
   end
 
   def offset_words
@@ -69,13 +69,12 @@ class Word::GetByStatus < ActiveInteraction::Base
   end
 
   def skyeng
-    skyeng_words = Api::Skyeng.learning_words(
-      email: user.skyeng_setting.email,
-      token: user.skyeng_setting.token
-    )
-    available.where(word: skyeng_words.flat_map(&:split).uniq)
-             .where.not(id: 1..100).order(:id)
-  # rescue
-  #   available.limit(0)
+    Rails.cache.fetch("skyeng_words_user_#{user.id}", expires_in: 1.hour) do
+      skyeng_words = Api::Skyeng.learning_words \
+        email: user.skyeng_setting.email,
+        token: user.skyeng_setting.token
+
+      available.where(word: skyeng_words).where.not(id: 1..100).order(:id).to_a
+    end
   end
 end

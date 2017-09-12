@@ -27,7 +27,7 @@ module Api
         end
 
         threads.each(&:join)
-        result.flatten.map { |i| i['text'] }.uniq
+        result.flatten.flat_map { |i| i['text'].split }.uniq
       end
 
       def learning_words(email:, token:)
