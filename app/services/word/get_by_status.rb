@@ -69,12 +69,17 @@ class Word::GetByStatus < ActiveInteraction::Base
   end
 
   def skyeng
-    Rails.cache.fetch("skyeng_words_user_#{user.id}", expires_in: 1.hour) do
-      skyeng_words = Api::Skyeng.learning_words \
-        email: user.skyeng_setting.email,
-        token: user.skyeng_setting.token
+    result = Rails.cache.read("skyeng_words_user_#{user.id}")
+    return result if result
 
-      available.where(word: skyeng_words).where.not(id: 1..100).order(:id).to_a
-    end
+    skyeng_words = Api::Skyeng.learning_words \
+      email: user.skyeng_setting.email,
+      token: user.skyeng_setting.token
+
+    result = available.where(word: skyeng_words).where.not(id: 1..100).order(:id).to_a
+    return result if result.size < 100
+
+    Rails.cache.write("skyeng_words_user_#{user.id}", expires_in: 1.hour) { result }
+    result
   end
 end
