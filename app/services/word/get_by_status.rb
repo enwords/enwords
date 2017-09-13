@@ -79,7 +79,7 @@ class Word::GetByStatus < ActiveInteraction::Base
     result = available.where(word: skyeng_words).where.not(id: 1..100).order(:id).to_a
     return result if result.size < 100
 
-    Rails.cache.write("skyeng_words_user_#{user.id}", expires_in: 1.hour) { result }
+    Rails.cache.write("skyeng_words_user_#{user.id}", result, expires_in: 1.hour)
     result
   end
 end
