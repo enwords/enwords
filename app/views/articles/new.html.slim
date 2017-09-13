@@ -1,7 +1,6 @@
-.container
-  .col-12.col-sm-8.offset-sm-2
-    .row.row-content
-      .col-12.jumbotron
-        h2.form-signin-heading
-          = t('texts.new_text')
-        = render 'form', article: @article, url: articles_path
+.col-12.col-lg-8.offset-lg-2.jumbotron
+  .row.row-content
+    .col-12
+      h2.form-signin-heading
+        = t('texts.new_text')
+      = render 'form', article: @article, url: articles_path

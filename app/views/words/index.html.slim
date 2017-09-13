@@ -102,4 +102,6 @@
                 style: 'max-width: 100px'
             = t('word.proficiency_level.first_words')
         .modal-footer
-          = button_tag t('texts.form.submit'), class: 'btn btn-secondary'
+          = button_tag t('texts.form.submit'),
+              class: 'btn btn-secondary',
+              data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
