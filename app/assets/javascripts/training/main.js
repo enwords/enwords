@@ -18,12 +18,12 @@ $(function () {
     $('[data-status="unknown"]').addClass('switcher_unknown');
 
     $switcher.on('click', function () {
+      var st = $(this).attr('data-status') === 'true';
+      var new_st = !st;
+      $(this).attr('data-status', new_st + '');
+      $(this).removeClass('switcher_unknown').toggleClass('switcher_learned');
       $.ajax({
-        url: '/change_status/' + $(this).data('id') + '/' + $(this).attr('data-status'),
-      }).done(function (responce) {
-        var $thisButton = $('[data-id=' + responce[0].word_id + ']');
-        $thisButton.attr('data-status', responce[0].learned);
-        $thisButton.removeClass('switcher_unknown').toggleClass('switcher_learned');
+        url: '/change_status/' + $(this).data('id') + '/' + new_st
       });
     });
   });

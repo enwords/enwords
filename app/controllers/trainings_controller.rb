@@ -21,11 +21,12 @@ class TrainingsController < ApplicationController
 
   def change_status
     to_state = case params[:status]
-               when 'unknown' then 'learned'
-               when 'true'    then 'learning'
-               when 'false'   then 'learned'
+               when 'true'    then 'learned'
+               when 'false'   then 'learning'
                end
-    updating = Word::UpdateState.run(ids: [params[:id]], to_state: to_state, user: current_user)
+    updating = Word::UpdateState.run(ids:      [params[:id]],
+                                     to_state: to_state,
+                                     user:     current_user)
     if updating.valid?
       render json: updating.result, status: :ok
     else
