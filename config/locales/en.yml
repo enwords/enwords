@@ -113,6 +113,10 @@ en:
         select_languages: "Select languages"
         proficiency_level: "Level of language proficiency"
       skyeng_setting: "Skyeng Settings"
+      grammar:
+        dropdown: "Grammar"
+        eng:
+          irregular_verbs: "Irregular verbs"
 
   static:
     index:

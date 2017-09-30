@@ -1,0 +1,41 @@
+.col-12.title
+  h3 = t('shared.navigation.grammar.eng.irregular_verbs')
+= form_tag create_training_grammar_eng_irregular_verbs_path, method: :put do
+  .row
+    .col-12.col-md-8.offset-md-2.table-main
+      table.table__words style='width: 100%'
+        thead
+          tr
+            th style='width: 4%'
+              input.check#check-all type='checkbox'
+            th style='width: 32%' Infinitive
+            th style='width: 32%' Simple past
+            th style='width: 32%' Past participle
+        - @irregular_verbs.each do |verb|
+          tr
+            td
+              span.check-box-wrapper
+                = check_box_tag 'ids[]', verb.id, false, class: 'check'
+            td
+              span.word-skyeng
+                = verb.infinitive.capitalize
+            td
+              span.word-skyeng = verb.simple_past.first.capitalize
+              span = '/' if verb.simple_past.second.try(:capitalize)
+              span.word-skyeng = verb.simple_past.second.try(:capitalize)
+            td
+              span.word-skyeng = verb.past_participle.first.capitalize
+              span = '/' if verb.past_participle.second.try(:capitalize)
+              span.word-skyeng = verb.past_participle.second.try(:capitalize)
+    .col-12 style='text-align: center'
+      = button_tag t('words.buttons.train_selected'),
+          type:  'submit',
+          class: 'btn btn-secondary',
+          data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+  .row
+    .col-12.digg_pagination
+      = will_paginate @irregular_verbs,
+              previous_label: '<i class="fa fa-angle-left"></i>',
+              next_label:     '<i class="fa fa-angle-right"></i>',
+              outer_window:   0,
+              inner_window:   2

@@ -39,6 +39,16 @@ Rails.application.routes.draw do
         put :update_proficiency_level
       end
     end
+
+    namespace :grammar do
+      namespace :eng do
+        resources :irregular_verbs, only: %i[index] do
+          collection do
+            put :create_training
+          end
+        end
+      end
+    end
   end
 
   resource :skyeng_setting do

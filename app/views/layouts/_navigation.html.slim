@@ -1,7 +1,10 @@
 header
   nav.navbar.navbar-dark.fixed-top.navbar-toggleable-md.scrolling-navbar
     .container.smooth-scroll
-      button.navbar-toggler.navbar-toggler-right aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation' data-target='#navbarNav' data-toggle='collapse' type='button'
+      button.navbar-toggler.navbar-toggler-right[aria-controls='navbarNav'
+      aria-expanded='false' aria-label='Toggle navigation' data-target='#navbarNav'
+      data-toggle='collapse' type='button']
+
         span.navbar-toggler-icon
       = link_to 'Enwords ', root_path, class: 'navbar-brand'
       #navbarNav.collapse.navbar-collapse
@@ -30,6 +33,15 @@ header
                     = link_to words_path(status: 'skyeng'), class: 'nav-link skyeng' do
                       i.fa.fa-remove.skyeng
                       = "#{t('shared.navigation.words.skyeng')} (#{@skyeng_words_count})"
+            - if current_user.learning_language == 'eng'
+              li.nav-item.dropdown
+                a.dropdown-toggle data-toggle='dropdown' href='#' class='nav-link'
+                  = t 'shared.navigation.grammar.dropdown'
+                  b.caret
+                ul.dropdown-menu
+                  li
+                    = link_to grammar_eng_irregular_verbs_path, class: 'nav-link' do
+                      = t('shared.navigation.grammar.eng.irregular_verbs')
 
             li.nav-item = link_to t('shared.navigation.texts'), articles_path, class: 'nav-link'
 

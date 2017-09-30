@@ -131,6 +131,10 @@ ru:
         select_languages: "Выберете языки"
         proficiency_level: "Уровень владения языком"
       skyeng_setting: "Настройки Skyeng"
+      grammar:
+        dropdown: "Грамматика"
+        eng:
+          irregular_verbs: "Неправильные глаголы"
 
   static:
     index:
