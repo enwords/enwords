@@ -33,9 +33,15 @@ class Training::Create < ActiveInteraction::Base
   end
 
   def sentences_per_word
-    Sentence.select('(array_agg(DISTINCT(sentences.id)))[1:100]').joins(:sentences_words).joins(:translations)
-            .where(sentences_words: { word: word_ids }, translations_sentences: { language: user.native_language })
-            .group('sentences_words.word_id')
+    result = Sentence.select('(array_agg(DISTINCT(sentences.id)))[1:100]')
+                     .joins(:sentences_words)
+                     .joins(:translations)
+                     .where(sentences_words:        { word: word_ids },
+                            translations_sentences: { language: user.native_language })
+                     .group('sentences_words.word_id')
+
+    return result if result.any?
+    sentences_per_word_diversity
   end
 
   def sentences_per_word_diversity
