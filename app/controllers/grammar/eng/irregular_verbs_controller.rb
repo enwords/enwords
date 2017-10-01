@@ -7,18 +7,14 @@ module Grammar
       end
 
       def create_training
-        verbs = Grammar::Eng::IrregularVerb.where(id: params[:ids])
+        fetching = Grammar::Eng::IrregularVerb::FetchTrainingData.run \
+          user:          current_user,
+          verb_ids:      params[:ids],
+          training_type: 'repeating',
+          words_learned: @learned_words_count
 
-        if verbs.any?
-          words =
-            verbs.pluck(:infinitive, :simple_past, :past_participle).flatten
-
-          ids = Word.where(word: words).pluck(:id)
-
-          Training::Create.run(word_ids:      ids,
-                               training_type: 'repeating',
-                               user:          current_user,
-                               words_learned: @learned_words_count)
+        if fetching.valid?
+          Training::Create.run fetching.result
           redirect_to training_path
         else
           redirect_to :back

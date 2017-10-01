@@ -26,30 +26,22 @@ class Training::Create < ActiveInteraction::Base
   end
 
   def sentence_ids
-    @_sentence_ids ||= begin
-      ids_bunch = user.diversity_enable ? sentences_per_word_diversity : sentences_per_word
-      ids_bunch.flat_map { |m| m['array_agg'].sample(user.sentences_number) }.uniq
+    result = word_ids.map do |w_id|
+      word = Word.find(w_id)
+
+      if user.diversity_enable? || sentences_of_word(word).blank?
+        word.sentences.pluck(:id)
+      else
+        sentences_of_word(word).pluck(:id)
+      end
     end
+
+    result.flat_map { |arr| arr.sample(user.sentences_number) }.uniq
   end
 
-  def sentences_per_word
-    result = Sentence.select('(array_agg(DISTINCT(sentences.id)))[1:100]')
-                     .joins(:sentences_words)
-                     .joins(:translations)
-                     .where(language:               user.learning_language,
-                            sentences_words:        { word:     word_ids },
-                            translations_sentences: { language: user.native_language })
-                     .group('sentences_words.word_id')
-
-    return result if result.any?
-    sentences_per_word_diversity
-  end
-
-  def sentences_per_word_diversity
-    Sentence.select('(array_agg(DISTINCT(sentences.id)))[1:100]')
-            .joins(:sentences_words)
-            .where(language:        user.learning_language,
-                   sentences_words: { word_id: word_ids })
-            .group('sentences_words.word_id')
+  def sentences_of_word(word)
+    word.sentences
+        .left_joins(:translations)
+        .where(translations_sentences: { language: user.native_language })
   end
 end
