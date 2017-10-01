@@ -3,7 +3,7 @@
 = form_tag create_training_grammar_eng_irregular_verbs_path, method: :put do
   .row
     .col-12.col-md-8.offset-md-2.table-main
-      table.table__words style='width: 100%'
+      table.table__words.table-striped style='width: 100%'
         thead
           tr
             th style='width: 4%'
@@ -13,7 +13,7 @@
             th style='width: 32%' Past participle
         - @irregular_verbs.each do |verb|
           tr
-            td
+            td style='background: white'
               span.check-box-wrapper
                 = check_box_tag 'ids[]', verb.id, false, class: 'check'
             td
@@ -21,12 +21,14 @@
                 = verb.infinitive.capitalize
             td
               span.word-skyeng = verb.simple_past.first.capitalize
-              span = '/' if verb.simple_past.second.try(:capitalize)
-              span.word-skyeng = verb.simple_past.second.try(:capitalize)
+              - if verb.simple_past.second
+                span = '/'
+                span.word-skyeng = verb.simple_past.second.capitalize
             td
               span.word-skyeng = verb.past_participle.first.capitalize
-              span = '/' if verb.past_participle.second.try(:capitalize)
-              span.word-skyeng = verb.past_participle.second.try(:capitalize)
+              - if verb.past_participle.second
+                span = '/'
+                span.word-skyeng = verb.past_participle.second.capitalize
     .col-12 style='text-align: center'
       = button_tag t('words.buttons.train_selected'),
           type:  'submit',
