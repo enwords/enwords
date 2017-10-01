@@ -11,10 +11,12 @@
         h3.form-signin-heading
           - @article.title.split.each do |w|
             span.word-skyeng = w
+            span.word-zero = ' '
       .col-12
         - @article.content.split("\r\n").each do |sen|
           - sen.split.each do |w|
             span.word-skyeng = w
+            span.word-zero = ' '
           br
     - else
       .col-12

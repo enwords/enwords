@@ -18,6 +18,7 @@
             - if body_class == 'eng-rus'
               - sentence.sentence.split.each do |w|
                 span.word-skyeng = w
+                span.word-zero = ' '
             - else
               = sentence.sentence
 

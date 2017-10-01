@@ -17,8 +17,7 @@
               span.check-box-wrapper
                 = check_box_tag 'ids[]', verb.id, false, class: 'check'
             td
-              span.word-skyeng
-                = verb.infinitive.capitalize
+              span.word-skyeng = verb.infinitive.capitalize
             td
               span.word-skyeng = verb.simple_past.first.capitalize
               - if verb.simple_past.second

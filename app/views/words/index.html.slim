@@ -18,8 +18,7 @@
                 span.check-box-wrapper
                   = check_box_tag 'ids[]', word.id, false, class: 'check'
               td
-                span.word-skyeng
-                  = word.word.capitalize
+                span.word-skyeng  = word.word.capitalize
       .col-6.col-sm-3.col-md-2
         .btn-group-vertical
           = button_tag t('words.buttons.train_selected'),
