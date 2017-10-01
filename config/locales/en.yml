@@ -208,7 +208,7 @@ en:
     buttons:
       train_selected:  '"Repeating" Training'
       add_to_learning: 'Add to "Learning"'
-      add_to_learned:  'Add to "Learned"'
+      add_to_learned:  'Add to "Learned"&nbsp'
       add_to_unknown:  'Add to "Unknown"'
       train_selected_spelling: '"Spelling" Training'
 
