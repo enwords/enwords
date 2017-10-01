@@ -43,8 +43,11 @@ module Api
         return :invalid_params unless result.is_a?(Array)
         return {} if result.blank?
 
-        meanings = result.dig(0, 'meanings').sort_by { |el| el['id'] }
-        meanings[0].merge('text' => result.dig(0, 'text'))
+        word_block = result.find { |i| word.casecmp(i['text']).zero? }
+        return {} if word_block.blank?
+
+        meanings = word_block['meanings'].sort_by { |el| el['id'] }
+        meanings[0].merge('text' => word_block['text'])
       end
 
       def build_get_response(url, params = {})
