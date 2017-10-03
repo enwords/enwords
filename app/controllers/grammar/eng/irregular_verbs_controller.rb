@@ -2,8 +2,12 @@ module Grammar
   module Eng
     class IrregularVerbsController < ApplicationController
       def index
+        infinitives = Grammar::Eng::IrregularVerb.select(:infinitive)
+        words       = Word.where(word: infinitives).order(:id).pluck(:word)
+
         @irregular_verbs =
-          Grammar::Eng::IrregularVerb.all.paginate(page: params[:page], per_page: 20)
+          Grammar::Eng::IrregularVerb.all.sort_by { |v| words.index(v.infinitive) }
+                                     .paginate(page: params[:page], per_page: 20)
       end
 
       def create_training
