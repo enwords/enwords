@@ -6,7 +6,6 @@ class SkyengSetting::Create < ActiveInteraction::Base
   validates :user, presence: true
 
   def execute
-    skyeng_setting      = SkyengSetting.new(email: email.downcase)
     user.skyeng_setting = skyeng_setting
 
     if user.save
@@ -14,5 +13,12 @@ class SkyengSetting::Create < ActiveInteraction::Base
     else
       errors.add(:skyeng_setting, t('skyeng_settings.did_not_save'))
     end
+  end
+
+  private
+
+  def skyeng_setting
+    @_skyeng_setting ||=
+      SkyengSetting.where(email: email.downcase).first_or_initialize
   end
 end
