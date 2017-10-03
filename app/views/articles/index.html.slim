@@ -14,11 +14,19 @@
         tbody
           - @articles.each do |article|
             tr
-              td = check_box_tag 'ids[]', article.id, false, class: 'check'
-              td = link_to article.title, article_path(article), class: 'link'
-              td = link_to icon('book'),  words_path(article: article), title: t('texts.links.words')
-              td = link_to icon('edit'),  edit_article_path(article), title: t('texts.links.edit')
-              td = link_to icon('trash'), article_path(article), method: :delete, title: t('texts.links.delete')
+              td = check_box_tag 'ids[]', article.id, false,
+                                 class: 'check'
+              td = link_to article.title, article_path(article),
+                           class: 'link'
+              td = link_to icon('book'),  words_path(article: article),
+                           title: t('texts.links.words')
+              td = link_to icon('edit'),  edit_article_path(article),
+                           title: t('texts.links.edit')
+              td = link_to icon('trash'), article_path(article),
+                           method: :delete,
+                           title:  t('texts.links.delete'),
+                           data:   { confirm: t('texts.links.are_you_sure') }
+
   .col-12.btn-articles
     = link_to new_article_path, class: 'btn' do
       i.fa.fa-plus

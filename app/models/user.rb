@@ -20,7 +20,10 @@ class User < ActiveRecord::Base
   enum learning_language: SHORT_LANGUAGE_NAMES, _prefix: :learning
 
   store_accessor :additional_info,
-                 :proficiency_levels
+                 :proficiency_levels,
+                 :sign_up_params
+
+  after_create :create_test_article
 
   # Allows to change a profile settings without entering a password
   def update_with_password(params, *options)
@@ -45,5 +48,9 @@ class User < ActiveRecord::Base
 
   def proficiency_level
     proficiency_levels.try(:[], learning_language) || 0
+  end
+
+  def create_test_article
+    Article.find(1).dup.update(user_id: id)
   end
 end

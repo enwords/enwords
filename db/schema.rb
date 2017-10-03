@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929180800) do
+ActiveRecord::Schema.define(version: 20171003191316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,12 +71,14 @@ ActiveRecord::Schema.define(version: 20170929180800) do
   end
 
   create_table "trainings", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "word_ids",      default: [],              array: true
-    t.integer "sentence_ids",  default: [],              array: true
-    t.string  "training_type",              null: false
-    t.integer "words_learned", default: 0,  null: false
-    t.integer "current_page",  default: 1,  null: false
+    t.integer  "user_id"
+    t.integer  "word_ids",      default: [],              array: true
+    t.integer  "sentence_ids",  default: [],              array: true
+    t.string   "training_type",              null: false
+    t.integer  "words_learned", default: 0,  null: false
+    t.integer  "current_page",  default: 1,  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["user_id"], name: "index_trainings_on_user_id", using: :btree
   end
 

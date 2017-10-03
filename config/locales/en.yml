@@ -166,6 +166,7 @@ en:
       delete: "Delete"
       words: "Words"
       cancel: "Cancel"
+      are_you_sure: "Are you sure?"
     new_text: "New text"
     edit_text: "Edit text"
     form:

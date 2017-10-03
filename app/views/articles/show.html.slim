@@ -5,7 +5,10 @@
       = ' / '
       = link_to t('texts.links.edit'), edit_article_path(@article)
       = ' / '
-      = link_to t('texts.links.delete'), article_path(@article), method: :delete
+      = link_to t('texts.links.delete'), article_path(@article),
+          method: :delete,
+          data: { confirm: t('texts.links.are_you_sure') }
+
     - if body_class == 'eng-rus'
       .col-12
         h3.form-signin-heading

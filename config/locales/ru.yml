@@ -184,6 +184,7 @@ ru:
       delete: "Удалить"
       words: "Слова"
       cancel: "Отмена"
+      are_you_sure: "Вы уверены?"
     new_text: "Новый текст"
     edit_text: "Редактирование текста"
     form:

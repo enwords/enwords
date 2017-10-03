@@ -53,7 +53,7 @@ $(function () {
             api.set('content.text', status + ': ' + error);
           });
 
-        return '...';
+        return '  <i class="fa fa-spinner fa-spin"></i>';
       },
     },
   });
