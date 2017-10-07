@@ -59,7 +59,7 @@ class WordsController < ApplicationController
                             user:     current_user)
       redirect_to :back, notice: t('words.buttons.state_changed')
     else
-      redirect_to :back
+      redirect_to :back, alert: t('words.buttons.select_words')
     end
   end
 

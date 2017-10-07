@@ -23,4 +23,11 @@ module ApplicationHelper
   def actual_skyeng_setting_path
     current_user.skyeng_setting.present? ? skyeng_setting_path : new_skyeng_setting_path
   end
+
+  def bootstrap_flash_key(key)
+    case key
+    when 'notice', 'success' then 'success'
+    when 'alert', 'error'    then 'warning'
+    end
+  end
 end

@@ -6,8 +6,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if creating.valid?
         sign_in_and_redirect(:user, creating.result)
       else
-        flash[:error] = creating.errors.messages.values.join('<br>')
-        redirect_to new_user_registration_path
+        redirect_to new_user_registration_path,
+                    alert: creating.errors.messages.values.join('<br>')
       end
     end
   end

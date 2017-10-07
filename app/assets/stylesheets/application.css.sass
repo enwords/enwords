@@ -160,18 +160,6 @@ body
     animation-iteration-count: 1
     animation-timing-function: linear
 
-#right_alert, #wrong_alert
-  position: absolute
-  left: 0
-  right: 0
-  margin-left: auto
-  margin-right: auto
-  display: none
-  @media (max-width: 767px)
-    top: 60px
-  @media (min-width: 768px)
-    top: 80px
-
 .links-top
   text-align: right
 
@@ -385,6 +373,7 @@ pre
 
 //Other
 .alert
+  z-index: 3
   padding-top: 10px
   position: absolute
   margin: 0
@@ -429,12 +418,6 @@ ul
     margin-left: 0
 
 ////
-.alert-success, .alert-notice, #right_alert
-  color: #5cb85c
-
-.alert-danger, .alert-alert, #wrong_alert
-  color: #C32221
-
 .devise-error
   color: #C32221
   display: block

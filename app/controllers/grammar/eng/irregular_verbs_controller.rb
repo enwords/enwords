@@ -1,6 +1,8 @@
 module Grammar
   module Eng
     class IrregularVerbsController < ApplicationController
+      before_action :authenticate_user!
+
       def index
         infinitives = Grammar::Eng::IrregularVerb.select(:infinitive)
         words       = Word.where(word: infinitives).order(:id).pluck(:word)
@@ -21,7 +23,7 @@ module Grammar
           Training::Create.run fetching.result
           redirect_to training_path
         else
-          redirect_to :back
+          redirect_to :back, alert: t('words.buttons.select_words')
         end
       end
     end
