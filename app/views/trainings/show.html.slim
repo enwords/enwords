@@ -1,4 +1,1 @@
-- if @training.repeating?
-  = render 'trainings/repeating'
-- elsif @training.spelling?
-  = render 'trainings/spelling'
+= render "trainings/#{@training.training_type}"

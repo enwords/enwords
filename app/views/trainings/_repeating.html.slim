@@ -22,11 +22,10 @@
             - else
               = sentence.sentence
 
-        - translate = sentence.translations.where(language: current_user.native_language).first.try(:sentence)
-        - if translate
+        - if translation(sentence)
           .col-12.translation-block
             a = t 'training.show_translation'
-            span = translate
+            span.hidden = translation(sentence)
       .col-12
         .digg_pagination.pagination-training
           - if params[:page] == @page_count.to_s
@@ -51,7 +50,4 @@
   = javascript_include_tag 'training/main'
   = javascript_include_tag 'training/repeating'
 
-- if current_user.audio_enable
-  javascript:
-    var $audio = $('audio')[0];
-    if ($audio !== undefined) $audio.play();
+= render 'trainings/crutches', show_previous_page_button: true

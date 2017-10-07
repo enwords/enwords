@@ -21,13 +21,13 @@
                 span.word-skyeng  = word.word.capitalize
       .col-6.col-sm-4.col-md-3.col-lg-2
         .btn-group-vertical.w-100
-          = button_tag t('words.buttons.train_selected'),
+          = button_tag t('words.buttons.training_repeating'),
                   type:  'submit',
                   value: 'to_training_repeating',
                   name:  'commit',
                   class: 'btn btn-raised btn-md btn-link btn-colored',
                   data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
-          = button_tag t('words.buttons.train_selected_spelling'),
+          = button_tag t('words.buttons.training_spelling'),
                   type:  'submit',
                   value: 'to_training_spelling',
                   name:  'commit',

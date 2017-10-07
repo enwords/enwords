@@ -16,7 +16,7 @@ module Grammar
         fetching = Grammar::Eng::IrregularVerb::FetchTrainingData.run \
           user:          current_user,
           verb_ids:      params[:ids],
-          training_type: 'repeating',
+          training_type: params[:commit].gsub(/to_training_/, ''),
           words_learned: @learned_words_count
 
         if fetching.valid?

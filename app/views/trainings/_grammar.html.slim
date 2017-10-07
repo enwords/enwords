@@ -15,22 +15,18 @@
             span.fa.fa-volume-off
           h4#original-sentence data-sentence-id=sentence.id
             - if body_class == 'eng-rus'
+              - count = 0
               - sentence.sentence.split.each do |w|
-                span.word-skyeng = w
+                - if count.zero? && @words.include?(clean_word(w))
+                  = text_field_tag 'input-word', '', grammar_training_data(clean_word(w))
+                  - count += 1
+                - else
+                  span.word-skyeng = w
                 span.word-zero = ' '
             - else
               = sentence.sentence
-        .col-10.offset-1 style='margin-top: 10px'
-          = text_area_tag 'input-sentence', '',
-                  autocomplete: 'off',
-                  class: 'form-control input-sentence',
-                  maxlength: 200,
-                  autofocus: true
-          span style="float: right" = t('training.replace')
-
-        - if translation(sentence)
-          .col-12.translation-block
-            span = translation(sentence)
+        .col-12.translation-block
+          span = translation(sentence)
     .row
       .col-12
         .digg_pagination.pagination-training
@@ -45,6 +41,6 @@
 
 = content_for :footer_js do
   = javascript_include_tag 'training/main'
-  = javascript_include_tag 'training/spelling'
+  = javascript_include_tag 'training/grammar'
 
 = render 'trainings/crutches'

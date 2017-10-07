@@ -1,0 +1,12 @@
+- show_previous_page_button ||= false
+
+- unless show_previous_page_button
+  css:
+    .previous_page {
+      display: none !important;
+    }
+
+- if current_user.audio_enable
+  javascript:
+    var $audio = $('audio')[0];
+    if ($audio !== undefined) $audio.play();

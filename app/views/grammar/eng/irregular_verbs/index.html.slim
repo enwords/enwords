@@ -29,8 +29,10 @@
                 span = '/'
                 span.word-skyeng = verb.past_participle.second.capitalize
     .col-12 style='text-align: center'
-      = button_tag t('words.buttons.train_selected'),
+      = button_tag t('words.buttons.training_grammar'),
+          value: 'to_training_grammar',
           type:  'submit',
+          name: 'commit',
           class: 'btn btn-secondary',
           data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
   .row

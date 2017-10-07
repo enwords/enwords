@@ -14,4 +14,5 @@ Rails.application.config.assets.precompile += %w[
   training/main.js
   training/spelling.js
   training/repeating.js
+  training/grammar.js
 ]

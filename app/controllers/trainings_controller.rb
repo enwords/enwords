@@ -5,6 +5,8 @@ class TrainingsController < ApplicationController
   def show
     @sentences = Sentence.where(id: current_training.sentence_ids).order(:id)
                          .paginate(page: params[:page], per_page: 1)
+    @words = Word.where(id: current_training.word_ids).order(:id).pluck(:word)
+
     current_training.update_attributes(current_page: (params[:page] || 1))
     @page_count = @sentences.total_pages
   end
