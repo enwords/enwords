@@ -9,16 +9,19 @@ class ApplicationController < ActionController::Base
   private
 
   def word_statistic
-    @skyeng_words_count   = if current_user.skyeng_setting
-                              Word::GetByStatus.run!(status: 'skyeng',
-                                                     user:   current_user).size
-                            end
-    @learning_words_count = Word::GetByStatus.run!(status: 'learning',
-                                                   user:   current_user).size
-    @learned_words_count  = Word::GetByStatus.run!(status: 'learned',
-                                                   user:   current_user).size
-    @unknown_words_count  = Word::GetByStatus.run!(status: 'unknown',
-                                                   user:   current_user).size
+    @skyeng_words_count =
+      if current_user.skyeng_setting
+        Word::ByStatus.run!(status: 'skyeng', user: current_user).size
+      end
+
+    @learning_words_count =
+      Word::ByStatus.run!(status: 'learning', user: current_user).size
+
+    @learned_words_count =
+      Word::ByStatus.run!(status: 'learned', user: current_user).size
+
+    @unknown_words_count =
+      Word::ByStatus.run!(status: 'unknown', user: current_user).size
   end
 
   def set_locale
@@ -33,11 +36,13 @@ class ApplicationController < ActionController::Base
 
   # Allows to change a profile settings without entering a password
   def configure_devise_permitted_parameters
-    registration_params = %i[email password password_confirmation learning_language native_language audio_enable
-                             diversity_enable sentences_number]
+    registration_params =
+      %i[email password password_confirmation learning_language native_language
+         audio_enable diversity_enable sentences_number]
 
     if params[:action] == 'update'
-      devise_parameter_sanitizer.permit(:account_update, keys: registration_params << :current_password)
+      devise_parameter_sanitizer.permit \
+        :account_update, keys: registration_params << :current_password
     elsif params[:action] == 'create'
       devise_parameter_sanitizer.permit(:sign_up, keys: registration_params)
     end

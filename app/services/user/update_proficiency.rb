@@ -1,5 +1,5 @@
-class Word < ApplicationRecord
-  class UpdateProficiencyLevel < ActiveInteraction::Base
+class User < ApplicationRecord
+  class UpdateProficiency < ActiveInteraction::Base
     object  :user
     integer :limit
 

@@ -1,0 +1,16 @@
+.container
+  .row
+    h3 trainings
+    table.table style="overflow-x:auto;" 
+      tbody
+        - @trainings.each do |training|
+          tr
+            td = training.id
+            td = training.user.email
+            td = training.created_at
+            td = training.updated_at
+
+    #pagination-mobile.col-12.hidden-sm.hidden-md.hidden-lg.digg_pagination
+      = will_paginate @trainings, previous_label: '❬', next_label: '❭', outer_window: 0
+    #pagination-desktop.hidden.col-sm-12.digg_pagination
+      = will_paginate @trainings, previous_label: '❬', next_label: '❭', outer_window: 0

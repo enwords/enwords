@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  root to: 'static#index'
+
+  get '/admin' => 'admin#index'
+
+  namespace :admin do
+    resources :sentences
+    resources :trainings
+    resources :users
+  end
+
   get '/words_from_sentence/:id',   to: 'trainings#words_from_sentence'
   get '/change_status/:id/:status', to: 'trainings#change_status'
 
@@ -18,11 +28,13 @@ Rails.application.routes.draw do
                skip:        :omniauth_callbacks,
                controllers: { registrations: 'registrations' }
 
+    resources :users, only: %i[] do
+      collection do
+        put :update_proficiency
+      end
+    end
 
-    root to: 'static#index'
-
-    resources :users
-    resource :training do
+    resource :training, only: %i[show] do
       get :result
       put :repeat
     end
@@ -31,12 +43,9 @@ Rails.application.routes.draw do
       post :delete_selected, on: :collection
     end
 
-    resources :sentences
-
-    resources :words do
+    resources :words, only: %i[index] do
       collection do
         put :word_action
-        put :update_proficiency_level
       end
     end
 

@@ -1,5 +1,5 @@
 class Word < ApplicationRecord
-  class GetByStatus < ActiveInteraction::Base
+  class ByStatus < ActiveInteraction::Base
     object :user
     string :status,  default: nil
     string :search,  default: nil

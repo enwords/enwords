@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_article, only: %i[show edit update destroy]
 
   def delete_selected
     current_user.articles.where(id: params[:ids]).delete_all
@@ -8,7 +8,9 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @articles = current_user.articles.where(language: current_user.learning_language).order(:id)
+    @articles = current_user.articles
+                            .where(language: current_user.learning_language)
+                            .order(:id)
                             .paginate(page: params[:page], per_page: 15)
   end
 

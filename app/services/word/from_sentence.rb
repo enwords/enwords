@@ -22,15 +22,15 @@ class Word < ApplicationRecord
     end
 
     def available_words
-      @_available_words ||= Word::GetByStatus.run!(status: 'available', user: user)
+      @_available_words ||= Word::ByStatus.run!(status: 'available', user: user)
     end
 
     def learning_words
-      @_learning_words ||= Word::GetByStatus.run!(status: 'learning', user: user)
+      @_learning_words ||= Word::ByStatus.run!(status: 'learning', user: user)
     end
 
     def learned_words
-      @_learned_words ||= Word::GetByStatus.run!(status: 'learned', user: user)
+      @_learned_words ||= Word::ByStatus.run!(status: 'learned', user: user)
     end
 
     def learned?(word)

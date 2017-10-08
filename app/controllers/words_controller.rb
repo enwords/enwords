@@ -25,8 +25,8 @@ class WordsController < ApplicationController
   def edit; end
 
   def index
-    @words = Word::GetByStatus.run!(params.merge(user: current_user))
-                              .paginate(page: params[:page], per_page: 20)
+    @words = Word::ByStatus.run!(params.merge(user: current_user))
+                           .paginate(page: params[:page], per_page: 20)
   end
 
   def update
@@ -61,13 +61,6 @@ class WordsController < ApplicationController
     else
       redirect_to :back, alert: t('words.buttons.select_words')
     end
-  end
-
-  def update_proficiency_level
-    Word::UpdateProficiencyLevel.run(user: current_user,
-                                     limit: params[:proficiency_level])
-    Rails.cache.delete("skyeng_words_user_#{current_user.id}")
-    redirect_back(fallback_location: root_path)
   end
 
   private

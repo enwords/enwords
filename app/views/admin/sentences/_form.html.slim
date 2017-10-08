@@ -1,4 +1,4 @@
-= form_for(sentence) do |f|
+= form_for [:admin, sentence] do |f|
   - if sentence.errors.any?
     #error_explanation
       h2
