@@ -1,8 +1,10 @@
 .row
   .col-12
     .main--languages
-      = link_to locale: 'en' do
-        = image_tag 'flags/128/gb.png', class: 'img-flag'
-      = '  '
-      = link_to locale: 'ru' do
-        = image_tag 'flags/128/ru.png', class: 'img-flag'
+      = link_to_unless_current \
+        image_tag('flags/128/gb.png', class: 'img-flag', alt: 'English'),
+        locale: 'en'
+      = ' '
+      = link_to_unless_current \
+        image_tag('flags/128/ru.png', class: 'img-flag', alt: 'Русский'),
+        locale: 'ru'
