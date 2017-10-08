@@ -50,10 +50,10 @@ $(function () {
             api.set('content.text', content);
           })
           .fail(function (xhr, status, error) {
-            api.set('content.text', status + ': ' + error);
+            api.set('');
           });
 
-        return '  <i class="fa fa-spinner fa-spin"></i>';
+        return '<i class="fa fa-spinner fa-spin"></i>';
       },
     },
   });

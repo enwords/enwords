@@ -1,4 +1,4 @@
-class SkyengSetting < ActiveRecord::Base
+class SkyengSetting < ApplicationRecord
   belongs_to :user
 
   include AASM

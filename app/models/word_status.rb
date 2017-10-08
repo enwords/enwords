@@ -1,4 +1,4 @@
-class WordStatus < ActiveRecord::Base
+class WordStatus < ApplicationRecord
   belongs_to :user
   belongs_to :word
 

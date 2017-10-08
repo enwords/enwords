@@ -1,11 +1,17 @@
-class User < ActiveRecord::Base
-  has_many :authentications, class_name: 'UserAuthentication', dependent: :destroy
+class User < ApplicationRecord
+  has_many :authentications,
+           class_name: 'UserAuthentication',
+           dependent:  :destroy
+
   has_many :word_statuses,
            dependent: :delete_all
+
   has_many :words,
            through: :word_statuses
+
   has_many :articles,
            dependent: :delete_all
+
   has_one :training
 
   has_one :skyeng_setting
