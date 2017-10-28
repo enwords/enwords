@@ -49,7 +49,7 @@ header
               li.nav-item = link_to t('shared.navigation.last_training'),
                       training_path(page: current_user.training.current_page),
                       class: 'nav-link'
-            - if body_class == 'eng-rus'
+            - if body_class == 'eng-rus' && !current_user.skyeng_setting.try(:finished?) && (Date.current - current_user.created_at.to_date).to_i < 1
               li.nav-item = link_to t('shared.navigation.skyeng_setting'),
                       actual_skyeng_setting_path,
                       class: 'nav-link'
@@ -68,13 +68,19 @@ header
               ul.nav-item.dropdown-menu
                 li
                   = link_to edit_user_registration_path,
-                          class: 'nav-link' do
+                    class: 'nav-link' do
                     i.fa.fa-cog
                     = t 'shared.navigation.user.settings'
+                - if body_class == 'eng-rus'
+                  li
+                    = link_to actual_skyeng_setting_path,
+                      class: 'nav-link' do
+                      i.fa.fa-cog
+                      = t 'shared.navigation.skyeng_setting'
                 li
                   = link_to destroy_user_session_path,
-                          method: 'delete',
-                          class: 'nav-link' do
+                    method: 'delete',
+                    class: 'nav-link' do
                     i.fa.fa-sign-out
                     = t 'shared.navigation.user.sign_out'
         - else

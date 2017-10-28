@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  root to: 'static#index'
-
   get '/words_from_sentence/:id',   to: 'trainings#words_from_sentence'
   get '/change_status/:id/:status', to: 'trainings#change_status'
 
@@ -16,6 +14,8 @@ Rails.application.routes.draw do
              controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   scope ':locale', locale: /#{I18n.available_locales.join('|')}/ do
+    root to: 'static#index'
+
     devise_for :users,
                skip:        :omniauth_callbacks,
                controllers: { registrations: 'registrations' }
