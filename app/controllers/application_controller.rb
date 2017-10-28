@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   def word_statistic
     @skyeng_words_count = if current_user.skyeng_setting
-                            current_user.skyeng_words_count || 0
+                            current_user.skyeng_words_count || '?'
                           end
 
     @learning_words_count =
