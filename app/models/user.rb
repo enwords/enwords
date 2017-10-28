@@ -27,7 +27,8 @@ class User < ApplicationRecord
 
   store_accessor :additional_info,
                  :proficiency_levels,
-                 :sign_up_params
+                 :sign_up_params,
+                 :skyeng_words_count
 
   after_create :create_test_article
   after_create :set_default_settings

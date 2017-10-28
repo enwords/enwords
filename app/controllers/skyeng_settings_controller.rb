@@ -39,6 +39,7 @@ class SkyengSettingsController < ApplicationController
                                            token:          skyeng_setting_params[:token].strip)
 
     if updating.valid?
+      Word::ByStatus.run!(status: 'skyeng', user: current_user)
       redirect_to skyeng_setting_path, notice: t('skyeng_settings.finished')
     else
       redirect_to :back, alert: updating.errors.messages.values.join('<br>')

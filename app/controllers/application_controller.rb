@@ -9,10 +9,9 @@ class ApplicationController < ActionController::Base
   private
 
   def word_statistic
-    @skyeng_words_count =
-      if current_user.skyeng_setting
-        Word::ByStatus.run!(status: 'skyeng', user: current_user).size
-      end
+    @skyeng_words_count = if current_user.skyeng_setting
+                            current_user.skyeng_words_count || 0
+                          end
 
     @learning_words_count =
       Word::ByStatus.run!(status: 'learning', user: current_user).size

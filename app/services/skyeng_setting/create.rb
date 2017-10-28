@@ -7,10 +7,10 @@ class SkyengSetting < ApplicationRecord
                                 message: :email_invalid }
 
     def execute
-      user.skyeng_setting = skyeng_setting
+      skyeng_setting.email = email
 
-      if user.save
-        user.skyeng_setting
+      if skyeng_setting.save
+        skyeng_setting
       else
         errors.add(:skyeng_setting, t('skyeng_settings.errors.did_not_save'))
       end
@@ -20,7 +20,7 @@ class SkyengSetting < ApplicationRecord
 
     def skyeng_setting
       @_skyeng_setting ||=
-        SkyengSetting.where(email: email.downcase).first_or_initialize
+        SkyengSetting.where(user_id: user.id).first_or_initialize
     end
   end
 end
