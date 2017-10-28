@@ -30,6 +30,7 @@ class User < ApplicationRecord
                  :sign_up_params
 
   after_create :create_test_article
+  after_create :set_default_settings
 
   # Allows to change a profile settings without entering a password
   def update_with_password(params, *options)
@@ -58,5 +59,9 @@ class User < ApplicationRecord
 
   def create_test_article
     Article.find(1).dup.update(user_id: id)
+  end
+
+  def set_default_settings
+    update(sentences_number: 3)
   end
 end
