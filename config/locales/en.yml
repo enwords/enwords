@@ -121,7 +121,7 @@ en:
   static:
     index:
       sign_in:
-        title: "Recommendations for successful learning:"
+        title: "Guidance for successful learning:"
         item_1:
           text: "<a href=%{words_path}>Select words</a> to learn and repeat them in different sentences that will give
           you Enwords and also to mark the words that you know to make them disappear from the list (all words arranged
