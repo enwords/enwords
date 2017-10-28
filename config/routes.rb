@@ -1,14 +1,6 @@
 Rails.application.routes.draw do
   root to: 'static#index'
 
-  get '/admin' => 'admin#index'
-
-  namespace :admin do
-    resources :sentences
-    resources :trainings
-    resources :users
-  end
-
   get '/words_from_sentence/:id',   to: 'trainings#words_from_sentence'
   get '/change_status/:id/:status', to: 'trainings#change_status'
 
@@ -58,6 +50,15 @@ Rails.application.routes.draw do
         end
       end
     end
+
+    get '/admin' => 'admin#index'
+
+    namespace :admin do
+      resources :sentences
+      resources :trainings
+      resources :users
+    end
+
   end
 
   resource :skyeng_setting do
