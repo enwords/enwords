@@ -35,6 +35,11 @@ $(function () {
             var previewUrl    = data.previewUrl;
             var soundUrl      = data.soundUrl;
 
+            var transcriptionBlock = ' - ';
+            if (typeof transcription !== 'undefined') {
+              transcriptionBlock = '[' + transcription + ']';
+            }
+
             var content = (
             '<div style="font-size: 1.25rem; font-weight: 100">' +
             '<span> ' +
@@ -43,7 +48,7 @@ $(function () {
               '</span>' +
               '<span> ' + word.capitalize() + '</span>' +
             '</span>' +
-              '<span style="color: #b9b9b9"> [' + transcription + ']</span>' +
+              '<span style="color: #b9b9b9"> ' + transcriptionBlock + '</span>' +
               '<span> ' + translation + '</span>' +
             '</div>');
 

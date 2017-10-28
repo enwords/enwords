@@ -90,3 +90,4 @@ end
 gem 'ruby_dig'
 gem 'aasm'
 gem 'redis-rails'
+gem 'yandex-translator'

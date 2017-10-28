@@ -42,16 +42,15 @@ module Api
     end
 
     def first_meaning(word:)
-      word   = word.gsub(/\W/, '').downcase
       result = build_get_response \
         'http://dictionary.skyeng.ru/api/public/v1/words/search',
         search: word
 
       return :invalid_params unless result.is_a?(Array)
-      return {} if result.blank?
+      return if result.blank?
 
       word_block = result.find { |i| word.casecmp(i['text']).zero? }
-      return {} if word_block.blank?
+      return if word_block.blank?
 
       meanings = word_block['meanings'].sort_by { |el| el['id'] }
       meanings[0].merge('text' => word_block['text'])
@@ -69,3 +68,26 @@ module Api
     end
   end
 end
+
+#
+# https://translate.yandex.net/api/v1.5/tr.json/translate?lang=en-ru&key=trnsl.1.1.20171028T161942Z.7425cc61e644a259.27eb2ce8f5d9d941b5344e9753fde863dc37e924&text=drives
+#
+# {
+#   lang: en-ru,
+#   key:  'trnsl.1.1.20171028T161942Z.7425cc61e644a259.27eb2ce8f5d9d941b5344e9753fde863dc37e924',
+#   text: 'drives'
+# }
+#
+# {
+#   2
+# "code": 200,
+#   3
+# "lang": "en-ru",
+#   4
+# "text": [
+#   5
+# "диски"
+# 6
+# ]
+# 7
+# }
