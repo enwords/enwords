@@ -1,6 +1,6 @@
-.col-12.col-lg-8.offset-lg-2.jumbotron
-  .row.row-content
-    .col-12.links-top.mb-1
+.row
+  .col-12.col-lg-8.offset-lg-2.jumbotron
+    div.links-top.mb-1
       = link_to t('texts.links.words'), words_path(article: @article)
       = ' / '
       = link_to t('texts.links.edit'), edit_article_path(@article)
@@ -8,22 +8,21 @@
       = link_to t('texts.links.delete'), article_path(@article),
           method: :delete,
           data: { confirm: t('texts.links.are_you_sure') }
-
     - if body_class == 'eng-rus'
-      .col-12
+      div
         h3.form-signin-heading
           - @article.title.split.each do |w|
             span.word-skyeng = w
             span.word-zero = ' '
-      .col-12
+      div
         - @article.content.split("\r\n").each do |sen|
           - sen.split.each do |w|
             span.word-skyeng = w
             span.word-zero = ' '
           br
     - else
-      .col-12
+      div
         h3.form-signin-heading = @article.title
-      .col-12
+      div
         pre = @article.content
 
