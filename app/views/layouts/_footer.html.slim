@@ -8,6 +8,10 @@ footer.footer
           = ' '
           a href='http://fb.com/sadovnikov.dmitry' Dmitry Sadovnikov
       .hidden-md-down.col-lg-6
-        span.copyright.pull-right
-          = link_to "Donate (ETH): #{ENV['ETH_ADDRESS']}",
-                    "https://etherscan.io/address/#{ENV['ETH_ADDRESS']}"
+        .pull-right
+          .copyright
+            span.noselect
+              = 'Donate ETH: '
+            span.force-select
+              = link_to ENV['ETH_ADDRESS'],
+                  "https://etherscan.io/address/#{ENV['ETH_ADDRESS']}", class: 'force-select'
