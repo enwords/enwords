@@ -1,7 +1,13 @@
 footer.footer
   .container
-    span.copyright
-      i.fa.fa-copyright
-      |  2016&mdash;#{Date.current.year} by
-      = ' '
-      a href='http://fb.com/sadovnikov.dmitry' Dmitry Sadovnikov
+    .row
+      .col-12.col-lg-6
+        span.copyright
+          i.fa.fa-copyright
+          |  2016&mdash;#{Date.current.year} by
+          = ' '
+          a href='http://fb.com/sadovnikov.dmitry' Dmitry Sadovnikov
+      .hidden-md-down.col-lg-6
+        span.copyright.pull-right
+          = link_to "Donate (ETH): #{ENV['ETH_ADDRESS']}",
+                    "https://etherscan.io/address/#{ENV['ETH_ADDRESS']}"
