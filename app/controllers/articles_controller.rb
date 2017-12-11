@@ -11,7 +11,7 @@ class ArticlesController < ApplicationController
     @articles = current_user.articles
                             .where(language: current_user.learning_language)
                             .order(:id)
-                            .paginate(page: params[:page], per_page: 15)
+                            .paginate(page: params[:page], per_page: 20)
   end
 
   def new

@@ -100,8 +100,12 @@ en:
         learned: 'Learned '
         learning: 'Learning '
         unknown: 'Unknown '
-        skyeng: "Skyeng"
-      texts: 'Texts'
+        skyeng: 'Skyeng'
+      articles:
+        dropdown: 'Articles'
+        my: 'My articles'
+        other: 'Other articles'
+
       last_training: 'Continue training'
       search: 'Word search'
       user:

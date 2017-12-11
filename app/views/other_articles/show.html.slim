@@ -1,0 +1,19 @@
+.row
+  .col-12.col-lg-8.offset-lg-2.jumbotron
+    div.links-top.mb-1
+      = link_to t('texts.links.words'), words_path(article: @article)
+    div
+      h3.form-signin-heading
+        - @article.title.split.each do |w|
+          span.word-skyeng = w
+          span.word-zero = ' '
+    div
+      iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/#{@article.track_id}&amp;color=%23ff5500&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;show_teaser=false"
+      br
+      br
+    div
+      - @article.content.split("\r\n").each do |sen|
+        - sen.split.each do |w|
+          span.word-skyeng = w
+          span.word-zero = ' '
+        br

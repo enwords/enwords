@@ -1,11 +1,12 @@
 class Article < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
 
-  validates :user, :language, :title, :content, presence: true
+  validates :language, :title, :content, presence: true
   before_save :word_frequency
 
   store_accessor :words_data,
-                 :frequency
+                 :frequency,
+                 :track_id
 
   private
 

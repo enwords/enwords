@@ -42,9 +42,14 @@ header
                   li
                     = link_to grammar_eng_irregular_verbs_path, class: 'nav-link' do
                       = t('shared.navigation.grammar.eng.irregular_verbs')
-
-            li.nav-item = link_to t('shared.navigation.texts'), articles_path, class: 'nav-link'
-
+              li.nav-item.dropdown
+                a.dropdown-toggle data-toggle='dropdown' href='#' class='nav-link'
+                  = t 'shared.navigation.articles.dropdown'
+                  b.caret
+                ul.dropdown-menu
+                  li = link_to t('shared.navigation.articles.my'), articles_path, class: 'nav-link'
+                  - if body_class == 'eng-rus'
+                    li = link_to t('shared.navigation.articles.other'), other_articles_path, class: 'nav-link'
             - if current_user.training.present?
               li.nav-item = link_to t('shared.navigation.last_training'),
                       training_path(page: current_user.training.current_page),

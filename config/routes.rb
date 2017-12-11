@@ -35,6 +35,8 @@ Rails.application.routes.draw do
       post :delete_selected, on: :collection
     end
 
+    resources :other_articles
+
     resources :words, only: %i[index] do
       collection do
         put :word_action

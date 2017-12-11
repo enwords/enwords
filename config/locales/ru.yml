@@ -119,7 +119,10 @@ ru:
         learning: 'Изучаемые '
         unknown: 'Неизвестные '
         skyeng: "Skyeng"
-      texts: 'Тексты'
+        articles:
+          dropdown: 'Статьи'
+          my: 'Мои статьи'
+          other: 'Другие статьи'
       last_training: 'Продолжить тренировку'
       search: 'Поиск слов'
       user:
