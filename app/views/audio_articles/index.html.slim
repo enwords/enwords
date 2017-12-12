@@ -6,7 +6,8 @@
       tbody
         - @articles.each do |article|
           tr
-            td = link_to article.title, audio_article_path(article),
+            td style= 'padding-bottom: 5px'
+              = link_to article.title, audio_article_path(article),
                          class: 'link'
             td style = 'text-align: right'
               = link_to icon('list'), words_path(article: article), title: t('texts.links.words')
