@@ -104,7 +104,7 @@ en:
       articles:
         dropdown: 'Articles'
         my: 'My articles'
-        other: 'Other articles'
+        audio: 'Audio articles'
 
       last_training: 'Continue training'
       search: 'Word search'

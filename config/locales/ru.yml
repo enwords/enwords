@@ -122,7 +122,7 @@ ru:
       articles:
         dropdown: 'Статьи'
         my: 'Мои статьи'
-        other: 'Другие статьи'
+        audio: 'Аудио статьи'
       last_training: 'Продолжить тренировку'
       search: 'Поиск слов'
       user:
@@ -177,7 +177,7 @@ ru:
       text: "Выученных слов"
 
   texts:
-    title: "Тексты"
+    title: "Статьи"
     buttons:
       add_text: "Добавить текст"
       delete_selected: "Удалить выбранные"

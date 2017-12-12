@@ -1,4 +1,4 @@
-class OtherArticlesController < ApplicationController
+class AudioArticlesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_article, only: %i[show]
 
