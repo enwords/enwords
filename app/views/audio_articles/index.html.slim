@@ -8,9 +8,8 @@
           tr
             td = link_to article.title, audio_article_path(article),
                          class: 'link'
-            td style = 'text-align: center'
-              = link_to icon('book'),  words_path(article: article),
-                         title: t('texts.links.words')
+            td style = 'text-align: right'
+              = link_to icon('list'), words_path(article: article), title: t('texts.links.words')
 
 .col-12.digg_pagination
   = will_paginate @articles,

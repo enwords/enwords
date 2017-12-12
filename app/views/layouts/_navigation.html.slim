@@ -47,9 +47,19 @@ header
                   = t 'shared.navigation.articles.dropdown'
                   b.caret
                 ul.dropdown-menu
-                  li = link_to t('shared.navigation.articles.my'), articles_path, class: 'nav-link'
-                  - if body_class == 'eng-rus'
-                    li = link_to t('shared.navigation.articles.audio'), audio_articles_path, class: 'nav-link'
+                  li
+                    = link_to articles_path, class: 'nav-link' do
+                      = icon('plus')
+                      = ' '
+                      = t('shared.navigation.articles.my')
+
+                    - if body_class == 'eng-rus'
+                      li
+                        = link_to audio_articles_path, class: 'nav-link' do
+                          = icon('volume-up')
+                          = ' '
+                          = t('shared.navigation.articles.audio')
+
             - if current_user.training.present?
               li.nav-item = link_to t('shared.navigation.last_training'),
                       training_path(page: current_user.training.current_page),

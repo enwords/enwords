@@ -1,7 +1,10 @@
 .row
   .col-12.col-lg-8.offset-lg-2.jumbotron
     div.links-top.mb-1
-      = link_to t('texts.links.words'), words_path(article: @article)
+      = link_to words_path(article: @article) do
+        = icon('hand-o-right')
+        = ' '
+        = t('texts.links.words')
       = ' / '
       = link_to t('texts.links.edit'), edit_article_path(@article)
       = ' / '
