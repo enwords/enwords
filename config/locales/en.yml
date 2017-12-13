@@ -152,9 +152,7 @@ en:
           text: "In different sentences words have different meanings, it's impossible to learn all translations of all
           words, you need to learn to understand their meaning in the context.<br><br>
           Your task is to choose words and Enwords will give you sentences with these words, repeat them at
-          least 10 minutes a day and in a month you will see the result.<br><br>
-          Don't forget to read books, listen to audio
-          courses and watch movies in the studied language, you need to take the words from there."
+          least 10 minutes a day and in a month you will see the result."
     result:
       title: "Result of training:"
       text: "Learned words"
