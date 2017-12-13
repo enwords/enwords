@@ -3,7 +3,7 @@ module Admin
     before_action :set_user, only: %i[show update destroy]
 
     def index
-      @users = User.order(id: :desc).paginate(page: params[:page], per_page: 20)
+      @users = User.order(updated_at: :desc).paginate(page: params[:page], per_page: 20)
     end
 
     def show; end

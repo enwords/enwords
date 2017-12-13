@@ -1,15 +1,29 @@
 .container
   .row
     h3 Users
-    table.table style="overflow-x:auto;" 
+    table.table style="overflow-x:auto;"
+      thead
+        th
+        th
+        th native language
+        th learning language
+        th created at
+        th updated at
+        th sign in count
+        th words learned
+        th role
+        th
       tbody
         - @users.each do |user|
           tr
             td = user.id
             td = link_to user.email, admin_user_path(user)
-            td = user.learning_language
             td = user.native_language
-            td = user.created_at
+            td = user.learning_language
+            td = user.created_at.strftime('%d.%m.%Y %H:%m')
+            td = user.updated_at.strftime('%d.%m.%Y %H:%m')
+            td = user.sign_in_count
+            td = (user.training.words_learned rescue '...')
             td
               = form_for [:admin, user] do |f|
                 = f.select :role,
@@ -21,6 +35,4 @@
               = link_to 'Delete user', admin_user_path(user), data: { confirm: 'Are you sure?' }, method: :delete, class: 'button'
 
     #pagination-mobile.col-12.hidden-sm.hidden-md.hidden-lg.digg_pagination
-      = will_paginate @users, previous_label: '❬', next_label: '❭', outer_window: 0
-    #pagination-desktop.hidden.col-sm-12.digg_pagination
       = will_paginate @users, previous_label: '❬', next_label: '❭', outer_window: 0
