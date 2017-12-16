@@ -15,8 +15,11 @@
       br
       br
     div
-      - @article.content.split("\r\n").each do |sen|
-        - sen.split.each do |w|
-          span.word-skyeng = w
-          span.word-zero = ' '
-        br
+      - if body_class == 'eng-rus'
+        - @article.content.split("\r\n").each do |sen|
+          - sen.split.each do |w|
+            span.word-skyeng = w
+            span.word-zero = ' '
+          br
+      - else
+        pre = @article.content
