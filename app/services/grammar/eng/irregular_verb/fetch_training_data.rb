@@ -26,7 +26,7 @@ module Grammar
         end
 
         def words
-          verbs.pluck(:infinitive, :simple_past, :past_participle).flatten
+          verbs.pluck(:simple_past, :past_participle).flatten
         end
 
         def verbs
