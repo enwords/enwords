@@ -15,6 +15,14 @@ module ApplicationHelper
     end
   end
 
+  def word_color_class(word)
+    return if %w[unknown learning learned].include? params[:status]
+    case
+    when @learned_ids.include?(word.id)  then 'learned'
+    when @learning_ids.include?(word.id) then 'learning'
+    end
+  end
+
   def body_class
     return if current_user.blank?
     "#{current_user.learning_language}-#{current_user.native_language}"

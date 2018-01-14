@@ -1,5 +1,6 @@
 class WordsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_word_statuses, only: %i[index]
   before_action :set_word, only: %i[show edit update destroy]
 
   def new
@@ -71,5 +72,11 @@ class WordsController < ApplicationController
 
   def set_word
     @word = Word.find(params[:id])
+  end
+
+  def set_word_statuses
+    statuses = current_user.word_statuses
+    @learned_ids  = statuses.where(learned: true).pluck(:word_id)
+    @learning_ids = statuses.where(learned: false).pluck(:word_id)
   end
 end
