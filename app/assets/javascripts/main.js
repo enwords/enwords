@@ -59,4 +59,9 @@ $(function () {
       $thisButton.removeClass('switcher_unknown').toggleClass('switcher_learned');
     });
   });
+
+  $('[name="generate_phrase_form"]').on('ajax:success', function(event, data, status, xhr) {
+    var funny_phrase = 'Today you are a ' + data.resource;
+    $('[name="generate_phrase_result_field"]').val(funny_phrase)
+  });
 });

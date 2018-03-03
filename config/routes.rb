@@ -14,6 +14,14 @@ Rails.application.routes.draw do
              controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   scope ':locale', locale: /#{I18n.available_locales.join('|')}/ do
+    namespace :api do
+      resources :words, only: %i[] do
+        collection do
+          get :generate_phrase
+        end
+      end
+    end
+
     root to: 'static#index'
 
     devise_for :users,

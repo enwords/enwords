@@ -1,0 +1,16 @@
+.row
+  .col-12.col-sm-8.offset-sm-2.mt-3 style=('text-align: center')
+    = form_tag generate_phrase_api_words_path,
+        method: :get,
+        remote: true,
+        name:   'generate_phrase_form',
+        class:  'form-inline' do |f|
+      .col-12.col-md-8.mb-2
+        = text_field_tag 'generate_phrase_result_field', '',
+            placeholder: t('api.word.generate_phrase.field'),
+            class: 'form-control',
+            style: 'width: 100%; text-align: center; font-size: 120%;'
+      .col-12.col-md-4.mb-2
+        = button_tag t('api.word.generate_phrase.button'),
+            class: 'btn btn-secondary btn-lg',
+            name: 'generate_phrase_button'

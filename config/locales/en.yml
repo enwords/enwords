@@ -241,3 +241,8 @@ en:
     proficiency_level:
       hide: "Hide first "
       first_words: " words from the general word list"
+  api:
+    word:
+      generate_phrase:
+        field: "It's just a generator of English phrases"
+        button: "Push!"

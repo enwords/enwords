@@ -264,3 +264,8 @@ ru:
     proficiency_level:
       hide: "Скрыть "
       first_words: " первых слов из общего списка"
+  api:
+    word:
+      generate_phrase:
+        field: "Это просто генератор английских фраз"
+        button: "Жми!"
