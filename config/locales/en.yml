@@ -40,11 +40,11 @@ en:
         text: "To confirm your registration click on the link:"
         link: "Submit"
       password_change:
-        text: "Your password has been changed."
+        text: "Your password has been changed"
       reset_password_instructions:
-        text1: "Someone decided to change your password if this is you, then click on the link."
+        text1: "Someone decided to change your password if this is you, then click on the link"
         link: "Change password"
-        text2: "If you do not want to change your password, please ignore this message."
+        text2: "If you do not want to change your password, please ignore this message"
       unlock_instructions:
         text: "Your account has been suspended due to the large number of failed login attempts . Go Py link to unlock the account:"
         link: "Unlock"
@@ -147,12 +147,12 @@ en:
       sign_out:
         item1:
           text: "Enwords - a free application created to improve your vocabulary of studied language, here represented
-          about 0.5 million words and 3.5 million sentences in 30 languages."
+          about 0.5 million words and 3.5 million sentences in 30 languages (such English, German, Spanish, Italian, French, Esperanto, etc)"
         item2:
           text: "In different sentences words have different meanings, it's impossible to learn all translations of all
           words, you need to learn to understand their meaning in the context.<br><br>
           Your task is to choose words and Enwords will give you sentences with these words, repeat them at
-          least 10 minutes a day and in a month you will see the result."
+          least 10 minutes a day and in a month you will see the result"
     result:
       title: "Result of training:"
       text: "Learned words"
