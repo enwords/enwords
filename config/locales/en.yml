@@ -146,13 +146,10 @@ en:
 
       sign_out:
         item1:
-          text: "Enwords - a free application created to improve your vocabulary of studied language, here represented
-          about 0.5 million words and 3.5 million sentences in 30 languages (such English, German, Spanish, Italian, French, Esperanto, etc)"
+          text: "Enwords is a free application created to improve your vocabulary of studied language. Here are about 0.5 million words and 3.5 million sentences in 30 languages (such as English, German, Spanish, Italian, French, Esperanto, etc.)"
         item2:
-          text: "In different sentences words have different meanings, it's impossible to learn all translations of all
-          words, you need to learn to understand their meaning in the context.<br><br>
-          Your task is to choose words and Enwords will give you sentences with these words, repeat them at
-          least 10 minutes a day and in a month you will see the result"
+          text: "In different sentences words have different meanings, it is impossible to study all translations of all words, you need to learn to understand their meaning in context
+          <br><br>Your task is to choose words and Enwords will give you sentences with these words, repeat them at least 10 minutes a day and in a month you will see the result"
     result:
       title: "Result of training:"
       text: "Learned words"
