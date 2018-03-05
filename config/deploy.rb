@@ -16,7 +16,6 @@ namespace :deploy do
     end
   end
 
-  after :updated, 'deploy:migrate'
   after :publishing, 'deploy:restart'
   after :finishing, 'deploy:cleanup'
 end
