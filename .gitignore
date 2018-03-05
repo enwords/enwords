@@ -26,8 +26,6 @@ lib/capistrano/
 
 /shared/
 
-config/database.yml
-config/secrets.yml
 config/application.yml
 
 .DS_Store/
