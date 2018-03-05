@@ -5,12 +5,11 @@ bundler_args: --without development --without production --no-cache
 script:
   - bundle exec rspec
 before_script:
+  - export DEVISE_KEY=90ddef9ea853b30ca6f068eca43cb1ec4b4435c4857ac41f5bbe18c1fe5bbd9c2ef23e92ea91342a6a290c4eaa5af6061ce42407e0ae59c264f344c1519ae376
+  - export TEST_DATABASE_NAME=enwords_test
   - psql -c 'create database enwords_test;' -U postgres
-  - RAILS_ENV=test bundle exec rake db:migrate > /dev/null
+  - RAILS_ENV=test bundle exec rake db:migrate --trace --quiet
 services:
   - postgresql
 addons:
   postgresql: "9.6"
-env:
-  - DEVISE_KEY=90ddef9ea853b30ca6f068eca43cb1ec4b4435c4857ac41f5bbe18c1fe5bbd9c2ef23e92ea91342a6a290c4eaa5af6061ce42407e0ae59c264f344c1519ae376
-  - TEST_DATABASE_NAME=enwords_test
