@@ -1,0 +1,12 @@
+language: ruby
+rvm:
+  - 2.3.0
+bundler_args: --without development --without production --no-cache
+script:
+  - bundle exec rspec
+before_script:
+  - psql -c 'create database enwords_test;' -U postgres
+services:
+  - postgresql
+addons:
+  postgresql: "9.6"

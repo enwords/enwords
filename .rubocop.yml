@@ -1,22 +1,46 @@
 AllCops:
-  TargetRubyVersion: 2.1
+  TargetRubyVersion: 2.3
+  DisplayCopNames: true
   Exclude:
-    - db/schema.rb
-    - bin/*
-    - vendor/bundle/**/*
-    - provision/**/*
+    - 'db/schema.rb'
+    - 'bin/*'
+    - 'vendor/bundle/**/*'
+    - 'provision/**/*'
 
 Rails:
   Enabled: true
 
-Style/Documentation:
-  Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
 
-Style/FrozenStringLiteralComment:
+Metrics/ModuleLength:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Style/Documentation:
   Enabled: false
 
 Style/AsciiComments:
   Enabled: false
 
-Metrics/BlockLength:
+DotPosition:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+LineLength:
+  Max: 120
+
+CyclomaticComplexity:
+  Max: 12
+
+Style/SignalException:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
   Enabled: false

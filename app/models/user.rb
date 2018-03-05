@@ -59,6 +59,7 @@ class User < ApplicationRecord
   end
 
   def create_test_article
+    return unless Rails.env.production?
     Article.find(1).dup.update(user_id: id)
   end
 
