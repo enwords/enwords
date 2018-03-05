@@ -6,6 +6,7 @@ script:
   - bundle exec rspec
 before_script:
   - psql -c 'create database enwords_test;' -U postgres
+  - RAILS_ENV=test bundle exec rake db:migrate > /dev/null
 services:
   - postgresql
 addons:
