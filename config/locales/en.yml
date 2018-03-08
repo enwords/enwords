@@ -241,5 +241,5 @@ en:
   api:
     word:
       generate_phrase:
-        field: "It's just a generator of English phrases"
+        field: "It's just a generator of English phrases :)"
         button: "Push!"
