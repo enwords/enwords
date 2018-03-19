@@ -236,8 +236,8 @@ en:
     change: "Change skyeng email and token"
   word:
     proficiency_level:
-      hide: "Hide first "
-      first_words: " words from the general word list"
+      hide: "Now "
+      first_words: " most simple words from the general list are hidden. You can hide more words by changing this value"
   api:
     word:
       generate_phrase:

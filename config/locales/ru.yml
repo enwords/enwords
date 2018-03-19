@@ -262,8 +262,8 @@ ru:
     select_proficiency_level: "Выберете уровень владения языком"
   word:
     proficiency_level:
-      hide: "Скрыть "
-      first_words: " первых слов из общего списка"
+      hide: "Сейчас скрыто "
+      first_words: " самых простых слов из общего списка. Вы можете скрыть больше слов, изменив данное значение"
   api:
     word:
       generate_phrase:

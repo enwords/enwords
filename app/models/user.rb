@@ -64,6 +64,9 @@ class User < ApplicationRecord
   end
 
   def set_default_settings
-    update(sentences_number: 3)
+    self.proficiency_levels                    = {}
+    self.proficiency_levels[learning_language] = 100
+    self.sentences_number                      = 3
+    save!
   end
 end
