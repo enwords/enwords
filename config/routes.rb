@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
 
   get 'dev' => 'development#index'
+  get 'privacy' => 'static#privacy'
 
   devise_for :users,
              only:        :omniauth_callbacks,
