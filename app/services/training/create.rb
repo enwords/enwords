@@ -28,12 +28,13 @@ class Training < ApplicationRecord
 
     def sentence_ids
       result = word_ids.map do |w_id|
-        word = Word.find(w_id)
+        word              = Word.find(w_id)
+        sentences_of_word = sentences_of_word(word)
 
-        if user.diversity_enable? || sentences_of_word(word).blank?
+        if user.diversity_enable? || sentences_of_word.blank?
           word.sentences.pluck(:id)
         else
-          sentences_of_word(word).pluck(:id)
+          sentences_of_word.pluck(:id)
         end
       end
 
