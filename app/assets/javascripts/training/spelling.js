@@ -25,7 +25,7 @@ $(function () {
   });
 
   function replacePunctuation(str) {
-    return str.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()\s]/g, '');
+    return str.toLowerCase().replace(/[\.\,\/\#\!\$\%\^\&\*\;\:\{\}\=\-\_\`\’\'\~\(\)\s]/g, '');
   }
 
   $inputSentence.keypress(function (e) {
