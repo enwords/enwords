@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :telegram do
+      resources :schedule_bots, only: %i[] do
+        collection do
+          get :message
+        end
+      end
+    end
+  end
+
   get '/words_from_sentence/:id',   to: 'trainings#words_from_sentence'
   get '/change_status/:id/:status', to: 'trainings#change_status'
 
@@ -69,7 +79,6 @@ Rails.application.routes.draw do
       resources :trainings
       resources :users
     end
-
   end
 
   resource :skyeng_setting do
