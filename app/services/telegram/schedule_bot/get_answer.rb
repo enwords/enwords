@@ -27,8 +27,8 @@ module Telegram
 
         case word
         when /xoxo/i then 'YOLO!'
-        when /a-z/i  then Sentence::ByWord.run!(word: word, language: 'eng', translation_language: 'rus').text
-        when /а-ё/i  then Sentence::ByWord.run!(word: word, language: 'rus', translation_language: 'eng').text
+        when /[a-z]/i  then Sentence::ByWord.run!(word: word, language: 'eng', translation_language: 'rus').text
+        when /[а-ё]/i  then Sentence::ByWord.run!(word: word, language: 'rus', translation_language: 'eng').text
         end
       end
     end
