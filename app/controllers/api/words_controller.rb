@@ -5,7 +5,7 @@ module Api
     end
 
     def random_sentence
-      word = params[:word].to_s.split(' ').first.downcase.strip
+      word = params[:word].to_s.split(' ').first.mb_chars.downcase.to_s.strip
 
       result =
         case word
