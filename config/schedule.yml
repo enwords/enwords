@@ -1,0 +1,4 @@
+test_job:
+  cron:  '*/1 * * * *'
+  name:  'TestWorker'
+  class: 'TestWorker'
