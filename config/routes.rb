@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     namespace :telegram do
       resources :schedule_bots, only: %i[] do
         collection do
-          get :message
+          post :message
         end
       end
     end
