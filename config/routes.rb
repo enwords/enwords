@@ -4,8 +4,14 @@ Rails.application.routes.draw do
       resources :schedule_bots, only: %i[] do
         collection do
           post :message, defaults: { format: :json }
-          get  :message, defaults: { format: :json }
         end
+      end
+    end
+
+    resources :words, only: %i[] do
+      collection do
+        get :generate_phrase, defaults: { format: :json }
+        get :random_sentence, defaults: { format: :json }
       end
     end
   end
@@ -26,15 +32,6 @@ Rails.application.routes.draw do
              controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   scope ':locale', locale: /#{I18n.available_locales.join('|')}/ do
-    namespace :api do
-      resources :words, only: %i[] do
-        collection do
-          get :generate_phrase
-          get :random_sentence
-        end
-      end
-    end
-
     root to: 'static#index'
 
     devise_for :users,
