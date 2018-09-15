@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       resources :words, only: %i[] do
         collection do
           get :generate_phrase
+          get :random_sentence
         end
       end
     end
