@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :schedule_bots, only: %i[] do
         collection do
           post :message, defaults: { format: :json }
+          get  :message, defaults: { format: :json }
         end
       end
     end
