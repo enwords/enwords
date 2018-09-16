@@ -39,9 +39,7 @@ class Sentence < ApplicationRecord
 
       <<~HEREDOC
         #{sentence.try(:sentence)}
-
         * * *
-
         #{translation}
       HEREDOC
     end
