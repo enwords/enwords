@@ -12,7 +12,7 @@ class TestWorker
     ActionMailer::Base.mail(
       from:    ENV['GMAIL_USERNAME'],
       to:      ENV['GMAIL_USERNAME'],
-      subject: word,
+      subject: word + ' - ' + Api::Skyeng.first_meaning(word: word).dig('translation', 'text'),
       body:    text
     ).deliver
 
