@@ -37,7 +37,7 @@ class Sentence < ApplicationRecord
     def text
       return unless sentence.try(:sentence)
 
-      <<-HEREDOC
+      <<~HEREDOC
         #{sentence.try(:sentence)}
 
         * * *
