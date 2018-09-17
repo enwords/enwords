@@ -1,4 +1,4 @@
 test_job:
-  cron:  '5 11-23 * * *'
+  cron:  '5 9-20 * * *'
   class: 'TestWorker'
   active_job: true
