@@ -192,7 +192,7 @@ en:
     unknown: 'Unknown words'
     all: "All words"
     search_result: "Search result"
-    words_of_text: "Words in text"
+    words_of_text: "Words from the text"
     warning:
       text1: "There are no words in this list, you can find new words "
       link1: "here"
