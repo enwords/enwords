@@ -165,7 +165,7 @@ en:
       title: "Title"
       text: "Text"
       language: "Text language (the text will be unavailable when learning other languages) "
-      warning: "Attention! Unfortunately for word search in Chinese and Japanese texts the words should be separated by a space"
+      warning: "Attention! Unfortunately for word search in Chinese and Japanese texts, the words should be separated by a space"
       submit: "Save"
       saving: "Saving..."
       wait: "Please wait..."
