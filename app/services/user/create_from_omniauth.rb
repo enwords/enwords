@@ -42,7 +42,13 @@ class User < ApplicationRecord
     end
 
     def fake_email
-      "#{Devise.friendly_token}@#{auth_params['provider']}.com"
+      domain =
+        case auth_params['provider']
+        when 'vkontakte' then 'vk.com'
+        else "#{auth_params['provider']}.com"
+        end
+
+      SecureRandom.hex(8) + '@' + domain
     end
   end
 end
