@@ -1,8 +1,13 @@
 class Sentence < ApplicationRecord
-  has_and_belongs_to_many :words
-  has_and_belongs_to_many :translations,
-                          class_name:              'Sentence',
-                          join_table:              'links',
-                          foreign_key:             'sentence_1_id',
-                          association_foreign_key: 'sentence_2_id'
+  has_many :sentences_words
+
+  has_many :links,
+           foreign_key: :sentence_1_id
+
+  has_many :words,
+           through: :sentences_words
+
+  has_many :translations,
+           through: :links,
+           source:  :translation
 end

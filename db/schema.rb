@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181231113852) do
+ActiveRecord::Schema.define(version: 20181231175840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,11 +28,6 @@ ActiveRecord::Schema.define(version: 20181231113852) do
     t.index ["user_id"], name: "index_articles_on_user_id", using: :btree
   end
 
-  create_table "audios", id: false, force: :cascade do |t|
-    t.integer "sentence_id"
-    t.index ["sentence_id"], name: "index_audios_on_sentence_id", using: :btree
-  end
-
   create_table "authentication_providers", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -46,7 +41,7 @@ ActiveRecord::Schema.define(version: 20181231113852) do
     t.jsonb  "past_participle", default: []
   end
 
-  create_table "links", id: false, force: :cascade do |t|
+  create_table "links", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.integer "sentence_1_id", null: false
     t.integer "sentence_2_id", null: false
     t.index ["sentence_1_id", "sentence_2_id"], name: "index_links_on_sentence_1_id_and_sentence_2_id", unique: true, using: :btree
@@ -60,7 +55,7 @@ ActiveRecord::Schema.define(version: 20181231113852) do
     t.index ["language"], name: "index_sentences_on_language", using: :btree
   end
 
-  create_table "sentences_words", id: false, force: :cascade do |t|
+  create_table "sentences_words", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.integer "word_id",     null: false
     t.integer "sentence_id", null: false
     t.index ["word_id", "sentence_id"], name: "index_sentences_words_on_word_id_and_sentence_id", unique: true, using: :btree
@@ -123,7 +118,7 @@ ActiveRecord::Schema.define(version: 20181231113852) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  create_table "word_statuses", id: false, force: :cascade do |t|
+  create_table "word_statuses", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
     t.integer "user_id"
     t.integer "word_id"
     t.boolean "learned", null: false
@@ -141,6 +136,5 @@ ActiveRecord::Schema.define(version: 20181231113852) do
   end
 
   add_foreign_key "articles", "users"
-  add_foreign_key "audios", "sentences"
   add_foreign_key "trainings", "users"
 end

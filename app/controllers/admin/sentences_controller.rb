@@ -42,7 +42,6 @@ module Admin
     end
 
     def destroy
-      Audio.where(sentence_id: @sentence.id).delete_all
       @sentence.destroy
       respond_to do |format|
         format.html { redirect_to admin_sentences_path, notice: 'Sentence was successfully destroyed.' }

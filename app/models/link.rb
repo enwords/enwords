@@ -1,4 +1,9 @@
 class Link < ApplicationRecord
-  belongs_to :sentence_1, class_name: 'Sentence'
-  belongs_to :sentence_2, class_name: 'Sentence'
+  belongs_to :sentence,
+             class_name:  'Sentence',
+             foreign_key: :sentence_1_id
+
+  belongs_to :translation,
+             class_name:  'Sentence',
+             foreign_key: :sentence_2_id
 end

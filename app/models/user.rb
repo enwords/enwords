@@ -59,7 +59,7 @@ class User < ApplicationRecord
 
   def create_test_article
     return unless Rails.env.production?
-    Article.find(1).dup.update(user_id: id)
+    Article.find(34).dup.update(user_id: id)
   end
 
   def set_default_settings
