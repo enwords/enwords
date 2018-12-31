@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   has_many :authentications,
-           class_name: 'UserAuthentication',
-           dependent:  :destroy
+           class_name: 'UserAuthentication'
 
   has_many :word_statuses,
            dependent: :delete_all

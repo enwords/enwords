@@ -10,10 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180303163147) do
+ActiveRecord::Schema.define(version: 20181231113852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
+  enable_extension "pgcrypto"
 
   create_table "articles", force: :cascade do |t|
     t.integer  "user_id"
@@ -51,8 +53,10 @@ ActiveRecord::Schema.define(version: 20180303163147) do
   end
 
   create_table "sentences", id: :integer, force: :cascade do |t|
-    t.string "language", limit: 4
-    t.string "sentence"
+    t.string  "language",   limit: 4
+    t.string  "sentence"
+    t.integer "tatoeba_id"
+    t.boolean "with_audio",           default: false
     t.index ["language"], name: "index_sentences_on_language", using: :btree
   end
 
@@ -129,9 +133,10 @@ ActiveRecord::Schema.define(version: 20180303163147) do
   end
 
   create_table "words", id: :integer, force: :cascade do |t|
-    t.string "language", limit: 4
-    t.string "word"
-    t.string "pos"
+    t.string  "language", limit: 4
+    t.string  "word"
+    t.string  "pos"
+    t.integer "weight"
     t.index ["language"], name: "index_words_on_language", using: :btree
   end
 
