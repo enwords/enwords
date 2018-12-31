@@ -27,7 +27,7 @@ puts 'sentences done'
 csv_text = File.read(Rails.root.join('db', 'seeds_data', 'word_sentence.tsv'))
 csv = CSV.parse(csv_text, :col_sep => "\t", :headers => false, :encoding => 'utf-8')
 csv.each do |row|
-  SentencesWords.create!(word_id: row[0], sentence_id: row[1])
+  SentencesWord.create!(word_id: row[0], sentence_id: row[1])
 end
 puts 'word_sentence done'
 
@@ -41,6 +41,6 @@ puts 'audio done'
 csv_text = File.read(Rails.root.join('db', 'seeds_data', 'links.tsv'))
 csv = CSV.parse(csv_text, :col_sep => "\t", :headers => false, :encoding => 'utf-8')
 csv.each do |row|
-  Links.create!(sentence_1_id: row[0], sentence_2_id: row[1])
+  Link.create!(sentence_1_id: row[0], sentence_2_id: row[1])
 end
 puts 'links done'
