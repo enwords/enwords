@@ -34,7 +34,7 @@ puts 'word_sentence done'
 csv_text = File.read(Rails.root.join('db', 'seeds_data', 'audio.tsv'))
 csv = CSV.parse(csv_text, :col_sep => "\t", :headers => false, :encoding => 'utf-8')
 csv.each do |row|
-  Audio.create!(sentence_id: row[0])
+  Sentence.find_by!(id: row[0]).update!(with_audio: true)
 end
 puts 'audio done'
 
