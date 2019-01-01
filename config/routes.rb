@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/words_from_sentence/:id',   to: 'trainings#words_from_sentence'
+  get '/words_from_sentence/:sentence_id', to: 'trainings#words_from_sentence'
   get '/change_status/:id/:status', to: 'trainings#change_status'
 
   as :user do

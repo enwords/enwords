@@ -12,10 +12,9 @@ class TrainingsController < ApplicationController
   end
 
   def words_from_sentence
-    @words_from_sentence = Word::FromSentence.run!(
-      user:     current_user,
-      sentence: Sentence.find(params[:id])
-    )
+    @words_from_sentence =
+      Word::FromSentence.run!(params.merge(user: current_user))
+
     render layout: false
   rescue
     render nothing: true

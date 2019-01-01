@@ -1,7 +1,7 @@
 class Word < ApplicationRecord
   class FromSentence < ActiveInteraction::Base
     object :user
-    object :sentence, class: Sentence
+    integer :sentence_id
 
     def execute
       words_from_sentence.map do |word|
@@ -15,10 +15,13 @@ class Word < ApplicationRecord
 
     private
 
+    def sentence
+      @_sentence ||= Sentence.find(sentence_id)
+    end
+
     def words_from_sentence
-      @_words_from_sentence ||= begin
+      @_words_from_sentence ||=
         sentence.words.map { |word| word if available_words.include? word }.compact
-      end
     end
 
     def available_words
