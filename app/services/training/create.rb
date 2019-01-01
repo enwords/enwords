@@ -27,32 +27,38 @@ class Training < ApplicationRecord
     end
 
     def grouped_sentences_words
-      SentencesWord.where(word_id: word_ids).group_by(&:word_id)
+      SentencesWord
+        .select("word_id, (array_agg(sentence_id order by random()))[1:#{user.sentences_number}] sentence_ids")
+        .where(word_id: word_ids)
+        .group(:word_id)
+        .order(:word_id)
+        .each_with_object({}) { |sw, hsh| hsh[sw.word_id] = sw.sentence_ids }
     end
 
     def grouped_sentences_words_with_translations
       result =
         SentencesWord
+          .select("word_id, (array_agg(sentence_id order by random()))[1:#{user.sentences_number}] sentence_ids")
           .where(word_id: word_ids)
           .left_joins(sentence: :translations)
           .where(translations_sentences: { language: user.native_language })
-          .group_by(&:word_id)
+          .group(:word_id)
+          .order(:word_id)
+          .each_with_object({}) { |sw, hsh| hsh[sw.word_id] = sw.sentence_ids }
 
       word_ids.map(&:to_i).each do |word_id|
         next if result[word_id].present?
 
-        result[word_id] = SentencesWord.where(word_id: word_id)
+        result[word_id] =
+          SentencesWord
+            .select("(array_agg(sentence_id))[1:#{user.sentences_number}] sentence_ids")
+            .where(word_id: word_id)
+            .order('random()')
+            .first
+            .sentence_ids
       end
 
       result
-    end
-
-    def select_random_sentence_ids(grouped_sentences_words)
-      result = grouped_sentences_words.flat_map do |_word_id, sentences_words_array|
-        sentences_words_array.map(&:sentence_id).sample(user.sentences_number)
-      end
-
-      result.uniq
     end
 
     def sentence_ids
@@ -63,7 +69,7 @@ class Training < ApplicationRecord
           grouped_sentences_words_with_translations
         end
 
-      select_random_sentence_ids(result)
+      result.values.flatten.uniq
     end
 
     # validations
