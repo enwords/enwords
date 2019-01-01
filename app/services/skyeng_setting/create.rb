@@ -8,6 +8,7 @@ class SkyengSetting < ApplicationRecord
 
     def execute
       skyeng_setting.email = email
+      skyeng_setting.aasm_state = 'token_adding'
 
       if skyeng_setting.save
         skyeng_setting
