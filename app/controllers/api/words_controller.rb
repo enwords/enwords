@@ -15,10 +15,10 @@ module Api
     end
 
     def mnemos
-      return render json: { resource: [] }, status: :ok unless word
+      return render json: { collection: [] }, status: :ok unless word
 
       _, result = Word::GetMnemo.run!(word: word)
-      render json: { resource: result.as_json }, status: :ok
+      render json: { collection: result.as_json }, status: :ok
     end
 
     private
