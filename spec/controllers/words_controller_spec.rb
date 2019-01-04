@@ -8,7 +8,6 @@ describe WordsController do
     subject { described_class }
 
     before do
-
       allow(controller).to receive(:current_user).and_return(user)
       allow(controller).to receive(:authenticate_user!).and_return(true)
 

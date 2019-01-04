@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Api::Telegram::ScheduleBotsController do
+xdescribe Api::Telegram::ScheduleBotsController do
   context 'message' do
     before do
       allow(Telegram::ScheduleBot::Reply).to receive(:run!).and_return(true)

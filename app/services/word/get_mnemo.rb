@@ -17,7 +17,7 @@ class Word::GetMnemo < ActiveInteraction::Base
       callout.css('em').remove
       callout.css('.author').remove
       mnemos_text_array =
-        callout.text.strip.split(/\[.*?\] - /).map(&:strip).select(&:present?)
+        callout.text.strip.split(/\[.*?\]\s*\-\s*/).map(&:strip).select(&:present?)
 
       ApplicationRecord.transaction do
         mnemos_text_array.each do |content|
@@ -32,6 +32,6 @@ class Word::GetMnemo < ActiveInteraction::Base
   end
 
   def response
-    @response ||= HTTParty.post(URL, body: "pattern=#{word.word}").body
+    @response ||= HTTParty.post(URL, body: "pattern=!#{word.word}!").body
   end
 end
