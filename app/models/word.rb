@@ -11,4 +11,6 @@ class Word < ApplicationRecord
 
   has_many :sentences,
            through: :sentences_words
+
+  has_many :mnemos
 end

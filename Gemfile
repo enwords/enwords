@@ -7,6 +7,7 @@ gem 'devise'
 gem 'figaro'
 gem 'font-awesome-sass', '4.6.2'
 gem 'foreman'
+gem 'httparty'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'omniauth'
@@ -44,7 +45,6 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'ffaker'
   gem 'pry-rails'
-  gem 'rspec-rails'
   gem 'rubocop'
 end
 
@@ -62,4 +62,9 @@ end
 group :production do
   gem 'exception_notification'
   gem 'rails_12factor'
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'webmock'
 end

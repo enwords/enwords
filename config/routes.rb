@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       collection do
         get :generate_phrase, defaults: { format: :json }
         get :random_sentence, defaults: { format: :json }
+        get :mnemos,          defaults: { format: :json }
       end
     end
   end
