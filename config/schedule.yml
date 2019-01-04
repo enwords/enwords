@@ -1,4 +1,9 @@
 test_job:
-  cron:  '5 9-20 * * *'
+  cron:  '5 8-19 * * *'
   class: 'TestWorker'
+  active_job: true
+
+mnemo_job:
+  cron:  '*/1 * * * *'
+  class: 'MnemoWorker'
   active_job: true
