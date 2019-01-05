@@ -3,9 +3,9 @@
     .row.text-center
       - @words.each do |word|
         .col-12.original-sentence-block
-          h4
-            b = word.word
-          br
+          span.word-skyeng(style="font-size: 2rem")
+            = word.word
+        br
         - _, mnemos = Word::GetMnemo.run!(word: word)
         .col-12.original-sentence-block
           - if mnemos.map(&:content).compact.blank?
