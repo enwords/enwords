@@ -183,6 +183,7 @@ en:
     right: "You're right!"
     wrong: "You're wrong"
     no_translate: "Unfortunately, we do not have the translated sentences of your studying word, you can turn on the option"
+    no_mnemo: "Unfortunately, no mnemonic associations were found for this word"
     in_settings: "in settings"
     repeat: "Repeat exercise"
     spell_check: "Next"
@@ -202,6 +203,7 @@ en:
       training_repeating:  '"Repeating" exercise'
       training_spelling: '"Spelling" exercise'
       training_grammar: 'Exercise'
+      training_mnemo: '"Mnemo" exercise'
       add_to_learning: 'Add to "Learning"'
       add_to_learned:  'Add to "Learned"&nbsp'
       add_to_unknown:  'Add to "Unknown"'

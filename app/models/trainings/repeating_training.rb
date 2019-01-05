@@ -1,0 +1,1 @@
+class RepeatingTraining < Training; end

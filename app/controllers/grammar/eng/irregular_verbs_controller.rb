@@ -20,7 +20,7 @@ module Grammar
           words_learned: @learned_words_count
 
         if fetching.valid?
-          Training::Create.run fetching.result
+          Training::Create.run!(fetching.result)
           redirect_to training_path
         else
           redirect_to :back, alert: t('words.buttons.select_words')

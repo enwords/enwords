@@ -1,0 +1,1 @@
+class GrammarTraining < Training; end

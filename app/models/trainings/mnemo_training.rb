@@ -1,0 +1,1 @@
+class MnemoTraining < Training; end

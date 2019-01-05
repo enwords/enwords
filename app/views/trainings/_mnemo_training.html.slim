@@ -1,0 +1,34 @@
+.row.pt-3
+  .col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2
+    .row.text-center
+      - @words.each do |word|
+        .col-12.original-sentence-block
+          h4
+            b = word.word
+          br
+        - _, mnemos = Word::GetMnemo.run!(word: word)
+        .col-12.original-sentence-block
+          - if mnemos.map(&:content).compact.blank?
+            = t('training.no_mnemo')
+          - else
+            - mnemos.each do |mnemo|
+              h4 = mnemo.content
+              br
+      .col-12
+        .digg_pagination.pagination-training
+          - if params[:page] == @page_count.to_s
+            .pagination-training_last-link-off
+              = will_paginate @words,
+                      page_links: false,
+                      previous_label: '<i class="fa fa-angle-left"></i>',
+                      next_label: '<i class="fa fa-angle-right"></i>'
+              .pagination
+                = link_to t('training.end'), result_training_path, id: 'link-result'
+          - elsif @page_count == 1
+            .pagination
+              = link_to t('training.end'), result_training_path, id: 'link-result'
+          - else
+            = will_paginate @words,
+                    page_links: false,
+                    previous_label: '<i class="fa fa-angle-left"></i>',
+                    next_label: '<i class="fa fa-angle-right"></i>'

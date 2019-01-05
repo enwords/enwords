@@ -9,15 +9,19 @@ class Training < ApplicationRecord
 
     set_callback :type_check, :after, -> { self.word_ids = word_ids.map(&:to_i) }
 
-    validate :check_training_type
-
     def execute
-      training.update!(
-        training_type: training_type,
-        word_ids:      word_ids,
-        sentence_ids:  sentence_ids,
-        words_learned: words_learned
-      )
+      ApplicationRecord.transaction do
+        training.update!(
+          type:          type,
+          word_ids:      word_ids,
+          words_learned: words_learned,
+        )
+
+        case type
+        when 'RepeatingTraining', 'SpellingTraining', 'GrammarTraining'
+          training.update!(sentence_ids: sentence_ids)
+        end
+      end
     end
 
     private
@@ -72,11 +76,18 @@ class Training < ApplicationRecord
       result.values.flatten.uniq
     end
 
-    # validations
+    def mnemo_ids
 
-    def check_training_type
-      return if Training::TRAINING_TYPES.include? training_type
-      errors.add :training, 'Unknown training type'
+    end
+
+    def type
+      case training_type
+      when 'repeating'  then 'RepeatingTraining'
+      when 'spelling'   then 'SpellingTraining'
+      when 'grammar'    then 'GrammarTraining'
+      when 'mnemo'      then 'MnemoTraining'
+      else raise 'wtf?'
+      end
     end
   end
 end

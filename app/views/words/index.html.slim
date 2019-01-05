@@ -33,6 +33,13 @@
                   name:  'commit',
                   class: 'btn btn-raised btn-md btn-link btn-colored',
                   data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+          - if current_user.native_language == 'rus' && current_user.learning_language == 'eng'
+            = button_tag t('words.buttons.training_mnemo'),
+                    type: 'submit',
+                    value: 'to_training_mnemo',
+                    name: 'commit',
+                    class: 'btn btn-raised btn-md btn-link btn-colored',
+                    data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
           - unless params[:status] == 'learning'
             = button_tag t('words.buttons.add_to_learning'),
                     type:  'submit',

@@ -1,0 +1,1 @@
+class SpellingTraining < Training; end

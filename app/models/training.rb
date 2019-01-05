@@ -1,5 +1,15 @@
 class Training < ApplicationRecord
   belongs_to :user
-  TRAINING_TYPES = %w[repeating spelling grammar].freeze
-  enum training_type: TRAINING_TYPES.each_with_object({}) { |e, hsh| hsh[e] = e }
+
+  store_accessor :data,
+                 :word_ids,
+                 :sentence_ids
+
+  def sentences
+    Sentence.where(id: sentence_ids).order(:id)
+  end
+
+  def words
+    Word.where(id: word_ids).order(:id)
+  end
 end
