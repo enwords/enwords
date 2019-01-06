@@ -23,13 +23,36 @@ module Telegram
       end
 
       def execute
-        word = text.to_s.split(' ').first.downcase.strip
-
-        case word
-        when /xoxo/i then 'YOLO!'
-        when /[a-z]/i  then Sentence::ByWord.run!(word: word, language: 'eng', translation_language: 'rus').text
-        when /[а-ё]/i  then Sentence::ByWord.run!(word: word, language: 'rus', translation_language: 'eng').text
+        case word_string
+        when /xoxo/i
+          'YOLO!'
+        else
+          Sentence::ByWord.run!(word: word, trans_lang: trans_lang).text
         end
+      end
+
+      def trans_lang
+        @trans_lang ||=
+          case lang
+          when 'rus' then 'eng'
+          when 'eng' then 'rus'
+          end
+      end
+
+      def lang
+        @lang ||=
+          case word_string
+          when /[a-z]/i then 'eng'
+          when /[а-ё]/i then 'rus'
+          end
+      end
+
+      def word_string
+        @word_string ||= text.to_s.split(' ').first.mb_chars.downcase.to_s.strip
+      end
+
+      def word
+        @word ||= Word.find_by(word: word_string, language: lang)
       end
     end
   end

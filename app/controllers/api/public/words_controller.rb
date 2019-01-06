@@ -1,8 +1,6 @@
 module Api
   module Public
-    class WordsController < ActionController::Base
-      before_action -> { params[:format] = 'json' }
-
+    class WordsController < ::Api::BaseController
       def generate_phrase
         render json: { resource: Word::GeneratePhrase.run! }, status: :ok
       end
