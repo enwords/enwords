@@ -1,8 +1,7 @@
 class Sentence < ApplicationRecord
   class ByWord < ActiveInteraction::Base
-    string :word
-    string :language
-    string :translation_language
+    object :word
+    string :trans_lang
 
     def execute
       OpenStruct.new(
@@ -14,10 +13,10 @@ class Sentence < ApplicationRecord
 
     def sentence
       @_sentence ||=
-        word_record
+        word
         .sentences
         .left_joins(:translations)
-        .where(translations_sentences: { language: translation_language })
+        .where(translations_sentences: { language: trans_lang })
         .sample
     end
 
@@ -25,13 +24,9 @@ class Sentence < ApplicationRecord
       @_translation ||=
         sentence
         .translations
-        .where(language: translation_language)
+        .where(language: trans_lang)
         .first
         .try(:sentence)
-    end
-
-    def word_record
-      @_word_record ||= Word.find_by(word: word, language: language)
     end
 
     def text
@@ -41,6 +36,8 @@ class Sentence < ApplicationRecord
         #{sentence.try(:sentence)}
         * * *
         #{translation}
+        * * *
+        #{word.mnemos.map(&:content).join("\n")}
       HEREDOC
     end
   end

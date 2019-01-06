@@ -8,11 +8,13 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :words, only: %i[] do
-      collection do
-        get :generate_phrase, defaults: { format: :json }
-        get :random_sentence, defaults: { format: :json }
-        get :mnemos,          defaults: { format: :json }
+    namespace :public do
+      resources :words, only: %i[] do
+        collection do
+          get :generate_phrase
+          get :random_sentence
+          get :mnemos
+        end
       end
     end
   end

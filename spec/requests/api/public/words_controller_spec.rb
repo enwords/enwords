@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Api::WordsController, type: :request do
+describe Api::Public::WordsController, type: :request do
   let(:word) { create :eng_word, word: 'obstacle' }
 
   let(:headers) do
@@ -12,7 +12,7 @@ describe Api::WordsController, type: :request do
   let(:params) { {} }
 
   context 'GET #mnemos' do
-    subject { get '/api/words/mnemos', params: params, headers: headers }
+    subject { get '/api/public/words/mnemos', params: params, headers: headers }
 
     let!(:mnemo) { create :mnemo, word: word }
 
@@ -29,7 +29,7 @@ describe Api::WordsController, type: :request do
   end
 
   context 'GET #generate_phrase' do
-    subject { get '/api/words/generate_phrase', params: params, headers: headers }
+    subject { get '/api/public/words/generate_phrase', params: params, headers: headers }
 
     before do
       allow_any_instance_of(Word::GeneratePhrase).to receive(:run!).and_return('')
@@ -42,7 +42,7 @@ describe Api::WordsController, type: :request do
   end
 
   context 'GET #random_sentence' do
-    subject { get '/api/words/random_sentence', params: params, headers: headers }
+    subject { get '/api/public/words/random_sentence', params: params, headers: headers }
 
     let(:params) do
       {
@@ -60,23 +60,3 @@ describe Api::WordsController, type: :request do
     end
   end
 end
-
-
-# def generate_phrase
-#   render json: { resource: Word::GeneratePhrase.run! }, status: :ok
-# end
-#
-# def random_sentence
-#   result =
-#     case word_text
-#     when /[a-z]/i then Sentence::ByWord.run!(word: word_text, language: 'eng', translation_language: 'rus')
-#     when /[а-ё]/i then Sentence::ByWord.run!(word: word_text, language: 'rus', translation_language: 'eng')
-#     end
-#
-#   render json: { resource: result.as_json }, status: :ok
-# end
-#
-# def mnemos
-#   _, result = Word::GetMnemo.run!(word: word)
-#   render json: { resource: result.as_json }, status: :ok
-# end
