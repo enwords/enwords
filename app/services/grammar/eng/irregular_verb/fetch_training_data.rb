@@ -21,7 +21,7 @@ module Grammar
         private
 
         def word_ids
-          Word.where(word:     words,
+          Word.where(value:    words,
                      language: user.learning_language).pluck(:id)
         end
 

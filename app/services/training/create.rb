@@ -42,13 +42,13 @@ class Training < ApplicationRecord
     def grouped_sentences_words_with_translations
       result =
         SentencesWord
-          .select("word_id, (array_agg(sentence_id order by random()))[1:#{user.sentences_number}] sentence_ids")
-          .where(word_id: word_ids)
-          .left_joins(sentence: :translations)
-          .where(translations_sentences: { language: user.native_language })
-          .group(:word_id)
-          .order(:word_id)
-          .each_with_object({}) { |sw, hsh| hsh[sw.word_id] = sw.sentence_ids }
+        .select("word_id, (array_agg(sentence_id order by random()))[1:#{user.sentences_number}] sentence_ids")
+        .where(word_id: word_ids)
+        .left_joins(sentence: :translations)
+        .where(translations_sentences: { language: user.native_language })
+        .group(:word_id)
+        .order(:word_id)
+        .each_with_object({}) { |sw, hsh| hsh[sw.word_id] = sw.sentence_ids }
 
       word_ids.map(&:to_i).each do |word_id|
         next if result[word_id].present?

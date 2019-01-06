@@ -5,7 +5,7 @@ module Grammar
 
       def index
         infinitives = Grammar::Eng::IrregularVerb.select(:infinitive)
-        words       = Word.where(word: infinitives).order(:id).pluck(:word)
+        words       = Word.where(value: infinitives).order(:id).pluck(:value)
 
         @irregular_verbs =
           Grammar::Eng::IrregularVerb.all.sort_by { |v| words.index(v.infinitive) }

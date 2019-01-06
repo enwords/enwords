@@ -13,14 +13,14 @@ puts 'wait few minutes'
 csv_text = File.read(Rails.root.join('db', 'seeds_data', 'words.tsv'))
 csv = CSV.parse(csv_text, :col_sep => "\t", :headers => false, :encoding => 'utf-8')
 csv.each do |row|
-   Word.create!(id: row[0], language: row[1], word: row[2])
+   Word.create!(id: row[0], language: row[1], value: row[2])
 end
 puts 'words done'
 
 csv_text = File.read(Rails.root.join('db', 'seeds_data', 'sentences.tsv'))
 csv = CSV.parse(csv_text, :col_sep => "\t", :headers => false, :encoding => 'utf-8')
 csv.each do |row|
-  Sentence.create!(id: row[0], language: row[1], sentence: row[2])
+  Sentence.create!(id: row[0], language: row[1], value: row[2])
 end
 puts 'sentences done'
 

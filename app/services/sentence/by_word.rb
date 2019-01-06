@@ -5,8 +5,8 @@ class Sentence < ApplicationRecord
 
     def execute
       OpenStruct.new(
-        sentence:    sentence.try(:sentence),
-        translation: translation,
+        sentence:    sentence.try(:value),
+        translation: translation.try(:value),
         text:        text
       )
     end
@@ -26,18 +26,17 @@ class Sentence < ApplicationRecord
         .translations
         .where(language: trans_lang)
         .first
-        .try(:sentence)
     end
 
     def text
-      return unless sentence.try(:sentence)
+      return unless sentence.try(:value)
 
       <<~HEREDOC
-        #{sentence.try(:sentence)}
+        #{sentence.try(:value)}
         * * *
-        #{translation}
+        #{translation.try(:value)}
         * * *
-        #{word.mnemos.map(&:content).join("\n")}
+        #{word.mnemos.map(&:value).join("\n")}
       HEREDOC
     end
   end

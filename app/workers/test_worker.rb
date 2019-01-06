@@ -6,7 +6,7 @@ class TestWorker
   def perform(*)
     user           = User.find(1)
     learning_words = Word::ByStatus.run!(status: 'learning', user: user)
-    word           = learning_words.sample.word
+    word           = learning_words.sample.value
     translation    = skyeng_translation(word)
     return :no_translation unless translation
 

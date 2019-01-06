@@ -11,7 +11,7 @@ class Word < ApplicationRecord
     def get_rand_word(pos:)
       words  = Word.where(language: 'eng', pos: pos)
       offset = rand(words.count - 1)
-      words.offset(offset).first.word.titleize
+      words.offset(offset).first.value.titleize
     end
   end
 end

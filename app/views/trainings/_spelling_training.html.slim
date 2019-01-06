@@ -13,13 +13,13 @@
               = audio_tag "https://audio.tatoeba.org/sentences/#{sentence.language}/#{sentence.id}.mp3"
           - else
             span.fa.fa-volume-off
-          h4#original-sentence data-sentence-id=sentence.id
+          h4#original-sentence data-sentence-id=sentence.id data-sentence-value=sentence.value
             - if body_class == 'eng-rus'
-              - sentence.sentence.split.each do |w|
+              - sentence.value.split.each do |w|
                 span.word-skyeng = w
                 span.word-zero = ' '
             - else
-              = sentence.sentence
+              = sentence.value
         .col-10.offset-1 style='margin-top: 10px'
           = text_area_tag 'input-sentence', '',
                   autocomplete: 'off',

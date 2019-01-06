@@ -13,15 +13,15 @@ describe Sentence::ByWord do
   let(:trans_lang) { 'eng' }
 
   let(:word) do
-    create :word, word: 'Привет', language: language
+    create :word, value: 'Привет', language: language
   end
 
   let(:sentence) do
-    create :sentence, sentence: 'Reply to answer', language: language
+    create :sentence, value: 'Reply to answer', language: language
   end
 
   let(:translation) do
-    create :sentence, sentence: 'Ответ на привет', language: trans_lang
+    create :sentence, value: 'Ответ на привет', language: trans_lang
   end
 
   let!(:link) do

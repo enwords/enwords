@@ -68,26 +68,3 @@ module Api
     end
   end
 end
-
-#
-# https://translate.yandex.net/api/v1.5/tr.json/translate?lang=en-ru&key=trnsl.1.1.20171028T161942Z.7425cc61e644a259.27eb2ce8f5d9d941b5344e9753fde863dc37e924&text=drives
-#
-# {
-#   lang: en-ru,
-#   key:  'trnsl.1.1.20171028T161942Z.7425cc61e644a259.27eb2ce8f5d9d941b5344e9753fde863dc37e924',
-#   text: 'drives'
-# }
-#
-# {
-#   2
-# "code": 200,
-#   3
-# "lang": "en-ru",
-#   4
-# "text": [
-#   5
-# "диски"
-# 6
-# ]
-# 7
-# }

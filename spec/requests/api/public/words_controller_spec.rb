@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Api::Public::WordsController, type: :request do
-  let(:word) { create :eng_word, word: 'obstacle' }
+  let(:word) { create :eng_word, value: 'obstacle' }
 
   let(:headers) do
     {
@@ -18,7 +18,7 @@ describe Api::Public::WordsController, type: :request do
 
     let(:params) do
       {
-        word: word.word
+        word: word.value
       }
     end
 
@@ -46,7 +46,7 @@ describe Api::Public::WordsController, type: :request do
 
     let(:params) do
       {
-        word: word.word
+        word: word.value
       }
     end
 

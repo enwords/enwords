@@ -6,7 +6,7 @@ class TrainingsController < ApplicationController
     when RepeatingTraining, SpellingTraining, GrammarTraining
       @sentences  =
         current_training.sentences.paginate(page: params[:page], per_page: 1)
-      @words      = current_training.words.pluck(:word)
+      @words      = current_training.words.pluck(:value)
       @page_count = @sentences.total_pages
     when MnemoTraining
       @words =

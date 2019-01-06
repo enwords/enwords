@@ -20,18 +20,18 @@ class Word::GetMnemo < ActiveInteraction::Base
         callout.text.strip.split(/\[.*?\]\s*\-\s*/).map(&:strip).select(&:present?)
 
       ApplicationRecord.transaction do
-        mnemos_text_array.each do |content|
-          Mnemo.create!(word: word, language: 'rus', content: content)
+        mnemos_text_array.each do |value|
+          Mnemo.create!(word: word, language: 'rus', value: value)
         end
       end
     else
-      Mnemo.create!(word: word, language: 'rus', content: nil)
+      Mnemo.create!(word: word, language: 'rus', value: nil)
     end
 
     [:ok, word.reload.mnemos]
   end
 
   def response
-    @response ||= HTTParty.post(URL, body: "pattern=!#{word.word}!").body
+    @response ||= HTTParty.post(URL, body: "pattern=!#{word.value}!").body
   end
 end

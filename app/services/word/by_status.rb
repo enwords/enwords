@@ -57,7 +57,7 @@ class Word < ApplicationRecord
 
     def searching
       @_searching ||=
-        available.where('word LIKE ?', "#{search.strip.downcase}%").order(:id).to_a
+        available.where('value LIKE ?', "#{search.strip.downcase}%").order(:id).to_a
     end
 
     def offset_words
@@ -78,8 +78,8 @@ class Word < ApplicationRecord
         email: user.skyeng_setting.email,
         token: user.skyeng_setting.token
 
-      result = available.where(word: skyeng_words).where.not(id: 1..100).order(:id).to_a
-      user.update(skyeng_words_count: result.size)
+      result = available.where(value: skyeng_words).where.not(id: 1..100).order(:id).to_a
+      user.update!(skyeng_words_count: result.size)
 
       return result if result.size < 100
 

@@ -1,12 +1,12 @@
 $(function () {
   'use strict';
 
-  var $originalSentence = $('#original-sentence');
-  var $nextPage         = $('.next_page');
+  var $originalSentence = $('#original-sentence').data('sentence-value');
   var $inputSentence    = $('.input-sentence');
+  var $nextPage         = $('.next_page');
 
   $nextPage.on('click', function () {
-    if (replacePunctuation($inputSentence.val()) === replacePunctuation($originalSentence.text())) {
+    if (replacePunctuation($inputSentence.val()) === replacePunctuation($originalSentence)) {
       $inputSentence.addClass('input-sentence_right');
       setTimeout(function () {
         $inputSentence.removeClass('input-sentence_right');
@@ -28,7 +28,7 @@ $(function () {
     var result  = str.toLowerCase();
     var punctRE = /[\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-.\/:;<=>?@\[\]^_`{|}~]/g;
     var spaceRE = /\s+/g;
-    result.replace(punctRE, '').replace(spaceRE, '');
+    return result.replace(punctRE, '').replace(spaceRE, '');
   }
 
   $inputSentence.keypress(function (e) {

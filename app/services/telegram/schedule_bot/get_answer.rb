@@ -52,7 +52,7 @@ module Telegram
       end
 
       def word
-        @word ||= Word.find_by(word: word_string, language: lang)
+        @word ||= Word.find_by(value: word_string, language: lang)
       end
     end
   end

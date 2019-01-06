@@ -8,7 +8,7 @@ describe Api::Telegram::ScheduleBotsController, type: :request do
            headers: headers
     end
 
-    let(:word) { create :word, word: 'привет', language: 'rus' }
+    let(:word) { create :word, value: 'привет', language: 'rus' }
     let(:sentence) { create :sentence, language: 'rus' }
     let(:translation) { create :sentence, language: 'eng' }
     let!(:sentences_word) { create :sentences_word, word: word, sentence: sentence }
@@ -44,7 +44,7 @@ describe Api::Telegram::ScheduleBotsController, type: :request do
                 'type'       => 'private'
               },
             'date'       => 1527367962,
-            'text'       => word.word
+            'text'       => word.value
           }
       }
     end

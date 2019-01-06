@@ -2,6 +2,6 @@ FactoryBot.define do
   factory :mnemo do
     word { build :word }
     language 'rus'
-    content 'Контент'
+    value 'Контент'
   end
 end

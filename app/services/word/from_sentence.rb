@@ -7,7 +7,7 @@ class Word < ApplicationRecord
       words_from_sentence.map do |word|
         {
           id:      word.id,
-          word:    word.word,
+          word:    word.value,
           learned: learned?(word)
         }
       end.as_json

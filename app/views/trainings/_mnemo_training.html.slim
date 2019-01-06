@@ -4,15 +4,15 @@
       - @words.each do |word|
         .col-12.original-sentence-block
           span.word-skyeng(style="font-size: 2rem")
-            = word.word
+            = word.value.titleize
         br
         - _, mnemos = Word::GetMnemo.run!(word: word)
         .col-12.original-sentence-block
-          - if mnemos.map(&:content).compact.blank?
+          - if mnemos.map(&:value).compact.blank?
             = t('training.no_mnemo')
           - else
             - mnemos.each do |mnemo|
-              h4 = mnemo.content
+              h4 = mnemo.value.titleize
               br
       .col-12
         .digg_pagination.pagination-training

@@ -20,7 +20,7 @@ module Api
       private
 
       def word
-        @word ||= Word.find_by(word: word_string, language: word_lang)
+        @word ||= Word.find_by(value: word_string, language: word_lang)
       end
 
       def word_lang

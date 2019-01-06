@@ -16,11 +16,11 @@
             span.fa.fa-volume-off
           h4#original-sentence data-sentence-id=sentence.id
             - if body_class == 'eng-rus'
-              - sentence.sentence.split.each do |w|
+              - sentence.value.split.each do |w|
                 span.word-skyeng = w
                 span.word-zero = ' '
             - else
-              = sentence.sentence
+              = sentence.value
 
         - if translation(sentence)
           .col-12.translation-block
