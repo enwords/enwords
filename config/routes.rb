@@ -17,6 +17,11 @@ Rails.application.routes.draw do
         end
       end
     end
+
+    namespace :mobile do
+      resources :words, only: %i[index] do
+      end
+    end
   end
 
   get '/words_from_sentence/:sentence_id', to: 'trainings#words_from_sentence'

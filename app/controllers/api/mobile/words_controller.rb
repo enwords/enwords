@@ -1,11 +1,11 @@
 module Api
-  module Public
+  module Mobile
     class WordsController < ::Api::BaseController
       def index
         result =
           Word::ByStatus
-          .run!(params.merge(user: current_user))
-          .paginate(page: params[:page], per_page: 20)
+          .run!(user: current_user, status: params[:status])
+          .paginate(page: params[:page] || 1, per_page: 20)
 
         render json: { collection: result.as_json }, status: :ok
       end

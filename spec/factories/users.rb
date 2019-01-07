@@ -9,5 +9,6 @@ FactoryBot.define do
     audio_enable { false }
     diversity_enable { false }
     skyeng_words_count { 15 }
+    proficiency_levels { {} }
   end
 end
