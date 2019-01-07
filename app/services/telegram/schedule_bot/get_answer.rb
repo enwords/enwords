@@ -23,7 +23,7 @@ module Telegram
       end
 
       def execute
-        case word_string
+        case word_value
         when /xoxo/i
           'YOLO!'
         else
@@ -41,18 +41,18 @@ module Telegram
 
       def lang
         @lang ||=
-          case word_string
+          case word_value
           when /[a-z]/i then 'eng'
           when /[а-ё]/i then 'rus'
           end
       end
 
-      def word_string
-        @word_string ||= text.to_s.split(' ').first.mb_chars.downcase.to_s.strip
+      def word_value
+        @word_value ||= text.to_s.split(' ').first.mb_chars.downcase.to_s.strip
       end
 
       def word
-        @word ||= Word.find_by(value: word_string, language: lang)
+        @word ||= Word.find_by(value: word_value, language: lang)
       end
     end
   end

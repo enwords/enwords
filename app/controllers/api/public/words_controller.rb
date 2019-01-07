@@ -20,12 +20,12 @@ module Api
       private
 
       def word
-        @word ||= Word.find_by(value: word_string, language: word_lang)
+        @word ||= Word.find_by(value: word_value, language: word_lang)
       end
 
       def word_lang
         @word_lang ||=
-          case word_string
+          case word_value
           when /[a-z]/i then 'eng'
           when /[а-ё]/i then 'runs'
           end
@@ -39,8 +39,8 @@ module Api
           end
       end
 
-      def word_string
-        @word_string ||=
+      def word_value
+        @word_value ||=
           params[:word].to_s.split(' ').first.mb_chars.downcase.to_s.strip
       end
     end
