@@ -9,7 +9,7 @@ module Api
             user:          current_user
           )
 
-        render json: { collection: result.as_json }, status: :ok
+        render json: { resource: result.as_json }, status: :ok
       end
     end
   end

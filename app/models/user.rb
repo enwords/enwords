@@ -32,6 +32,10 @@ class User < ApplicationRecord
   after_create :create_test_article
   after_create :set_default_settings
 
+  def self.testee
+    find_by!(email: 'testee@qqq.qqq')
+  end
+
   # Allows to change a profile settings without entering a password
   def update_with_password(params, *options)
     current_password = params.delete(:current_password)

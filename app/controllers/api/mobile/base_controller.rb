@@ -4,7 +4,7 @@ module Api
       protected
 
       def current_user
-        @current_user ||= User.first
+        @current_user ||= User.testee
       end
     end
   end

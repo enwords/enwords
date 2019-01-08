@@ -76,10 +76,6 @@ class Training < ApplicationRecord
       result.values.flatten.uniq
     end
 
-    def mnemo_ids
-
-    end
-
     def type
       case training_type
       when 'repeating'  then 'RepeatingTraining'
