@@ -21,6 +21,9 @@ Rails.application.routes.draw do
     namespace :mobile do
       resources :words, only: %i[index] do
       end
+
+      resources :trainings, only: %i[create] do
+      end
     end
   end
 

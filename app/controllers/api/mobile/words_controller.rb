@@ -1,6 +1,6 @@
 module Api
   module Mobile
-    class WordsController < ::Api::BaseController
+    class WordsController < BaseController
       def index
         result =
           Word::ByStatus
@@ -8,10 +8,6 @@ module Api
           .paginate(page: params[:page] || 1, per_page: 20)
 
         render json: { collection: result.as_json }, status: :ok
-      end
-
-      def current_user
-        @current_user ||= User.first
       end
     end
   end
