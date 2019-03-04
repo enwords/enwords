@@ -1,5 +1,6 @@
 class TrainingsController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_current_training
 
   def show
     case current_training
@@ -59,5 +60,9 @@ class TrainingsController < ApplicationController
 
   def current_training
     @current_training ||= current_user.training
+  end
+
+  def check_current_training
+    redirect_to root_path unless current_training
   end
 end
