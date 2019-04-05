@@ -3,7 +3,7 @@ test_job:
   class: 'TestWorker'
   active_job: true
 
-mnemo_job:
-  cron:  '*/1 * * * *'
-  class: 'MnemoWorker'
+certbot_renew_job:
+  cron:  '0 0 1 */6 *'
+  class: 'CertbotRenewWorker'
   active_job: true
