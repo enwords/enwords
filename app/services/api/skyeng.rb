@@ -52,7 +52,7 @@ module Api
       word_block = result.find { |i| word.casecmp(i['text']).zero? }
       return if word_block.blank?
 
-      meanings = word_block['meanings'].sort_by { |el| el['id'] }
+      meanings = word_block['meanings']
       meanings[0].merge('text' => word_block['text'])
     end
 
