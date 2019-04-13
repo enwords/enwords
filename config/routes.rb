@@ -16,6 +16,12 @@ Rails.application.routes.draw do
           get :mnemos
         end
       end
+
+      resources :names, only: %i[] do
+        collection do
+          get :random
+        end
+      end
     end
 
     namespace :mobile do
