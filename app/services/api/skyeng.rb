@@ -64,7 +64,7 @@ module Api
       return :ok unless response.body
       JSON.parse(response.body)
     rescue StandardError => e
-      ExceptionNotifier.notify_exception e, data: { url: url, params: params }
+      # ExceptionNotifier.notify_exception e, data: { url: url, params: params }
       :fail
     end
   end
