@@ -60,6 +60,7 @@ module Api
       uri       = URI(url)
       uri.query = URI.encode_www_form(params)
       response  = Net::HTTP.get_response(uri)
+      response  = Net::HTTP.get_response(URI.parse(response.header['location'])) if response.code == '301'
 
       return :ok unless response.body
       JSON.parse(response.body)
