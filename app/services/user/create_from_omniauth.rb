@@ -4,22 +4,17 @@ class User < ApplicationRecord
     object :user, default: nil
 
     def execute
-      case
-      when authentication.present?
-        authentication.user
-      when existing_user.present?
-        UserAuthentication.create_from_omniauth \
-          auth_params, existing_user, provider
+      return authentication.user if authentication.present?
 
-        existing_user
-      else
-        user = User.create(email:    email || fake_email,
-                           password: Devise.friendly_token)
+      user =
+        if existing_user.present?
+          existing_user
+        else
+          User.create!(email: email || fake_email, password: Devise.friendly_token)
+        end
 
-        errors.add :user, user.errors.full_messages.first unless user.valid?
-        UserAuthentication.create_from_omniauth(auth_params, user, provider)
-        user
-      end
+      UserAuthentication.create_from_omniauth(auth_params, user, provider)
+      user
     end
 
     private
