@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'aasm'
 gem 'active_interaction'
+gem 'chartkick'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'devise'
 gem 'figaro'
