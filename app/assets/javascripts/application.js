@@ -19,5 +19,3 @@
 //= require skyeng
 //= require facebook
 //= require me-talk
-//= require chartkick
-//= require Chart.bundle
