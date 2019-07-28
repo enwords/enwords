@@ -36,7 +36,7 @@ module Admin
     end
 
     def stat
-      render :stat, locals: { data: User.group(:created_at).count }
+      render :stat, locals: { data: User.group('created_at::date').count }
     end
 
     private
