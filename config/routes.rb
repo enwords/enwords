@@ -93,7 +93,11 @@ Rails.application.routes.draw do
     namespace :admin do
       resources :sentences
       resources :trainings
-      resources :users
+      resources :users do
+        collection do
+          get :stat
+        end
+      end
     end
   end
 

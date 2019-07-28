@@ -35,6 +35,10 @@ module Admin
       end
     end
 
+    def stat
+      render :stat, locals: { data: User.group(:created_at).count }
+    end
+
     private
 
     def set_user
