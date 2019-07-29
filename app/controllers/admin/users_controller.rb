@@ -36,7 +36,13 @@ module Admin
     end
 
     def stat
-      render :stat, locals: { data: User.group('created_at::date').count }
+      count = 0
+      data = User.group('created_at::date').count.sort.each_with_object(Hash.new(0)) do |(date, delta), hash|
+        count += delta
+        hash[date] = count
+      end
+
+      render :stat, locals: { data: data }
     end
 
     private
