@@ -36,13 +36,14 @@ module Admin
     end
 
     def stat
+      per_day = User.group('created_at::date').count
       count = 0
-      data = User.group('created_at::date').count.sort.each_with_object(Hash.new(0)) do |(date, delta), hash|
+      data = per_day.sort.each_with_object(Hash.new(0)) do |(date, delta), hash|
         count += delta
         hash[date] = count
       end
 
-      render :stat, locals: { data: data }
+      render :stat, locals: { per_day: per_day, data: data }
     end
 
     private
