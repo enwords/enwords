@@ -19,10 +19,4 @@
           br
           br
     - else
-      .col-12.col-md-10.offset-md-1
-        h3 == t 'static.index.sign_out.item1.text'
-        br
-      .col-12.col-md-10.offset-md-1
-        h4 == t 'static.index.sign_out.item2.text'
-        = render 'static/phrase_generator'
-        = render 'devise/registrations/form'
+      = render 'static/main_landing'

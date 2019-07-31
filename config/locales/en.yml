@@ -102,6 +102,17 @@ en:
           irregular_verbs: "Irregular verbs"
 
   static:
+    landings:
+      main:
+        block_1:
+          title: "Learn languages"
+          body: "In Enwords you will find <b>30 languages​​</b>, such as 🇬🇧 English, 🇩🇪 German, 🇪🇸 Spanish, 🇫🇷 French and others 🏳️‍🌈"
+        block_2:
+          title: "Learn new words"
+          body: "There are more than <b>500 thousand words</b> on the platform that you can learn"
+        block_3:
+          title: "Just 10 minutes a day"
+          body: "Age and level don't matter"
     index:
       sign_in:
         title: "Guidance for successful learning:"
@@ -112,16 +123,9 @@ en:
         item_3:
           text: "Setup exercise: increase the number of sentences, turn on autoplay of audio or make practice more diverse by sacrificing translation (unfortunately not all sentences translated)"
         item_4:
-          text: "Do you study English Skyeng? <a href=%{skyeng_setting_path}>Attach your Skyeng account</a> and you will be able to continue learning on our service"
+          text: "Do you study English using Skyeng? <a href=%{skyeng_setting_path}>Attach your Skyeng account</a> and you will be able to continue learning on our service"
         item_5:
           text: "Don't forget to add Enwords to bookmarks and add the bookmark to your home screen on your mobile device"
-
-      sign_out:
-        item1:
-          text: "Enwords is a free application created to improve your vocabulary of a studied language. Here are about 0.5 million words and 3.5 million sentences in 30 languages (such as English, German, Spanish, Italian, French, Esperanto, etc.)"
-        item2:
-          text: "In different sentences, words have various meanings, it is impossible to study all translations of all words, you need to learn to understand their meaning in a context
-          <br><br>Your task is to choose words and Enwords will give you sentences with these words, repeat them at least 10 minutes a day and in a month you will see the result"
     result:
       title: "Exercise result:"
       text: "Learned words"
@@ -215,5 +219,5 @@ en:
   api:
     word:
       generate_phrase:
-        field: "It's just a generator of English phrases :)"
+        field: "It's just a English phrase generator :)"
         button: "Push!"
