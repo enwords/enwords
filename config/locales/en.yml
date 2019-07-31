@@ -1,24 +1,3 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
   hello: "Hello "
   email: "Email"
@@ -46,7 +25,7 @@ en:
         link: "Change password"
         text2: "If you do not want to change your password, please ignore this message"
       unlock_instructions:
-        text: "Your account has been suspended due to the large number of failed login attempts . Go Py link to unlock the account:"
+        text: "Your account has been suspended due to a large number of failed login attempts. Go Py link to unlock the account:"
         link: "Unlock"
     passwords:
       edit:
@@ -62,7 +41,7 @@ en:
         learning_language: "Learning language"
       edit:
         title: "User settings"
-        unconfirmed_email: "Still waiting confirmation for: "
+        unconfirmed_email: "Still waiting for confirmation for: "
         sentences_number: "Number of sentences for one word"
         audio_enable: "Turn on autoplay audio?"
         diversity_enable: "More diversity of sentences but without audio and translation"
@@ -127,13 +106,13 @@ en:
       sign_in:
         title: "Guidance for successful learning:"
         item_1:
-          text: "<a href=%{words_path}>Select words</a> to learn and repeat them in different sentences that will give you Enwords and also mark the words that you know to make them disappear from the list (all words arranged in order of their frequency in speech, it is recommended for study the word order, so the first words you probably know)"
+          text: "<a href=%{words_path}>Select words</a> to learn and repeat them in different sentences that will give you Enwords and also mark the words that you know to make them disappear from the list (all words arranged in order of their frequency in speech, it is recommended to study the word order, so the first words you probably know)"
         item_2:
           text: "<a href=%{articles_path}>Add your own text</a> from audio courses or thematic articles (if you are a cook then upload the recipes, if you are a driver then upload the traffic rules) in the learning language, and all words will be arranged in order of their frequency in this text"
         item_3:
           text: "Setup exercise: increase the number of sentences, turn on autoplay of audio or make practice more diverse by sacrificing translation (unfortunately not all sentences translated)"
         item_4:
-          text: "Do you study English words on the site skyeng.ru? <a href=%{skyeng_setting_path}>Bind your email</a> from the skyeng account, and you will be able to continue learning on our service"
+          text: "Do you study English Skyeng? <a href=%{skyeng_setting_path}>Attach your Skyeng account</a> and you will be able to continue learning on our service"
         item_5:
           text: "Don't forget to add Enwords to bookmarks and add the bookmark to your home screen on your mobile device"
 
@@ -141,7 +120,7 @@ en:
         item1:
           text: "Enwords is a free application created to improve your vocabulary of a studied language. Here are about 0.5 million words and 3.5 million sentences in 30 languages (such as English, German, Spanish, Italian, French, Esperanto, etc.)"
         item2:
-          text: "In different sentences words have various meanings, it is impossible to study all translations of all words, you need to learn to understand their meaning in a context
+          text: "In different sentences, words have various meanings, it is impossible to study all translations of all words, you need to learn to understand their meaning in a context
           <br><br>Your task is to choose words and Enwords will give you sentences with these words, repeat them at least 10 minutes a day and in a month you will see the result"
     result:
       title: "Exercise result:"
@@ -221,12 +200,12 @@ en:
   skyeng_settings:
     errors:
       did_not_save: "Settings did not save"
-    add_email: "Enter email from your skyeng account"
-    main: "Now you can study the words added to the skyeng.ru, for this you need to fill the following fields"
+    add_email: "Enter email from your <b>Skyeng</b> account"
+    main: "You can learn the words that you added on Skyeng. Please fill in the following fields"
     submit: "Submit"
-    add_token: "Add a secret key, we sent it to %{email}"
+    add_token: "Add a secret key, we sent it to <b>%{email}</b>"
     token_example: "Add token here"
-    finished: "Now you can see the words added to the site skyeng.ru"
+    finished: "Now you can see the words added on Skyeng"
     study_words: "Learn words from Skyeng"
     change: "Change skyeng email and token"
   word:

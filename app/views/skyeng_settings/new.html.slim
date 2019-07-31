@@ -1,9 +1,9 @@
 = render 'layouts/locale_switcher'
 .col-12
-  h2.main--title.text-center = t('skyeng_settings.main')
+  h3.main--title.text-center = t('skyeng_settings.main')
 
 .col-12.col-sm-10.offset-sm-1.col-md-6.offset-md-3.jumbotron.mt-4
-  h2.form-signin-heading = t('skyeng_settings.add_email')
+  h3.form-signin-heading = t('skyeng_settings.add_email').html_safe
   = form_for @skyeng_setting, url: skyeng_setting_path, method: :post do |f|
     .field
       = f.text_field :email, placeholder: 'example@gmail.com'
