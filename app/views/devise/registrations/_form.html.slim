@@ -7,7 +7,7 @@
     = render 'devise/shared/omniouth'
     = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
       .field
-        = f.email_field :email, autofocus: true, class: 'form-control', placeholder: t('email')
+        = f.email_field :email, class: 'form-control', placeholder: t('email')
       .field
         = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: t('password_minimum_6')
       .field
