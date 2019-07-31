@@ -6,23 +6,25 @@
         = render 'static/select_languages'
       - else
         .col-12.col-md-10.offset-md-1
-          h1.main--title == t 'static.index.sign_in.title'
+          h1.text-center == t 'static.index.sign_in.title'
+          br
           br
         .col-12.col-md-10.offset-md-1
           ul.main--list
-            li == t 'static.index.sign_in.item_1.text', words_path: words_path(status: 'unknown')
-            li == t 'static.index.sign_in.item_2.text', articles_path: articles_path
-            li == t 'static.index.sign_in.item_3.text'
+            li
+              h3 == t 'static.index.sign_in.item_1.text', words_path: words_path(status: 'unknown')
+              h1.text-center == "***"
+            li
+              h3 == t 'static.index.sign_in.item_2.text', articles_path: articles_path
+              h1.text-center == "***"
+            li
+              h3 == t 'static.index.sign_in.item_3.text'
             - if body_class == 'eng-rus'
-              li == t 'static.index.sign_in.item_4.text', skyeng_setting_path: actual_skyeng_setting_path
+              li
+                h1.text-center == "***"
+                h3 == t 'static.index.sign_in.item_4.text', skyeng_setting_path: actual_skyeng_setting_path
           br
           br
           br
     - else
-      .col-12.col-md-10.offset-md-1
-        h3 == t 'static.index.sign_out.item1.text'
-        br
-      .col-12.col-md-10.offset-md-1
-        h4 == t 'static.index.sign_out.item2.text'
-        = render 'static/phrase_generator'
-        = render 'devise/registrations/form'
+      = render 'static/main_landing'
