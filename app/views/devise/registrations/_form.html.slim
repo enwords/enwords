@@ -2,7 +2,7 @@
   .col-12
     span.text-center.devise-error == resource.errors.full_messages.join('<br>')
 .row
-  .col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2.col-lg-6.offset-lg-3.jumbotron.mt-3
+  .col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2.jumbotron.mt-3
     h2.form-signin-heading= t('devise.registration.form.title')
     = render 'devise/shared/omniouth'
     = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|

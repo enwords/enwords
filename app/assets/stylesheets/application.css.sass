@@ -61,9 +61,6 @@ html
 body
   color: $bodyTextCol
 
-.vertical
-  margin-top: 50%
-
 .navbar-brand
   padding: 0
   font-size: 27px
@@ -437,10 +434,6 @@ ul
     list-style-type: none
     li
       margin-bottom: 20px
-      text-indent: -5px
-      &:before
-        content: ''
-        text-indent: -5px
 
 .btn-group-vertical
   .btn:first-child
@@ -544,6 +537,13 @@ table
   width: 100% !important
   text-align: center
 
+.vertical-description
+  margin-top: 40%
+
 @media (min-width: 320px)
   .generate_phrase_result_field
     font-size: 1.5rem
+
+@media only screen and (max-width: 480px)
+  .vertical-description
+    margin-top: 20%

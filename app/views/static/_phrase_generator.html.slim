@@ -4,11 +4,11 @@
       remote: true,
       name:   'generate_phrase_form',
       class:  'form-inline' do |f|
-    .col-12.col-md-8.mb-2
+    .col-12.col-md-8.mb-2.p-0
       = text_field_tag 'generate_phrase_result_field', '',
           placeholder: t('api.word.generate_phrase.field'),
           class: 'form-control generate_phrase_result_field'
-    .col-12.col-md-4.mb-2
+    .col-12.col-md-4.mb-2.p-0
       = button_tag t('api.word.generate_phrase.button'),
           class: 'btn btn-secondary btn-lg',
           name: 'generate_phrase_button'
