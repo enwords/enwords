@@ -1,6 +1,6 @@
 .container
   .row.row-content
-    .col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2.jumbotron.mt-3
+    .col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2.col-lg-6.offset-lg-3.jumbotron.mt-3
       h2.form-signin-heading= t('devise.session.new.title')
       = render 'devise/shared/omniouth'
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
