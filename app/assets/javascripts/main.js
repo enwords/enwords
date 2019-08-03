@@ -61,7 +61,7 @@ $(function () {
   });
 
   $('[name="generate_phrase_form"]').on('ajax:success', function(event, data, status, xhr) {
-    var funny_phrase = 'Today you are a ' + data.resource;
+    var funny_phrase = "Today you're like a " + data.resource;
     $('[name="generate_phrase_result_field"]').val(funny_phrase)
   });
 });
