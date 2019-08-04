@@ -1,9 +1,22 @@
 footer.footer
   .container
     .row
-      .col-12.col-lg-6
+      .col-6.col-md-9
         span.copyright
           i.fa.fa-copyright
-          |  2016&mdash;#{Date.current.year} by
-          = ' '
-          a href='http://fb.com/sadovnikov.dmitry' Dmitry Sadovnikov
+          |  2016&mdash;#{Date.current.year}
+          span.footer--my-name
+            = ' by '
+            a href='http://fb.com/sadovnikov.dmitry' Dmitry Sadovnikov
+      .col-6.col-md-3
+        .footer--social
+          = link_to 'https://instagram.com/enwordsapp' do
+            i.fa.fa-instagram
+          = link_to 'https://t.me/enwordsapp' do
+            i.fa.fa-paper-plane
+          = link_to 'https://facebook.com/enwords' do
+            i.fa.fa-facebook
+          = link_to 'https://twitter.com/enwordsapp' do
+            i.fa.fa-twitter
+          = link_to 'https://vk.com/enwordsapp' do
+            i.fa.fa-vk
