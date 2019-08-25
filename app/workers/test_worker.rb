@@ -13,13 +13,6 @@ class TestWorker
 
     text = Sentence::ByWord.run!(word: word, trans_lang: 'rus').text
 
-    ActionMailer::Base.mail(
-      from:    ENV['GMAIL_USERNAME'],
-      to:      ENV['GMAIL_USERNAME'],
-      subject: word_value + ' - ' + translation,
-      body:    text
-    ).deliver
-
     Telegram::ScheduleBot::Reply.run!(
       text: word_value + ' - ' + translation + "\n" + text,
       chat_id: 160589750
