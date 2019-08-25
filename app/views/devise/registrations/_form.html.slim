@@ -31,7 +31,7 @@
                 span
                   = f.select :native_language, options_for_select(User::FULL_LANGUAGE_NAMES, :rus), {},
                           { class: 'form-control' }
-
+      br
       = f.button t('devise.registration.form.title'),
               class: 'btn btn-lg btn-secondary btn-block',
               data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('shared.navigation.user.signing_up') }
