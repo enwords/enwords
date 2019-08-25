@@ -20,6 +20,11 @@ class TestWorker
       body:    text
     ).deliver
 
+    Telegram::ScheduleBot::Reply.run!(
+      text: word_value + ' - ' + translation + "\n" + text,
+      chat_id: 160589750
+    )
+
     :ok
   end
 
