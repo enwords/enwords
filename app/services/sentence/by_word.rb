@@ -43,27 +43,28 @@ class Sentence < ApplicationRecord
     def text
       return unless sentence.try(:value)
 
-      result = ''
-      result << word.value
+      result = "*#{word.value}*"
       result << ' '
-      result << "[#{word_transcription}] " if word_transcription.present?
-      result << '- '
-      result << word_translation
+      result << "_[#{word_transcription}]_ " if word_transcription.present?
+
+      if word_translation
+        result << '- '
+        result << word_translation
+      end
+
       result << "\n"
       result << "\n"
       result << sentence.value
 
       if sentence_translation.present?
         result << "\n"
-        result << "-"
-        result << "\n"
-        result << sentence_translation
+        result << "_#{sentence_translation}_"
       end
 
       if word_mnemo.present?
         result << "\n"
         result << "\n"
-        result << word_mnemo
+        result << "_#{word_mnemo}_"
       end
 
       result

@@ -11,7 +11,7 @@ class TestWorker
     word_translation = sentence_struct.text
     return :no_word_translation unless word_translation
 
-    Telegram::ScheduleBot::Reply.run!(text: sentence_struct.text, chat_id: 160_589_750)
+    Telegram::ScheduleBot::Reply.run!(text: sentence_struct.text, chat_id: 160_589_750, parse_mode: 'markdown')
     :ok
   end
 end

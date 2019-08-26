@@ -3,6 +3,7 @@ module Telegram
     class Reply < ActiveInteraction::Base
       string :text, default: nil
       integer :chat_id
+      string :parse_mode, default: nil
 
       def execute
         return :no_text unless text
