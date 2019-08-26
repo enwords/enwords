@@ -47,7 +47,7 @@ class Sentence < ApplicationRecord
       result << ' '
       result << "_[#{word_transcription}]_ " if word_transcription.present?
 
-      if word_translation
+      if word_translation.present?
         result << '- '
         result << word_translation
       end
