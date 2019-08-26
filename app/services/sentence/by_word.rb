@@ -21,6 +21,8 @@ class Sentence < ApplicationRecord
     end
 
     def sentence_translation
+      return unless sentence
+
       @sentence_translation ||= sentence.translations.where(language: trans_lang).first.try(:value)
     end
 
