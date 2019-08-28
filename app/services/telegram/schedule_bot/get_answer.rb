@@ -11,7 +11,7 @@ module Telegram
         string  :first_name
         string  :last_name
         string  :username
-        string  :language_code
+        string  :language_code, default: nil
       end
 
       hash :chat do
