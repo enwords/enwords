@@ -89,6 +89,7 @@ GEM
     connection_pool (2.2.2)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
+    curb (0.9.7)
     debug_inspector (0.0.2)
     devise (4.2.0)
       bcrypt (~> 3.0)
@@ -372,6 +373,7 @@ DEPENDENCIES
   capistrano-sidekiq
   chartkick
   coffee-rails (~> 4.1.0)
+  curb (= 0.9.7)
   devise
   exception_notification
   factory_bot_rails
