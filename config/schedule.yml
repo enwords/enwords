@@ -1,6 +1,6 @@
 test_job:
-  cron:  '5 8-19 * * *'
-  class: 'TestWorker'
+  cron:  '5 7-19 * * *'
+  class: 'Telegram::SendMessageToSubscribersWorker'
   active_job: true
 
 certbot_renew_job:

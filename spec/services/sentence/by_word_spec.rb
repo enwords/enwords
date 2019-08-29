@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Sentence::ByWord do
-  subject { described_class.run!(word: word, trans_lang: trans_lang) }
+  subject { described_class.run!(word: word, translation_lang: translation_lang) }
 
   before do
     allow(Api::Skyeng).to receive(:first_meaning).and_return(
@@ -17,7 +17,7 @@ describe Sentence::ByWord do
   end
 
   let(:language) { 'rus' }
-  let(:trans_lang) { 'eng' }
+  let(:translation_lang) { 'eng' }
 
   let(:word) do
     create :word, value: 'word', language: language
@@ -28,7 +28,7 @@ describe Sentence::ByWord do
   end
 
   let(:translation) do
-    create :sentence, value: 'слово', language: trans_lang
+    create :sentence, value: 'слово', language: translation_lang
   end
 
   let!(:link) do
