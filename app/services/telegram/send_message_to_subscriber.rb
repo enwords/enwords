@@ -8,7 +8,13 @@ module Telegram
       return :no_learning_word if learning_word.blank?
       return :no_text if text.blank?
 
-      Telegram::SendMessage.run!(text: text, chat_id: user.telegram_chat.chat_id)
+      result = Telegram::SendMessage.run!(text: text, chat_id: user.telegram_chat.chat_id)
+      return :ok if result[:ok]
+
+      case result[:error_code]
+      when 403 then user.telegram_chat.update!(active: false)
+      end
+      [:error, result]
     end
 
     def learning_word

@@ -30,7 +30,13 @@ module Telegram
     def response_text
       case clean_text
       when '/start'
-        I18n.t('telegram.process_message.send_email', locale: :ru)
+        if telegram_chat
+          I18n.t('telegram.process_message.telegram_chat_created',
+                 locale: :ru,
+                 words_count: Word::ByStatus.run!(status: 'learning', user: telegram_chat.user).size)
+        else
+          I18n.t('telegram.process_message.send_email', locale: :ru)
+        end
       when /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
         user = User.find_by(email: clean_text)
         return I18n.t('telegram.process_message.user_not_found', locale: :ru) unless user
@@ -40,7 +46,7 @@ module Telegram
                locale: :ru,
                words_count: Word::ByStatus.run!(status: 'learning', user: user).size)
       when '/stop'
-        telegram_chat.update!(active: false) if telegram_chat
+        telegram_chat&.update!(active: false)
         I18n.t('telegram.process_message.bye', locale: :ru)
       when /xoxo/i
         'YOLO!'
@@ -80,14 +86,16 @@ module Telegram
     end
 
     def create_telegram_chat(user)
-      @telegram_chat = TelegramChat.find_or_create_by!(
-        user: user,
-        chat_id: chat[:id],
-        username: chat[:username],
-        first_name: chat[:first_name],
-        last_name: chat[:last_name],
-        active: true
-      )
+      @telegram_chat = begin
+        result = TelegramChat.find_or_initialize_by(
+          user: user,
+          chat_id: chat[:id],
+          username: chat[:username],
+          first_name: chat[:first_name],
+          last_name: chat[:last_name]
+        )
+        result.update!(active: true)
+      end
     end
   end
 end
