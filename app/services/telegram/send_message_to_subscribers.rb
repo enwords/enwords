@@ -8,7 +8,7 @@ module Telegram
     end
 
     def users
-      @users ||= User.joins(:telegram_chat).where(telegram_chat: { active: true })
+      @users ||= User.joins(:telegram_chat).where(telegram_chats: { active: true })
     end
   end
 end

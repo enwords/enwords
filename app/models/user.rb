@@ -1,19 +1,12 @@
 class User < ApplicationRecord
-  has_many :authentications,
-    class_name: 'UserAuthentication'
-
-  has_many :word_statuses,
-    dependent: :delete_all
-
-  has_many :words,
-    through: :word_statuses
-
-  has_many :articles,
-    dependent: :delete_all
+  has_many :authentications, class_name: 'UserAuthentication'
+  has_many :word_statuses, dependent: :delete_all
+  has_many :words, through: :word_statuses
+  has_many :articles, dependent: :delete_all
 
   has_one :training
-
   has_one :skyeng_setting
+  has_one :telegram_chat
 
   devise :omniauthable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -25,9 +18,9 @@ class User < ApplicationRecord
   enum learning_language: SHORT_LANGUAGE_NAMES, _prefix: :learning
 
   store_accessor :additional_info,
-    :proficiency_levels,
-    :sign_up_params,
-    :skyeng_words_count
+                 :proficiency_levels,
+                 :sign_up_params,
+                 :skyeng_words_count
 
   after_create :create_test_article
   after_create :set_default_settings

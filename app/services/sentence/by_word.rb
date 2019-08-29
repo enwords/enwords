@@ -3,7 +3,7 @@ class Sentence < ApplicationRecord
     private
 
     object :word
-    string :trans_lang
+    symbol :translation_lang
 
     def execute
       {
@@ -18,13 +18,13 @@ class Sentence < ApplicationRecord
 
     def sentence
       @sentence ||=
-        word.sentences.left_joins(:translations).where(translations_sentences: { language: trans_lang }).sample
+        word.sentences.left_joins(:translations).where(translations_sentences: { language: translation_lang }).sample
     end
 
     def sentence_translation
       return unless sentence
 
-      @sentence_translation ||= sentence.translations.where(language: trans_lang).first.try(:value)
+      @sentence_translation ||= sentence.translations.where(language: translation_lang).first.try(:value)
     end
 
     def skyeng_hash

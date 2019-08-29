@@ -8,7 +8,7 @@ module Telegram
       return :no_learning_word if learning_word.blank?
       return :no_text if text.blank?
 
-      Telegram::SendMessage.run!(text: text, chat_id: user.telegram_chat_id)
+      Telegram::SendMessage.run!(text: text, chat_id: user.telegram_chat.chat_id)
     end
 
     def learning_word
@@ -16,7 +16,7 @@ module Telegram
     end
 
     def text
-      @text ||= Sentence::ByWord.run!(word: word, trans_lang: 'rus')[:text]
+      @text ||= Sentence::ByWord.run!(word: learning_word, translation_lang: :rus)[:text]
     end
   end
 end
