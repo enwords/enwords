@@ -12,7 +12,6 @@ class ApplicationController < ActionController::Base
     @skyeng_words_count = if current_user.skyeng_setting
                             current_user.skyeng_words_count || '?'
                           end
-
     @learning_words_count =
       Word::ByStatus.run!(status: 'learning', user: current_user).size
 
@@ -27,13 +26,12 @@ class ApplicationController < ActionController::Base
     I18n.locale = params[:locale] if params[:locale].present?
   end
 
-  def default_url_options(options = {})
+  def default_url_options
     { locale: I18n.locale }
   end
 
   protected
 
-  # Allows to change a profile settings without entering a password
   def configure_devise_permitted_parameters
     registration_params =
       %i[email password password_confirmation learning_language native_language

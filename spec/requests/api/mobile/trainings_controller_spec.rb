@@ -15,9 +15,13 @@ describe Api::Mobile::TrainingsController, type: :request do
 
   let(:params) { {} }
 
-  context 'POST' do
+  context '#create' do
     subject do
       post '/api/mobile/trainings', params: params.to_json, headers: headers
+    end
+
+    before do
+      create(:user, email: 'testee@qqq.qqq')
     end
 
     let(:params) do

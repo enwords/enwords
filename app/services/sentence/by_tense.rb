@@ -33,7 +33,6 @@ class Sentence < ApplicationRecord
       They
     ].freeze
 
-
     AUXILIARY_CONTINUOUS_VERBS =%w[
       am
       is
@@ -63,70 +62,6 @@ class Sentence < ApplicationRecord
       S + V1(s/es) + O
     end
 
-    def present_continuous
-
-    end
-
-    def present_perfect
-
-    end
-
-    def present_perfect_continuous
-
-    end
-
-    # def present_simple
-    #   @_present_simple ||=
-    #     sentences.where("sentences.sentence NOT ILIKE '%will%'")
-    #              .where("sentences.sentence NOT ILIKE '%have%'")
-    #              .where("sentences.sentence NOT ILIKE '%has%'")
-    #              .where("sentences.sentence NOT ILIKE '%had%'")
-    #              .where("sentences.sentence NOT ILIKE '%was%'")
-    #              .where("sentences.sentence NOT ILIKE '%were%'")
-    #              .where("sentences.sentence NOT ILIKE '%did%'")
-    #              .where("sentences.sentence NOT ILIKE '%ing%'")
-    #              .where("sentences.sentence NOT ILIKE '%am%'")
-    #              .where("sentences.sentence NOT ILIKE '%is%'")
-    #              .where("sentences.sentence NOT ILIKE '%are%'")
-    #              .where("sentences.sentence NOT ILIKE '%''%'")
-    #              .where("sentences.sentence NOT ILIKE '%ed %'")
-    #              .where('sentences.sentence NOT SIMILAR TO ?',
-    #                     "%(#{(irregular_simple_past + irregular_past_participle).join('|')})%")
-    #              .where('LOWER(sentences.sentence) SIMILAR TO ?',
-    #                     '(i|you|he|she|it|we|they) %')
-    #
-    # end
-    #
-    # def present_continuous
-    #   @_present_continuous ||=
-    #     sentences.where("sentences.sentence ILIKE '%ing %'")
-    #              .where('LOWER(sentences.sentence) SIMILAR TO ?',
-    #                     '(i|you|he|she|it|we|they) %')
-    #              .where('LOWER(sentences.sentence) SIMILAR TO ?',
-    #                     '% (am|are|is|) %')
-    #              .where('sentences.sentence NOT SIMILAR TO ?',
-    #                     "%(#{(irregular_simple_past + irregular_past_participle).join('|')})%")
-    # end
-    #
-    # def present_perfect
-    #   @_present_perfect ||=
-    #     sentences.where("sentences.sentence LIKE '%ed %'")
-    #              .where('LOWER(sentences.sentence) SIMILAR TO ?',
-    #                     '(i|you|he|she|it|we|they) %')
-    #              .where('LOWER(sentences.sentence) SIMILAR TO ?',
-    #                     '% (has|have) %')
-    #              .where('LOWER(sentences.sentence) NOT SIMILAR TO ?',
-    #                     '% (has a|have a) %')
-    #              .where('sentences.sentence LIKE ?',
-    #                     '%ed %')
-    #              .where('sentences.sentence NOT LIKE ?',
-    #                     '% been %')
-    #              .where('sentences.sentence NOT LIKE ?',
-    #                     '%s %')
-    #              .where('sentences.sentence NOT SIMILAR TO ?',
-    #                     "%(#{(irregular_simple_past).join('|')})%")
-    # end
-
     def sentences
       Sentence.includes(:translations)
               .where(language:               user.learning_language,
@@ -155,40 +90,3 @@ class Sentence < ApplicationRecord
     end
   end
 end
-
-# REGULARKIII!!!
-
-# formula of tenses
-#
-# Present Tense
-#
-# 1. Simple Present Tense
-# S + V1(s/es) + O
-# 2. Present Continuous Tense
-# S + is,am,are + V-ing + O
-# 3. Present Perfect Tense
-# S + has/have + V3 + O
-#
-# Past Tense
-#
-# 1. Simple Past Tense
-# S + V2 + object
-# S + was/were + (adv/adj/noun)
-# 2. Past Continuous Tense
-# S + was/were + V-ing + O
-# 3. Past Perfect Tense
-# S + had + V3 + …..
-#   4. Past Perfect Continuous Tense
-# S + had been + V-ing + for…before…
-#
-# Future Tense
-#
-# 1. Present Future Tense
-# S + shall/will + V1 (be) + O
-# S + to be (am/is/are) + going to + V1(be)
-# 2. Present Future Continuous Tense
-# S + shall/will + be + V1 ing + O
-# 3. Present Future Perfect Tense
-# S + shall/will + have + V3 (been) + O
-# 4. Present Future Perfect Continuous Tense
-# S + shall/will + have been + V-ing + O

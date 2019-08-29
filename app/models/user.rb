@@ -1,15 +1,15 @@
 class User < ApplicationRecord
   has_many :authentications,
-           class_name: 'UserAuthentication'
+    class_name: 'UserAuthentication'
 
   has_many :word_statuses,
-           dependent: :delete_all
+    dependent: :delete_all
 
   has_many :words,
-           through: :word_statuses
+    through: :word_statuses
 
   has_many :articles,
-           dependent: :delete_all
+    dependent: :delete_all
 
   has_one :training
 
@@ -25,9 +25,9 @@ class User < ApplicationRecord
   enum learning_language: SHORT_LANGUAGE_NAMES, _prefix: :learning
 
   store_accessor :additional_info,
-                 :proficiency_levels,
-                 :sign_up_params,
-                 :skyeng_words_count
+    :proficiency_levels,
+    :sign_up_params,
+    :skyeng_words_count
 
   after_create :create_test_article
   after_create :set_default_settings
@@ -36,7 +36,6 @@ class User < ApplicationRecord
     find_by!(email: 'testee@qqq.qqq')
   end
 
-  # Allows to change a profile settings without entering a password
   def update_with_password(params, *options)
     current_password = params.delete(:current_password)
 
@@ -67,9 +66,9 @@ class User < ApplicationRecord
   end
 
   def set_default_settings
-    self.proficiency_levels                    = {}
+    self.proficiency_levels = {}
     self.proficiency_levels[learning_language] = 100
-    self.sentences_number                      = 3
+    self.sentences_number = 3
     save!
   end
 end

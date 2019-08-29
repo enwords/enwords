@@ -28,7 +28,7 @@ module Telegram
           'YOLO!'
         else
           return unless word
-          Sentence::ByWord.run!(word: word, trans_lang: trans_lang).text
+          Sentence::ByWord.run!(word: word, trans_lang: trans_lang)[:text]
         end
       end
 

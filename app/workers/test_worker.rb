@@ -7,11 +7,11 @@ class TestWorker
     word = learning_words.sample
     return :no_word unless word
 
-    sentence_struct = Sentence::ByWord.run!(word: word, trans_lang: 'rus')
-    word_translation = sentence_struct.text
-    return :no_word_translation unless word_translation
+    result = Sentence::ByWord.run!(word: word, trans_lang: 'rus')
+    result = result[:text]
+    return :no_word_translation if word_translation.blank?
 
-    Telegram::ScheduleBot::Reply.run!(text: sentence_struct.text, chat_id: 160_589_750, parse_mode: 'markdown')
+    Telegram::SendMessage.run!(text: result[:text], chat_id: 160_589_750)
     :ok
   end
 end

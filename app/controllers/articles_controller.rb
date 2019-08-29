@@ -10,7 +10,7 @@ class ArticlesController < ApplicationController
   def index
     @articles = current_user.articles
                             .where(language: current_user.learning_language)
-                            .order(:id)
+                            .order(id: :desc)
                             .paginate(page: params[:page], per_page: 20)
   end
 

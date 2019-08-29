@@ -25,6 +25,7 @@ module ApplicationHelper
 
   def body_class
     return if current_user.blank?
+
     "#{current_user.learning_language}-#{current_user.native_language}"
   end
 

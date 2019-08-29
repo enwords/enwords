@@ -6,18 +6,19 @@ class Sentence < ApplicationRecord
     string :trans_lang
 
     def execute
-      OpenStruct.new(
+      {
         word: word.value,
         sentence: sentence.try(:value),
         word_translation: word_translation,
         sentence_translation: sentence_translation,
         menemo: word_mnemo,
         text: text
-      )
+      }
     end
 
     def sentence
-      @sentence ||= word.sentences.left_joins(:translations).where(translations_sentences: { language: trans_lang }).sample
+      @sentence ||=
+        word.sentences.left_joins(:translations).where(translations_sentences: { language: trans_lang }).sample
     end
 
     def sentence_translation
@@ -27,11 +28,13 @@ class Sentence < ApplicationRecord
     end
 
     def skyeng_hash
-      @skyeng_hash ||= Api::Skyeng.first_meaning(word: word.value) || {} rescue {}
+      @skyeng_hash ||= Api::Skyeng.first_meaning(word: word.value)
+    rescue
+      {}
     end
 
     def word_translation
-      skyeng_hash.dig('translation', 'text') || ''
+      skyeng_hash.dig('translation', 'text')
     end
 
     def word_transcription

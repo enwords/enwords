@@ -7,7 +7,7 @@ module Api
 
       def random_sentence
         result = Sentence::ByWord.run!(word: word, trans_lang: trans_lang)
-        render json: { resource: result.as_json }, status: :ok
+        render json: { resource: result }, status: :ok
       end
 
       def mnemos

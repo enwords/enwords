@@ -7,11 +7,11 @@ class Word::GetMnemo < ActiveInteraction::Base
     mnemos = word.mnemos
     return [:ok, mnemos] if mnemos.present?
 
-    page          = Nokogiri::HTML(response.force_encoding('windows-1251').encode('utf-8'))
-    callout       = page.css('.callout', '.primary').last
+    page = Nokogiri::HTML(response.force_encoding('windows-1251').encode('utf-8'))
+    callout = page.css('.callout', '.primary').last
     matches_count = callout.css('.h2').last.css('strong').text.to_i
 
-    if matches_count > 0
+    if matches_count.positive?
       callout.css('p').remove
       callout.css('strong').remove
       callout.css('em').remove

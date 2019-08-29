@@ -34,8 +34,10 @@ class SkyengSettingsController < ApplicationController
   end
 
   def add_token
-    updating = SkyengSetting::AddToken.run(skyeng_setting: skyeng_setting,
-                                           token: skyeng_setting_params[:token].strip)
+    updating = SkyengSetting::AddToken.run(
+      skyeng_setting: skyeng_setting,
+      token: skyeng_setting_params[:token].strip
+    )
 
     if updating.valid?
       Word::ByStatus.run!(status: 'skyeng', user: current_user)

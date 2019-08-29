@@ -7,14 +7,14 @@ class Training < ApplicationRecord
       Integer
     end
 
-    set_callback :type_check, :after, -> { self.word_ids = word_ids.map(&:to_i) }
+    set_callback(:type_check, :after, -> { self.word_ids = word_ids.map(&:to_i) })
 
     def execute
       ApplicationRecord.transaction do
         training.update!(
           type:          type,
           word_ids:      word_ids,
-          words_learned: words_learned,
+          words_learned: words_learned
         )
 
         case type
@@ -55,11 +55,11 @@ class Training < ApplicationRecord
 
         result[word_id] =
           SentencesWord
-            .select("(array_agg(sentence_id))[1:#{user.sentences_number}] sentence_ids")
-            .where(word_id: word_id)
-            .order('random()')
-            .first
-            .sentence_ids
+          .select("(array_agg(sentence_id))[1:#{user.sentences_number}] sentence_ids")
+          .where(word_id: word_id)
+          .order('random()')
+          .first
+          .sentence_ids
       end
 
       result

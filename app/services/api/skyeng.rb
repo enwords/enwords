@@ -42,15 +42,12 @@ module Api
     end
 
     def first_meaning(word:)
-      result = build_get_response \
-        'http://dictionary.skyeng.ru/api/public/v1/words/search',
-        search: word
-
+      result = build_get_response('http://dictionary.skyeng.ru/api/public/v1/words/search', search: word)
       return :invalid_params unless result.is_a?(Array)
-      return if result.blank?
+      return {} if result.blank?
 
       word_block = result.find { |i| word.casecmp(i['text']).zero? }
-      return if word_block.blank?
+      return {} if word_block.blank?
 
       meanings = word_block['meanings']
       meanings[0].merge('text' => word_block['text'])
@@ -61,11 +58,10 @@ module Api
       uri.query = URI.encode_www_form(params)
       response  = Net::HTTP.get_response(uri)
       response  = Net::HTTP.get_response(URI.parse(response.header['location'])) if response.code == '301'
-
       return :ok unless response.body
+
       JSON.parse(response.body)
-    rescue StandardError => e
-      # ExceptionNotifier.notify_exception e, data: { url: url, params: params }
+    rescue StandardError
       :fail
     end
   end
