@@ -15,6 +15,10 @@ describe Api::Mobile::WordsController, type: :request do
 
   let(:params) { {} }
 
+  before do
+    create(:user, email: 'testee@qqq.qqq')
+  end
+
   context 'GET' do
     subject { get '/api/mobile/words', params: params, headers: headers }
 

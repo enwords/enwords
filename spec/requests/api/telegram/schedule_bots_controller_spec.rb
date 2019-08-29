@@ -50,7 +50,17 @@ describe Api::Telegram::ScheduleBotsController, type: :request do
     end
 
     before do
-      allow(Telegram::ScheduleBot::Reply).to receive(:run!).and_return(true)
+      allow(Telegram::SendMessage).to receive(:run!).and_return(true)
+      allow(Api::Skyeng).to receive(:first_meaning).and_return(
+        'id' => 92_160,
+        'partOfSpeechCode' => 'n',
+        'translation' => { 'text' => 'слово', 'note' => nil },
+        'previewUrl' => '//static.skyeng.ru/image/download/project/dictionary/id/119873/width/96/height/72',
+        'imageUrl' => '//static.skyeng.ru/image/download/project/dictionary/id/119873/width/640/height/480',
+        'transcription' => 'wɜːd',
+        'soundUrl' => '//dmsbj0x9fxpml.cloudfront.net/0795f8750310b61cf71bb9ff6fdc1d40.mp3',
+        'text' => 'word'
+      )
     end
 
     it do

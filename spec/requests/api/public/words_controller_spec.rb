@@ -32,6 +32,9 @@ describe Api::Public::WordsController, type: :request do
     subject { get '/api/public/words/generate_phrase', params: params, headers: headers }
 
     before do
+      create(:word, pos: :j, language: :eng)
+      create(:word, pos: :i, language: :eng)
+      create(:word, pos: :n, language: :eng)
       allow_any_instance_of(Word::GeneratePhrase).to receive(:run!).and_return('')
     end
 
@@ -51,6 +54,8 @@ describe Api::Public::WordsController, type: :request do
     end
 
     before do
+      create(:word, pos: :j, language: :eng)
+      create(:word, pos: :i, language: :eng)
       allow_any_instance_of(Sentence::ByWord).to receive(:run!).and_return('')
     end
 

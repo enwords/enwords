@@ -9,6 +9,12 @@ describe Api::Public::NamesController, type: :request do
 
   let(:params) { {} }
 
+  before do
+    create(:word, pos: :j, language: :eng)
+    create(:word, pos: :i, language: :eng)
+    allow_any_instance_of(Sentence::ByWord).to receive(:run!).and_return('')
+  end
+
   context 'GET #random' do
     subject { get '/api/public/names/random', params: params, headers: headers }
 

@@ -1,11 +1,12 @@
+inherit_from: .rubocop_todo.yml
+
 AllCops:
   TargetRubyVersion: 2.3
   DisplayCopNames: true
   Exclude:
     - 'db/schema.rb'
     - 'bin/*'
-    - 'vendor/bundle/**/*'
-    - 'provision/**/*'
+    - 'tmp/**/*.rb'
 
 Rails:
   Enabled: true
@@ -17,6 +18,12 @@ Metrics/BlockLength:
 Metrics/ModuleLength:
   Exclude:
     - 'spec/**/*.rb'
+
+Metrics/MethodLength:
+  Max: 26
+
+Metrics/AbcSize:
+  Max: 41
 
 Style/Documentation:
   Enabled: false
