@@ -3,9 +3,7 @@ require 'rails_helper'
 describe Api::Telegram::MessagesController, type: :request do
   context 'message' do
     subject do
-      post '/api/telegram/messages',
-           params:  params.to_json,
-           headers: headers
+      post '/api/telegram/messages', params: params.to_json, headers: headers
     end
 
     let(:word) { create :word, value: 'привет', language: 'rus' }
@@ -23,28 +21,28 @@ describe Api::Telegram::MessagesController, type: :request do
     let(:params) do
       {
         'update_id' => 394352518,
-        'message'   =>
+        'message' =>
           {
             'message_id' => 5,
-            'from'       =>
+            'from' =>
               {
-                'id'            => 160589750,
-                'is_bot'        => false,
-                'first_name'    => 'Dmitry',
-                'last_name'     => 'Sadovnikov',
-                'username'      => 'DmitrySadovnikov',
+                'id' => 160589750,
+                'is_bot' => false,
+                'first_name' => 'Dmitry',
+                'last_name' => 'Sadovnikov',
+                'username' => 'DmitrySadovnikov',
                 'language_code' => 'en-RU'
               },
-            'chat'       =>
+            'chat' =>
               {
-                'id'         => 160589750,
+                'id' => 160589750,
                 'first_name' => 'Dmitry',
-                'last_name'  => 'Sadovnikov',
-                'username'   => 'DmitrySadovnikov',
-                'type'       => 'private'
+                'last_name' => 'Sadovnikov',
+                'username' => 'DmitrySadovnikov',
+                'type' => 'private'
               },
-            'date'       => 1527367962,
-            'text'       => word.value
+            'date' => 1527367962,
+            'text' => word.value
           }
       }
     end
@@ -66,6 +64,152 @@ describe Api::Telegram::MessagesController, type: :request do
     it do
       subject
       expect(response).to have_http_status(:success)
+    end
+
+    context 'with callback' do
+      let(:user) { create(:user) }
+      let(:word) { create(:word) }
+
+      let(:params) do
+        {
+          update_id: 132359233,
+          callback_query: {
+            id: "689727727951515987",
+            from: {
+              id: 160589750,
+              is_bot: false,
+              first_name: "Dmitry",
+              last_name: "Sadovnikov",
+              username: "DmitrySadovnikov",
+              language_code: "en"
+            },
+            message: {
+              message_id: 54,
+              from: {
+                id: 892276454,
+                is_bot: true,
+                first_name: "Enwords",
+                username: "enwordsapp_bot"
+              },
+              chat: {
+                id: 160589750,
+                first_name: "Dmitry",
+                last_name: "Sadovnikov",
+                username: "DmitrySadovnikov",
+                type: "private"
+              },
+              date: 1567163062,
+              text: "escaped [ɪsˈkeɪpt] - сбежавший\n\nA tiger has escaped from the zoo.\nИз зоопарка сбежал тигр.",
+              entities: [
+                {
+                  offset: 0,
+                  length: 7,
+                  type: "bold"
+                },
+                {
+                  offset: 8,
+                  length: 10,
+                  type: "italic"
+                },
+                {
+                  offset: 66,
+                  length: 24,
+                  type: "italic"
+                }
+              ],
+              reply_markup: {
+                inline_keyboard: [
+                  [
+                    {
+                      text: "Добавить в Выученные",
+                      callback_data: "{\"user_id\":#{user.id},\"word_id\":#{word.id},\"action\":\"learned\"}"
+                    }
+                  ]
+                ]
+              }
+            },
+            chat_instance: "3254013575179478708",
+            data: "{\"user_id\":#{user.id},\"word_id\":#{word.id},\"action\":\"learned\"}"
+          },
+          controller: "api/telegram/messages",
+          action: "create",
+          message: {
+            update_id: 132359233,
+            callback_query: {
+              id: "689727727951515987",
+              from: {
+                id: 160589750,
+                is_bot: false,
+                first_name: "Dmitry",
+                last_name: "Sadovnikov",
+                username: "DmitrySadovnikov",
+                language_code: "en" },
+              message: {
+                message_id: 54,
+                from: {
+                  id: 892276454,
+                  is_bot: true,
+                  first_name: "Enwords",
+                  username: "enwordsapp_bot"
+                },
+                chat: {
+                  id: 160589750,
+                  first_name: "Dmitry",
+                  last_name: "Sadovnikov",
+                  username: "DmitrySadovnikov",
+                  type: "private"
+                },
+                date: 1567163062,
+                text: "escaped [ɪsˈkeɪpt] - сбежавший\n\nA tiger has escaped from the zoo.\nИз зоопарка сбежал тигр.",
+                entities: [
+                  {
+                    offset: 0,
+                    length: 7,
+                    type: "bold"
+                  },
+                  {
+                    offset: 8,
+                    length: 10,
+                    type: "italic"
+                  },
+                  {
+                    offset: 66,
+                    length: 24,
+                    type: "italic"
+                  }
+                ],
+                reply_markup: {
+                  inline_keyboard: [
+                    [
+                      {
+                        text: "Добавить в Выученные",
+                        callback_data: "{\"user_id\":#{user.id},\"word_id\":#{word.id},\"action\":\"learned\"}"
+                      }
+                    ]
+                  ]
+                }
+              },
+              chat_instance: "3254013575179478708",
+              data: "{\"user_id\":#{user.id},\"word_id\":#{word.id},\"action\":\"learned\"}"
+            }
+          }
+        }
+      end
+
+      before do
+        stub_request(:post, /deleteMessage/)
+          .with(body: "chat_id=160589750&message_id=54")
+          .to_return(status: 200, body: "{}", headers: {})
+      end
+
+      it do
+        subject
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'creates WordStatus' do
+        expect { subject }.to change { WordStatus.count }.by(1)
+      end
     end
   end
 end
