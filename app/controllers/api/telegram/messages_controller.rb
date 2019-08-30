@@ -1,7 +1,7 @@
 module Api
   module Telegram
-    class ScheduleBotsController < ::Api::BaseController
-      def message
+    class MessagesController < ::Api::BaseController
+      def create
         return render json: {}, status: :ok unless params[:message]
 
         ::Telegram::ProcessMessage.run!(params[:message])

@@ -1,11 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :telegram do
-      resources :schedule_bots, only: %i[] do
-        collection do
-          post :message
-        end
-      end
+      resources :messages, only: %i[create]
     end
 
     namespace :public do

@@ -53,6 +53,7 @@ module Telegram
       else
         return I18n.t('telegram.process_message.not_understand', locale: :ru) unless word
 
+        update_word_status
         Sentence::ByWord.run!(word: word, translation_lang: translation_lang)[:text]
       end
     end
@@ -96,6 +97,16 @@ module Telegram
         )
         result.update!(active: true)
       end
+    end
+
+    def update_word_status
+      return unless word
+      return unless telegram_chat
+
+      user = telegram_chat.user
+      return if word.language != user.learning_language
+
+      Word::UpdateState.run(ids: [word.id], to_state: 'learning', user: user)
     end
   end
 end
