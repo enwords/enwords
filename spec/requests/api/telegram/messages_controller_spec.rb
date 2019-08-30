@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-describe Api::Telegram::ScheduleBotsController, type: :request do
+describe Api::Telegram::MessagesController, type: :request do
   context 'message' do
     subject do
-      post '/api/telegram/schedule_bots/message',
+      post '/api/telegram/messages',
            params:  params.to_json,
            headers: headers
     end
