@@ -113,19 +113,13 @@ en:
         block_3:
           title: "Just 10 minutes a day"
           body: "Learn 3 words a day and in a year you will know more than 1000 words 😱"
-    index:
-      sign_in:
-        title: "Guidance for successful learning:"
-        item_1:
-          text: "<a href=%{words_path}>Select words</a> to learn and repeat them in different sentences that will give you Enwords and also mark the words that you know to make them disappear from the list (all words arranged in order of their frequency in speech, it is recommended to study the word order, so the first words you probably know)"
-        item_2:
-          text: "<a href=%{articles_path}>Add your own text</a> from audio courses or thematic articles (if you are a cook then upload the recipes, if you are a driver then upload the traffic rules) in the learning language, and all words will be arranged in order of their frequency in this text"
-        item_3:
-          text: "Setup exercise: increase the number of sentences, turn on autoplay of audio or make practice more diverse by sacrificing translation (unfortunately not all sentences translated)"
-        item_4:
-          text: "Do you study English using Skyeng? <a href=%{skyeng_setting_path}>Attach your Skyeng account</a> and you will be able to continue learning on our service"
-        item_5:
-          text: "Don't forget to add Enwords to bookmarks and add the bookmark to your home screen on your mobile device"
+      guide: "Guidance for successful learning:"
+      select_words: "<a href=%{words_path}>Choose the words</a> that you want to learn and click on the training button, Enwords will select the context for you to learn easier. Mark the words that you don’t know how to study them in the future, and those you know will disappear from the general list of words. The list of words is sorted from the most popular words to the rare words in the language, so you probably already know the first words 🤷‍♀️"
+      upload_articles: "<a href =%{articles_path}>Add your text</a> in the language you are learning, for example, from audio courses, magazines, books, if you are a cook upload recipes 👩🏼‍🍳, if the driver upload the traffic rules 👮🏻‍♂️"
+      use_settings: "Configure the training parameters: the number of sentences, automatic voice acting, make training the most diverse"
+      from_skyeng: "Do you study English on skyeng.ru? <a href=%{skyeng_setting_path}>Add your mail</a> from the Skyeng account and you can continue to study words on our website"
+      use_telegram_bot: "Still not using our Telegram bot <a target='_blank' href='https://t.me/enwordsapp_bot'>@enwordsapp_bot</a>? Send him an unfamiliar word and get a translation. And the bot will send you the studied scheduled words so you can finally learn them 🤪"
+      follow_us: 'Follow us on Instagram, there are a lot of interesting <a target="_blank" href="https://instagram.com/enwordsapp">@enwordsapp</a>'
     result:
       title: "Exercise result:"
       text: "Learned words"
