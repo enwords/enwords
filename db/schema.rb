@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190831094652) do
+ActiveRecord::Schema.define(version: 20190831172035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,10 +154,11 @@ ActiveRecord::Schema.define(version: 20190831094652) do
   end
 
   create_table "words", id: :integer, force: :cascade do |t|
-    t.string  "language", limit: 4
+    t.string  "language",      limit: 4
     t.string  "value"
     t.string  "pos"
     t.integer "weight"
+    t.string  "transcription"
     t.index ["language"], name: "index_words_on_language", using: :btree
     t.index ["value"], name: "index_words_on_value", using: :btree
   end

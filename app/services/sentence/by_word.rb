@@ -6,6 +6,7 @@ class Sentence < ApplicationRecord
     symbol :translation_lang
 
     def execute
+      word.update(transcription: word_transcription) if word_transcription.present? && word.transcription.blank?
       {
         word: word.value,
         sentence: sentence.try(:value),
@@ -38,7 +39,7 @@ class Sentence < ApplicationRecord
     end
 
     def word_transcription
-      skyeng_hash['transcription']
+      skyeng_hash['transcription'] || word.transcription
     end
 
     def word_mnemo
