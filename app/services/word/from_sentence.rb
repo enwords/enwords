@@ -6,9 +6,9 @@ class Word < ApplicationRecord
     def execute
       words_from_sentence.map do |word|
         {
-          id:      word.id,
-          word:    word.value,
-          learned: learned?(word)
+          id: word.id,
+          word: word.value,
+          learned: word.learned
         }
       end.as_json
     end
@@ -16,30 +16,23 @@ class Word < ApplicationRecord
     private
 
     def sentence
-      @_sentence ||= Sentence.find(sentence_id)
+      Sentence.find(sentence_id)
     end
 
     def words_from_sentence
-      @_words_from_sentence ||=
-        sentence.words.map { |word| word if available_words.include? word }.compact
+      sentence
+        .words
+        .select('words.id, words.value, word_statuses.learned')
+        .where(id: available_words.select(:id))
+        .joins(<<~SQL)
+          LEFT JOIN word_statuses
+          ON word_statuses.word_id = words.id
+          AND word_statuses.user_id = #{user.id}
+        SQL
     end
 
     def available_words
-      @_available_words ||= Word::ByStatus.run!(status: 'available', user: user)
-    end
-
-    def learning_words
-      @_learning_words ||= Word::ByStatus.run!(status: 'learning', user: user)
-    end
-
-    def learned_words
-      @_learned_words ||= Word::ByStatus.run!(status: 'learned', user: user)
-    end
-
-    def learned?(word)
-      return true  if learned_words.include? word
-      return false if learning_words.include? word
-      nil
+      Word::ByStatus.run!(status: 'available', user: user)
     end
   end
 end

@@ -143,7 +143,8 @@ describe Api::Telegram::MessagesController, type: :request do
                 first_name: "Dmitry",
                 last_name: "Sadovnikov",
                 username: "DmitrySadovnikov",
-                language_code: "en" },
+                language_code: "en"
+              },
               message: {
                 message_id: 54,
                 from: {

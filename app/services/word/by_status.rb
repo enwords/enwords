@@ -1,84 +1,85 @@
 class Word < ApplicationRecord
   class ByStatus < ActiveInteraction::Base
+    private
+
     object :user
     string :status,  default: nil
     string :search,  default: nil
     string :article, default: nil
+    boolean :with_offset, default: true
 
     def execute
-      if status
-        case status
-        when 'learning'  then learning
-        when 'learned'   then learned
-        when 'unknown'   then unknown
-        when 'available' then available
-        when 'skyeng'    then skyeng
+      result =
+        if status
+          case status
+          when 'learning' then learning
+          when 'learned' then learned
+          when 'unknown' then unknown
+          when 'available' then available
+          when 'skyeng' then skyeng
+          end
+        elsif search then searching
+        elsif article then words_from_article
         end
-      elsif search       then searching
-      elsif article      then words_from_article
-      elsif user.admin?  then admining
-      end
-    end
-
-    private
-
-    def words_from_article
-      @_words_from_article ||= begin
-        word_ids = Hash[Article.find(article)
-                               .frequency.sort_by { |_k, v| v }.reverse].keys
-
-        available.where(id: word_ids)
-                 .where.not(id: learned)
-                 .order("position(id::text in '#{word_ids.join(', ')}')")
-      end
+      result = result.order(:weight)
+      result = result.offset(user.proficiency_level.to_i) if with_offset
+      result
     end
 
     def available
-      @_available ||=
-        Word.where(language: user.learning_language).where.not(id: offset_words)
+      Word.where(language: user.learning_language)
+    end
+
+    def words_from_article
+      word_ids =
+        Hash[Article.find(article).frequency.sort_by { |_k, v| v }.reverse].keys
+      available
+        .where(id: word_ids)
+        .where.not(id: learned)
+        .order("position(id::text in '#{word_ids.join(', ')}')")
     end
 
     def learned
-      @_learned ||=
-        available.where(id: WordStatus.select(:word_id)
-                                      .where(user: user, learned: true)).order(:id).to_a
+      filter_words_by_status(available, true)
     end
 
     def learning
-      @_learning ||=
-        available.where(id: WordStatus.select(:word_id).where(user: user, learned: false))
-                 .order(:id).to_a
+      filter_words_by_status(available, false)
+    end
+
+    def filter_words_by_status(relation, learned)
+      relation
+        .joins(<<~SQL)
+          JOIN word_statuses
+          ON word_statuses.word_id = words.id
+          AND word_statuses.user_id = #{user.id}
+          AND learned = #{learned}
+        SQL
     end
 
     def unknown
-      @_unknown ||=
-        available.where.not(id: WordStatus.select(:word_id).where(user: user)).order(:id).to_a
+      available
+        .joins(<<~SQL)
+          LEFT JOIN word_statuses
+          ON word_statuses.word_id = words.id
+          AND word_statuses.user_id = #{user.id}
+        SQL
+        .where(word_statuses: { user_id: nil })
     end
 
     def searching
-      @_searching ||=
-        available.where('value LIKE ?', "#{search.strip.downcase}%").order(:id).to_a
-    end
-
-    def offset_words
-      @_offset_words ||= Word.where(language: user.learning_language)
-                             .order(:id)
-                             .limit(user.proficiency_level)
-    end
-
-    def admining
-      Word.all.order(:id)
+      available.where('value LIKE ?', "#{search.strip.downcase}%")
     end
 
     def skyeng
       result = Rails.cache.read("skyeng_words_user_#{user.id}")
       return result if result
 
-      skyeng_words = Api::Skyeng.learning_words \
+      skyeng_words = Api::Skyeng.learning_words(
         email: user.skyeng_setting.email,
         token: user.skyeng_setting.token
-
-      result = available.where(value: skyeng_words).where.not(id: 1..100).order(:id).to_a
+      )
+      result = available.where(value: skyeng_words).where.not(id: 1..100)
       user.update!(skyeng_words_count: result.size)
 
       return result if result.size < 100

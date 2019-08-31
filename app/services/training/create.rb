@@ -44,12 +44,18 @@ class Training < ApplicationRecord
         SentencesWord
         .select("word_id, (array_agg(sentence_id order by random()))[1:#{user.sentences_number}] sentence_ids")
         .where(word_id: word_ids)
-        .left_joins(sentence: :translations)
-        .where(translations_sentences: { language: user.native_language })
+        .joins(<<~SQL)
+          LEFT JOIN sentences
+          ON sentences.id = sentences_words.sentence_id
+          LEFT JOIN links
+          ON links.sentence_1_id = sentences.id
+          LEFT JOIN sentences translations_sentences
+          ON translations_sentences.id = links.sentence_2_id
+          AND translations_sentences.language = '#{user.native_language}'
+        SQL
         .group(:word_id)
         .order(:word_id)
-        .each_with_object({}) { |sw, hsh| hsh[sw.word_id] = sw.sentence_ids }
-
+      result = result.each_with_object({}) { |sw, hsh| hsh[sw.word_id] = sw.sentence_ids }
       word_ids.map(&:to_i).each do |word_id|
         next if result[word_id].present?
 
