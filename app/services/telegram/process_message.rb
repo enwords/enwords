@@ -9,17 +9,17 @@ module Telegram
     hash :from do
       integer :id
       boolean :is_bot
-      string :first_name
-      string :last_name
-      string :username
+      string :first_name, default: nil
+      string :last_name, default: nil
+      string :username, default: nil
       string :language_code, default: nil
     end
 
     hash :chat do
       integer :id
-      string :first_name
-      string :last_name
-      string :username
+      string :first_name, default: nil
+      string :last_name, default: nil
+      string :username, default: nil
       string :type
     end
 
