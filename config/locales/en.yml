@@ -190,7 +190,7 @@ en:
       added_to_unknown:  'Added to "Unknown"'
       state_changed: "Status of words successfully changed"
       select_words: "Please, select words"
-    select_all: 'Select all on the page'
+    select_all: 'Select all'
     skyeng: "Skyeng"
     very_easy_words: "Very easy words?"
   articles:

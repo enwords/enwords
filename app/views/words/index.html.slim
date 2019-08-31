@@ -11,12 +11,16 @@
                 input.check#check-all type='checkbox'
               th.max-width
                 label.checkbox-label for='check-all'
-                  b = t 'words.select_all'
+                  b
+                    = t 'words.select_all'
+                    span = " ["
+                    span#check-count = 0
+                    span = "]"
           - @words.each do |word|
             tr
               td
                 span.check-box-wrapper
-                  = check_box_tag 'ids[]', word.id, false, class: 'check'
+                  = check_box_tag 'ids[]', word.id, false, class: 'check check-word'
               td
                 span.word-skyeng[class=word_color_class(word)] = word.value.capitalize
       .col-6.col-sm-4.col-md-3.col-lg-2

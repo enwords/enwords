@@ -13,6 +13,7 @@ $(function () {
   $checkAll.on('ifChecked', function () {
     $check.iCheck('check');
     triggeredByChild = false;
+    setCheckCount()
   });
 
   $checkAll.on('ifUnchecked', function () {
@@ -21,18 +22,25 @@ $(function () {
     }
 
     triggeredByChild = false;
+    setCheckCount()
   });
 
   $check.on('ifUnchecked', function () {
     triggeredByChild = true;
     $checkAll.iCheck('uncheck');
+    setCheckCount()
   });
 
   $check.on('ifChecked', function () {
     if ($check.filter(':checked').length === $check.length) {
       $checkAll.iCheck('check');
     }
+    setCheckCount()
   });
+
+  function setCheckCount() {
+    $('#check-count').text($('.check-word:checked').length);
+  }
 
   // flash
   $('.alert').delay(1000).fadeOut(4000);

@@ -204,7 +204,7 @@ ru:
       added_to_unknown:  'Добавлено в "Неизвестные"'
       state_changed: "Состояние слов успешно изменено"
       select_words: "Выберите слова"
-    select_all: 'Выбрать все на странице'
+    select_all: 'Выбрать все'
     skyeng: "Skyeng"
     very_easy_words: "Слишком простые слова?"
   articles:
