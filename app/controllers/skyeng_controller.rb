@@ -1,8 +1,7 @@
 class SkyengController < ApplicationController
-  before_action :set_word
-
   def first_meaning
-    response = Api::Skyeng.first_meaning(word: @word)
+    response = Api::Skyeng.first_meaning(word: word_value)
+    update_transcription(response)
     response ||= yandex_translate
 
     if response.present?
@@ -14,16 +13,23 @@ class SkyengController < ApplicationController
 
   private
 
-  def set_word
-    @word = params[:word].gsub(/\W/, '').downcase
+  def word_value
+    @word_value ||= params[:word].gsub(/\W/, '').downcase
   end
 
   def yandex_translate
-    trans = YANDEX_TRANSLATOR.translate @word, from: 'en', to: 'ru'
+    trans = YANDEX_TRANSLATOR.translate word_value, from: 'en', to: 'ru'
 
     {
       translation: { text: trans },
-      text:        @word
+      text: word_value
     }
+  end
+
+  def update_transcription(response)
+    word = Word.find_by(language: :eng, value: word_value)
+    return unless response['transcription'].present? && word.transcription.blank?
+
+    word.update!(transcription: response['transcription'])
   end
 end
