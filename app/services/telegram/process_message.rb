@@ -2,7 +2,7 @@ module Telegram
   class ProcessMessage < ActiveInteraction::Base
     private
 
-    string :text
+    string :text, default: nil
     integer :message_id
     integer :date
 
@@ -75,6 +75,8 @@ module Telegram
     end
 
     def clean_text
+      return if text.blank?
+
       @clean_text ||= text.mb_chars.downcase.to_s.strip
     end
 
