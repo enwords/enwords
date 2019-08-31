@@ -28,6 +28,7 @@ class SkyengController < ApplicationController
 
   def update_transcription(response)
     word = Word.find_by(language: :eng, value: word_value)
+    return unless word
     return unless response['transcription'].present? && word.transcription.blank?
 
     word.update!(transcription: response['transcription'])
