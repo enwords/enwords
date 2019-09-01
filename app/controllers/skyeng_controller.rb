@@ -2,7 +2,7 @@ class SkyengController < ApplicationController
   def first_meaning
     response = Api::Skyeng.first_meaning(word: word_value)
     update_transcription(response)
-    response ||= yandex_translate
+    response.presence ||= yandex_translate
 
     if response.present?
       render json: response, status: :ok
