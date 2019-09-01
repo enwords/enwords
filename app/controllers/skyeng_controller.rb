@@ -1,13 +1,13 @@
 class SkyengController < ApplicationController
   def first_meaning
-    response = Api::Skyeng.first_meaning(word: word_value)
-    update_transcription(response)
-    response.presence ||= yandex_translate
+    result = skyeng_translate
+    update_transcription(result)
+    result = yandex_translate if result.blank?
 
-    if response.present?
-      render json: response, status: :ok
+    if result.present?
+      render json: result, status: :ok
     else
-      render json: response, status: :unprocessable_entity
+      render json: result, status: :unprocessable_entity
     end
   end
 
@@ -15,6 +15,10 @@ class SkyengController < ApplicationController
 
   def word_value
     @word_value ||= params[:word].gsub(/\W/, '').downcase
+  end
+
+  def skyeng_translate
+    Api::Skyeng.first_meaning(word: word_value)
   end
 
   def yandex_translate
