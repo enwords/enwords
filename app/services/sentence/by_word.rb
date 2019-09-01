@@ -11,21 +11,44 @@ class Sentence < ApplicationRecord
         word: word.value,
         sentence: sentence.try(:value),
         word_translation: word_translation,
-        sentence_translation: sentence_translation,
+        sentence_translation: sentence.try(:translation),
         menemo: word_mnemo,
         text: text
       }
     end
 
     def sentence
-      @sentence ||=
-        word.sentences.left_joins(:translations).where(translations_sentences: { language: translation_lang }).sample
+      return @sentence if defined? @sentence
+
+      @sentence = sentence_with_translation || sentence_without_translation
     end
 
-    def sentence_translation
-      return unless sentence
+    def sentence_with_translation
+      Sentence
+        .joins(<<~SQL)
+          JOIN sentences_words
+          ON sentences.id = sentences_words.sentence_id
+          AND sentences_words.word_id = #{word.id}
+          JOIN links
+          ON links.sentence_1_id = sentences.id
+          JOIN sentences translations_sentences
+          ON translations_sentences.id = links.sentence_2_id
+          AND translations_sentences.language = '#{translation_lang}'
+        SQL
+        .distinct
+        .select('sentences.value, translations_sentences.value translation')
+        .sample
+    end
 
-      @sentence_translation ||= sentence.translations.where(language: translation_lang).first.try(:value)
+    def sentence_without_translation
+      Sentence
+        .joins(<<~SQL)
+          JOIN sentences_words
+          ON sentences.id = sentences_words.sentence_id
+          AND sentences_words.word_id = #{word.id}
+        SQL
+        .distinct
+        .sample
     end
 
     def skyeng_hash
@@ -62,9 +85,9 @@ class Sentence < ApplicationRecord
       result << "\n"
       result << sentence.value
 
-      if sentence_translation.present?
+      if sentence.try(:translation).present?
         result << "\n"
-        result << "_#{sentence_translation}_"
+        result << "_#{sentence.translation}_"
       end
 
       if word_mnemo.present?
