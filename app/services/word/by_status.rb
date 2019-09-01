@@ -6,7 +6,6 @@ class Word < ApplicationRecord
     string :status,  default: nil
     string :search,  default: nil
     string :article, default: nil
-    boolean :with_offset, default: true
 
     def execute
       result =
@@ -22,12 +21,15 @@ class Word < ApplicationRecord
         elsif article then words_from_article
         end
       result = result.order(:weight)
-      result = result.offset(user.proficiency_level.to_i) if with_offset
       result
     end
 
+    def offset_word
+      Word.where(language: user.learning_language).offset(user.proficiency_level.to_i).order(:weight).first
+    end
+
     def available
-      Word.where(language: user.learning_language)
+      Word.where(language: user.learning_language).where('words.weight >= ?', offset_word.weight)
     end
 
     def words_from_article

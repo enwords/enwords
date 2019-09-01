@@ -44,8 +44,6 @@ class Sentence < ApplicationRecord
       were
     ].freeze
 
-    # am, is, are, was, were, being, been are different tenses of the verb
-
     object :user
     string :tense
 
@@ -63,11 +61,12 @@ class Sentence < ApplicationRecord
     end
 
     def sentences
-      Sentence.includes(:translations)
-              .where(language:               user.learning_language,
-                     translations_sentences: { language: user.native_language })
-              .where('sentences.id > ?', rand(10**3..(10**6.7).round))
-              .limit(10)
+      Sentence
+        .includes(:translations)
+        .where(language: user.learning_language,
+               translations_sentences: { language: user.native_language })
+        .where('sentences.id > ?', rand(10 ** 3..(10 ** 6.7).round))
+        .limit(10)
     end
 
     def irregular_verbs

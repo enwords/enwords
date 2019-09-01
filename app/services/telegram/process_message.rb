@@ -31,7 +31,7 @@ module Telegram
       case clean_text
       when '/start'
         if telegram_chat
-          words_count = Word::ByStatus.run!(status: 'learning', user: telegram_chat.user, with_offset: false).size
+          words_count = Word::ByStatus.run!(status: 'learning', user: telegram_chat.user).size
           I18n.t('telegram.process_message.telegram_chat_created', locale: :ru, words_count: words_count)
         else
           I18n.t('telegram.process_message.send_email', locale: :ru)
@@ -41,7 +41,7 @@ module Telegram
         return I18n.t('telegram.process_message.user_not_found', locale: :ru) unless user
 
         create_telegram_chat(user)
-        words_count = Word::ByStatus.run!(status: 'learning', user: user, with_offset: false).size
+        words_count = Word::ByStatus.run!(status: 'learning', user: user).size
         I18n.t('telegram.process_message.telegram_chat_created', locale: :ru, words_count: words_count)
       when '/stop'
         telegram_chat&.update!(active: false)

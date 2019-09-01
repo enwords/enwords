@@ -13,13 +13,13 @@ class ApplicationController < ActionController::Base
                             current_user.skyeng_words_count || '?'
                           end
     @learning_words_count =
-      Word::ByStatus.run!(status: 'learning', user: current_user, with_offset: false).size
+      Word::ByStatus.run!(status: 'learning', user: current_user).count
 
     @learned_words_count =
-      Word::ByStatus.run!(status: 'learned', user: current_user, with_offset: false).size
+      Word::ByStatus.run!(status: 'learned', user: current_user).count
 
     @unknown_words_count =
-      Word::ByStatus.run!(status: 'unknown', user: current_user, with_offset: false).size
+      Word::ByStatus.run!(status: 'unknown', user: current_user).count
   end
 
   def set_locale
