@@ -29,7 +29,8 @@ class Word < ApplicationRecord
     end
 
     def available
-      Word.where(language: user.learning_language).where('words.weight >= ?', offset_word.weight)
+      Word.where(language: user.learning_language)
+          .where('words.weight >= ?', offset_word.try(:weight).to_i)
     end
 
     def words_from_article
