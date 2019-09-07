@@ -40,16 +40,12 @@ Rails.application.routes.draw do
   get 'dev' => 'development#index'
   get 'privacy' => 'static#privacy'
 
-  devise_for :users,
-             only:        :omniauth_callbacks,
-             controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, only: :omniauth_callbacks, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   scope ':locale', locale: /#{I18n.available_locales.join('|')}/ do
     root to: 'static#index'
 
-    devise_for :users,
-               skip:        :omniauth_callbacks,
-               controllers: { registrations: 'registrations' }
+    devise_for :users, skip: :omniauth_callbacks, controllers: { registrations: 'registrations' }
 
     resources :users, only: %i[] do
       collection do

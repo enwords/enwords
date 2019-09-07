@@ -8,14 +8,13 @@ class UserAuthentication < ApplicationRecord
     token_expires_at = if params.dig('credentials', 'expires_at')
                          Time.zone.at(params.dig('credentials', 'expires_at')).to_datetime
                        end
-
     create(
-      user:                    user,
+      user: user,
       authentication_provider: provider,
-      uid:                     params['uid'],
-      token:                   params.dig('credentials', 'token'),
-      token_expires_at:        token_expires_at,
-      params:                  params
+      uid: params['uid'],
+      token: params.dig('credentials', 'token'),
+      token_expires_at: token_expires_at,
+      params: params
     )
   end
 end

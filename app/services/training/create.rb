@@ -12,8 +12,8 @@ class Training < ApplicationRecord
     def execute
       ApplicationRecord.transaction do
         training.update!(
-          type:          type,
-          word_ids:      word_ids,
+          type: type,
+          word_ids: word_ids,
           words_learned: words_learned
         )
 
@@ -27,10 +27,10 @@ class Training < ApplicationRecord
     private
 
     def training
-      @_training ||= Training.where(user: user).first_or_initialize
+      @training ||= Training.where(user: user).first_or_initialize
     end
 
-    def grouped_sentences_words
+    def grouped
       SentencesWord
         .select("word_id, (array_agg(sentence_id order by random()))[1:#{user.sentences_number}] sentence_ids")
         .where(word_id: word_ids)
@@ -39,7 +39,7 @@ class Training < ApplicationRecord
         .each_with_object({}) { |sw, hsh| hsh[sw.word_id] = sw.sentence_ids }
     end
 
-    def grouped_sentences_words_with_translations
+    def grouped_with_trans
       result =
         SentencesWord
         .select("word_id, (array_agg(sentence_id order by random()))[1:#{user.sentences_number}] sentence_ids")
@@ -56,6 +56,10 @@ class Training < ApplicationRecord
         .group(:word_id)
         .order(:word_id)
       result = result.each_with_object({}) { |sw, hsh| hsh[sw.word_id] = sw.sentence_ids }
+      add_additional_ids(result)
+    end
+
+    def add_additional_ids(result)
       word_ids.map(&:to_i).each do |word_id|
         next if result[word_id].present?
 
@@ -67,18 +71,11 @@ class Training < ApplicationRecord
           .first
           .sentence_ids
       end
-
       result
     end
 
     def sentence_ids
-      result =
-        if user.diversity_enable?
-          grouped_sentences_words
-        else
-          grouped_sentences_words_with_translations
-        end
-
+      result = user.diversity_enable? ? grouped : grouped_with_trans
       result.values.flatten.uniq
     end
 

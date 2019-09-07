@@ -11,8 +11,8 @@ module Grammar
 
         def execute
           {
-            user:          user,
-            word_ids:      word_ids,
+            user: user,
+            word_ids: word_ids,
             training_type: training_type,
             words_learned: words_learned
           }
@@ -21,7 +21,7 @@ module Grammar
         private
 
         def word_ids
-          Word.where(value:    words,
+          Word.where(value: words,
                      language: user.learning_language).pluck(:id)
         end
 
@@ -30,7 +30,7 @@ module Grammar
         end
 
         def verbs
-          @_verbs ||= Grammar::Eng::IrregularVerb.where(id: verb_ids)
+          @verbs ||= Grammar::Eng::IrregularVerb.where(id: verb_ids)
         end
 
         # validations

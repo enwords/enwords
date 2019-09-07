@@ -7,6 +7,7 @@ class AddPosToWords < ActiveRecord::Migration[5.0]
     csv.each do |row|
       word = Word.where(language: 'eng', word: row[0]).first
       next unless word
+
       word.update(pos: row[1])
     end
   end

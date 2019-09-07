@@ -55,7 +55,11 @@ class SkyengSettingsController < ApplicationController
   private
 
   def skyeng_setting_params
-    params.require(:skyeng_setting).permit(:email, :token).tap { |i| i[:email].strip!.downcase! rescue nil }
+    params.require(:skyeng_setting).permit(:email, :token).tap do |i|
+      i[:email].strip!.downcase!
+    rescue StandardError
+      nil
+    end
   end
 
   def skyeng_setting

@@ -33,13 +33,13 @@ class Sentence < ApplicationRecord
       They
     ].freeze
 
-    AUXILIARY_CONTINUOUS_VERBS =%w[
+    AUXILIARY_CONTINUOUS_VERBS = %w[
       am
       is
       are
     ].freeze
 
-    AUXILIARY_PERFECT_VERBS =%w[
+    AUXILIARY_PERFECT_VERBS = %w[
       was
       were
     ].freeze
@@ -57,7 +57,7 @@ class Sentence < ApplicationRecord
 
     def present_simple
       sentences.where('')
-      S + V1(s/es) + O
+      S + V1(s / es) + O
     end
 
     def sentences
@@ -65,26 +65,26 @@ class Sentence < ApplicationRecord
         .includes(:translations)
         .where(language: user.learning_language,
                translations_sentences: { language: user.native_language })
-        .where('sentences.id > ?', rand(10 ** 3..(10 ** 6.7).round))
+        .where('sentences.id > ?', rand(10**3..(10**6.7).round))
         .limit(10)
     end
 
     def irregular_verbs
-      @_irregular_verbs ||= Grammar::Eng::IrregularVerb.all
+      @irregular_verbs ||= Grammar::Eng::IrregularVerb.all
     end
 
     def irregular_infinitive
-      @_irregular_infinitive ||=
+      @irregular_infinitive ||=
         irregular_verbs.flat_map(&:infinitive)
     end
 
     def irregular_simple_past
-      @_irregular_simple_past ||=
+      @irregular_simple_past ||=
         irregular_verbs.flat_map(&:simple_past).flatten
     end
 
     def irregular_past_participle
-      @_irregular_past_participle ||=
+      @irregular_past_participle ||=
         irregular_verbs.flat_map(&:past_participle).flatten
     end
   end

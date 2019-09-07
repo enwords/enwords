@@ -17,10 +17,8 @@ module ApplicationHelper
 
   def word_color_class(word)
     return if %w[unknown learning learned].include? params[:status]
-    case
-    when @learned_ids.include?(word.id)  then 'learned'
-    when @learning_ids.include?(word.id) then 'learning'
-    end
+    return 'learned' if @learned_ids.include?(word.id)
+    return 'learning' if @learning_ids.include?(word.id)
   end
 
   def body_class

@@ -3,7 +3,7 @@ class SkyengSetting < ApplicationRecord
     string :email
     object :user
 
-    validates :email, format: { with:    /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i,
+    validates :email, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i,
                                 message: :email_invalid }
 
     def execute
@@ -20,7 +20,7 @@ class SkyengSetting < ApplicationRecord
     private
 
     def skyeng_setting
-      @_skyeng_setting ||=
+      @skyeng_setting ||=
         SkyengSetting.where(user_id: user.id).first_or_initialize
     end
   end

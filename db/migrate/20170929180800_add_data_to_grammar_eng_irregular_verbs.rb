@@ -3,8 +3,8 @@ class AddDataToGrammarEngIrregularVerbs < ActiveRecord::Migration[5.0]
     infinitives.each do |line|
       infinitive, simple_past, past_participle = line.split(';')
       Grammar::Eng::IrregularVerb.create \
-        infinitive:      infinitive,
-        simple_past:     simple_past.split(','),
+        infinitive: infinitive,
+        simple_past: simple_past.split(','),
         past_participle: past_participle.split(',')
     end
   end
