@@ -2,31 +2,32 @@ version: '3.7'
 
 services:
   redis:
-    image: 'redis:5.0.5-alpine'
+    image: redis:5.0.5-alpine
     command: redis-server
     volumes:
-      - 'redis:/data'
+      - redis:/data
 
   web:
     depends_on:
-      - 'redis'
+      - redis
     build: .
     ports:
-      - '3000:3000'
+      - 3000:3000
     volumes:
-      - '.:/app'
+      - .:/app
     env_file:
-      - '.env'
+      - .env
 
   sidekiq:
     depends_on:
-      - 'redis'
+      - redis
     build: .
     command: sidekiq -C config/sidekiq.yml
     volumes:
-      - '.:/app'
+      - .:/app
     env_file:
-      - '.env'
+      - .env
+
   nginx:
     build:
       context: .
@@ -35,5 +36,6 @@ services:
       - web
     ports:
       - 80:80
+
 volumes:
   redis:
