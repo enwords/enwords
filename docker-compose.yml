@@ -27,6 +27,13 @@ services:
       - '.:/app'
     env_file:
       - '.env'
-
+  nginx:
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    depends_on:
+      - web
+    ports:
+      - 80:80
 volumes:
   redis:
