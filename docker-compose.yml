@@ -36,6 +36,10 @@ services:
       - web
     ports:
       - 80:80
+      - 443:443
+    volumes:
+      - letsencrypt:/etc/letsencrypt
 
 volumes:
   redis:
+  letsencrypt:

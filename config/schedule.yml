@@ -4,6 +4,6 @@ test_job:
   active_job: true
 
 certbot_renew_job:
-  cron:  '0 0 1 */6 *'
+  cron:  '0 0 */15 * *'
   class: 'CertbotRenewWorker'
   active_job: true
