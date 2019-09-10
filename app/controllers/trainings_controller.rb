@@ -5,9 +5,9 @@ class TrainingsController < ApplicationController
   def show
     case current_training
     when RepeatingTraining, SpellingTraining, GrammarTraining
-      @sentences  =
+      @sentences =
         current_training.sentences.paginate(page: params[:page], per_page: 1)
-      @words      = current_training.words.pluck(:value)
+      @words = current_training.words.pluck(:value)
       @page_count = @sentences.total_pages
     when MnemoTraining
       @words =
@@ -21,7 +21,7 @@ class TrainingsController < ApplicationController
   def words_from_sentence
     @words_from_sentence = Word::FromSentence.run!(params.merge(user: current_user))
     render layout: false
-  rescue
+  rescue StandardError
     render nothing: true
   end
 
@@ -34,9 +34,9 @@ class TrainingsController < ApplicationController
 
     updating =
       Word::UpdateState.run(
-        ids:      [params[:id]],
+        ids: [params[:id]],
         to_state: to_state,
-        user:     current_user
+        user: current_user
       )
 
     if updating.valid?

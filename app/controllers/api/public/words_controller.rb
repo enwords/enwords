@@ -32,7 +32,7 @@ module Api
       end
 
       def trans_lang
-        @translation_language ||=
+        @trans_lang ||=
           case word_lang
           when 'eng' then 'rus'
           when 'rus' then 'eng'

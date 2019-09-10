@@ -24,7 +24,7 @@ class Word < ApplicationRecord
 
     def create_or_update_state(id, bool)
       WordStatus.create!(user_id: user.id, word_id: id, learned: bool)
-    rescue
+    rescue StandardError
       WordStatus.where(user_id: user, word_id: id).update_all(learned: bool)
     end
 

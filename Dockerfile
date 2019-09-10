@@ -1,29 +1,16 @@
-ARG BASE_IMAGE=ruby:2.3.0-alpine
+FROM ruby:2.6.1
 
-# We want to build from clean git tree, not current working directory
-FROM ${BASE_IMAGE} as clean_checkout
-RUN apk add git --no-cache
-COPY . /source
-RUN git clone /source /app
-RUN rm -rf /app/.git
-
-FROM ${BASE_IMAGE} as bundler_builder
-RUN apk add build-base postgresql-dev git openssh-client libxml2-dev libxslt-dev --no-cache
-ENV LANG C.UTF-8
+COPY . /app
 WORKDIR /app
-COPY --from=clean_checkout /app/Gemfile /app/Gemfile.lock ./
-# RUN bundle config build.nokogiri --use-system-libraries
-RUN bundle config build.nokogiri
-RUN bundle install --deployment --without development test --jobs=3
-RUN rm -rf ./vendor/bundle/ruby/*/cache/
+RUN apt-get update
+RUN apt-get install -y nodejs
+RUN gem install bundler
+RUN gem install nokogiri -v '1.10.4'
+RUN gem install nio4r -v '2.5.1'
+RUN gem install websocket-driver -v '0.7.1'
+RUN bundle install
+RUN chmod +x entrypoint.sh
 
-FROM ${BASE_IMAGE} as app
-ENV LANG C.UTF-8
-RUN apk add libpq tzdata libxslt --no-cache
-RUN cp /usr/share/zoneinfo/Europe/Moscow /etc/localtime
-WORKDIR /app
-COPY --from=clean_checkout /app ./
-COPY --from=bundler_builder /app/vendor ./vendor
-COPY --from=bundler_builder /usr/local/bundle/config /usr/local/bundle/config
-EXPOSE 3000
-ENTRYPOINT ["bundle", "exec", "puma"]
+ENTRYPOINT ["./entrypoint.sh"]
+CMD ["dbmigrate"]
+CMD ["web"]

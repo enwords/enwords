@@ -20,13 +20,13 @@ describe Api::Telegram::MessagesController, type: :request do
 
     let(:params) do
       {
-        'update_id' => 394352518,
+        'update_id' => 394_352_518,
         'message' =>
           {
             'message_id' => 5,
             'from' =>
               {
-                'id' => 160589750,
+                'id' => 160_589_750,
                 'is_bot' => false,
                 'first_name' => 'Dmitry',
                 'last_name' => 'Sadovnikov',
@@ -35,13 +35,13 @@ describe Api::Telegram::MessagesController, type: :request do
               },
             'chat' =>
               {
-                'id' => 160589750,
+                'id' => 160_589_750,
                 'first_name' => 'Dmitry',
                 'last_name' => 'Sadovnikov',
                 'username' => 'DmitrySadovnikov',
                 'type' => 'private'
               },
-            'date' => 1527367962,
+            'date' => 1_527_367_962,
             'text' => word.value
           }
       }
@@ -72,11 +72,11 @@ describe Api::Telegram::MessagesController, type: :request do
 
       let(:params) do
         {
-          update_id: 132359233,
+          update_id: 132_359_233,
           callback_query: {
             id: "689727727951515987",
             from: {
-              id: 160589750,
+              id: 160_589_750,
               is_bot: false,
               first_name: "Dmitry",
               last_name: "Sadovnikov",
@@ -86,19 +86,19 @@ describe Api::Telegram::MessagesController, type: :request do
             message: {
               message_id: 54,
               from: {
-                id: 892276454,
+                id: 892_276_454,
                 is_bot: true,
                 first_name: "Enwords",
                 username: "enwordsapp_bot"
               },
               chat: {
-                id: 160589750,
+                id: 160_589_750,
                 first_name: "Dmitry",
                 last_name: "Sadovnikov",
                 username: "DmitrySadovnikov",
                 type: "private"
               },
-              date: 1567163062,
+              date: 1_567_163_062,
               text: "escaped [ɪsˈkeɪpt] - сбежавший\n\nA tiger has escaped from the zoo.\nИз зоопарка сбежал тигр.",
               entities: [
                 {
@@ -134,11 +134,11 @@ describe Api::Telegram::MessagesController, type: :request do
           controller: "api/telegram/messages",
           action: "create",
           message: {
-            update_id: 132359233,
+            update_id: 132_359_233,
             callback_query: {
               id: "689727727951515987",
               from: {
-                id: 160589750,
+                id: 160_589_750,
                 is_bot: false,
                 first_name: "Dmitry",
                 last_name: "Sadovnikov",
@@ -148,19 +148,19 @@ describe Api::Telegram::MessagesController, type: :request do
               message: {
                 message_id: 54,
                 from: {
-                  id: 892276454,
+                  id: 892_276_454,
                   is_bot: true,
                   first_name: "Enwords",
                   username: "enwordsapp_bot"
                 },
                 chat: {
-                  id: 160589750,
+                  id: 160_589_750,
                   first_name: "Dmitry",
                   last_name: "Sadovnikov",
                   username: "DmitrySadovnikov",
                   type: "private"
                 },
-                date: 1567163062,
+                date: 1_567_163_062,
                 text: "escaped [ɪsˈkeɪpt] - сбежавший\n\nA tiger has escaped from the zoo.\nИз зоопарка сбежал тигр.",
                 entities: [
                   {

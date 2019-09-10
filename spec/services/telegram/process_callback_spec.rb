@@ -7,7 +7,7 @@ describe Telegram::ProcessCallback do
     {
       id: "689727725824529856",
       from: {
-        id: 160589750,
+        id: 160_589_750,
         is_bot: false,
         first_name: "Dmitry",
         last_name: "Sadovnikov",
@@ -17,19 +17,19 @@ describe Telegram::ProcessCallback do
       message: {
         message_id: 204,
         from: {
-          id: 669937716,
+          id: 669_937_716,
           is_bot: true,
           first_name: "Enwords test",
           username: "enwords_schedule_bot"
         },
         chat: {
-          id: 160589750,
+          id: 160_589_750,
           first_name: "Dmitry",
           last_name: "Sadovnikov",
           username: "DmitrySadovnikov",
           type: "private"
         },
-        date: 1567159596,
+        date: 1_567_159_596,
         text: "lol [ɛl-əʊ-ɛl] - умираю от смеха\n\nThe vacation is over now.\nТеперь каникулы закончились.",
         entities: [
           {

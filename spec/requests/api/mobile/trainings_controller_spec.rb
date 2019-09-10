@@ -26,7 +26,7 @@ describe Api::Mobile::TrainingsController, type: :request do
 
     let(:params) do
       {
-        word_ids:      [word.id],
+        word_ids: [word.id],
         training_type: 'repeating'
       }
     end

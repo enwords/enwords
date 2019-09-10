@@ -53,7 +53,7 @@ class Sentence < ApplicationRecord
 
     def skyeng_hash
       @skyeng_hash ||= Api::Skyeng.first_meaning(word: word.value)
-    rescue
+    rescue StandardError
       {}
     end
 

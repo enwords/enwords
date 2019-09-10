@@ -9,17 +9,10 @@ class ApplicationController < ActionController::Base
   private
 
   def word_statistic
-    @skyeng_words_count = if current_user.skyeng_setting
-                            current_user.skyeng_words_count || '?'
-                          end
-    @learning_words_count =
-      Word::ByStatus.run!(status: 'learning', user: current_user).count
-
-    @learned_words_count =
-      Word::ByStatus.run!(status: 'learned', user: current_user).count
-
-    @unknown_words_count =
-      Word::ByStatus.run!(status: 'unknown', user: current_user).count
+    @skyeng_words_count = (current_user.skyeng_words_count || '?' if current_user.skyeng_setting)
+    @learning_words_count = Word::ByStatus.run!(status: 'learning', user: current_user).count
+    @learned_words_count = Word::ByStatus.run!(status: 'learned', user: current_user).count
+    @unknown_words_count = Word::ByStatus.run!(status: 'unknown', user: current_user).count
   end
 
   def set_locale

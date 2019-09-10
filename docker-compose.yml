@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  redis:
+    image: redis:5.0.5-alpine
+    command: redis-server
+    volumes:
+      - redis:/data
+
+  web:
+    depends_on:
+      - redis
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+
+  sidekiq:
+    depends_on:
+      - redis
+    build: .
+    command: sidekiq -C config/sidekiq.yml
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    depends_on:
+      - web
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - letsencrypt:/etc/letsencrypt
+
+volumes:
+  redis:
+  letsencrypt:

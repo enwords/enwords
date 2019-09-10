@@ -55,12 +55,13 @@ class User < ApplicationRecord
 
   def create_test_article
     return unless Rails.env.production?
+
     Article.find(34).dup.update(user_id: id)
   end
 
   def set_default_settings
     self.proficiency_levels = {}
-    self.proficiency_levels[learning_language] = 100
+    proficiency_levels[learning_language] = 100
     self.sentences_number = 3
     save!
   end

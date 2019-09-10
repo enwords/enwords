@@ -5,7 +5,7 @@ module Grammar
 
       def index
         infinitives = Grammar::Eng::IrregularVerb.select(:infinitive)
-        words       = Word.where(value: infinitives).order(:id).pluck(:value)
+        words = Word.where(value: infinitives).order(:id).pluck(:value)
 
         @irregular_verbs =
           Grammar::Eng::IrregularVerb.all.sort_by { |v| words.index(v.infinitive) }
@@ -14,8 +14,8 @@ module Grammar
 
       def create_training
         fetching = Grammar::Eng::IrregularVerb::FetchTrainingData.run \
-          user:          current_user,
-          verb_ids:      params[:ids],
+          user: current_user,
+          verb_ids: params[:ids],
           training_type: params[:commit].gsub(/to_training_/, ''),
           words_learned: @learned_words_count
 

@@ -12,8 +12,8 @@ module Api
         'https://words.skyeng.ru/api/public/v1/users/meanings',
         email: email,
         token: token
-
       return :invalid_params unless result.is_a?(Array)
+
       result.map { |el| el['meaningId'] }
     end
 
@@ -36,8 +36,8 @@ module Api
 
     def learning_words(email:, token:)
       ids = learning_word_ids(email: email, token: token)
-
       return [] unless ids.is_a?(Array)
+
       words(ids: ids)
     end
 

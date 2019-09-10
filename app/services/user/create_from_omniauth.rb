@@ -20,16 +20,16 @@ class User < ApplicationRecord
     private
 
     def provider
-      @_provider ||= AuthenticationProvider.find_by(name: auth_params.provider)
+      @provider ||= AuthenticationProvider.find_by(name: auth_params.provider)
     end
 
     def authentication
-      @_authentication ||=
+      @authentication ||=
         provider.user_authentications.find_by(uid: auth_params.uid)
     end
 
     def existing_user
-      @_existing_user ||= (user || User.find_by(email: email))
+      @existing_user ||= (user || User.find_by(email: email))
     end
 
     def email
