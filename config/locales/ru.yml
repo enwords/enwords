@@ -238,7 +238,7 @@ ru:
 
   telegram:
     process_message:
-      send_email: 'Привет! Отправь свой email от [Enwords](https://enwords.tk/ru) для получения рассылки изучаемых слов'
+      send_email: 'Привет! Отправь свой email от [Enwords](https://enwords.app/ru) для получения рассылки изучаемых слов'
       user_not_found: 'Пользователь не найден'
       telegram_chat_created: "Пользователь найден. У вас %{words_count} изучаемых слов. Вы будете получать рассылку раз в час"
       bye: "Пока!"
