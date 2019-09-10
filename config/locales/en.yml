@@ -217,7 +217,7 @@ en:
         button: "Push!"
   telegram:
     process_message:
-      send_email: 'Hello! Send your email from [Enwords] (https://enwords.tk/en) to receive a list of studied words'
+      send_email: 'Hello! Send your email from [Enwords] (https://enwords.app/en) to receive a list of studied words'
       user_not_found: 'User not found'
       telegram_chat_created: "User found. You have %{words_count} learning words. You will receive a newsletter once an hour"
       bye: "Bye!"

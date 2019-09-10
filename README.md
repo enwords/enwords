@@ -6,4 +6,4 @@ In different sentences words have different meanings, it is impossible to study 
 
 Your task is to choose words and Enwords will give you sentences with these words, repeat them at least 10 minutes a day and in a month you will see the result
 
-website: https://enwords.tk
+website: https://enwords.app

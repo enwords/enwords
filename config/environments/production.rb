@@ -26,7 +26,7 @@ Rails.application.configure do
 
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'enwords.tk' }
+  config.action_mailer.default_url_options = { host: 'enwords.app' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default charset: 'utf-8'
 
@@ -44,7 +44,7 @@ Rails.application.configure do
     ExceptionNotification::Rack,
     email: {
       email_prefix: '[Enwords][ERROR] ',
-      sender_address: %('Enwords Notifier' <noreply@enwords.tk>),
+      sender_address: %('Enwords Notifier' <noreply@enwords.app>),
       exception_recipients: %w[sadedv@mail.ru]
     }
   )
