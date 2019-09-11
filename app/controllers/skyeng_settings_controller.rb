@@ -19,7 +19,7 @@ class SkyengSettingsController < ApplicationController
       Api::Skyeng.send_token(email: skyeng_setting.email)
       redirect_to skyeng_setting_path, notice: t('skyeng_settings.add_token', email: skyeng_setting.email).html_safe
     else
-      redirect_to :back, alert: creating.errors.messages.values.join('<br>')
+      redirect_back(fallback_location: root_path, alert: creating.errors.messages.values.join('<br>'))
     end
   end
 
@@ -29,7 +29,7 @@ class SkyengSettingsController < ApplicationController
     if updating.valid?
       redirect_to skyeng_setting_path, notice: t('skyeng_settings.finished')
     else
-      redirect_to :back, alert: updating.errors.messages.values.join('<br>')
+      redirect_back(fallback_location: root_path, alert: updating.errors.messages.values.join('<br>'))
     end
   end
 
@@ -43,7 +43,7 @@ class SkyengSettingsController < ApplicationController
       Word::ByStatus.run!(status: 'skyeng', user: current_user)
       redirect_to skyeng_setting_path, notice: t('skyeng_settings.finished')
     else
-      redirect_to :back, alert: updating.errors.messages.values.join('<br>')
+      redirect_back(fallback_location: root_path, alert: updating.errors.messages.values.join('<br>'))
     end
   end
 

@@ -18,9 +18,9 @@ class WordsController < ApplicationController
       Word::UpdateState.run(ids: params[:ids],
                             to_state: params[:commit].gsub(/to_state_/, ''),
                             user: current_user)
-      redirect_to :back, notice: t('words.buttons.state_changed')
+      redirect_back(fallback_location: root_path, notice: t('words.buttons.state_changed'))
     else
-      redirect_to :back, alert: t('words.buttons.select_words')
+      redirect_back(fallback_location: root_path, alert: t('words.buttons.select_words'))
     end
   end
 

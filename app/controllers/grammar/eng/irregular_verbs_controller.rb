@@ -23,7 +23,7 @@ module Grammar
           Training::Create.run!(fetching.result)
           redirect_to training_path
         else
-          redirect_to :back, alert: t('words.buttons.select_words')
+          redirect_back(fallback_location: root_path, alert: t('words.buttons.select_words'))
         end
       end
     end
