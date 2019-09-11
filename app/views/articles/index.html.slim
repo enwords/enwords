@@ -20,11 +20,11 @@
                                    class: 'check'
                 td = link_to article.title, article_path(article),
                              class: 'link'
-                td = link_to icon('list'), words_path(article: article),
+                td = link_to icon('fas', 'list'), words_path(article: article),
                              title: t('texts.links.words')
-                td = link_to icon('edit'),  edit_article_path(article),
+                td = link_to icon('fas', 'edit'),  edit_article_path(article),
                              title: t('texts.links.edit')
-                td = link_to icon('trash'), article_path(article),
+                td = link_to icon('fas', 'trash'), article_path(article),
                              method: :delete,
                              title:  t('texts.links.delete'),
                              data:   { confirm: t('texts.links.are_you_sure') }

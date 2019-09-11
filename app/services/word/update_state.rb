@@ -29,7 +29,7 @@ class Word < ApplicationRecord
     end
 
     def update_state_to_unknown
-      WordStatus.delete_all(user: user, word_id: ids)
+      WordStatus.where(user: user, word_id: ids).delete_all
     end
   end
 end

@@ -5,8 +5,7 @@ gem 'active_interaction'
 gem 'chartkick'
 gem 'curb', '0.9.7'
 gem 'devise'
-gem 'font-awesome-sass', '4.6.2'
-gem 'jbuilder', '~> 2.5'
+gem 'font-awesome-sass', '~> 5.9.0'
 gem 'jquery-rails'
 gem 'omniauth'
 gem 'omniauth-facebook'
@@ -49,6 +48,7 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'derailed_benchmarks'
   gem 'web-console'
 end
 
