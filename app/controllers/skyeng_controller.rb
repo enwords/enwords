@@ -22,7 +22,7 @@ class SkyengController < ApplicationController
   end
 
   def yandex_translate
-    trans = YANDEX_TRANSLATOR.translate word_value, from: 'en', to: 'ru'
+    trans = Api::YandexTranslate.translate(text: word_value, from: 'en', to: 'ru')
 
     {
       translation: { text: trans },

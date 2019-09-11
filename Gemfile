@@ -27,7 +27,6 @@ gem 'turbolinks', '~> 5.x'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'uglifier', '>= 1.3.0'
 gem 'will_paginate', '~> 3.1.0'
-gem 'yandex-translator'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-iCheck'
