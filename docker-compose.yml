@@ -17,6 +17,7 @@ services:
       - .:/app
     env_file:
       - .env
+    restart: always
     healthcheck:
       test: ['CMD', 'curl', '-L', 'http://localhost/hc']
       interval: 1m30s
