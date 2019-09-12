@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :word_statistic, if: :current_user
 
+  def hc
+    head :ok
+  end
+
   private
 
   def word_statistic

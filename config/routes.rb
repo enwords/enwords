@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     get ':id/users/password' => 'devise/passwords#edit', as: :edit_password
   end
 
+  get 'hc' => 'application#hc'
   get 'dev' => 'development#index'
   get 'privacy' => 'static#privacy'
 
