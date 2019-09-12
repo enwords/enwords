@@ -19,7 +19,7 @@ services:
       - .env
     restart: always
     healthcheck:
-      test: ['CMD', 'curl', '-L', 'http://localhost/hc']
+      test: ['CMD', 'curl', '-L', 'http://localhost:3000/hc']
       interval: 1m30s
       timeout: 10s
       retries: 3
