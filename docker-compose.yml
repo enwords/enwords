@@ -18,12 +18,23 @@ services:
     env_file:
       - .env
     restart: always
+    labels:
+      - autoheal=true
     healthcheck:
       test: ['CMD', 'curl', '-L', 'http://localhost:3000/hc']
-      interval: 1m30s
-      timeout: 10s
+      interval: 30s
+      timeout: 15s
       retries: 3
-      start_period: 40s
+      start_period: 1m
+
+  autoheal:
+    image: willfarrell/autoheal:latest
+    restart: always
+    environment:
+      AUTOHEAL_CONTAINER_LABEL: all
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    hostname: autoheal
 
   sidekiq:
     depends_on:
