@@ -23,6 +23,26 @@ class Sentence < ApplicationRecord
       @sentence = sentence_with_translation || sentence_without_translation
     end
 
+    def word_mnemo
+      return @word_mnemo if defined? @word_mnemo
+
+      @word_mnemo = word.mnemos.first.try(:value)
+    end
+
+    def word_translation
+      @word_translation ||= skyeng_hash.dig('translation', 'text')
+    end
+
+    def word_transcription
+      @word_transcription ||= skyeng_hash['transcription'] || word.transcription
+    end
+
+    def skyeng_hash
+      @skyeng_hash ||= Api::Skyeng.first_meaning(word: word.value)
+    rescue StandardError
+      {}
+    end
+
     def sentence_with_translation
       Sentence
         .joins(<<~SQL)
@@ -36,8 +56,9 @@ class Sentence < ApplicationRecord
           AND translations_sentences.language = '#{translation_lang}'
         SQL
         .distinct
-        .select('sentences.value, translations_sentences.value translation')
-        .sample
+        .select('sentences.value, translations_sentences.value translation, RANDOM()')
+        .order('RANDOM()')
+        .first
     end
 
     def sentence_without_translation
@@ -48,25 +69,9 @@ class Sentence < ApplicationRecord
           AND sentences_words.word_id = #{word.id}
         SQL
         .distinct
-        .sample
-    end
-
-    def skyeng_hash
-      @skyeng_hash ||= Api::Skyeng.first_meaning(word: word.value)
-    rescue StandardError
-      {}
-    end
-
-    def word_translation
-      skyeng_hash.dig('translation', 'text')
-    end
-
-    def word_transcription
-      skyeng_hash['transcription'] || word.transcription
-    end
-
-    def word_mnemo
-      @word_mnemo ||= word.mnemos.first.try(:value)
+        .select('sentences.*, RANDOM()')
+        .order('RANDOM()')
+        .first
     end
 
     def text
