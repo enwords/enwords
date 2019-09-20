@@ -209,7 +209,7 @@ describe Api::Telegram::MessagesController, type: :request do
       end
 
       it 'creates WordStatus' do
-        expect { subject }.to change { WordStatus.count }.by(1)
+        expect { Sidekiq::Testing.inline! { subject } }.to change { WordStatus.count }.by(1)
       end
     end
   end
