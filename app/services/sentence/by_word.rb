@@ -26,7 +26,7 @@ class Sentence < ApplicationRecord
     def word_mnemo
       return @word_mnemo if defined? @word_mnemo
 
-      @word_mnemo = word.mnemos.first.try(:value)
+      @word_mnemo = word.mnemos.sample.try(:value)
     end
 
     def word_translation
