@@ -1,9 +1,14 @@
-test_job:
+send_message:
   cron:  '5 7-19 * * *'
   class: 'Telegram::SendMessageToSubscribersWorker'
   active_job: true
 
-certbot_renew_job:
+send_external_article:
+  cron:  '0 13 * * *'
+  class: 'Telegram::SendExternalArticleWorker'
+  active_job: true
+
+certbot_renew:
   cron:  '0 0 */15 * *'
   class: 'CertbotRenewWorker'
   active_job: true
