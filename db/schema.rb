@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_20_205839) do
+ActiveRecord::Schema.define(version: 2019_10_08_114438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -33,6 +33,16 @@ ActiveRecord::Schema.define(version: 2019_09_20_205839) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_name_on_authentication_providers"
+  end
+
+  create_table "external_articles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.string "url"
+    t.string "source"
+    t.string "author"
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "grammar_eng_irregular_verbs", id: :serial, force: :cascade do |t|

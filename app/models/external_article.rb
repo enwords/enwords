@@ -1,0 +1,2 @@
+class ExternalArticle < ApplicationRecord
+end
