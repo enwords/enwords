@@ -4,7 +4,7 @@ send_message:
   active_job: true
 
 send_external_article:
-  cron:  '0 13 * * *'
+  cron:  '0 7 * * *'
   class: 'Telegram::SendExternalArticleWorker'
   active_job: true
 
