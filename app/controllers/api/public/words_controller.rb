@@ -13,8 +13,7 @@ module Api
       def mnemos
         return render json: { collection: [] }, status: :ok unless word
 
-        _, result = Word::GetMnemo.run!(word: word)
-        render json: { collection: result.as_json }, status: :ok
+        render json: { collection: word.mnemos.as_json }, status: :ok
       end
 
       private

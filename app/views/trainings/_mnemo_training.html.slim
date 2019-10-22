@@ -6,7 +6,7 @@
           span.word-skyeng(style="font-size: 2rem")
             = word.value.titleize
         br
-        - _, mnemos = Word::GetMnemo.run!(word: word)
+        - mnemos = word.mnemos
         .col-12.original-sentence-block
           - if mnemos.map(&:value).compact.blank?
             = t('training.no_mnemo')
