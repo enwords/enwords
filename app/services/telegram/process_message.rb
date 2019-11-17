@@ -46,8 +46,8 @@ module Telegram
       when '/stop'
         telegram_chat&.update!(active: false)
         I18n.t('telegram.process_message.bye', locale: :ru)
-      when /xoxo/i
-        'YOLO!'
+      when /hello/i
+        'Hey. You are awesome!'
       else
         return I18n.t('telegram.process_message.not_understand', locale: :ru) unless word
 
