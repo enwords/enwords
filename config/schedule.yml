@@ -1,14 +1,15 @@
 send_message:
   cron:  '5 7-19 * * *'
   class: 'Telegram::SendMessageToSubscribersWorker'
-  active_job: true
 
 send_external_article:
   cron:  '0 7 * * *'
   class: 'Telegram::SendExternalArticleWorker'
-  active_job: true
 
 certbot_renew:
   cron:  '0 0 */15 * *'
   class: 'CertbotRenewWorker'
-  active_job: true
+
+send_promo_email:
+  cron:  '12 6-19 * * *'
+  class: 'Mailer::SendPromoEmailWorker'
