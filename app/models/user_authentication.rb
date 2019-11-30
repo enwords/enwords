@@ -4,13 +4,21 @@ class UserAuthentication < ApplicationRecord
 
   serialize :params
 
-  def self.create_from_omniauth(params, user, provider)
+  enum provider: {
+    facebook: 1,
+    twitter: 2,
+    google: 3,
+    vkontakte: 4
+  }, _prefix: :provider
+
+  def self.create_from_omniauth(params, user, auth_provider, provider)
     token_expires_at = if params.dig('credentials', 'expires_at')
                          Time.zone.at(params.dig('credentials', 'expires_at')).to_datetime
                        end
     create(
       user: user,
-      authentication_provider: provider,
+      authentication_provider: auth_provider,
+      provider: provider,
       uid: params['uid'],
       token: params.dig('credentials', 'token'),
       token_expires_at: token_expires_at,

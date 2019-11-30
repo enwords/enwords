@@ -13,7 +13,7 @@ class User < ApplicationRecord
           User.create!(email: email || fake_email, password: Devise.friendly_token)
         end
 
-      UserAuthentication.create_from_omniauth(auth_params, user, provider)
+      UserAuthentication.create_from_omniauth(auth_params, user, provider, auth_params.provider)
       user
     end
 

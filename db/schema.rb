@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_30_202534) do
+ActiveRecord::Schema.define(version: 2019_11_30_211957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 2019_11_30_202534) do
     t.text "params"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "provider"
     t.index ["authentication_provider_id"], name: "index_user_authentications_on_authentication_provider_id"
     t.index ["user_id"], name: "index_user_authentications_on_user_id"
   end
