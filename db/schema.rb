@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_30_211957) do
+ActiveRecord::Schema.define(version: 2019_11_30_214530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -26,13 +26,6 @@ ActiveRecord::Schema.define(version: 2019_11_30_211957) do
     t.datetime "updated_at", null: false
     t.jsonb "words_data", default: {}
     t.index ["user_id"], name: "index_articles_on_user_id"
-  end
-
-  create_table "authentication_providers", id: :serial, force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_name_on_authentication_providers"
   end
 
   create_table "external_articles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -120,7 +113,6 @@ ActiveRecord::Schema.define(version: 2019_11_30_211957) do
 
   create_table "user_authentications", id: :serial, force: :cascade do |t|
     t.integer "user_id"
-    t.integer "authentication_provider_id"
     t.string "uid"
     t.string "token"
     t.datetime "token_expires_at"
@@ -128,7 +120,6 @@ ActiveRecord::Schema.define(version: 2019_11_30_211957) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "provider"
-    t.index ["authentication_provider_id"], name: "index_user_authentications_on_authentication_provider_id"
     t.index ["user_id"], name: "index_user_authentications_on_user_id"
   end
 
