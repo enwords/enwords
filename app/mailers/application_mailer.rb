@@ -6,7 +6,11 @@ class ApplicationMailer < ActionMailer::Base
     mail(to: email, subject: 'Welcome to My Awesome Site', body: 'Хорошего дня')
   end
 
-  def feedback_mail(email)
+  def feedback_email(email)
     mail(to: email, subject: 'Нам нужен твой отзыв')
+  end
+
+  def telegram_bot_email(email)
+    mail(to: email, subject: 'Попробуй бота для изучения английского')
   end
 end
