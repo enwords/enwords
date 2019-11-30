@@ -7,8 +7,9 @@ class UserAuthentication < ApplicationRecord
   enum provider: {
     facebook: 1,
     twitter: 2,
-    google: 3,
-    vkontakte: 4
+    vkontakte: 3,
+    google: 4,
+    google_oauth2: 5
   }, _prefix: :provider
 
   def self.create_from_omniauth(params, user, auth_provider, provider)
