@@ -10,6 +10,6 @@ certbot_renew:
   cron:  '0 0 */15 * *'
   class: 'CertbotRenewWorker'
 
-send_promo_email:
-  cron:  '12 6-19 * * *'
-  class: 'Mailer::SendPromoEmailWorker'
+#send_promo_email:
+#  cron:  '12 6-19 * * *'
+#  class: 'Mailer::SendPromoEmailWorker'
