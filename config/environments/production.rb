@@ -29,23 +29,22 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'enwords.app' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default charset: 'utf-8'
-
   config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
-    port: 587,
-    domain: ENV['GMAIL_DOMAIN'],
+    address: ENV['SMTP_ADDRESS'],
+    port: ENV['SMTP_PORT'],
+    domain: ENV['SMTP_DOMAIN'],
+    user_name: ENV['SMTP_USER_NAME'],
+    password: ENV['SMTP_PASSWORD'],
+    tls: true,
     authentication: 'plain',
-    enable_starttls_auto: true,
-    user_name: ENV['GMAIL_USERNAME'],
-    password: ENV['GMAIL_PASSWORD']
+    enable_starttls_auto: true
   }
-
   Rails.application.config.middleware.use(
     ExceptionNotification::Rack,
     email: {
       email_prefix: '[Enwords][ERROR] ',
       sender_address: %('Enwords Notifier' <noreply@enwords.app>),
-      exception_recipients: %w[sadedv@mail.ru]
+      exception_recipients: [ENV['EXCEPTION_RECIPIENT']]
     }
   )
 end

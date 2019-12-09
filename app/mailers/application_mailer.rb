@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "Enwords<#{ENV['GMAIL_USERNAME']}>"
+  default from: "Enwords<#{ENV['SMTP_USER_NAME']}>"
   layout 'mailer'
 
   def test_email(email)
