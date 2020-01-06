@@ -15,8 +15,7 @@ Rails.application.configure do
     user_name: ENV['SMTP_USER_NAME'],
     password: ENV['SMTP_PASSWORD'],
     authentication: 'plain',
-    enable_starttls_auto: true,
-    tls: true
+    enable_starttls_auto: true
   }
   config.active_support.deprecation = :log
   config.active_record.migration_error = :page_load
