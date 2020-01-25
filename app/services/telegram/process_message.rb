@@ -29,31 +29,44 @@ module Telegram
 
     def response_text
       case clean_text
-      when '/start'
-        if telegram_chat
-          words_count = Word::ByStatus.run!(status: 'learning', user: telegram_chat.user).size
-          I18n.t('telegram.process_message.telegram_chat_created', locale: :ru, words_count: words_count)
-        else
-          I18n.t('telegram.process_message.send_email', locale: :ru)
-        end
-      when /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-        user = User.find_by(email: clean_text)
-        return I18n.t('telegram.process_message.user_not_found', locale: :ru) unless user
-
-        create_telegram_chat(user)
-        words_count = Word::ByStatus.run!(status: 'learning', user: user).size
-        I18n.t('telegram.process_message.telegram_chat_created', locale: :ru, words_count: words_count)
-      when '/stop'
-        telegram_chat&.update!(active: false)
-        I18n.t('telegram.process_message.bye', locale: :ru)
-      when /hello/i
-        'Hey. You are awesome!'
-      else
-        return I18n.t('telegram.process_message.not_understand', locale: :ru) unless word
-
-        update_word_status
-        Sentence::ByWord.run!(word: word, translation_lang: translation_lang)[:text]
+      when '/start' then process_start
+      when /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i then process_email
+      when '/stop' then process_stop
+      when /hello/i then process_hello
+      else process_word
       end
+    end
+
+    def process_start
+      return I18n.t('telegram.process_message.send_email', locale: :ru) unless telegram_chat
+
+      words_count = Word::ByStatus.run!(status: 'learning', user: telegram_chat.user).size
+      I18n.t('telegram.process_message.telegram_chat_created', locale: :ru, words_count: words_count)
+    end
+
+    def process_email
+      user = User.find_by(email: clean_text)
+      return I18n.t('telegram.process_message.user_not_found', locale: :ru) unless user
+
+      create_telegram_chat(user)
+      words_count = Word::ByStatus.run!(status: 'learning', user: user).size
+      I18n.t('telegram.process_message.telegram_chat_created', locale: :ru, words_count: words_count)
+    end
+
+    def process_stop
+      telegram_chat&.update!(active: false)
+      I18n.t('telegram.process_message.bye', locale: :ru)
+    end
+
+    def process_hello
+      'Hey. You are awesome!'
+    end
+
+    def process_word
+      return I18n.t('telegram.process_message.not_understand', locale: :ru) unless word
+
+      update_word_status
+      Sentence::ByWord.run!(word: word, translation_lang: translation_lang)[:text]
     end
 
     def translation_lang
