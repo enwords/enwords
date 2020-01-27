@@ -40,6 +40,7 @@ module Telegram
     def process_start
       return I18n.t('telegram.process_message.send_email', locale: :ru) unless telegram_chat
 
+      telegram_chat.update!(active: true)
       words_count = Word::ByStatus.run!(status: 'learning', user: telegram_chat.user).size
       I18n.t('telegram.process_message.telegram_chat_created', locale: :ru, words_count: words_count)
     end
