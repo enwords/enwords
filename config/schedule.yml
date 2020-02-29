@@ -1,5 +1,5 @@
 send_message:
-  cron:  '5 7-19 * * *'
+  cron:  '5 8-18/2 * * *'
   class: 'Telegram::SendMessageToSubscribersWorker'
 
 send_external_article:
