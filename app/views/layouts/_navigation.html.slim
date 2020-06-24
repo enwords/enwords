@@ -36,6 +36,19 @@ header
             - if current_user.learning_language == 'eng'
               li.nav-item.dropdown
                 a.dropdown-toggle data-toggle='dropdown' href='#' class='nav-link'
+                  = t('shared.navigation.grammar.eng.idioms')
+                  b.caret
+                ul.dropdown-menu
+                  li
+                    = link_to grammar_eng_idioms_path(status: :learning), class: 'nav-link learning' do
+                      i.fas.fa-times.learning
+                      = "#{t('shared.navigation.words.learning')}"
+                  li
+                    = link_to grammar_eng_idioms_path(status: :learned), class: 'nav-link learned' do
+                      i.fas.fa-check.learned
+                      = "#{t('shared.navigation.words.learned')}"
+              li.nav-item.dropdown
+                a.dropdown-toggle data-toggle='dropdown' href='#' class='nav-link'
                   = t 'shared.navigation.grammar.dropdown'
                   b.caret
                 ul.dropdown-menu

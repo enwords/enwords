@@ -78,6 +78,11 @@ Rails.application.routes.draw do
             put :create_training
           end
         end
+        resources :idioms, only: %i[index] do
+          collection do
+            put :change_status
+          end
+        end
       end
     end
 

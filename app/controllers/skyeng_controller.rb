@@ -14,7 +14,7 @@ class SkyengController < ApplicationController
   private
 
   def word_value
-    @word_value ||= params[:word].gsub(/\W/, '').downcase
+    @word_value ||= params[:word].gsub(/[^a-zA-Z\s]+/, '').downcase.strip
   end
 
   def skyeng_translate

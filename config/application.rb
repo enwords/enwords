@@ -9,6 +9,7 @@ module Enwords
 
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
+      g.orm :active_record, force_foreign_key_type: :uuid
       g.test_framework :rspec, fixture: true
       g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end

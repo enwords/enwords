@@ -116,6 +116,7 @@ ru:
         dropdown: "Грамматика"
         eng:
           irregular_verbs: "Неправильные глаголы"
+          idioms: "Идиомы"
 
   static:
     landings:
