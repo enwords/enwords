@@ -13,5 +13,60 @@ class User < ApplicationRecord
       %w[Marathi mar], %w[Macedonian mkd], ['Low Saxon', 'nds'], %w[Dutch nld], %w[Polish pol], %w[Portuguese por],
       %w[Russian rus], %w[Spanish spa], %w[Serbian srp], %w[Swedish swe], %w[Turkish tur], %w[Ukrainian ukr]
     ].freeze
+
+    LOCALES = {
+      ara: :ar,
+      bul: :bg,
+      ces: :cs,
+      cmn: :zh,
+      dan: :da,
+      deu: :de,
+      eng: :en,
+      epo: :eo,
+      fin: :fi,
+      fra: :fr,
+      heb: :he,
+      hun: :hu,
+      ina: :ia,
+      ita: :it,
+      jpn: :ja,
+      lat: :la,
+      lit: :lt,
+      mar: :mr,
+      mkd: :mk,
+      nld: :nl,
+      pol: :pl,
+      por: :pt,
+      rus: :ru,
+      spa: :es,
+      srp: :sr,
+      swe: :sv,
+      tur: :tr,
+      ukr: :uk
+    }.freeze
+
+    YOUGLISH_ACCENTS = {
+      en: 'english',
+      fr: 'french',
+      es: 'spanish',
+      la: 'spanish',
+      pt: 'portugues',
+      nl: 'dutch',
+      ar: 'arabic',
+      zh: 'chinese',
+      he: 'hebrew',
+      it: 'italian',
+      de: 'german',
+      jp: 'japanese',
+      ko: 'korean',
+      tr: 'turkish',
+      ru: 'russian'
+    }.freeze
+
+    class << self
+      def supported_pair?(learning, native)
+        LOCALES[learning.to_sym] && LOCALES[native.to_sym]
+      end
+    end
   end
 end

@@ -21,7 +21,7 @@
                   = text_field_tag 'input-word', '', grammar_training_data(clean_word(w))
                   - count += 1
                 - else
-                  span.word-skyeng = w
+                  span.word-translate data-from=l_lang data-to=n_lang = w
                 span.word-zero = ' '
             - else
               = sentence.value

@@ -11,16 +11,16 @@
       = link_to t('texts.links.delete'), article_path(@article),
           method: :delete,
           data: { confirm: t('texts.links.are_you_sure') }
-    - if body_class == 'eng-rus'
+    - if User::Languages.supported_pair?(*lang_pair)
       div
         h3.form-signin-heading
           - @article.title.split.each do |w|
-            span.word-skyeng = w
+            span.word-translate data-from=l_lang data-to=n_lang = w
             span.word-zero = ' '
       div
         - @article.content.split("\r\n").each do |sen|
           - sen.split.each do |w|
-            span.word-skyeng = w
+            span.word-translate data-from=l_lang data-to=n_lang = w
             span.word-zero = ' '
           br
     - else

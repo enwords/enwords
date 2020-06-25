@@ -10,7 +10,7 @@
           - @words_from_sentence.each do |word_hash|
             tr
               td.td__word
-                span.word-skyeng = word_hash['word'].capitalize
+                span.word-translate data-from=l_lang data-to=n_lang = word_hash['word'].capitalize
               td
                 .switcher data-id="#{word_hash['id']}" data-status="#{word_hash['learned'].nil? ? 'unknown' : word_hash['learned']}"
                   .switcher-round

@@ -27,6 +27,10 @@ Rails.application.routes.draw do
       resources :trainings, only: %i[create] do
       end
     end
+
+    namespace :web do
+      resources :translations, only: %i[index]
+    end
   end
 
   get '/words_from_sentence/:sentence_id', to: 'trainings#words_from_sentence'
@@ -102,8 +106,6 @@ Rails.application.routes.draw do
   resource :skyeng_setting do
     put :add_token
   end
-
-  get 'first_meaning' => 'skyeng#first_meaning'
 
   get '*unmatched_route', to: redirect('/', status: 302)
   match '', to: redirect("/#{I18n.default_locale}"), via: [:get]

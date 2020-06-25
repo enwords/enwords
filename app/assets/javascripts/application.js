@@ -16,6 +16,6 @@
 //= require iCheck/icheck.min.js
 //= require qTip2
 //= require main
-//= require skyeng
+//= require translate
 //= require facebook
 //= require me-talk

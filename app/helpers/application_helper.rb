@@ -22,9 +22,19 @@ module ApplicationHelper
   end
 
   def body_class
-    return if current_user.blank?
+    lang_pair.join('-') if current_user
+  end
 
-    "#{current_user.learning_language}-#{current_user.native_language}"
+  def l_lang
+    current_user&.learning_language
+  end
+
+  def n_lang
+    current_user&.native_language
+  end
+
+  def lang_pair
+    [l_lang, n_lang]
   end
 
   def actual_skyeng_setting_path

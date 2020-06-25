@@ -239,6 +239,17 @@ pre
     font-size: 25px
     top: 6px
 
+.word-translate-icon
+  .fa-volume-up
+    cursor: pointer
+
+  .fa-volume-off
+    cursor: default
+    opacity: 0.3
+
+  .fa-volume-up, .fa-volume-off
+    color: $bodyTextCol
+
 .translation-block
   min-height: 68px
   color: $bodyTextCol
@@ -476,18 +487,17 @@ table
     &:hover
       text-decoration: none
 
-.eng-rus
-  .word
-    &-zero
-      font-size: 0
-    &-skyeng
-      display: inline-block
-      border:  1px transparent solid
-      padding: 2px
-      &:hover
-        cursor: pointer
-        border: dashed 1px $learningColor
-        border-radius: 4px
+.word
+  &-zero
+    font-size: 0
+  &-translate
+    display: inline-block
+    border:  1px transparent solid
+    padding: 2px
+    &:hover
+      cursor: pointer
+      border: dashed 1px $learningColor
+      border-radius: 4px
 
 .social
   text-align: center
