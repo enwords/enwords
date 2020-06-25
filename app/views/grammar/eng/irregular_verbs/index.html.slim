@@ -17,17 +17,17 @@
               span.check-box-wrapper
                 = check_box_tag 'ids[]', verb.id, false, class: 'check'
             td
-              span.word-skyeng = verb.infinitive.capitalize
+              span.word-translate data-from=l_lang data-to=n_lang = verb.infinitive.capitalize
             td
-              span.word-skyeng = verb.simple_past.first.capitalize
+              span.word-translate data-from=l_lang data-to=n_lang = verb.simple_past.first.capitalize
               - if verb.simple_past.second
                 span = '/'
-                span.word-skyeng = verb.simple_past.second.capitalize
+                span.word-translate data-from=l_lang data-to=n_lang = verb.simple_past.second.capitalize
             td
-              span.word-skyeng = verb.past_participle.first.capitalize
+              span.word-translate data-from=l_lang data-to=n_lang = verb.past_participle.first.capitalize
               - if verb.past_participle.second
                 span = '/'
-                span.word-skyeng = verb.past_participle.second.capitalize
+                span.word-translate data-from=l_lang data-to=n_lang = verb.past_participle.second.capitalize
     .col-12 style='text-align: center'
       = button_tag t('words.buttons.training_grammar'),
           value: 'to_training_grammar',

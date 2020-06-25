@@ -19,8 +19,7 @@
                 span.check-box-wrapper
                   = check_box_tag 'ids[]', idiom.id, false, class: 'check'
               td
-                span.word-skyeng
-                  = idiom.value
+                span.word-translate data-from=l_lang data-to=n_lang = idiom.value
               td
                 = idiom.meaning
         .col-12 style='text-align: center'

@@ -1,6 +1,5 @@
 class AudioArticlesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_article, only: %i[show]
 
   def index
     @articles =
@@ -10,11 +9,7 @@ class AudioArticlesController < ApplicationController
              .paginate(page: params[:page], per_page: 20)
   end
 
-  def show; end
-
-  private
-
-  def set_article
+  def show
     @article = Article.find(params[:id])
   end
 end

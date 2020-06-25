@@ -3,8 +3,7 @@
     .row.text-center
       - @words.each do |word|
         .col-12.original-sentence-block
-          span.word-skyeng(style="font-size: 2rem")
-            = word.value.titleize
+          span.word-translate data-from=l_lang data-to=n_lang style="font-size: 2rem" = word.value.titleize
         br
         - mnemos = word.mnemos
         .col-12.original-sentence-block

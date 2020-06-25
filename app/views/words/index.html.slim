@@ -22,7 +22,7 @@
                 span.check-box-wrapper
                   = check_box_tag 'ids[]', word.id, false, class: 'check check-word'
               td
-                span.word-skyeng[class=word_color_class(word)] = word.value.capitalize
+                span.word-translate data-from=l_lang data-to=n_lang class=word_color_class(word) = word.value.capitalize
       .col-6.col-sm-4.col-md-3.col-lg-2
         .btn-group-vertical.w-100
           = button_tag t('words.buttons.training_repeating'),
