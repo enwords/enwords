@@ -60,7 +60,7 @@ $(function() {
               if(youglish != null) {
                 var youglishContent =
                   '<br>' +
-                  '<a id="yg-widget-0" class="youglish-widget" data-query="' + word + '" data-lang="' + youglish.lang + '" data-accent="' + youglish.accent + '" data-components="220" data-auto-start="0" data-link-color="#808080" data-ttl-color="#5A98D0" data-cap-color="#5A98D0" data-marker-color="#FFF700" data-panels-bkg-color="#FF0000" data-text-color="#5A98D0" data-keyword-color="#5A98D0" data-video-quality="medium" data-title="%D0%9F%D1%80%D0%B8%D0%BC%D0%B5%D1%80%20%25i%25%20%D0%B8%D0%B7%20%25total%25%3A"  rel="nofollow" href="https://youglish.com"/a>' +
+                  '<a id="yg-widget-0" class="youglish-widget" data-query="' + word + '" data-lang="' + youglish.lang + '" data-accent="' + youglish.accent + '" data-components="220" data-auto-start="0" data-link-color="#808080" data-ttl-color="#5A98D0" data-cap-color="#5A98D0" data-marker-color="#FFF700" data-panels-bkg-color="#FF0000" data-text-color="#5A98D0" data-keyword-color="#5A98D0" data-video-quality="medium" data-title="Example %i% from %total%:" rel="nofollow" href="https://youglish.com"/a>' +
                   '<script async src="https://youglish.com/public/emb/widget.js" charset="utf-8"></script>'
               } else {
                 var youglishContent = ''
