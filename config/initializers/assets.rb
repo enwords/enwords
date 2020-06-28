@@ -16,4 +16,5 @@ Rails.application.config.assets.precompile += %w[
   training/repeating.js
   training/grammar.js
   stat.js
+  translate.js
 ]
