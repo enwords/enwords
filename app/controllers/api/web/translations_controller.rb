@@ -42,15 +42,19 @@ class Api::Web::TranslationsController < ::Api::BaseController
     trans = Api::YandexTranslate.translate(text: word_value, from: from, to: to)
     {
       translation: { text: trans },
+      transcription: word&.transcription,
       text: word_value
     }
   end
 
   def update_transcription(response)
-    word = Word.find_by(language: :eng, value: word_value)
     return unless word
     return unless response['transcription'].present? && word.transcription.blank?
 
     word.update!(transcription: response['transcription'])
+  end
+
+  def word
+    @word ||= Word.find_by(language: params[:from], value: word_value)
   end
 end

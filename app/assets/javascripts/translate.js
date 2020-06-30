@@ -54,7 +54,7 @@ $(function() {
               }
               var youglish = data.youglish
               var transcriptionBlock = ' - ';
-              if(typeof transcription !== 'undefined') {
+              if(transcription !== 'undefined' && transcription !== null) {
                 transcriptionBlock = '[' + transcription + ']';
               }
               if(youglish != null) {
