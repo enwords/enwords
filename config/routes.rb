@@ -50,7 +50,10 @@ Rails.application.routes.draw do
   scope ':locale', locale: /#{I18n.available_locales.join('|')}/ do
     root to: 'static#index'
 
-    devise_for :users, skip: :omniauth_callbacks, controllers: { registrations: 'registrations' }
+    devise_for :users, skip: :omniauth_callbacks, controllers: {
+      registrations: 'registrations',
+      sessions: 'sessions'
+    }
 
     resources :users, only: %i[] do
       collection do
