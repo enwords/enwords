@@ -112,5 +112,5 @@
         | If you have any
         |  questions or suggestions about our Privacy Policy, do not hesitate to
         = ' '
-        = mail_to 'sadovnikov.js@gmail.com', 'contact us'
+        = mail_to ENV['SMTP_USER_NAME'], 'contact us'
         | .
