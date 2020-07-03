@@ -6,7 +6,7 @@ module Api
       end
 
       def random_sentence
-        result = Sentence::ByWord.run!(word: word, trans_lang: trans_lang)
+        result = Sentence::ByWord.run!(word: word, translation_lang: translation_lang)
         render json: { resource: result }, status: :ok
       end
 
@@ -26,12 +26,12 @@ module Api
         @word_lang ||=
           case word_value
           when /[a-z]/i then 'eng'
-          when /[а-ё]/i then 'runs'
+          when /[а-ё]/i then 'rus'
           end
       end
 
-      def trans_lang
-        @trans_lang ||=
+      def translation_lang
+        @translation_lang ||=
           case word_lang
           when 'eng' then 'rus'
           when 'rus' then 'eng'
