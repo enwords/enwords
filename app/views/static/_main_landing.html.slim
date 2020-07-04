@@ -1,24 +1,26 @@
 .col-12
-  .row
+  .row.mt-sm-5.mb-sm-5
     .col-md-6.p-0
-      .text-center.vertical-description
+      .text-center.vertical-desc-4
         h1 == t('static.landings.main.block_1.title')
         h3 == t('static.landings.main.block_1.body')
     .col-md-6.p-0
-      = image_tag 'landing/boy.jpg', class: 'toast-top-full-width'
-  .row
+      = image_tag 'landing/laptop.png', class: 'toast-top-full-width'
+  .row.mb-sm-4
     .hidden-xs-down.col-md-6
-      = image_tag 'landing/girl.jpg', class: 'toast-top-full-width'
+      = image_tag 'landing/skate.png', class: 'toast-top-full-width'
     .col-md-6.p-0
-      .col-12.p-0
-        .text-center.vertical-description
-          h1 == t('static.landings.main.block_2.title')
-          h3 == t('static.landings.main.block_2.body')
-          = render 'static/phrase_generator'
-      .col-12.p-0
-        .text-center.vertical-description
-          h1 == t('static.landings.main.block_3.title')
-          h3 == t('static.landings.main.block_3.body')
+      .text-center.vertical-desc-3
+        h1 == t('static.landings.main.block_2.title')
+        h3 == t('static.landings.main.block_2.body')
+        = render 'static/phrase_generator'
+  .row
+    .col-md-6.p-0
+      .text-center.vertical-desc-4
+        h1 == t('static.landings.main.block_3.title')
+        h3 == t('static.landings.main.block_3.body')
+    .col-md-6
+      = image_tag 'landing/fell.png', class: 'toast-top-full-width'
   .row
     .col-12.col-md-10.offset-md-1
       = render 'devise/registrations/form'

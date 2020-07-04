@@ -555,16 +555,22 @@ table
   width: 100% !important
   text-align: center
 
-.vertical-description
-  margin-top: 40%
+.vertical-desc
+  &-3
+    margin-top: 30%
+  &-4
+    margin-top: 40%
 
 @media (min-width: 320px)
   .generate_phrase_result_field
     font-size: 1.5rem
 
-@media only screen and (max-width: 480px)
-  .vertical-description
-    margin-top: 20%
+@media only screen and (max-width: 800px)
+  .vertical-desc
+    &-3
+      margin-top: 15%
+    &-4
+      margin-top: 20%
 
 @media only screen and (max-width: 510px)
   .footer--my-name

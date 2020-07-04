@@ -106,20 +106,20 @@ en:
     landings:
       main:
         block_1:
-          title: "Learn languages FREE"
-          body: "In Enwords you will find <b>30 languages​​</b>, such as 🇬🇧 English, 🇩🇪 German, 🇪🇸 Spanish, 🇫🇷 French and others 🏳️‍🌈"
+          title: "Learn languages for FREE"
+          body: "In the Enwords you will find <b>30 languages​​</b>, such as 🇬🇧 English, 🇩🇪 German, 🇪🇸 Spanish, 🇫🇷 French, and others 🏳️‍🌈"
         block_2:
           title: "Learn new words"
           body: "There are more than <b>500 thousand words</b> on the platform that you can learn"
         block_3:
           title: "Just 10 minutes a day"
-          body: "Learn 3 words a day and in a year you will know more than 1000 words 😱"
+          body: "Learn 3 words a day, and in a year you will know more than 1000 words 😱"
       guide: "Guidance for successful learning:"
       select_words: "<a href=%{words_path}>Choose the words</a> that you want to learn and click on the training button, Enwords will select the context for you to learn easier. Mark the words that you don’t know how to study them in the future, and those you know will disappear from the general list of words. The list of words is sorted from the most popular words to the rare words in the language, so you probably already know the first words 🤷‍♀️"
-      upload_articles: "<a href =%{articles_path}>Add your text</a> in the language you are learning, for example, from audio courses, magazines, books, if you are a cook upload recipes 👩🏼‍🍳, if the driver upload the traffic rules 👮🏻‍♂️"
+      upload_articles: "<a href =%{articles_path}>Add your text</a> in the language you are learning, for example, from audio courses, magazines, books, if you are a cook upload recipes 👩🏼‍🍳 if you are the driver upload the traffic rules 👮🏻‍♂️"
       use_settings: "Configure the training parameters: the number of sentences, automatic voice acting, make training the most diverse"
       from_skyeng: "Do you study English on skyeng.ru? <a href=%{skyeng_setting_path}>Add your mail</a> from the Skyeng account and you can continue to study words on our website"
-      use_telegram_bot: "Still not using our Telegram bot <a target='_blank' href='https://t.me/enwordsapp_bot'>@enwordsapp_bot</a>? Send him an unfamiliar word and get a translation. And the bot will send you the studied scheduled words so you can finally learn them 🤪"
+      use_telegram_bot: "Still not using our Telegram bot <a target='_blank' href='https://t.me/enwordsapp_bot'>@enwordsapp_bot</a>? Send an unfamiliar word to it and get a translation. The bot will send you the learning words several times a day, so you can finally learn them 🤪"
       follow_us: 'Follow us on Instagram, there are a lot of interesting <a target="_blank" href="https://instagram.com/enwordsapp">@enwordsapp</a>'
     result:
       title: "Exercise result:"
@@ -214,7 +214,7 @@ en:
   api:
     word:
       generate_phrase:
-        field: "It's just a English phrase generator :)"
+        field: "It's just an English phrase generator :)"
         button: "Push!"
   telegram:
     process_message:
