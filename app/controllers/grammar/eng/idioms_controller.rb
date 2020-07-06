@@ -13,11 +13,12 @@ module Grammar::Eng
     end
 
     def change_status
+      ids = params[:ids] || []
       case params[:commit]
       when 'learned'
-        params[:ids].each { |id| Grammar::Eng::UserIdiom.create(user: current_user, idiom_id: id) }
+        ids.each { |id| Grammar::Eng::UserIdiom.create(user: current_user, idiom_id: id) }
       when 'learning'
-        Grammar::Eng::UserIdiom.where(user: current_user, idiom_id: params[:ids]).delete_all
+        Grammar::Eng::UserIdiom.where(user: current_user, idiom_id: ids).delete_all
       end
       redirect_back(fallback_location: root_path)
     end
