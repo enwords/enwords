@@ -89,6 +89,9 @@ body
     padding-left: 5px
 
 //NAVBAR
+.navbar.navbar-dark .navbar-toggler-icon
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>")
+
 .navbar
   i
     &:before
@@ -555,22 +558,9 @@ table
   width: 100% !important
   text-align: center
 
-.vertical-desc
-  &-3
-    margin-top: 30%
-  &-4
-    margin-top: 40%
-
 @media (min-width: 320px)
   .generate_phrase_result_field
     font-size: 1.5rem
-
-@media only screen and (max-width: 800px)
-  .vertical-desc
-    &-3
-      margin-top: 15%
-    &-4
-      margin-top: 20%
 
 @media only screen and (max-width: 510px)
   .footer--my-name
