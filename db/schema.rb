@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2020_06_24_190551) do
     t.string "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "creative_added", default: false
     t.index ["word_id"], name: "index_mnemos_on_word_id"
   end
 

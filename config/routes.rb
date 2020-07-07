@@ -31,6 +31,14 @@ Rails.application.routes.draw do
     namespace :web do
       resources :translations, only: %i[index]
     end
+
+    namespace :payments do
+      resources :webhooks, only: %i[] do
+        collection do
+          post :paypal
+        end
+      end
+    end
   end
 
   get '/words_from_sentence/:sentence_id', to: 'trainings#words_from_sentence'
