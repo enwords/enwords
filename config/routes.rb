@@ -82,7 +82,7 @@ Rails.application.routes.draw do
       namespace :eng do
         resources :irregular_verbs, only: %i[index] do
           collection do
-            put :create_training
+            put :change_status
           end
         end
         resources :idioms, only: %i[index] do

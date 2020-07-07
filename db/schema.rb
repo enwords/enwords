@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_07_153942) do
+ActiveRecord::Schema.define(version: 2020_07_07_214051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -78,6 +78,16 @@ ActiveRecord::Schema.define(version: 2020_07_07_153942) do
     t.index ["idiom_id"], name: "index_grammar_eng_user_idioms_on_idiom_id"
     t.index ["user_id", "idiom_id"], name: "index_grammar_eng_user_idioms_on_user_id_and_idiom_id", unique: true
     t.index ["user_id"], name: "index_grammar_eng_user_idioms_on_user_id"
+  end
+
+  create_table "grammar_eng_user_irregular_verbs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "irregular_verb_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["irregular_verb_id"], name: "index_grammar_eng_user_irregular_verbs_on_irregular_verb_id"
+    t.index ["user_id", "irregular_verb_id"], name: "index_user_on_irregular_verb", unique: true
+    t.index ["user_id"], name: "index_grammar_eng_user_irregular_verbs_on_user_id"
   end
 
   create_table "grammar_eng_user_phrasal_verbs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -217,6 +227,8 @@ ActiveRecord::Schema.define(version: 2020_07_07_153942) do
   add_foreign_key "grammar_eng_phrasal_verb_meanings", "grammar_eng_phrasal_verbs", column: "phrasal_verb_id"
   add_foreign_key "grammar_eng_user_idioms", "grammar_eng_idioms", column: "idiom_id"
   add_foreign_key "grammar_eng_user_idioms", "users"
+  add_foreign_key "grammar_eng_user_irregular_verbs", "grammar_eng_irregular_verbs", column: "irregular_verb_id"
+  add_foreign_key "grammar_eng_user_irregular_verbs", "users"
   add_foreign_key "grammar_eng_user_phrasal_verbs", "grammar_eng_phrasal_verbs", column: "phrasal_verb_id"
   add_foreign_key "grammar_eng_user_phrasal_verbs", "users"
   add_foreign_key "telegram_chats", "users"
