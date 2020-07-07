@@ -90,6 +90,11 @@ Rails.application.routes.draw do
             put :change_status
           end
         end
+        resources :phrasal_verbs, only: %i[index] do
+          collection do
+            put :change_status
+          end
+        end
       end
     end
 

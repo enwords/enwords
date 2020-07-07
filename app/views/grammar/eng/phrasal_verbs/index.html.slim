@@ -1,0 +1,57 @@
+.col-12.title
+  h3
+    = t('shared.navigation.grammar.eng.phrasal_verbs')
+
+= form_tag change_status_grammar_eng_phrasal_verbs_path, method: :put do
+  .row
+    .col-12.col-md-8.offset-md-2
+      - if phrasal_verbs.present?
+        table.table-main.table__words.table-striped style='width: 100%'
+          thead
+            tr
+              th style='width: 4%'
+                input.check#check-all type='checkbox'
+              th style='width: 24%' Phrasal Verb
+              th style='width: 72%' Meaning
+          - phrasal_verbs.each do |phrasal_verb|
+            tr
+              td style='background: white'
+                span.check-box-wrapper
+                  = check_box_tag 'ids[]', phrasal_verb.id, false, class: 'check'
+              td
+                span.word-translate data-from=l_lang data-to=n_lang = phrasal_verb.value.capitalize
+              td
+                - if phrasal_verb.meanings.size > 1
+                  ul
+                    - phrasal_verb.meanings.each_with_index do |m, i|
+                      li = "#{i + 1}. #{m.value}"
+                - else
+                  = phrasal_verb.meanings.first.value
+        .col-12 style='text-align: center'
+          - case params[:status]
+          - when 'learning'
+            = button_tag t('words.buttons.add_to_learned').html_safe,
+                    type: 'submit',
+                    value: 'learned',
+                    name: 'commit',
+                    class: 'btn btn-raised btn-md btn-link learned',
+                    data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+          - when 'learned'
+            = button_tag t('words.buttons.add_to_learning'),
+                    type: 'submit',
+                    value: 'learning',
+                    name: 'commit',
+                    class: 'btn btn-raised btn-md btn-link learning',
+                    data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+      - else
+        .col-12
+          p.title
+            = t 'words.warning.text1'
+            a href=grammar_eng_phrasal_verbs_path(status: :learning) = t 'words.warning.link1'
+  .row
+    .col-12.digg_pagination
+      = will_paginate phrasal_verbs,
+              previous_label: '<i class="fa fa-angle-left"></i>',
+              next_label: '<i class="fa fa-angle-right"></i>',
+              outer_window: 0,
+              inner_window: 2

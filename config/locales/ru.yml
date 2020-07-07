@@ -117,6 +117,7 @@ ru:
         eng:
           irregular_verbs: "Неправильные глаголы"
           idioms: "Идиомы"
+          phrasal_verbs: "Phrasal Verbs"
 
   static:
     landings:
