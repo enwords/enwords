@@ -192,6 +192,8 @@ en:
       added_to_unknown:  'Added to "Unknown"'
       state_changed: "Status of words successfully changed"
       select_words: "Please, select words"
+      show_learning: "Show learning"
+      show_learned: "Show learned"
     select_all: 'Select all'
     skyeng: "Skyeng"
     very_easy_words: "Very easy words?"

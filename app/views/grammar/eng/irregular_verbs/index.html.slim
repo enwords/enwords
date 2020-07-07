@@ -29,6 +29,12 @@
                 span = '/'
                 span.word-translate data-from=l_lang data-to=n_lang = verb.past_participle.second.capitalize
     .col-12 style='text-align: center'
+      = button_tag t('words.buttons.training_grammar'),
+                   value: 'grammar',
+                   type: 'submit',
+                   name: 'commit',
+                   class: 'btn btn-secondary',
+                   data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
       - case params[:status]
       - when 'learning'
         = button_tag t('words.buttons.add_to_learned').html_safe,
@@ -37,6 +43,9 @@
                 name: 'commit',
                 class: 'btn btn-raised btn-md btn-link learned',
                 data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+        = link_to t('words.buttons.show_learned').html_safe,
+                grammar_eng_irregular_verbs_path(status: :learned),
+                class: 'btn btn-raised btn-md btn-link learned'
       - when 'learned'
         = button_tag t('words.buttons.add_to_learning'),
                 type: 'submit',
@@ -44,12 +53,9 @@
                 name: 'commit',
                 class: 'btn btn-raised btn-md btn-link learning',
                 data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
-      = button_tag t('words.buttons.training_grammar'),
-          value: 'grammar',
-          type:  'submit',
-          name: 'commit',
-          class: 'btn btn-secondary',
-          data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+        = link_to t('words.buttons.show_learning').html_safe,
+                grammar_eng_irregular_verbs_path(status: :learning),
+                class: 'btn btn-raised btn-md btn-link learning'
   .row
     .col-12.digg_pagination
       = will_paginate @irregular_verbs,

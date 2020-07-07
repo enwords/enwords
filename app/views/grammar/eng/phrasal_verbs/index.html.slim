@@ -11,8 +11,8 @@
             tr
               th style='width: 4%'
                 input.check#check-all type='checkbox'
-              th style='width: 24%' Verb
-              th style='width: 72%' Meaning
+              th style='width: 28%' Verb
+              th style='width: 68%' Meaning
           - phrasal_verbs.each do |phrasal_verb|
             tr
               td style='background: white'
@@ -36,6 +36,9 @@
                     name: 'commit',
                     class: 'btn btn-raised btn-md btn-link learned',
                     data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+            = link_to t('words.buttons.show_learned').html_safe,
+                      grammar_eng_phrasal_verbs_path(status: :learned),
+                      class: 'btn btn-raised btn-md btn-link learned'
           - when 'learned'
             = button_tag t('words.buttons.add_to_learning'),
                     type: 'submit',
@@ -43,6 +46,9 @@
                     name: 'commit',
                     class: 'btn btn-raised btn-md btn-link learning',
                     data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+            = link_to t('words.buttons.show_learning').html_safe,
+                    grammar_eng_phrasal_verbs_path(status: :learning),
+                    class: 'btn btn-raised btn-md btn-link learning'
       - else
         .col-12
           p.title

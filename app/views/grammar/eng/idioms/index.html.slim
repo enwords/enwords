@@ -26,18 +26,24 @@
           - case params[:status]
           - when 'learning'
             = button_tag t('words.buttons.add_to_learned').html_safe,
-                    type:  'submit',
+                    type: 'submit',
                     value: 'learned',
-                    name:  'commit',
+                    name: 'commit',
                     class: 'btn btn-raised btn-md btn-link learned',
-                    data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+                    data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+            = link_to t('words.buttons.show_learned').html_safe,
+                    grammar_eng_idioms_path(status: :learned),
+                    class: 'btn btn-raised btn-md btn-link learned'
           - when 'learned'
             = button_tag t('words.buttons.add_to_learning'),
-                  type:  'submit',
-                  value: 'learning',
-                  name:  'commit',
-                  class: 'btn btn-raised btn-md btn-link learning',
-                  data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+                    type: 'submit',
+                    value: 'learning',
+                    name: 'commit',
+                    class: 'btn btn-raised btn-md btn-link learning',
+                    data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+            = link_to t('words.buttons.show_learning').html_safe,
+                    grammar_eng_idioms_path(status: :learning),
+                    class: 'btn btn-raised btn-md btn-link learning'
       - else
         .col-12
           p.title
