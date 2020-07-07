@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_24_190551) do
+ActiveRecord::Schema.define(version: 2020_07_07_153942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -53,6 +53,23 @@ ActiveRecord::Schema.define(version: 2020_06_24_190551) do
     t.jsonb "past_participle", default: []
   end
 
+  create_table "grammar_eng_phrasal_verb_meanings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "value", null: false
+    t.string "example"
+    t.uuid "phrasal_verb_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["phrasal_verb_id"], name: "index_grammar_eng_phrasal_verb_meanings_on_phrasal_verb_id"
+  end
+
+  create_table "grammar_eng_phrasal_verbs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "value", null: false
+    t.integer "weight", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["value"], name: "index_grammar_eng_phrasal_verbs_on_value", unique: true
+  end
+
   create_table "grammar_eng_user_idioms", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.bigint "user_id", null: false
     t.uuid "idiom_id", null: false
@@ -61,6 +78,16 @@ ActiveRecord::Schema.define(version: 2020_06_24_190551) do
     t.index ["idiom_id"], name: "index_grammar_eng_user_idioms_on_idiom_id"
     t.index ["user_id", "idiom_id"], name: "index_grammar_eng_user_idioms_on_user_id_and_idiom_id", unique: true
     t.index ["user_id"], name: "index_grammar_eng_user_idioms_on_user_id"
+  end
+
+  create_table "grammar_eng_user_phrasal_verbs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.uuid "phrasal_verb_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["phrasal_verb_id"], name: "index_grammar_eng_user_phrasal_verbs_on_phrasal_verb_id"
+    t.index ["user_id", "phrasal_verb_id"], name: "index_user_on_phrasal_verb", unique: true
+    t.index ["user_id"], name: "index_grammar_eng_user_phrasal_verbs_on_user_id"
   end
 
   create_table "links", id: :uuid, default: -> { "uuid_generate_v4()" }, force: :cascade do |t|
@@ -187,8 +214,11 @@ ActiveRecord::Schema.define(version: 2020_06_24_190551) do
   end
 
   add_foreign_key "articles", "users"
+  add_foreign_key "grammar_eng_phrasal_verb_meanings", "grammar_eng_phrasal_verbs", column: "phrasal_verb_id"
   add_foreign_key "grammar_eng_user_idioms", "grammar_eng_idioms", column: "idiom_id"
   add_foreign_key "grammar_eng_user_idioms", "users"
+  add_foreign_key "grammar_eng_user_phrasal_verbs", "grammar_eng_phrasal_verbs", column: "phrasal_verb_id"
+  add_foreign_key "grammar_eng_user_phrasal_verbs", "users"
   add_foreign_key "telegram_chats", "users"
   add_foreign_key "trainings", "users"
 end

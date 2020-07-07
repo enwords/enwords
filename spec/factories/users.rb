@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :user do
-    email { 'test@mail.ru' }
-    password { 'password1234' }
-    role { 'user' }
+    email { FFaker::Internet.email }
+    password { FFaker::Internet.password }
+    role { :user }
     native_language { 'rus' }
     learning_language { 'eng' }
     sentences_number { 3 }
