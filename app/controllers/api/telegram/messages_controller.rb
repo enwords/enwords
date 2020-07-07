@@ -1,6 +1,6 @@
-module Api
+module API
   module Telegram
-    class MessagesController < ::Api::BaseController
+    class MessagesController < ::API::BaseController
       def create
         message = Message.create!(data: params[:callback_query] ||
                                         params[:message], message_type: message_type)

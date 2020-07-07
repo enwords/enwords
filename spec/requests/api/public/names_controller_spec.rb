@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Api::Public::NamesController, type: :request do
+describe API::Public::NamesController, type: :request do
   let(:headers) do
     {
       'Content-Type' => 'application/json'

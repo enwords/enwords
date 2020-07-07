@@ -20,8 +20,8 @@
             td = link_to user.email, admin_user_path(user)
             td = user.native_language
             td = user.learning_language
-            td = user.created_at.strftime('%d.%m.%Y %H:%m')
-            td = user.updated_at.strftime('%d.%m.%Y %H:%m')
+            td = user.created_at.strftime('%d.%m.%Y %H:%M')
+            td = user.updated_at.strftime('%d.%m.%Y %H:%M')
             td = user.sign_in_count
             td = (user.training.words_learned rescue '...')
             td

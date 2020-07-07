@@ -16,7 +16,7 @@ describe Sentence::ByWord do
   let!(:mnemo) { create :mnemo, word: word }
 
   before do
-    allow(Api::Skyeng).to receive(:first_meaning).and_return(
+    allow(API::Skyeng).to receive(:first_meaning).and_return(
       'id' => 92_160,
       'partOfSpeechCode' => 'n',
       'translation' => { 'text' => translation_value, 'note' => nil },
@@ -46,7 +46,7 @@ describe Sentence::ByWord do
     let(:translation_value) { 'word' }
 
     before do
-      allow(Api::YandexTranslate).to receive(:translate).and_return(translation_value)
+      allow(API::YandexTranslate).to receive(:translate).and_return(translation_value)
     end
 
     it 'returns valid hash' do

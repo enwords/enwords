@@ -1,4 +1,4 @@
-module Api
+module API
   module YandexTranslate
     API_URL = 'https://translate.yandex.net/api/v1.5/tr.json/translate'.freeze
     API_KEY = ENV['YANDEX_TRANSLATE']

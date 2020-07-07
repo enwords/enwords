@@ -1,4 +1,4 @@
-module Api
+module API
   module Skyeng
     module_function
 

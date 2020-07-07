@@ -1,4 +1,4 @@
-class Api::Web::TranslationsController < ::Api::BaseController
+class API::Web::TranslationsController < ::API::BaseController
   def index
     if params[:from] == 'eng' && params[:to] == 'rus'
       result = skyeng_translate
@@ -33,13 +33,13 @@ class Api::Web::TranslationsController < ::Api::BaseController
   end
 
   def skyeng_translate
-    Api::Skyeng.first_meaning(word: word_value)
+    API::Skyeng.first_meaning(word: word_value)
   end
 
   def yandex_translate
     from = User::Languages::LOCALES[params[:from].to_sym]
     to = User::Languages::LOCALES[params[:to].to_sym]
-    trans = Api::YandexTranslate.translate(text: word_value, from: from, to: to)
+    trans = API::YandexTranslate.translate(text: word_value, from: from, to: to)
     {
       translation: { text: trans },
       transcription: word&.transcription,

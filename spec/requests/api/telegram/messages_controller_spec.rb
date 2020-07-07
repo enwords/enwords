@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Api::Telegram::MessagesController, type: :request do
+describe API::Telegram::MessagesController, type: :request do
   context 'message' do
     subject do
       post '/api/telegram/messages', params: params.to_json, headers: headers
@@ -49,7 +49,7 @@ describe Api::Telegram::MessagesController, type: :request do
 
     before do
       allow(Telegram::SendMessage).to receive(:run!).and_return(true)
-      allow(Api::Skyeng).to receive(:first_meaning).and_return(
+      allow(API::Skyeng).to receive(:first_meaning).and_return(
         'id' => 92_160,
         'partOfSpeechCode' => 'n',
         'translation' => { 'text' => 'слово', 'note' => nil },

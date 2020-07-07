@@ -1,6 +1,6 @@
-module Api
+module API
   module Mobile
-    class BaseController < ::Api::BaseController
+    class BaseController < ::API::BaseController
       protected
 
       def current_user

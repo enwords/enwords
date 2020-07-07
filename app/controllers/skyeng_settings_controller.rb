@@ -17,7 +17,7 @@ class SkyengSettingsController < ApplicationController
 
     if creating.valid?
       skyeng_setting = creating.result
-      Api::Skyeng.send_token(email: skyeng_setting.email)
+      API::Skyeng.send_token(email: skyeng_setting.email)
       redirect_to skyeng_setting_path, notice: t('skyeng_settings.add_token', email: skyeng_setting.email).html_safe
     else
       redirect_back(fallback_location: root_path, alert: creating.errors.messages.values.join('<br>'))

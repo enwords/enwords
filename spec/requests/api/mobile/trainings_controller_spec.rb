@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Api::Mobile::TrainingsController, type: :request do
+describe API::Mobile::TrainingsController, type: :request do
   let(:user) { create :user }
   let(:word) { create :eng_word, value: 'obstacle' }
   let!(:word_status) do

@@ -1,4 +1,4 @@
-module Api
+module API
   module Mobile
     class TrainingsController < BaseController
       def create

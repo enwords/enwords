@@ -300,6 +300,8 @@ GEM
       tilt (>= 1.1, < 3)
     sassc (2.2.0)
       ffi (~> 1.9)
+    shoulda-matchers (4.2.0)
+      activesupport (>= 4.2.0)
     sidekiq (6.0.0)
       connection_pool (>= 2.2.2)
       rack (>= 2.0.0)
@@ -388,6 +390,7 @@ DEPENDENCIES
   rubocop
   rufus-scheduler (~> 3.4.0)
   sass-rails (~> 5.0)
+  shoulda-matchers
   sidekiq
   sidekiq-cron (~> 0.6.3)
   simple_form
@@ -400,4 +403,4 @@ DEPENDENCIES
   will_paginate (~> 3.1.0)
 
 BUNDLED WITH
-   1.17.2
+   1.17.3

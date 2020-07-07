@@ -49,13 +49,13 @@ class Sentence < ApplicationRecord
     end
 
     def skyeng_translate
-      Api::Skyeng.first_meaning(word: word.value)
+      API::Skyeng.first_meaning(word: word.value)
     end
 
     def yandex_translate
       from = User::Languages::LOCALES[word.language.to_sym]
       to = User::Languages::LOCALES[translation_lang.to_sym]
-      trans = Api::YandexTranslate.translate(text: word.value, from: from, to: to)
+      trans = API::YandexTranslate.translate(text: word.value, from: from, to: to)
       {
         'translation' => { 'text' => trans },
         'text' => word.value

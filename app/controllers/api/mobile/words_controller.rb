@@ -1,4 +1,4 @@
-module Api
+module API
   module Mobile
     class WordsController < BaseController
       def index

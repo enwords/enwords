@@ -78,7 +78,7 @@ class Word < ApplicationRecord
       result = Rails.cache.read("skyeng_words_user_#{user.id}")
       return result if result
 
-      skyeng_words = Api::Skyeng.learning_words(
+      skyeng_words = API::Skyeng.learning_words(
         email: user.skyeng_setting.email,
         token: user.skyeng_setting.token
       )

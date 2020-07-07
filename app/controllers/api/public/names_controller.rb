@@ -1,6 +1,6 @@
-module Api
+module API
   module Public
-    class NamesController < ::Api::BaseController
+    class NamesController < ::API::BaseController
       def random
         render json: Names::GetRandom.run!(group: params[:group].presence)
       end

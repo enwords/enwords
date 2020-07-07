@@ -1,6 +1,6 @@
-module Api
+module API
   module Public
-    class WordsController < ::Api::BaseController
+    class WordsController < ::API::BaseController
       def generate_phrase
         render json: { resource: Word::GeneratePhrase.run! }, status: :ok
       end
