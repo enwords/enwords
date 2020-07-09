@@ -41,7 +41,7 @@ module Telegram
       return I18n.t('telegram.process_message.send_email', locale: :ru) unless telegram_chat
 
       telegram_chat.update!(active: true)
-      words_count = Word::ByStatus.run!(status: 'learning', user: telegram_chat.user).size
+      words_count = Word::ByStatus.run!(status: 'learning', user: telegram_chat_user).size
       I18n.t('telegram.process_message.telegram_chat_created', locale: :ru, words_count: words_count)
     end
 
@@ -67,7 +67,11 @@ module Telegram
       return I18n.t('telegram.process_message.not_understand', locale: :ru) unless word
 
       update_word_status
-      Sentence::ByWord.run!(word: word, translation_lang: translation_lang)[:text]
+      texts_by_word[:text]
+    end
+
+    def texts_by_word
+      @texts_by_word ||= Sentence::ByWord.run!(word: word, translation_lang: translation_lang)
     end
 
     def translation_lang
@@ -96,6 +100,13 @@ module Telegram
       @word ||= Word.find_by(value: clean_text, language: lang)
     end
 
+    def translation_object
+      @translation_object ||=
+        if texts_by_word[:word_translation]
+          Word.find_by(value: texts_by_word[:word_translation].downcase, language: translation_lang)
+        end
+    end
+
     def telegram_chat
       @telegram_chat ||= TelegramChat.find_by(chat_id: chat[:id])
     end
@@ -113,14 +124,18 @@ module Telegram
       end
     end
 
+    def telegram_chat_user
+      @telegram_chat_user ||= telegram_chat.user
+    end
+
     def update_word_status
-      return unless word
       return unless telegram_chat
 
-      user = telegram_chat.user
-      return if word.language != user.learning_language
-
-      Word::UpdateState.run(ids: [word.id], to_state: 'learning', user: user)
+      if word && word.language == telegram_chat_user.learning_language
+        Word::UpdateState.run(ids: [word.id], to_state: 'learning', user: telegram_chat_user)
+      elsif translation_object && translation_object.language == telegram_chat_user.learning_language
+        Word::UpdateState.run(ids: [translation_object.id], to_state: 'learning', user: telegram_chat_user)
+      end
     end
   end
 end
