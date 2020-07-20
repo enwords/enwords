@@ -17,4 +17,5 @@ Rails.application.config.assets.precompile += %w[
   training/grammar.js
   stat.js
   translate.js
+  visible_videos.js
 ]

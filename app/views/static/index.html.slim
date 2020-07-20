@@ -1,36 +1,39 @@
 .container
   = render 'layouts/locale_switcher'
-  .row
+  .row.mt-5
     - if user_signed_in?
       - if current_user.learning_language.blank?
         = render 'static/select_languages'
       - else
-        .col-12.col-md-10.offset-md-1
-          h1.text-center == t 'static.landings.guide'
-          br
-          br
+        = content_for :footer_js do
+          = javascript_include_tag 'visible_videos'
+
         .col-12.col-md-10.offset-md-1
           ul.main--list
-            li
-              h3 == t 'static.landings.select_words', words_path: words_path(status: 'unknown')
-              h1.text-center == "***"
-            li
-              h3 == t 'static.landings.upload_articles', articles_path: articles_path
-              h1.text-center == "***"
-            li
-              h3 == t 'static.landings.use_settings'
-              h1.text-center == "***"
+            li.row.mt-5.mb-5.guides-item
+              .col-sm-6.col-lg-8.align-self-center
+                h3 == t 'static.landings.select_words', words_path: words_path(status: 'unknown')
+              .hidden-xs-down.col-sm-6.col-lg-4
+                = image_tag 'iphone-frame.png', class: 'phone-preview'
+                = video_tag 'words.mp4', loop: true, autoplay: true, preload: 'auto', class: 'phone-video'
+            li.row.mb-5.guides-item
+              .col-sm-6.col-lg-8.align-self-center
+                h3 == t 'static.landings.upload_articles', audio_articles_path: audio_articles_path, articles_path: articles_path
+              .hidden-xs-down.col-sm-6.col-lg-4
+                = image_tag 'iphone-frame.png', class: 'phone-preview'
+                = video_tag 'articles.mp4', loop: true, autoplay: true, preload: 'auto', class: 'phone-video'
             - if body_class == 'eng-rus'
-              li
-                h3 == t 'static.landings.use_telegram_bot'
-                h1.text-center == "***"
-              li
-                h3 == t 'static.landings.from_skyeng', skyeng_setting_path: actual_skyeng_setting_path
-                h1.text-center == "***"
-            li
-              h3 == t 'static.landings.follow_us'
-          br
-          br
-          br
+              li.row.mb-5.guides-item
+                .col-sm-6.col-lg-8.align-self-center
+                  h3 == t 'static.landings.use_telegram_bot'
+                .hidden-xs-down.col-sm-6.col-lg-4
+                  = image_tag 'iphone-frame.png', class: 'phone-preview'
+                  = video_tag 'telegram.mp4', loop: true, autoplay: true, preload: 'auto', class: 'phone-video cut'
+              li.row.mb-5.guides-item
+                .col-sm-6.col-lg-8.align-self-center
+                  h3 == t 'static.landings.follow_us'
+                .hidden-xs-down.col-sm-6.col-lg-4
+                  = image_tag 'iphone-frame.png', class: 'phone-preview'
+                  = video_tag 'instagram.mp4', loop: true, autoplay: true, preload: 'auto', class: 'phone-video cut'
     - else
       = render 'static/main_landing'
