@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_07_214051) do
+ActiveRecord::Schema.define(version: 2020_07_26_082213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(version: 2020_07_07_214051) do
     t.string "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "creative_added", default: false
     t.index ["word_id"], name: "index_mnemos_on_word_id"
   end
 
@@ -219,6 +220,7 @@ ActiveRecord::Schema.define(version: 2020_07_07_214051) do
     t.string "pos"
     t.integer "weight"
     t.string "transcription"
+    t.jsonb "data"
     t.index ["language"], name: "index_words_on_language"
     t.index ["value"], name: "index_words_on_value"
   end

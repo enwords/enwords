@@ -2,7 +2,6 @@ class API::Web::TranslationsController < ::API::BaseController
   def index
     if params[:from] == 'eng' && params[:to] == 'rus'
       result = skyeng_translate
-      update_transcription(result)
     end
     result = yandex_translate if result.blank?
     result.merge!(youglish: youglish)
@@ -33,6 +32,7 @@ class API::Web::TranslationsController < ::API::BaseController
   end
 
   def skyeng_translate
+    return
     API::Skyeng.first_meaning(word: word_value)
   end
 
@@ -40,18 +40,17 @@ class API::Web::TranslationsController < ::API::BaseController
     from = User::Languages::LOCALES[params[:from].to_sym]
     to = User::Languages::LOCALES[params[:to].to_sym]
     trans = API::YandexTranslate.translate(text: word_value, from: from, to: to)
+    if trans && word
+      data = word.data || {}
+      data['trans'] ||= {}
+      data['trans'][params[:to]] = trans
+      word.update!(data: data)
+    end
     {
       translation: { text: trans },
       transcription: word&.transcription,
       text: word_value
     }
-  end
-
-  def update_transcription(response)
-    return unless word
-    return unless response['transcription'].present? && word.transcription.blank?
-
-    word.update!(transcription: response['transcription'])
   end
 
   def word
