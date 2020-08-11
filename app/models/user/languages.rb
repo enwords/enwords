@@ -50,7 +50,7 @@ class User < ApplicationRecord
       fr: 'french',
       es: 'spanish',
       la: 'spanish',
-      pt: 'portugues',
+      pt: 'portuguese',
       nl: 'dutch',
       ar: 'arabic',
       zh: 'chinese',
