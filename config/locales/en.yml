@@ -223,3 +223,4 @@ en:
       telegram_chat_created: "User found. You have %{words_count} learning words. You will receive a newsletter once an hour"
       bye: "Bye!"
       not_understand: "I do not understand"
+    reminder: 'Send me the word you want to learn in English 🇬🇧 and you will receive a translation, and I will periodically send you this word to remember 🤖'

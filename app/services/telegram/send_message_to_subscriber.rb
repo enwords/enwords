@@ -5,10 +5,27 @@ module Telegram
     object :user, class: User
 
     def execute
-      return :no_learning_word if learning_word.blank?
+      return send_reminder if learning_word.blank?
       return :no_text if text.blank?
 
-      result = Telegram::SendMessage.run!(
+      result = send_word
+      return :ok if result[:ok]
+
+      case result[:error_code]
+      when 403 then user.telegram_chat.update!(active: false)
+      end
+      [:error, result]
+    end
+
+    def send_reminder
+      Telegram::SendMessage.run!(
+        text: I18n.t('telegram.reminder', locale: :ru),
+        chat_id: user.telegram_chat.chat_id
+      )
+    end
+
+    def send_word
+      Telegram::SendMessage.run!(
         text: text,
         chat_id: user.telegram_chat.chat_id,
         reply_markup: {
@@ -22,12 +39,6 @@ module Telegram
           ]
         }
       )
-      return :ok if result[:ok]
-
-      case result[:error_code]
-      when 403 then user.telegram_chat.update!(active: false)
-      end
-      [:error, result]
     end
 
     def learning_word
