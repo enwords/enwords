@@ -200,9 +200,9 @@ en:
     errors:
       did_not_save: "Settings did not save"
     add_email: "Enter email from your <b>Skyeng</b> account"
-    main: "You can learn the words that you added on Skyeng. Please fill in the following fields"
+    main: "You can learn the words you added in Skyeng. Please fill in the following fields"
     submit: "Submit"
-    add_token: "Add a secret key, we sent it to <b>%{email}</b>"
+    add_token: "Please enter the secret key that we sent you by email <b>%{email}</b>"
     token_example: "Add token here"
     finished: "Now you can see the words added on Skyeng"
     study_words: "Learn words from Skyeng"

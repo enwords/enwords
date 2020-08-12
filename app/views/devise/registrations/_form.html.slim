@@ -17,20 +17,14 @@
           tbody
             tr
               td.first-column
-                span
-                  = t('devise.registration.form.learning_language')
+                = t('devise.registration.form.learning_language')
               td.second-column
-                span
-                  = f.select :learning_language, options_for_select(User::FULL_LANGUAGE_NAMES, :eng), {},
-                          { class: 'form-control' }
+                = f.select :learning_language, options_for_select(User::FULL_LANGUAGE_NAMES, :eng), {}, { class: 'form-control', style: 'height: 100%' }
             tr
               td.first-column
-                span
-                  = t('devise.registration.form.native_language')
+                = t('devise.registration.form.native_language')
               td.second-column
-                span
-                  = f.select :native_language, options_for_select(User::FULL_LANGUAGE_NAMES, :rus), {},
-                          { class: 'form-control' }
+                = f.select :native_language, options_for_select(User::FULL_LANGUAGE_NAMES, :rus), {}, { class: 'form-control', style: 'height: 100%' }
       br
       = f.button t('devise.registration.form.title'),
               class: 'btn btn-lg btn-secondary btn-block',
