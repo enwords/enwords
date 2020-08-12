@@ -13,6 +13,7 @@ class Word < ApplicationRecord
         raise "Unknown state #{to_state}"
       end
 
+      user.touch
       WordStatus.where(user_id: user, word_id: ids)
     end
 

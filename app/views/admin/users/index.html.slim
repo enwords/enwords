@@ -1,5 +1,5 @@
-.container
-  .row
+.row
+  .col-12
     h3 Users
     table.table style="overflow-x:auto;"
       thead
@@ -10,8 +10,13 @@
         th created at
         th updated at
         th sign in count
+        th words learning
         th words learned
-        th role
+        th idioms learned
+        th irregular verbs learned
+        th phrasal verbs learned
+        th articles
+        th telegram
         th
       tbody
         - @users.each do |user|
@@ -23,16 +28,12 @@
             td = user.created_at.strftime('%d.%m.%Y %H:%M')
             td = user.updated_at.strftime('%d.%m.%Y %H:%M')
             td = user.sign_in_count
-            td = (user.training.words_learned rescue '...')
-            td
-              = form_for [:admin, user] do |f|
-                = f.select :role,
-                    options_for_select(User.roles.keys.map { |role| [role.titleize, role] },
-                    user.role), {}, { class: 'form-control' }
-
-                = f.submit 'Change Role', class: 'button'
-            td
-              = link_to 'Delete user', admin_user_path(user), data: { confirm: 'Are you sure?' }, method: :delete, class: 'button'
-
+            td = user.word_statuses.where(learned: false).count
+            td = user.word_statuses.where(learned: true).count
+            td = user.grammar_eng_user_idioms.count
+            td = user.grammar_eng_user_irregular_verbs.count
+            td = user.grammar_eng_user_phrasal_verbs.count
+            td = user.articles.count
+            td = user.telegram_chat&.active
     #pagination-mobile.col-12.hidden-sm.hidden-md.hidden-lg.digg_pagination
       = will_paginate @users, previous_label: '❬', next_label: '❭', outer_window: 0

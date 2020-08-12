@@ -3,6 +3,9 @@ class User < ApplicationRecord
   has_many :word_statuses, dependent: :delete_all
   has_many :words, through: :word_statuses
   has_many :articles, dependent: :delete_all
+  has_many :grammar_eng_user_irregular_verbs, class_name: 'Grammar::Eng::UserIrregularVerb'
+  has_many :grammar_eng_user_phrasal_verbs, class_name: 'Grammar::Eng::UserPhrasalVerb'
+  has_many :grammar_eng_user_idioms, class_name: 'Grammar::Eng::UserIdiom'
 
   has_one :training
   has_one :skyeng_setting

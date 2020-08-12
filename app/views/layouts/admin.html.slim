@@ -1,0 +1,15 @@
+doctype html
+html lang="ru" 
+  head
+    title Enwords
+    = render 'layouts/meta'
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all'
+  body.light-blue-skin class=body_class
+    = render 'layouts/navigation'
+    .mt-5
+      = yield
+    .mt-5
+      = render 'layouts/footer'
+    = javascript_include_tag 'application'
+    = yield :footer_js

@@ -3,7 +3,8 @@ module Admin
     before_action :set_user, only: %i[show update destroy]
 
     def index
-      @users = User.order(updated_at: :desc).paginate(page: params[:page], per_page: 20)
+      @users = User.order(updated_at: :desc).paginate(page: params[:page], per_page: 10)
+      @users = @users.joins(:word_statuses).distinct if params[:active]
     end
 
     def show; end
@@ -33,17 +34,6 @@ module Admin
           format.json { render json: @user.errors, status: :unprocessable_entity }
         end
       end
-    end
-
-    def stat
-      per_day = User.group('created_at::date').count
-      count = 0
-      data = per_day.sort.each_with_object(Hash.new(0)) do |(date, delta), hash|
-        count += delta
-        hash[date] = count
-      end
-
-      render :stat, locals: { per_day: per_day, data: data }
     end
 
     private
