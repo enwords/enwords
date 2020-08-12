@@ -1,0 +1,2 @@
+class PaymentCallback < ApplicationRecord
+end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_26_082213) do
+ActiveRecord::Schema.define(version: 2020_08_12_182958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -121,6 +121,12 @@ ActiveRecord::Schema.define(version: 2020_07_26_082213) do
     t.datetime "updated_at", null: false
     t.boolean "creative_added", default: false
     t.index ["word_id"], name: "index_mnemos_on_word_id"
+  end
+
+  create_table "payment_callbacks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.jsonb "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "sentences", id: :integer, default: nil, force: :cascade do |t|

@@ -30,6 +30,12 @@ Rails.application.routes.draw do
 
     namespace :web do
       resources :translations, only: %i[index]
+      resources :payments, only: %i[] do
+        collection do
+          post :callback
+          get :callback
+        end
+      end
     end
   end
 
