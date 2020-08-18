@@ -42,9 +42,7 @@ class API::Web::TranslationsController < ::API::BaseController
 
   def yandex_translate
     @yandex_translate ||= begin
-      from = User::Languages::LOCALES[params[:from].to_sym]
-      to = User::Languages::LOCALES[params[:to].to_sym]
-      result = API::YandexTranslate.translate(text: word_value, from: from, to: to)
+      result = Yandex::Translate.run!(text: word_value, from: params[:from], to: params[:to])
       update_trans(result)
       result
     end

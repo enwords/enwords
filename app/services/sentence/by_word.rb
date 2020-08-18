@@ -53,9 +53,7 @@ class Sentence < ApplicationRecord
     end
 
     def yandex_translate
-      from = User::Languages::LOCALES[word.language.to_sym]
-      to = User::Languages::LOCALES[translation_lang.to_sym]
-      trans = API::YandexTranslate.translate(text: word.value, from: from, to: to)
+      trans = Yandex::Translate.run!(text: word.value, from: word.language, to: translation_lang)
       {
         'translation' => { 'text' => trans },
         'text' => word.value
