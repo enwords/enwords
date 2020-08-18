@@ -30,34 +30,15 @@ class Sentence < ApplicationRecord
     end
 
     def word_translation
-      @word_translation ||= word_translation_hash.dig('translation', 'text')
+      @word_translation ||= word_translation_hash[:translation]
     end
 
     def word_transcription
-      @word_transcription ||= word_translation_hash['transcription'] || word.transcription
+      @word_transcription ||= word_translation_hash[:transcription] || word.transcription
     end
 
     def word_translation_hash
-      @word_translation_hash ||=
-        begin
-          result = skyeng_translate if word.language == 'eng' && translation_lang.to_s == 'rus'
-          result = yandex_translate if result.blank?
-          result
-        rescue StandardError
-          {}
-        end
-    end
-
-    def skyeng_translate
-      API::Skyeng.first_meaning(word: word.value)
-    end
-
-    def yandex_translate
-      trans = Yandex::Translate.run!(text: word.value, from: word.language, to: translation_lang)
-      {
-        'translation' => { 'text' => trans },
-        'text' => word.value
-      }
+      @word_translation_hash ||= Word::Translate.run!(text: word.value, from: word.language, to: translation_lang)
     end
 
     def sentence_with_translation

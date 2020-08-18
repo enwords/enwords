@@ -16,6 +16,7 @@ describe Sentence::ByWord do
   let!(:mnemo) { create :mnemo, word: word }
 
   before do
+    allow(Yandex::Translate).to receive(:run!).and_return(translation_value)
     allow(API::Skyeng).to receive(:first_meaning).and_return(
       'id' => 92_160,
       'partOfSpeechCode' => 'n',
