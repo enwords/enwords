@@ -1,10 +1,6 @@
 class API::Web::TranslationsController < ::API::BaseController
   def index
-    if params[:from] == 'eng' && params[:to] == 'rus'
-      result = skyeng_translate
-    end
-    result = yandex_translate if result.blank?
-    result.merge!(youglish: youglish)
+    result = decorate
     if result.present?
       render json: result, status: :ok
     else
@@ -32,25 +28,57 @@ class API::Web::TranslationsController < ::API::BaseController
   end
 
   def skyeng_translate
-    return
-    API::Skyeng.first_meaning(word: word_value)
+    @skyeng_translate ||= begin
+      return unless params[:from] == 'eng' && params[:to] == 'rus'
+
+      result = API::Skyeng.first_meaning(word: word_value)
+      return if result.blank?
+
+      update_trans(result.dig('translation', 'text'))
+      update_sound_url(result.dig('soundUrl'))
+      result
+    end
   end
 
   def yandex_translate
-    from = User::Languages::LOCALES[params[:from].to_sym]
-    to = User::Languages::LOCALES[params[:to].to_sym]
-    trans = API::YandexTranslate.translate(text: word_value, from: from, to: to)
-    if trans && word
-      data = word.data || {}
-      data['trans'] ||= {}
-      data['trans'][params[:to]] = trans
-      word.update!(data: data)
+    @yandex_translate ||= begin
+      from = User::Languages::LOCALES[params[:from].to_sym]
+      to = User::Languages::LOCALES[params[:to].to_sym]
+      result = API::YandexTranslate.translate(text: word_value, from: from, to: to)
+      update_trans(result)
+      result
     end
+  end
+
+  def decorate
+    return unless word
+
     {
-      translation: { text: trans },
-      transcription: word&.transcription,
-      text: word_value
+      translation: word.data&.dig('trans', params[:to]) || yandex_translate || skyeng_translate&.dig('translation', 'text'),
+      transcription: word.transcription,
+      text: word.value,
+      sound_url: word.data&.dig('sound_url') || skyeng_translate&.dig('soundUrl'),
+      youglish: youglish
     }
+  end
+
+  def update_trans(trans)
+    return unless word && trans
+    return if word.data&.dig('trans', params[:to])
+
+    data = word.data || {}
+    data['trans'] ||= {}
+    data['trans'][params[:to]] = trans
+    word.update!(data: data)
+  end
+
+  def update_sound_url(sound_url)
+    return unless word && sound_url
+    return if word.data&.dig('sound_url')
+
+    data = word.data || {}
+    data['sound_url'] = sound_url
+    word.update!(data: data)
   end
 
   def word
