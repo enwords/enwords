@@ -3,7 +3,7 @@ class Sentence < ApplicationRecord
     private
 
     object :word
-    symbol :translation_lang
+    string :translation_lang
 
     def execute
       word.update(transcription: word_transcription) if word_transcription.present? && word.transcription.blank?

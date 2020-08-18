@@ -11,7 +11,7 @@
       = link_to t('texts.links.delete'), article_path(@article),
           method: :delete,
           data: { confirm: t('texts.links.are_you_sure') }
-    - if User::Languages.supported_pair?(*lang_pair)
+    - if supported_pair?
       div
         h3.form-signin-heading
           - @article.title.split.each do |w|

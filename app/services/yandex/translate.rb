@@ -8,7 +8,7 @@ module Yandex
       api_url: ENV['YANDEX_API_URL'],
       oauth_token: ENV['YANDEX_OAUTH_TOKEN'],
       folder_id: ENV['YANDEX_FOLDER_ID']
-    }
+    }.freeze
 
     string :from
     string :to
@@ -17,8 +17,8 @@ module Yandex
     def execute
       request_params = {
         folderId: CONFIG[:folder_id],
-        sourceLanguageCode: User::Languages::LOCALES[from.to_sym] || from,
-        targetLanguageCode: User::Languages::LOCALES[to.to_sym] || to,
+        sourceLanguageCode: Rails.configuration.languages['locales'][from] || from,
+        targetLanguageCode: Rails.configuration.languages['locales'][to] || to,
         texts: [text]
       }
       result = Curl.post(CONFIG[:api_url], request_params.to_json) do |curl|

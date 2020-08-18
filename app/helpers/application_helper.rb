@@ -37,6 +37,11 @@ module ApplicationHelper
     [l_lang, n_lang]
   end
 
+  def supported_pair?
+    Rails.configuration.languages['locales'][l_lang] &&
+      Rails.configuration.languages['locales'][n_lang]
+  end
+
   def actual_skyeng_setting_path
     current_user.skyeng_setting.present? ? skyeng_setting_path : new_skyeng_setting_path
   end

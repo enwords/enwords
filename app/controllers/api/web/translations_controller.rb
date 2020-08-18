@@ -11,10 +11,10 @@ class API::Web::TranslationsController < ::API::BaseController
   private
 
   def youglish
-    accent = User::Languages::LOCALES[params[:from].to_sym]
+    accent = Rails.configuration.languages['locales'][params[:from]]
     return unless accent
 
-    lang = User::Languages::YOUGLISH_ACCENTS[accent]
+    lang = Rails.configuration.languages['youglish'][accent]
     return unless lang
 
     {
@@ -51,8 +51,11 @@ class API::Web::TranslationsController < ::API::BaseController
   def decorate
     return unless word
 
+    translation = word.data&.dig('trans', params[:to]) ||
+                  yandex_translate ||
+                  skyeng_translate&.dig('translation', 'text')
     {
-      translation: word.data&.dig('trans', params[:to]) || yandex_translate || skyeng_translate&.dig('translation', 'text'),
+      translation: translation,
       transcription: word.transcription,
       text: word.value,
       sound_url: word.data&.dig('sound_url') || skyeng_translate&.dig('soundUrl'),

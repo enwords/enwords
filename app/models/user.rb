@@ -14,11 +14,9 @@ class User < ApplicationRecord
   devise :omniauthable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  include User::Languages
-
   enum role: %i[user vip admin]
-  enum native_language: SHORT_LANGUAGE_NAMES, _prefix: :native
-  enum learning_language: SHORT_LANGUAGE_NAMES, _prefix: :learning
+  enum native_language: Rails.configuration.languages['enums'], _prefix: :native
+  enum learning_language: Rails.configuration.languages['enums'], _prefix: :learning
 
   store_accessor :additional_info,
                  :proficiency_levels,

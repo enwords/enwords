@@ -46,7 +46,7 @@ describe Sentence::ByWord do
     let(:translation_value) { 'word' }
 
     before do
-      allow(API::YandexTranslate).to receive(:translate).and_return(translation_value)
+      allow(Yandex::Translate).to receive(:run!).and_return(translation_value)
     end
 
     it 'returns valid hash' do

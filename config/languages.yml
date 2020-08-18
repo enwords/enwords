@@ -1,0 +1,120 @@
+default: &default
+  enums:
+    eng: 0
+    epo: 1
+    tur: 2
+    ita: 3
+    rus: 4
+    deu: 5
+    fra: 6
+    spa: 7
+    por: 8
+    jpn: 9
+    hun: 10
+    heb: 11
+    ber: 12
+    pol: 13
+    mkd: 14
+    fin: 15
+    nld: 16
+    cmn: 17
+    mar: 18
+    ukr: 19
+    swe: 20
+    dan: 21
+    srp: 22
+    bul: 23
+    ces: 24
+    ina: 25
+    lat: 26
+    ara: 27
+    nds: 28
+    lit: 29
+
+  names:
+    ara: Arabic
+    ber: Berber
+    bul: Bulgarian
+    ces: Czech
+    cmn: Chinese
+    dan: Danish
+    deu: German
+    eng: English
+    epo: Esperanto
+    fin: Finnish
+    fra: French
+    heb: Hebrew
+    hun: Hungarian
+    ina: Interlingua
+    ita: Italian
+    jpn: Japanese
+    lat: Latin
+    lit: Lithuanian
+    mar: Marathi
+    mkd: Macedonian
+    nds: "Low Saxon"
+    nld: Dutch
+    pol: Polish
+    por: Portuguese
+    rus: Russian
+    spa: Spanish
+    srp: Serbian
+    swe: Swedish
+    tur: Turkish
+    ukr: Ukrainian
+
+  locales:
+    ara: ar
+    bul: bg
+    ces: cs
+    cmn: zh
+    dan: da
+    deu: de
+    eng: en
+    epo: eo
+    fin: fi
+    fra: fr
+    heb: he
+    hun: hu
+    ina: ia
+    ita: it
+    jpn: ja
+    lat: la
+    lit: lt
+    mar: mr
+    mkd: mk
+    nld: nl
+    pol: pl
+    por: pt
+    rus: ru
+    spa: es
+    srp: sr
+    swe: sv
+    tur: tr
+    ukr: uk
+
+  youglish:
+    en: english
+    fr: french
+    es: spanish
+    la: spanish
+    pt: portuguese
+    nl: dutch
+    ar: arabic
+    zh: chinese
+    he: hebrew
+    it: italian
+    de: german
+    jp: japanese
+    ko: korean
+    tr: turkish
+    ru: russian
+
+test:
+  <<: *default
+
+development:
+  <<: *default
+
+production:
+  <<: *default

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe API::Web::PaymentsController do
   describe '#callback' do
-    subject { post '/api/web/payments/callback', headers: headers, params: params.to_json}
+    subject { post '/api/web/payments/callback', headers: headers, params: params.to_json }
 
     let(:headers) { { 'Content-Type' => 'application/json' } }
     let(:params) { { FFaker::Lorem.word => FFaker::Lorem.word } }

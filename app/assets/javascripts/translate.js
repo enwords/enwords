@@ -41,7 +41,7 @@ $(function() {
           })
             .done(function(data) {
               var content = ('<div style="font-size: 1.25rem; font-weight: 100">');
-              var word = data.text;
+              var word = data.text.capitalize();
               var translation;
               var transcription;
               var soundUrl;
@@ -70,7 +70,7 @@ $(function() {
                   '</span>' +
                   '<span> ' + word + '</span>' +
                   '</span>' +
-                  '<span style="color: #b9b9b9"> ' + transcriptionBlock + '</span>' +
+                  '<span> ' + transcriptionBlock + '</span>' +
                   '<span> ' + translation + '</span>'
                 );
               }

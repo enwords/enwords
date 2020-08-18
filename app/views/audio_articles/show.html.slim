@@ -15,7 +15,7 @@
       br
       br
     div
-      - if User::Languages.supported_pair?(*lang_pair)
+      - if supported_pair?
         - @article.content.split("\r\n").each do |sen|
           - sen.split.each do |w|
             span.word-translate data-from=l_lang data-to=n_lang = w

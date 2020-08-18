@@ -77,16 +77,16 @@ module Telegram
     def translation_lang
       @translation_lang ||=
         case lang
-        when :rus then :eng
-        when :eng then :rus
+        when 'rus' then 'eng'
+        when 'eng' then 'rus'
         end
     end
 
     def lang
       @lang ||=
         case clean_text
-        when /[a-z]/i then :eng
-        when /[а-ё]/i then :rus
+        when /[a-z]/i then 'eng'
+        when /[а-ё]/i then 'rus'
         end
     end
 

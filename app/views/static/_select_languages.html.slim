@@ -8,14 +8,14 @@
             = t('devise.registration.form.learning_language')
             .settings-item
               = f.select :learning_language,
-                      options_for_select(User::FULL_LANGUAGE_NAMES, :eng),
+                      options_for_select(Rails.configuration.languages['names'].invert, 'eng'),
                       {}, { class: 'form-control' }
         .field
           h5
             = t('devise.registration.form.native_language')
             .settings-item
               = f.select :native_language,
-                      options_for_select(User::FULL_LANGUAGE_NAMES, :rus),
+                      options_for_select(Rails.configuration.languages['names'].invert, 'rus'),
                       {}, { class: 'form-control' }
         .field style=('padding-top: 20px')
           = f.button t('devise.registration.edit.submit'),
