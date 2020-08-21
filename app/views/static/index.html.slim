@@ -1,39 +1,71 @@
-.container
-  = render 'layouts/locale_switcher'
-  .row.mt-5
-    - if user_signed_in?
-      - if current_user.learning_language.blank?
-        = render 'static/select_languages'
-      - else
-        = content_for :footer_js do
-          = javascript_include_tag 'visible_videos'
-
-        .col-12.col-md-10.offset-md-1
-          ul.main--list
-            li.row.mt-5.mb-5.guides-item
-              .col-sm-6.col-lg-8.align-self-center
-                h3 == t 'static.landings.select_words', words_path: words_path(status: 'unknown')
-              .hidden-xs-down.col-sm-6.col-lg-4
-                = image_tag 'iphone-frame.png', class: 'phone-preview'
-                = video_tag 'words.mp4', muted: true, playsinline: true, loop: true, autoplay: true, preload: 'auto', class: 'phone-video'
-            li.row.mb-5.guides-item
-              .col-sm-6.col-lg-8.align-self-center
-                h3 == t 'static.landings.upload_articles', audio_articles_path: audio_articles_path, articles_path: articles_path
-              .hidden-xs-down.col-sm-6.col-lg-4
-                = image_tag 'iphone-frame.png', class: 'phone-preview'
-                = video_tag 'articles.mp4', muted: true, playsinline: true, loop: true, autoplay: true, preload: 'auto', class: 'phone-video'
-            - if body_class == 'eng-rus'
-              li.row.mb-5.guides-item
-                .col-sm-6.col-lg-8.align-self-center
-                  h3 == t 'static.landings.use_telegram_bot'
-                .hidden-xs-down.col-sm-6.col-lg-4
-                  = image_tag 'iphone-frame.png', class: 'phone-preview'
-                  = video_tag 'telegram.mp4', muted: true, playsinline: true, loop: true, autoplay: true, preload: 'auto', class: 'phone-video cut'
-              li.row.mb-5.guides-item
-                .col-sm-6.col-lg-8.align-self-center
-                  h3 == t 'static.landings.follow_us'
-                .hidden-xs-down.col-sm-6.col-lg-4
-                  = image_tag 'iphone-frame.png', class: 'phone-preview'
-                  = video_tag 'instagram.mp4', muted: true, playsinline: true, loop: true, autoplay: true, preload: 'auto', class: 'phone-video cut'
+= render 'layouts/locale_switcher'
+.mt-5
+  - if user_signed_in?
+    - if current_user.learning_language.blank?
+      = render 'static/select_languages'
     - else
-      = render 'static/main_landing'
+      = content_for :footer_js do
+        = javascript_include_tag 'visible_videos'
+      .row.col-12
+        .row.mt-5.mb-5.guides-item
+          .col-sm-6.col-lg-8.align-self-center
+            h3 == t 'static.landings.select_words', words_path: words_path(status: 'unknown')
+          .hidden-xs-down.col-sm-6.col-lg-4
+            = image_tag 'iphone-frame.png', class: 'phone-preview'
+            = video_tag 'words.mp4', muted: true, playsinline: true, loop: true, autoplay: true, preload: 'auto', class: 'phone-video'
+        .row.mb-5.guides-item
+          .col-sm-6.col-lg-8.align-self-center
+            h3 == t 'static.landings.upload_articles', audio_articles_path: audio_articles_path, articles_path: articles_path
+          .hidden-xs-down.col-sm-6.col-lg-4
+            = image_tag 'iphone-frame.png', class: 'phone-preview'
+            = video_tag 'articles.mp4', muted: true, playsinline: true, loop: true, autoplay: true, preload: 'auto', class: 'phone-video'
+        - if body_class == 'eng-rus'
+          .row.mb-5.guides-item
+            .col-sm-6.col-lg-8.align-self-center
+              h3 == t 'static.landings.use_telegram_bot'
+            .hidden-xs-down.col-sm-6.col-lg-4
+              = image_tag 'iphone-frame.png', class: 'phone-preview'
+              = video_tag 'telegram.mp4', muted: true, playsinline: true, loop: true, autoplay: true, preload: 'auto', class: 'phone-video cut'
+          .row.mb-5.guides-item
+            .col-sm-6.col-lg-8.align-self-center
+              h3 == t 'static.landings.follow_us'
+            .hidden-xs-down.col-sm-6.col-lg-4
+              = image_tag 'iphone-frame.png', class: 'phone-preview'
+              = video_tag 'instagram.mp4', muted: true, playsinline: true, loop: true, autoplay: true, preload: 'auto', class: 'phone-video cut'
+      .row
+        .col-12.mb-1
+          h1 style="margin-left: 10px" = t('premium.subscription')
+          p style="margin-left: 10px" = t('premium.description')
+      .row
+        .col-12.col-md-4.mb-3
+          h3 style="margin-left: 10px" = t('premium.free')
+          p style="margin-left: 10px" = t('premium.basic_features')
+          = link_to t('premium.current_plan'), '#', class: 'btn btn-secondary disabled'
+          br
+          br
+          ul.fa-ul
+          ul.fa-ul
+            - t('premium.free_items').each do |item|
+              li
+                span class="fa-li"
+                  i class="fas fa-check"
+                = item
+        .col-12.col-md-8.mb-5
+          h3 style="margin-left: 10px" Premium
+          p style="margin-left: 10px" = t('premium.advanced_features')
+          = link_to link_to t('premium.upgrade'), '#', class: 'btn btn-warning', onclick: "return false;"
+          br
+          span.premium.price.active style="margin-left: 10px" = t('premium.price_monthly')
+          = " #{t('premium.or')} "
+          span.premium.price = t('premium.price_early')
+          br
+          br
+          ul.fa-ul
+            - t('premium.premium_items').each do |item|
+              li
+                span class="fa-li"
+                  i class="fas fa-check"
+                = item
+
+  - else
+    = render 'static/main_landing'
