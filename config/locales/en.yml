@@ -224,3 +224,26 @@ en:
       bye: "Bye!"
       not_understand: "I do not understand"
     reminder: 'Send me the word you want to learn in English 🇬🇧 and you will receive a translation, and I will periodically send you this word to remember 🤖'
+  premium:
+    basic_features: "Basic features."
+    free: "Free"
+    subscription: "Subscription 💰 -> 🧠"
+    description: "Take your english from good to great with Enwords Premium."
+    free_items:
+      - 1000 Words
+      - Grammar
+      - Articles
+    premium_items:
+      - ~25000 Words
+      - Grammar
+      - Articles
+      - Speaking Club
+      - Telegram Translator
+    advanced_features: "Advanced features."
+    current_plan: "Current Plan"
+    upgrade: "Upgrade"
+    price_monthly: "😎 ~$2 monthly"
+    price_early: "🤑 ~$13 early (-45%)"
+    or: "or"
+  footer:
+    agreement: "Terms and conditions"

@@ -19,3 +19,4 @@
 //= require translate
 //= require facebook
 //= require me-talk
+//= require premium

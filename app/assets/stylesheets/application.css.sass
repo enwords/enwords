@@ -20,7 +20,6 @@
 @import "font-awesome-sprockets"
 @import "font-awesome"
 @import url('https://fonts.googleapis.com/css?family=Montez')
-@import "cat"
 
 $learnedColor  : #5CB85C
 $learningColor : #F0AD4E
@@ -454,10 +453,6 @@ pre
 ul
   margin: 0
   padding-left: 0
-  &.main--list
-    list-style-type: none
-    li
-      margin-bottom: 20px
 
 .btn-group-vertical
   .btn:first-child
@@ -563,6 +558,10 @@ table
   .footer--my-name
     display: none
 
+@media only screen and (max-width: 710px)
+  .footer--agreement
+    display: none
+
 @media (min-width: 576px)
   .guides-item
     height: 520px
@@ -580,3 +579,9 @@ table
     &.cut
       margin-top: 76px
       height: 382px
+
+.premium
+  &.price
+    cursor: pointer
+    &.active
+      text-decoration: #f80 underline wavy
