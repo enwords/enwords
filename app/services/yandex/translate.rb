@@ -40,8 +40,8 @@ module Yandex
       end
       parsed_response = JSON.parse(response.body)
       result = parsed_response['iamToken']
-      expires_at = parsed_response['expiresAt']
-      Rails.cache.write(CONFIG[:iam_token_cache_key], result, expires_at: expires_at)
+      expires_at = Time.parse(parsed_response['expiresAt'])
+      Rails.cache.write(CONFIG[:iam_token_cache_key], result, expires_in: (expires_at.to_f - Time.current.to_f).seconds)
       result
     end
   end
