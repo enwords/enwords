@@ -1,4 +1,5 @@
 Rails.application.configure do
+  default_url_options[:host] = 'localhost:3000'
   config.cache_classes = true
   config.eager_load = false
   config.public_file_server.enabled = true

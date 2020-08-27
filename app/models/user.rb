@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :grammar_eng_user_irregular_verbs, class_name: 'Grammar::Eng::UserIrregularVerb'
   has_many :grammar_eng_user_phrasal_verbs, class_name: 'Grammar::Eng::UserPhrasalVerb'
   has_many :grammar_eng_user_idioms, class_name: 'Grammar::Eng::UserIdiom'
+  has_many :subscriptions
+  has_many :payments
 
   has_one :training
   has_one :skyeng_setting
@@ -65,5 +67,9 @@ class User < ApplicationRecord
     proficiency_levels[learning_language] = 100
     self.sentences_number = 3
     save!
+  end
+
+  def premium?
+    subscriptions.status_active.exists?
   end
 end

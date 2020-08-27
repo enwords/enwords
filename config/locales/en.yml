@@ -233,8 +233,8 @@ en:
       - 1000 Words
       - Grammar
       - Articles
+    words_to_learn: "%{words_count} Words to learn"
     premium_items:
-      - ~25000 Words
       - Grammar
       - Articles
       - Speaking Club
@@ -243,7 +243,9 @@ en:
     current_plan: "Current Plan"
     upgrade: "Upgrade"
     price_monthly: "😎 ~$2 monthly"
-    price_early: "🤑 ~$13 early (-45%)"
+    price_yearly: "🤑 ~$13 yearly (-45%)"
     or: "or"
+    thank_you: "Thank you for purchasing Premium. You are now an early adopter of Enwords. You will get new opportunities soon"
+    get_premium: "Get premium"
   footer:
     agreement: "Terms and conditions"

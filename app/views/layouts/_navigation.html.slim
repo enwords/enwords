@@ -82,6 +82,11 @@ header
                     class: 'form-control col-sm-8 m-0'
 
           ul.navbar-nav.navbar-right
+            li.nav-item
+              - if current_user.premium?
+                span class='nav-link' Premium
+              - else
+                = link_to t('premium.get_premium'), root_path(anchor: 'premium'), class: 'nav-link'
             li.nav-item.dropdown
               a.dropdown-toggle data-toggle='dropdown' href='#' class='nav-link'
                 = icon('far', 'user')

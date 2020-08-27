@@ -13,9 +13,5 @@ describe API::Web::PaymentsController do
     it 'creates PaymentCallback' do
       expect { subject }.to change { PaymentCallback.count }.by(1)
     end
-    it 'saves data' do
-      subject
-      expect(PaymentCallback.last.data).to eq(params)
-    end
   end
 end

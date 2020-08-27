@@ -117,6 +117,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :subscriptions, only: %i[create] do
+    collection do
+      get :after_checkout
+    end
+  end
+
   resource :skyeng_setting do
     put :add_token
   end

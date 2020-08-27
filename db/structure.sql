@@ -265,6 +265,23 @@ CREATE TABLE public.payment_callbacks (
 
 
 --
+-- Name: payments; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.payments (
+    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    user_id bigint NOT NULL,
+    amount_cents integer NOT NULL,
+    currency character varying NOT NULL,
+    provider integer NOT NULL,
+    status integer NOT NULL,
+    data jsonb,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -327,6 +344,22 @@ CREATE SEQUENCE public.skyeng_settings_id_seq
 --
 
 ALTER SEQUENCE public.skyeng_settings_id_seq OWNED BY public.skyeng_settings.id;
+
+
+--
+-- Name: subscriptions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.subscriptions (
+    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    user_id bigint NOT NULL,
+    payment_id uuid NOT NULL,
+    status integer NOT NULL,
+    plan integer NOT NULL,
+    expires_at timestamp without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
 
 
 --
@@ -647,6 +680,14 @@ ALTER TABLE ONLY public.payment_callbacks
 
 
 --
+-- Name: payments payments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payments
+    ADD CONSTRAINT payments_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: schema_migrations schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -676,6 +717,14 @@ ALTER TABLE ONLY public.sentences_words
 
 ALTER TABLE ONLY public.skyeng_settings
     ADD CONSTRAINT skyeng_settings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: subscriptions subscriptions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.subscriptions
+    ADD CONSTRAINT subscriptions_pkey PRIMARY KEY (id);
 
 
 --
@@ -818,6 +867,13 @@ CREATE INDEX index_mnemos_on_word_id ON public.mnemos USING btree (word_id);
 
 
 --
+-- Name: index_payments_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_payments_on_user_id ON public.payments USING btree (user_id);
+
+
+--
 -- Name: index_sentences_on_language; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -836,6 +892,20 @@ CREATE UNIQUE INDEX index_sentences_words_on_word_id_and_sentence_id ON public.s
 --
 
 CREATE INDEX index_skyeng_settings_on_user_id ON public.skyeng_settings USING btree (user_id);
+
+
+--
+-- Name: index_subscriptions_on_payment_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_subscriptions_on_payment_id ON public.subscriptions USING btree (payment_id);
+
+
+--
+-- Name: index_subscriptions_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_subscriptions_on_user_id ON public.subscriptions USING btree (user_id);
 
 
 --
@@ -923,6 +993,14 @@ CREATE INDEX index_words_on_value ON public.words USING btree (value);
 
 
 --
+-- Name: payments fk_rails_081dc04a02; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.payments
+    ADD CONSTRAINT fk_rails_081dc04a02 FOREIGN KEY (user_id) REFERENCES public.users(id);
+
+
+--
 -- Name: grammar_eng_user_idioms fk_rails_134f689978; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -955,6 +1033,14 @@ ALTER TABLE ONLY public.grammar_eng_user_phrasal_verbs
 
 
 --
+-- Name: subscriptions fk_rails_6e94fe58fc; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.subscriptions
+    ADD CONSTRAINT fk_rails_6e94fe58fc FOREIGN KEY (payment_id) REFERENCES public.payments(id);
+
+
+--
 -- Name: grammar_eng_user_phrasal_verbs fk_rails_75eb6993ab; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -968,6 +1054,14 @@ ALTER TABLE ONLY public.grammar_eng_user_phrasal_verbs
 
 ALTER TABLE ONLY public.grammar_eng_user_idioms
     ADD CONSTRAINT fk_rails_8dbd4b5a33 FOREIGN KEY (idiom_id) REFERENCES public.grammar_eng_idioms(id);
+
+
+--
+-- Name: subscriptions fk_rails_933bdff476; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.subscriptions
+    ADD CONSTRAINT fk_rails_933bdff476 FOREIGN KEY (user_id) REFERENCES public.users(id);
 
 
 --
@@ -1058,6 +1152,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200707153942'),
 ('20200707214051'),
 ('20200726082213'),
-('20200812182958');
+('20200812182958'),
+('20200826135019'),
+('20200826174732');
 
 

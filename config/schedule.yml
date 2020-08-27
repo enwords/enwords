@@ -9,3 +9,7 @@ send_external_article:
 certbot_renew:
   cron:  '0 0 */15 * *'
   class: 'CertbotRenewWorker'
+
+subscriptions_activate:
+  cron: "*/5 * * * *"
+  class: "Subscriptions::ActivateWorker"

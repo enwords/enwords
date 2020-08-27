@@ -7,7 +7,8 @@ class Word < ApplicationRecord
     def execute
       return unless word
 
-      translation = word.data&.dig('trans', to) ||
+      translation =
+        word.data&.dig('trans', to) ||
         yandex_translate ||
         skyeng_translate&.dig('translation', 'text')
       {
