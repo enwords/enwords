@@ -5,7 +5,10 @@ class Word < ApplicationRecord
     string :text
 
     def execute
-      return unless word
+      unless word
+        tr = yandex_translate
+        return tr ? { translation: tr, text: text, youglish: youglish } : nil
+      end
 
       translation =
         word.data&.dig('trans', to) ||

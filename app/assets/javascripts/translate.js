@@ -60,7 +60,7 @@ $(function() {
                   audio = ''
                 }
                 transcriptionBlock = ' - ';
-                if(transcription !== 'undefined' && transcription !== null) {
+                if(typeof transcription !== 'undefined' && transcription !== null) {
                   transcriptionBlock = '[' + transcription + ']';
                 }
                 content = content + (
