@@ -18,9 +18,15 @@ class Word < ApplicationRecord
         translation: translation,
         transcription: word.transcription || skyeng_translate&.dig('transcription'),
         text: word.value,
-        sound_url: word.data&.dig('sound_url') || skyeng_translate&.dig('soundUrl'),
+        sound_url: sound_url,
         youglish: youglish
       }
+    end
+
+    def sound_url
+      return unless from == 'eng'
+
+      "https://d2fmfepycn0xw0.cloudfront.net/?gender=female&accent=british&text=#{word_value}"
     end
 
     def youglish
@@ -51,7 +57,6 @@ class Word < ApplicationRecord
 
         update_trans(result.dig('translation', 'text'))
         update_transcription(result.dig('transcription'))
-        update_sound_url(result.dig('soundUrl'))
         result
       end
     end
@@ -71,15 +76,6 @@ class Word < ApplicationRecord
       data = word.data || {}
       data['trans'] ||= {}
       data['trans'][to] = trans
-      word.update!(data: data)
-    end
-
-    def update_sound_url(sound_url)
-      return unless word && sound_url
-      return if word.data&.dig('sound_url')
-
-      data = word.data || {}
-      data['sound_url'] = sound_url
       word.update!(data: data)
     end
 
