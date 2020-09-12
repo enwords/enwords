@@ -8,7 +8,7 @@ describe Yandex::Kassa::CheckPayment do
       payment: payment
     }
   end
-  let(:payment) { create(:payment, status: :pending) }
+  let(:payment) { create(:payment, status: :pending, data: [{ 'id' => 123 }]) }
   let(:response_body) do
     {
       id: '23d93cac-000f-5000-8000-126628f15141',
@@ -35,7 +35,7 @@ describe Yandex::Kassa::CheckPayment do
   end
 
   before do
-    stub_request(:get, "https://payment.yandex.net/api/v3/payments/#{payment.id}")
+    stub_request(:get, "https://payment.yandex.net/api/v3/payments/123")
       .to_return(status: 200, body: response_body.to_json, headers: {})
   end
 

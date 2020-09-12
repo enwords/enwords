@@ -26,6 +26,7 @@ class User < ApplicationRecord
                  :skyeng_words_count
 
   after_create :create_test_article
+  after_create :set_default_learning_words
   after_create :set_default_settings
 
   def self.testee
@@ -54,6 +55,10 @@ class User < ApplicationRecord
 
   def proficiency_level
     proficiency_levels.try(:[], learning_language) || 0
+  end
+
+  def set_default_learning_words
+    Word::UpdateState.run(ids: [680, 902, 1389, 1647, 3766], to_state: 'learning', user: self)
   end
 
   def create_test_article
