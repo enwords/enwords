@@ -521,7 +521,8 @@ CREATE TABLE public.words (
     pos character varying,
     weight integer,
     transcription character varying,
-    data jsonb
+    data jsonb,
+    frequency integer
 );
 
 
@@ -1154,6 +1155,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200726082213'),
 ('20200812182958'),
 ('20200826135019'),
-('20200826174732');
+('20200826174732'),
+('20200915190707');
 
 
