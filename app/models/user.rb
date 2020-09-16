@@ -69,8 +69,10 @@ class User < ApplicationRecord
 
   def set_default_settings
     self.proficiency_levels = {}
-    proficiency_levels[learning_language] = 100
+    proficiency_levels[learning_language] = 40
     self.sentences_number = 3
+    self.audio_enable = true
+    self.diversity_enable = true if learning_language == 'eng'
     save!
   end
 

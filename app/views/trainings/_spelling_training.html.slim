@@ -8,9 +8,8 @@
         = link_to t('training.in_settings'), edit_user_registration_path
       - @sentences.each do |sentence|
         .col-12.original-sentence-block
-          - if sentence.with_audio?
-            span.fa.fa-volume-up.btn-play-audio
-              = audio_tag "https://audio.tatoeba.org/sentences/#{sentence.language}/#{sentence.id}.mp3"
+          - if sentence.audio_url
+            span.fa.fa-volume-up.btn-play-audio = audio_tag sentence.audio_url, id: 'play-audio'
           - else
             span.fa.fa-volume-off
           h4#original-sentence data-sentence-id=sentence.id data-sentence-value=sentence.value

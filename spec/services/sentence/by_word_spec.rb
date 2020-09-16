@@ -31,7 +31,7 @@ describe Sentence::ByWord do
 
   it 'returns valid hash' do
     expect(subject).to eq(
-      menemo: 'Контент',
+      mnemo: 'Контент',
       sentence: 'word word word',
       sentence_translation: 'слово',
       text: "*word* _[wɜːd]_ - слово\n\nword word word\n_слово_\n\n_Контент_",
@@ -52,7 +52,7 @@ describe Sentence::ByWord do
 
     it 'returns valid hash' do
       expect(subject).to eq(
-        menemo: 'Контент',
+        mnemo: 'Контент',
         sentence: 'word word word',
         sentence_translation: 'word',
         text: "*слово* - word\n\nword word word\n_word_\n\n_Контент_",

@@ -8,5 +8,5 @@
 
 - if current_user.audio_enable
   javascript:
-    var $audio = $('audio')[0];
-    if ($audio !== undefined) $audio.play();
+    var audio = document.getElementById('play-audio');
+    if(audio !== undefined) audio.play();

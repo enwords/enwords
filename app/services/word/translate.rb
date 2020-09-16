@@ -24,9 +24,7 @@ class Word < ApplicationRecord
     end
 
     def sound_url
-      return unless from == 'eng'
-
-      "https://d2fmfepycn0xw0.cloudfront.net/?gender=female&accent=british&text=#{word_value}"
+      ENV['ENG_SOUND_URL'] + word_value if from == 'eng'
     end
 
     def youglish

@@ -70,10 +70,6 @@ header
               li.nav-item = link_to t('shared.navigation.last_training'),
                       training_path(page: current_user.training.current_page),
                       class: 'nav-link'
-            - if body_class == 'eng-rus' && !current_user.skyeng_setting.try(:finished?) && (Date.current - current_user.created_at.to_date).to_i < 1
-              li.nav-item = link_to t('shared.navigation.skyeng_setting'),
-                      actual_skyeng_setting_path,
-                      class: 'nav-link'
 
           = form_tag words_path, method: 'get',
                   class: 'navbar-form navbar-right' do

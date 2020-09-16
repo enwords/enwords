@@ -12,7 +12,7 @@ class Sentence < ApplicationRecord
         sentence: sentence.try(:value),
         word_translation: word_translation,
         sentence_translation: sentence.try(:translation),
-        menemo: word_mnemo,
+        mnemo: word_mnemo,
         text: text
       }
     end
@@ -87,10 +87,13 @@ class Sentence < ApplicationRecord
       result << "\n"
       result << "\n"
       result << sentence.value
+      result << "\n"
 
       if sentence.try(:translation).present?
-        result << "\n"
         result << "_#{sentence.translation}_"
+      else
+        translation = CreateTranslation.run!(sentence: sentence, translation_lang: translation_lang)
+        result << "_#{translation.value}_" if translation
       end
 
       if word_mnemo.present?

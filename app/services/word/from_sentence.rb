@@ -4,6 +4,7 @@ class Word < ApplicationRecord
     integer :sentence_id
 
     def execute
+      Sentence::AttachToWords.run!(sentence: sentence)
       words_from_sentence.map do |word|
         {
           id: word.id,
@@ -16,7 +17,7 @@ class Word < ApplicationRecord
     private
 
     def sentence
-      Sentence.find(sentence_id)
+      @sentence ||= Sentence.find(sentence_id)
     end
 
     def words_from_sentence
