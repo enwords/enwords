@@ -4,10 +4,12 @@
       h1 == t('static.landings.main.block_1.title')
       h3 == t('static.landings.main.block_1.body')
     .col-md-6.p-0
-      = image_tag 'landing/laptop.png', class: 'toast-top-full-width'
+      = picture_tag '/images/landing/laptop.png', image: { alt: 'You are awesome!', type: 'image/png', class: 'toast-top-full-width' } do
+        = source_tag srcset: '/images/landing/laptop.webp', type: 'image/webp'
   .row.mb-5
     .hidden-xs-down.col-md-6
-      = image_tag 'landing/skate.png', class: 'toast-top-full-width'
+      = picture_tag '/images/landing/skate.png', image: { alt: 'You are awesome!', type: 'image/png', class: 'toast-top-full-width' } do
+        = source_tag srcset: '/images/landing/skate.webp', type: 'image/webp'
     .col-md-6.p-0.align-self-center.text-center
       h1 == t('static.landings.main.block_2.title')
       h3 == t('static.landings.main.block_2.body')
@@ -17,7 +19,8 @@
       h1 == t('static.landings.main.block_3.title')
       h3 == t('static.landings.main.block_3.body')
     .col-md-6
-      = image_tag 'landing/fell.png', class: 'toast-top-full-width'
+      = picture_tag '/images/landing/fell.png', image: { alt: 'You are awesome!', type: 'image/png', class: 'toast-top-full-width' } do
+        = source_tag srcset: '/images/landing/fell.webp', type: 'image/webp'
   .row
     .col-12.col-md-10.offset-md-1
       = render 'devise/registrations/form'

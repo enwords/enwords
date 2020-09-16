@@ -11,26 +11,30 @@
           .col-sm-6.col-lg-8.align-self-center
             h3 == t 'static.landings.select_words', words_path: words_path(status: 'unknown')
           .hidden-xs-down.col-sm-6.col-lg-4
-            = image_tag 'iphone-frame.png', class: 'phone-preview'
+            = picture_tag '/images/iphone-frame.png', image: { alt: 'You are awesome!', type: 'image/png', class: 'phone-preview' } do
+              = source_tag srcset: '/images/iphone-frame.webp', type: 'image/webp'
             = video_tag 'words.mp4', muted: true, playsinline: true, loop: true, autoplay: true, preload: 'auto', class: 'phone-video'
         .row.mb-5.guides-item
           .col-sm-6.col-lg-8.align-self-center
             h3 == t 'static.landings.upload_articles', audio_articles_path: audio_articles_path, articles_path: articles_path
           .hidden-xs-down.col-sm-6.col-lg-4
-            = image_tag 'iphone-frame.png', class: 'phone-preview'
+            = picture_tag '/images/iphone-frame.png', image: { alt: 'You are awesome!', type: 'image/png', class: 'phone-preview' } do
+              = source_tag srcset: '/images/iphone-frame.webp', type: 'image/webp'
             = video_tag 'articles.mp4', muted: true, playsinline: true, loop: true, autoplay: true, preload: 'auto', class: 'phone-video'
         - if body_class == 'eng-rus'
           .row.mb-5.guides-item
             .col-sm-6.col-lg-8.align-self-center
               h3 == t 'static.landings.use_telegram_bot'
             .hidden-xs-down.col-sm-6.col-lg-4
-              = image_tag 'iphone-frame.png', class: 'phone-preview'
+              = picture_tag '/images/iphone-frame.png', image: { alt: 'You are awesome!', type: 'image/png', class: 'phone-preview' } do
+                = source_tag srcset: '/images/iphone-frame.webp', type: 'image/webp'
               = video_tag 'telegram.mp4', muted: true, playsinline: true, loop: true, autoplay: true, preload: 'auto', class: 'phone-video cut'
           .row.mb-5.guides-item
             .col-sm-6.col-lg-8.align-self-center
               h3 == t 'static.landings.follow_us'
             .hidden-xs-down.col-sm-6.col-lg-4
-              = image_tag 'iphone-frame.png', class: 'phone-preview'
+              = picture_tag '/images/iphone-frame.png', image: { alt: 'You are awesome!', type: 'image/png', class: 'phone-preview' } do
+                = source_tag srcset: '/images/iphone-frame.webp', type: 'image/webp'
               = video_tag 'instagram.mp4', muted: true, playsinline: true, loop: true, autoplay: true, preload: 'auto', class: 'phone-video cut'
       - unless current_user.premium?
         #premium.row
