@@ -7,7 +7,7 @@ class Word < ApplicationRecord
     def execute
       unless word
         tr = yandex_translate
-        return tr ? { translation: tr, text: text, youglish: youglish } : nil
+        return tr ? { translation: tr, text: text, youglish: youglish, sound_url: sound_url } : nil
       end
 
       translation =
