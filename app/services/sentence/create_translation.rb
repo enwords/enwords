@@ -11,6 +11,8 @@ class Sentence < ApplicationRecord
       Link.find_or_create_by!(sentence: sentence, translation: translation)
       AttachToWords.run!(sentence: translation)
       translation
+    rescue StandardError
+      nil
     end
 
     def translation_value
