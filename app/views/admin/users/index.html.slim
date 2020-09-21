@@ -17,6 +17,7 @@
         th phrasal verbs learned
         th articles
         th telegram
+        th premium
         th
       tbody
         - @users.each do |user|
@@ -34,6 +35,7 @@
             td = user.grammar_eng_user_irregular_verbs.count
             td = user.grammar_eng_user_phrasal_verbs.count
             td = user.articles.count
-            td = user.telegram_chat&.active
+            td = user.telegram_chat&.active?
+            td = user.premium?
     #pagination-mobile.col-12.hidden-sm.hidden-md.hidden-lg.digg_pagination
       = will_paginate @users, previous_label: '❬', next_label: '❭', outer_window: 0
