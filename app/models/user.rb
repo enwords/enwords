@@ -58,7 +58,7 @@ class User < ApplicationRecord
   end
 
   def set_default_learning_words
-    Word::UpdateState.run(ids: [680, 902, 1389, 1647, 3766], to_state: 'learning', user: self)
+    Word::UpdateState.run(ids: [680, 833, 843, 902, 909], to_state: 'learning', user: self)
   end
 
   def create_test_article

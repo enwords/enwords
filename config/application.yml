@@ -1,5 +1,5 @@
 default: &default
-  test: test
+  free_words_limit: <%= ENV.fetch('FREE_WORDS_LIMIT', 1_000) %>
 
 test:
   <<: *default

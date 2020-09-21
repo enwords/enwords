@@ -21,16 +21,21 @@ class Word < ApplicationRecord
         elsif article then words_from_article
         end
       result = result.order(:weight)
-      result
+      return result if user.premium?
+
+      result.where(id: base.order(:weight).limit(Rails.configuration.application['free_words_limit']).select(:id))
     end
 
     def offset_word
       Word.where(language: user.learning_language).offset(user.proficiency_level.to_i).order(:weight).first
     end
 
-    def available
+    def base
       Word.where(language: user.learning_language)
-          .where('words.weight >= ?', offset_word.try(:weight).to_i)
+    end
+
+    def available
+      base.where('words.weight >= ?', offset_word.try(:weight).to_i)
     end
 
     def words_from_article

@@ -64,7 +64,11 @@ module Telegram
     end
 
     def process_word
-      return I18n.t('telegram.process_message.not_understand', locale: :ru) unless word
+      unless word
+        return I18n.t('telegram.process_message.only_one_word', locale: :ru) if clean_text.split(' ').size > 1
+        return I18n.t('telegram.process_message.go_premium', locale: :ru) unless telegram_chat_user.premium?
+        return I18n.t('telegram.process_message.not_understand', locale: :ru)
+      end
 
       update_word_status
       texts_by_word[:text]
@@ -97,7 +101,7 @@ module Telegram
     end
 
     def word
-      @word ||= Word.find_by(value: clean_text, language: lang)
+      @word ||= Word::ByStatus.run!(status: 'available', user: telegram_chat_user).find_by(value: clean_text)
     end
 
     def translation_object

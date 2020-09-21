@@ -50,6 +50,10 @@
             br
             ul.fa-ul
             ul.fa-ul
+              li
+                span class="fa-li"
+                  i class="fas fa-check"
+                = t('premium.words_to_learn', words_count: Rails.configuration.application['free_words_limit'])
               - t('premium.free_items').each do |item|
                 li
                   span class="fa-li"

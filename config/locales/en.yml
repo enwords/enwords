@@ -218,27 +218,28 @@ en:
         button: "Push!"
   telegram:
     process_message:
-      send_email: 'Hello! Send your email from [Enwords] (https://enwords.app/en) to receive a list of studied words'
+      send_email: 'Hello! Send your email from [Enwords](https://enwords.app/en) to receive a list of studied words'
       user_not_found: 'User not found'
       telegram_chat_created: "User found. You have %{words_count} learning words. You will receive a newsletter once an hour"
       bye: "Bye!"
-      not_understand: "I do not understand"
+      only_one_word: "Send me just one word"
+      go_premium: "This word is available only to premium users.\n[Go premium](https://enwords.app/en#premium)"
+      not_understand: "I don't understand"
     reminder: 'Send me the word you want to learn in English 🇬🇧 and you will receive a translation, and I will periodically send you this word to remember 🤖'
   premium:
     basic_features: "Basic features."
     free: "Free"
     subscription: "Subscription 💰 -> 🧠"
     description: "Take your english from good to great with Enwords Premium."
+    words_to_learn: "%{words_count} Words to learn"
     free_items:
-      - 1000 Words
       - Grammar
       - Articles
-    words_to_learn: "%{words_count} Words to learn"
     premium_items:
       - Grammar
       - Articles
-      - Speaking Club
-      - Telegram Translator
+      - Telegram bot-translator without limits
+      - All new features
     advanced_features: "Advanced features."
     current_plan: "Current Plan"
     upgrade: "Upgrade"
