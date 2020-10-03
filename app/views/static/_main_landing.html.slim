@@ -1,8 +1,10 @@
 .col-12
   .row.mt-5.mb-5
     .col-md-6.p-0.align-self-center.text-center
+      br
       h1 == t('static.landings.main.block_1.title')
       h3 == t('static.landings.main.block_1.body')
+      = link_to t('static.landings.main.block_1.sign_up'), '#registration_form', class: 'btn btn-secondary btn-lg'
     .col-md-6.p-0
       = picture_tag '/images/landing/laptop.png', image: { alt: 'You are awesome!', type: 'image/png', class: 'toast-top-full-width' } do
         = source_tag srcset: '/images/landing/laptop.webp', type: 'image/webp'
@@ -22,5 +24,5 @@
       = picture_tag '/images/landing/fell.png', image: { alt: 'You are awesome!', type: 'image/png', class: 'toast-top-full-width' } do
         = source_tag srcset: '/images/landing/fell.webp', type: 'image/webp'
   .row
-    .col-12.col-md-10.offset-md-1
+    .col-12.col-md-10.offset-md-1#registration_form
       = render 'devise/registrations/form'
