@@ -27,7 +27,7 @@
                   = t('devise.registration.form.learning_language')
               td.second-column
                 span
-                  = f.select :learning_language, options_for_select(Rails.configuration.languages['names'].invert,
+                  = f.select :learning_language, options_for_select(t('languages').invert,
                           current_user.learning_language), {},
                           { class: 'form-control' }
 
@@ -37,7 +37,7 @@
                   = t('devise.registration.form.native_language')
               td.second-column
                 span
-                  = f.select :native_language, options_for_select(Rails.configuration.languages['names'].invert,
+                  = f.select :native_language, options_for_select(t('languages').invert,
                           current_user.native_language), {},
                           { class: 'form-control' }
 

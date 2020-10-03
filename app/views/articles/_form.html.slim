@@ -12,7 +12,7 @@
   .field
     .settings-item
       = f.select :language,
-              options_for_select(Rails.configuration.languages['names'].invert, current_user.learning_language),
+              options_for_select(t('languages').invert, current_user.learning_language),
               {}, { class: 'form-control' }
 
   - if current_user.learning_language == 'cmn' || current_user.learning_language == 'jpn'
