@@ -1,12 +1,10 @@
-= render 'layouts/locale_switcher'
-
-.row.mt-5
-  .col-12.mt-5
-    h3.main--title.text-center = t('skyeng_settings.finished')
-  .col-12.col-sm-10.offset-sm-1.col-md-6.offset-md-3.jumbotron.mt-4
-    .field
+.row.section-80
+  .col-12.col-sm-10.offset-sm-1.col-md-6.offset-md-3.align-self-center
+    h3.mb-2.text-center = t('skyeng_settings.finished')
+    .jumbotron
       = link_to t('skyeng_settings.study_words'), words_path(status: :skyeng),
-              class: 'btn btn-lg btn-secondary btn-block'
-    .field
+                style: 'width: 100%',
+                class: 'btn btn-lg btn-secondary'
       = link_to t('skyeng_settings.change'), new_skyeng_setting_path,
-              class: 'btn btn-lg btn-secondary btn-block'
+                style: 'width: 100%',
+                class: 'btn btn-lg btn-secondary'

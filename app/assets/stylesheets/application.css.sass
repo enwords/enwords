@@ -13,29 +13,42 @@
  *= require MDBootstrap/bootstrap
  *= require mdb_private/style
  *= require web/site_style
- *= require iCheck/skins/minimal/orange
+ *= require iCheck/skins/minimal/pink
  *= require qTip2
  */
 
 @import "font-awesome-sprockets"
 @import "font-awesome"
-@import url('https://fonts.googleapis.com/css?family=Montez')
 
 $learnedColor  : #5CB85C
 $learningColor : #F0AD4E
 $unknownColor  : #B7B7B7
-$text-muted    : #777777
-$bgHighlight   : #557e86
+$bgColPrimary  : #02B1FF
+$btnColSec     : #BA2ACC
 $btnColHover   : #F5F5F5
-$btnColBack    : #FFFFFF
-$btnColActive  : #6b9299
-$bodyTextCol   : #585858
+$btnColBack    : #E2E2E2
+$bodyBgCol     : #1E1E1E
+$bodySecCol    : #272727
+$textCol       : #e2e2e2
+$textMuted     : #777777
 
 @mixin trans($del)
   -webkit-transition: $del
   -moz-transition: $del
   -o-transition: $del
   transition: $del
+
+@font-face
+  font-family: "Finger Paint"
+  src: font-url("Finger_Paint/FingerPaint-Regular.ttf") format("truetype")
+  font-weight: 100
+  font-style: normal
+
+@font-face
+  font-family: "Roboto"
+  src: font-url("Roboto/Roboto-Thin.ttf") format("truetype")
+  font-weight: 100
+  font-style: normal
 
 @keyframes shadowPulseRed
   0%
@@ -56,24 +69,96 @@ $bodyTextCol   : #585858
 html
   position: relative
   min-height: 100%
-
 body
-  color: $bodyTextCol
+  color: $textCol
+  background-color: $bodyBgCol
+  font-family: "Roboto", sans-serif
+  font-size: 16px
 
-.navbar-brand
+button, input, select, textarea
+  font-family: "Roboto", sans-serif
+button
+  &.close
+    opacity: 1
+    text-shadow: none
+    color: $textCol
+    &:hover
+      color: $textMuted
+
+input
+  color: $textCol
+select
+  &#user_learning_language, &#user_native_language
+    padding-left: 4px
+
+a
+  color: $textCol
+  &:hover
+    color: $textMuted
+  &:focus
+    color:  $btnColSec
+
+ul
+  margin: 0
+  padding-left: 0
+
+table
+  label
+    margin-bottom: 0
+
+pre
+  font-family: inherit
   padding: 0
-  font-size: 27px
-  font-family: 'Montez', cursive
+  font-size: 14px
+  white-space: pre-wrap
+  background-color: $bodySecCol
+  border: none
+  word-break: normal
+  word-wrap: normal
+
+
+.jumbotron
+  background-color: $bodySecCol
+
+.guides-item
+  font-size: 24px
+  a
+    border-bottom: 1px solid $textCol
+
+.btn-link
+  &:hover
+    text-decoration: none
+  color: $textCol
+  background-color: $bodySecCol
+
+.btn-group-vertical
+  padding: 0
+  .btn:first-child
+    margin-left: 0
+
+.modal-footer,
+.modal-header
+  border: none
+
+.modal-content
+  background-color: $bodySecCol
+
+.yg-wrap
+  display: none
+  margin-top: 20px
+
+.qtip-content
+  background-color: $bodySecCol
 
 .footer
   position: absolute
   bottom: 0
   width: 100%
   height: 60px
-  background-color: rgb(240, 237, 234)
-  color: $text-muted
+  background-color: $bodySecCol
+  color: $textMuted
   a
-    color: $text-muted
+    color: $textMuted
   .container
     padding-right: 15px
     padding-left: 15px
@@ -88,7 +173,48 @@ body
     float: right
     padding-left: 10px
 
+.form-inline
+  label
+    font-size: 16px
+
+.btn
+  word-break: break-word
+
+.btn-primary, .btn-primary.disabled, .btn-primary:disabled
+  background-color: #02B1FF
+
+.btn-secondary, .btn-secondary.disabled, .btn-secondary:disabled
+  background-color: #BA2ACC
+  background-image: linear-gradient(to right, #02B1FF 0%, #7833F1 50%, #BA2ACC 100%)
+
+.btn-secondary
+  .disabled
+    color: inherit
+    background-color: inherit
+  &:disabled
+    color: inherit
+
+.form-control
+  color:  $textCol
+  &:focus
+    color:  $textCol
+
+
 //NAVBAR
+.navbar-dark
+  background-color: $bodySecCol
+
+.navbar-brand
+  height: 40px
+  padding: 5px 0
+  font-size: 20px
+  font-family: "Finger Paint", sans-serif
+  background: -webkit-linear-gradient(left, #02B1FF 0%, #7833F1 50%, #BA2ACC 100%)
+  background: -o-linear-gradient(right, #02B1FF 0%, #7833F1 50%, #BA2ACC 100%)
+  background: -moz-linear-gradient(right, #02B1FF 0%, #7833F1 50%, #BA2ACC 100%)
+  background: linear-gradient(to right, #02B1FF 0%, #7833F1 50%, #BA2ACC 100%)
+  -webkit-background-clip: text
+  -webkit-text-fill-color: transparent
 .navbar.navbar-dark .navbar-toggler-icon
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1.0)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>")
 
@@ -96,7 +222,15 @@ body
   i
     &:before
       padding-right: 5px
+.navbar.navbar-dark .navbar-nav .nav-item .dropdown-menu a
+  color: $textCol
+
 .dropdown-menu
+  background-color: $bodySecCol
+  a
+    color: $textCol
+    &:hover
+      background-color: $bodyBgCol
   li > a
     white-space: nowrap
 
@@ -113,25 +247,22 @@ body
     display: block
     float: left
     margin-right: 1px
-    background-color: $btnColBack
+    background-color: $bodySecCol
     box-shadow: 0 1px 2px rgba(0,0,0,.15)
-  .disabled
-    color: #dddddd
   .current
     font-style: normal
     font-weight: bold
-    background: $bgHighlight
-    color: $btnColBack
+    color: $textCol
+    background-color: $bodyBgCol
   a
     text-decoration: none
-    color: $bgHighlight
+    color: $textCol
 
     &:hover, &:focus
-      color: $bgHighlight
-      background-color: $btnColHover
+      color: $textCol
+      background-color: $bodyBgCol
     &:active
-      color: $btnColActive
-      box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125)
+      color: $bodyBgCol
   /* self-clearing method:
   &:after
     content: "."
@@ -200,27 +331,23 @@ body
 .links-top
   text-align: right
 
+.article-link
+  &:hover
+    color: #ed72b2
+
 .btn-articles
   text-align: center
   a
-    color: $btnColActive !important
+    color: $textCol
+    background-color: $bodySecCol
 
-pre
-  font-family: inherit
-  padding: 0
-  font-size: 14px
-  white-space: pre-wrap
-  background-color: white
-  border: none
-  word-break: normal
-  word-wrap: normal
 
 .table-main
   margin-bottom: 20px
   i
     padding-left: 20px
   a
-    color: $bodyTextCol
+    color: $textCol
   label, input[type="checkbox"]
     cursor: pointer
 
@@ -238,7 +365,7 @@ pre
     opacity: 0.3
 
   .fa-volume-up, .fa-volume-off
-    color: $bodyTextCol
+    color: $textCol
     font-size: 25px
     top: 6px
 
@@ -251,11 +378,11 @@ pre
     opacity: 0.3
 
   .fa-volume-up, .fa-volume-off
-    color: $bodyTextCol
+    color: $textCol
 
 .translation-block
   min-height: 68px
-  color: $bodyTextCol
+  color: $textCol
   padding-top: 8px
   text-align: center
   a, span
@@ -271,8 +398,6 @@ pre
     display: none
     font-size: 1.25rem
     font-weight: 300
-
-
 
 // words from sentence
 .table__words-from-sentence
@@ -295,17 +420,16 @@ pre
   margin-bottom: 4px
   white-space: normal
 .btn-default
-  color: $bgHighlight
+  color: $btnColSec
   background-color: $btnColBack
   border: none
-  box-shadow: 0 1px 2px rgba(0,0,0,.15)
   &:hover, &:focus
     border: none
     outline: 0
-    color: $bgHighlight
+    color: $btnColSec
     background-color: $btnColHover
   &:active:focus
-    color: $btnColActive
+    color: $btnColSec
     background-color: $btnColHover
     outline: 0
 
@@ -316,7 +440,6 @@ pre
   float: left
   border-radius: 5px
   margin: 3px 5px 0 20px
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15)
 
 #training-legend
   text-align: center
@@ -334,7 +457,7 @@ pre
   color: $learningColor !important
 
 .skyeng, .skyeng:hover, .skyeng:focus, .skyeng:active:focus
-  color: $bgHighlight !important
+  color: #557e86 !important
 //
 
 .result-page
@@ -343,53 +466,6 @@ pre
 
 ////
 
-select
-  &#user_learning_language, &#user_native_language
-    padding-left: 4px
-
-//Form
-.form-signin-heading
-  text-align: center
-  margin-bottom: 30px
-
-.form-signin
-  max-width: 380px
-  padding: 15px 35px 45px
-  margin: 0 auto
-  background-color: #fff
-  border: 1px solid rgba(0,0,0,0.1)
-
-  .form-signin-heading,
-  .checkbox
-    margin-top: 10px
-    margin-bottom: 30px
-
-  .checkbox
-    font-weight: normal
-
-  .form-control
-    position: relative
-    font-size: 16px
-    height: auto
-    padding: 10px
-
-    &:focus
-      z-index: 2
-
-  input[type="text"]
-    margin-bottom: -1px
-    border-bottom-left-radius: 0
-    border-bottom-right-radius: 0
-
-
-  input[type="password"]
-    margin-bottom: 20px
-    border-top-left-radius: 0
-    border-top-right-radius: 0
-
-////
-
-//Switcher
 .switcher
   padding: 2px
   box-shadow: 0px 1px 2px rgba(0,0,0,0.15)
@@ -418,12 +494,12 @@ select
     .switcher-round
       margin-left: 54%
   &_unknown
-    background: $unknownColor
+    background: #454545
 
-////
 
 //Other
 .alert
+  background-color: transparent
   z-index: 3
   padding-top: 10px
   position: absolute
@@ -432,64 +508,17 @@ select
   width: 100%
   text-align: center
 
-.settings-item
-  float: right
-
 .checkbox-label
   display: inline-block
   width: 100%
-  font-weight: normal
+  font-size: 16px
   margin-bottom: 0
 
 .check
   margin-right: 15px  !important
-////
 
-.main--languages
-  top: -20px
-  z-index: 10
-  position: absolute
-  right: 0
-  font-size: xx-large
-  a
-    font-size: large
-
-ul
-  margin: 0
-  padding-left: 0
-
-.btn-group-vertical
-  .btn:first-child
-    margin-left: 0
-
-////
-.devise-error
-  color: #C32221
-  display: block
-////
-
-.vcenter
-  display: inline-block
-  vertical-align: middle
-  float: none
-
-.icheckbox_minimal-orange
+.icheckbox_minimal-pink
   margin-right: 10px
-
-table
-  label
-    margin-bottom: 0
-
-.field
-  min-height: 40px
-  margin: 10px 0
-
-.btn
-  &-colored
-    color: $bgHighlight !important
-  &-link
-    &:hover
-      text-decoration: none
 
 .word
   &-zero
@@ -500,10 +529,10 @@ table
     padding: 2px
     &:hover
       cursor: pointer
-      border: dashed 1px $learningColor
+      border: dashed 1px $btnColSec
       border-radius: 4px
 
-.social
+.oauth
   text-align: center
   a
     cursor: pointer
@@ -512,57 +541,17 @@ table
     img
       width: 30px
       height: 30px
-
-.link
-  color: #585858
-  outline: none
-  &:hover, &:focus
-    color: #585858
-    border-bottom: #585858 solid 1px
-
-.table__form
-  .first-column
-    width: 100%
-  .second-column
-    min-width: 120px
-
-.table-words
-  .max-width
-    width: 100%
-  .check-box-wrapper
-    display: block
-    padding-bottom: 3px
+      box-shadow: none
+      -webkit-box-shadow: none
 
 .translate-tab
-  webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12)
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12)
-  border-color: white
+  color: $textCol
+  background-color: $bodySecCol
+  border-color: $bodySecCol
   max-width: 280px
   min-width: 280px
   font-size: 1.25rem
   font-weight: 100
-
-.noselect
-  -webkit-touch-callout: none
-  -webkit-user-select: none
-  -khtml-user-select: none
-  -moz-user-select: none
-  -ms-user-select: none
-  user-select: none
-
-.force-select
-  -webkit-user-select: all
-  -moz-user-select: all
-  -ms-user-select: all
-  user-select: all
-
-.generate_phrase_result_field
-  width: 100% !important
-  text-align: center
-
-@media (min-width: 320px)
-  .generate_phrase_result_field
-    font-size: 1.5rem
 
 @media only screen and (max-width: 510px)
   .footer--my-name
@@ -572,27 +561,95 @@ table
   .footer--agreement
     display: none
 
-@media (min-width: 576px)
-  .guides-item
-    height: 520px
-
 .phone
   &-preview
+    margin-top: 60px
     position: absolute
     right: 0
-    height: 520px
+    height: 620px
 
   &-video
     float: right
-    margin-top: 62px
-    height: 400px
+    margin-top: 132px
+    height: 484px
     &.cut
-      margin-top: 76px
-      height: 382px
+      margin-top: 138px
+      height: 460px
 
 .premium
-  &.price
+  .price
     cursor: pointer
     &.active
-      border-bottom: 1px solid #f80
+      border-bottom: 1px solid $btnColSec
       padding-bottom: 5px
+  .card
+    min-height: 405px
+
+.landing
+  background: image-url('landing/stars.png')
+  background-size: contain
+  .space
+    background: image-url('landing/space.png')
+    background-repeat: no-repeat
+    background-size: cover
+    background-position: left
+  .ecosystem
+    .card
+      min-height: 400px
+      background-image: image-url('landing/planets.png')
+      background-repeat: no-repeat
+      &#ecosystem-card-1
+        background-size: 791px
+        background-position-y: -101px
+        background-position-x: -178px
+      &#ecosystem-card-2
+        background-size: 1403px
+        background-position-x: -185px
+        background-position-y: -413px
+      &#ecosystem-card-3
+        background-size: 901px
+        background-position-x: -657px
+        background-position-y: -215px
+      &#ecosystem-card-4
+        background-size: 1059px
+        background-position-x: -580px
+        background-position-y: -140px
+  .sign_up
+    background: image-url('landing/planets.png')
+    background-repeat: no-repeat
+    background-size: cover
+    background-position: left
+
+  .btn
+    width: 100%
+    margin: 0
+
+.buy_coffee
+  background-image: image-url('landing/planets.png')
+  background-size: 1500px
+  background-position-x: -150px
+  background-position-y: -500px
+
+.section
+  &-80
+    overflow: auto
+    height: 80vh
+
+  &-100
+    overflow: auto
+    height: 100vh
+
+@media (min-width: 992px)
+  .landing
+    .space
+      background-size: contain
+      background-position: top right
+      .main-text
+        height: 250px
+        width: 350px
+        p
+          font-size: 18px
+    .sign_up
+      background-repeat: no-repeat
+      background-size: contain
+      background-position: bottom right

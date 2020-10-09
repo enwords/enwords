@@ -1,25 +1,15 @@
 = form_for article, url: url do |f|
-  .field
-    = f.text_field :title, class: 'form-control',
-            placeholder: t('texts.form.title'),
-            maxlength: 100
-  .field
-    = f.text_area :content,
+  = f.text_field :title, class: 'form-control',
+          placeholder: t('texts.form.title'),
+          maxlength: 100,
+          autocomplete: 'off'
+  = f.text_area :content,
             class: 'form-control',
             placeholder: t('texts.form.text'),
             maxlength: 100000,
-            style: 'resize: vertical; min-height: 300px;'
-  .field
-    .settings-item
-      = f.select :language,
-              options_for_select(t('languages').invert, current_user.learning_language),
-              {}, { class: 'form-control' }
-
-  - if current_user.learning_language == 'cmn' || current_user.learning_language == 'jpn'
-    .field
-      h5 = t('texts.form.warning')
-  .col-12.text-center
+            style: 'resize: vertical; min-height: 300px;',
+            autocomplete: 'off'
+  .text-center
     = f.button t('texts.form.submit'),
-          class: 'btn btn-secondary',
-          data: { disable_with: t('texts.form.wait').html_safe }
-    = link_to t('texts.links.cancel'), articles_path, class: 'btn btn-warning'
+               class: 'btn btn-secondary',
+               data: { disable_with: t('texts.form.wait').html_safe }

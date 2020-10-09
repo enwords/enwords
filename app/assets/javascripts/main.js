@@ -6,8 +6,12 @@ $(function () {
   var $check           = $('.check');
   var triggeredByChild = false;
 
+  $('#locale_switcher').on('change', function() {
+    window.location.replace($(location).attr('protocol') + '//' + $(location).attr('host') + '/' + $('#locale_switcher').val())
+  })
+
   $('input').iCheck({
-    checkboxClass: 'icheckbox_minimal-orange',
+    checkboxClass: 'icheckbox_minimal-pink',
   });
 
   $checkAll.on('ifChecked', function () {
@@ -66,10 +70,5 @@ $(function () {
       $thisButton.attr('data-status', responce[0].learned);
       $thisButton.removeClass('switcher_unknown').toggleClass('switcher_learned');
     });
-  });
-
-  $('[name="generate_phrase_form"]').on('ajax:success', function(event, data, status, xhr) {
-    var funny_phrase = "Today you're like a " + data.resource;
-    $('[name="generate_phrase_result_field"]').val(funny_phrase)
   });
 });

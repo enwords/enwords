@@ -23,7 +23,8 @@ class ArticlesController < ApplicationController
   def edit; end
 
   def create
-    @article      = Article.new(article_params)
+    @article = Article.new(article_params)
+    @article.language = current_user.learning_language
     @article.user = current_user
 
     respond_to do |format|

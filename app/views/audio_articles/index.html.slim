@@ -1,5 +1,6 @@
-.col-12.title
-  h3 = t('shared.navigation.articles.audio')
+.row
+  .col-12.mt-4
+    h3.text-center.mb-2 = t('shared.navigation.articles.audio')
 .row
   .col-12.col-sm-8.offset-sm-2.table-main
     table.table-striped style='width: 100%'
@@ -7,8 +8,7 @@
         - @articles.each do |article|
           tr
             td style= 'padding-bottom: 5px'
-              = link_to article.title, audio_article_path(article),
-                         class: 'link'
+              = link_to article.title, audio_article_path(article), class: 'article-link'
             td style = 'text-align: right'
               = link_to icon('fas', 'list'), words_path(article: article), title: t('texts.links.words')
 

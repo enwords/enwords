@@ -1,23 +1,21 @@
-.container
-  .row
-    h3 trainings
-    table.table style="overflow-x:auto;"
-      thead
-        th id
-        th user id
-        th email
-        th type
-        th created_at
-        th updated_at
-      tbody
-        - @trainings.each do |training|
-          tr
-            td = training.id
-            td = training.user.id
-            td = training.user.email
-            td = training.type
-            td = training.created_at
-            td = training.updated_at
-
-    #pagination-mobile.col-12.hidden-sm.hidden-md.hidden-lg.digg_pagination
-      = will_paginate @trainings, previous_label: '❬', next_label: '❭', outer_window: 0
+.row
+  h3 trainings
+  table.table style="overflow-x:auto;"
+    thead
+      th id
+      th user id
+      th email
+      th type
+      th created_at
+      th updated_at
+    tbody
+      - @trainings.each do |training|
+        tr
+          td = training.id
+          td = training.user.id
+          td = training.user.email
+          td = training.type
+          td = training.created_at
+          td = training.updated_at
+  #pagination-mobile.col-12.hidden-sm.hidden-md.hidden-lg.digg_pagination
+    = will_paginate @trainings, previous_label: '❬', next_label: '❭', outer_window: 0

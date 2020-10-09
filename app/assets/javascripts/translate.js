@@ -78,13 +78,16 @@ $(function() {
               if(youglish != null) {
                 content = content +
                   '<br>' +
-                  '<div class="yg-wrap" style="display: none"><a id="yg-widget-0" class="youglish-widget" data-query="' + word + '" data-lang="' + youglish.lang + '" data-accent="' + youglish.accent + '" data-components="220" data-auto-start="0" data-link-color="#808080" data-ttl-color="#5A98D0" data-cap-color="#5A98D0" data-marker-color="#FFF700" data-panels-bkg-color="#FF0000" data-text-color="#5A98D0" data-keyword-color="#5A98D0" data-video-quality="medium" data-title="Example %i% from %total%:" rel="nofollow" href="https://youglish.com"/a></div>' +
-                  '<script async src="https://youglish.com/public/emb/widget.js" charset="utf-8"></script>'
+                  '<div class="yg-wrap">' +
+                  '<a id="yg-widget-0" class="youglish-widget" data-query="' + word + '" data-lang="' + youglish.lang + '" data-accent="' + youglish.accent + '" data-components="64" height="233" data-video-quality="small" data-auto-start="0" rel="nofollow" href="https://youglish.com" data-bkg-color="#272727" data-bkg-color="theme_dark" data-link-color="#808080" data-ttl-color="#E2E2E2" data-cap-color="#E2E2E2" data-marker-color="#EB3324" data-panels-bkg-color="#272727" data-text-color="#E2E2E2" data-keyword-color="#E2E2E2"></a>' +
+                  '<script async src="https://youglish.com/public/emb/widget.js" charset="utf-8"></script>' +
+                  '</div>'
               }
               api.set('content.text', content);
               setTimeout(function() {
+                $("#fr_yg-widget-0").css('margin', '0')
                 $('.yg-wrap').slideDown()
-              }, 1000);
+              }, 2000);
             })
             .fail(function(xhr, status, error) {
               api.set('');
