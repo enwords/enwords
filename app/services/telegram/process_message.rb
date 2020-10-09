@@ -101,7 +101,7 @@ module Telegram
     end
 
     def word
-      @word ||= Word::ByStatus.run!(status: 'available', user: telegram_chat_user).find_by(value: clean_text)
+      @word ||= Word.find_by(value: clean_text, language: lang)
     end
 
     def translation_object
