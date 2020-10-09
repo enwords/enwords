@@ -33,7 +33,7 @@ en:
         submit: "Change password"
       new:
         title: "Forgot your password?"
-        submit: "Send instructions to reset your password"
+        submit: "Reset password"
     registration:
       form:
         title:  "Sign up"
@@ -81,8 +81,8 @@ en:
         unknown: 'Unknown '
         skyeng: 'Skyeng'
       articles:
-        dropdown: 'Articles'
-        my: 'My articles'
+        dropdown: 'Texts'
+        my: 'My texts'
         audio: 'Audio articles'
 
       last_training: 'Continue exercise'
@@ -103,26 +103,29 @@ en:
           idioms: "Idioms"
           phrasal_verbs: "Phrasal Verbs"
 
-  static:
-    landings:
-      main:
-        block_1:
-          title: "Learn languages for FREE"
-          body: "In the Enwords you will find <b>30 languages​​</b>, such as English 🇬🇧 German 🇩🇪 Spanish 🇪🇸 French 🇫🇷 and others"
-          sign_up: "Join us"
-        block_2:
-          title: "Learn new words"
-          body: "There are more than <b>500 thousand words</b> on the platform that you can learn"
-        block_3:
-          title: "Just 10 minutes a day"
-          body: "Learn 3 words a day, and in a year you will know more than 1000 words 😱"
-      select_words: "<a href=%{words_path}>Choose the words</a> to study and click on the training button 💪, and we will pick up sentences in which these words occur. The list of words is sorted from the most popular to the rarest, learn them in that order for better progress 🤪"
-      upload_articles: "<a href=%{audio_articles_path}>Listen 🎧 and read 📖</a> audio articles or <a href =%{articles_path}>add your text</a> in the language you are learning, for example, from audio courses, magazines, books 📚, if you are a cook upload recipes 👩🏼‍🍳 if you are a driver upload the traffic rules 👮🏻‍♂️"
-      use_telegram_bot: "Still not using the Telegram bot 🤖 <a target='_blank' href='https://t.me/enwordsapp_bot'>@enwordsapp_bot</a>? Send an unfamiliar word to it and get a translation. The bot will send you the words several times a day, so you can finally learn them 🤓"
-      follow_us: 'Follow and like us on Instagram ❤️ there are a lot of interesting️ <a target="_blank" href="https://instagram.com/enwordsapp">@enwordsapp</a>'
-    result:
-      title: "Exercise result:"
-      text: "Learned words"
+  landings:
+    space:
+      title: "Learn any language for FREE"
+      body: "Here you will find 30 languages​​, such as English 🇬🇧 German 🇩🇪 Spanish 🇪🇸 French 🇫🇷 and others"
+      sign_up: "Start 🚀"
+    ecosystem:
+      title: Enwords Space Ecosystem
+      web:
+        title: WEB app
+        body: Here is a half a million words with millions sentences to learn
+      telegram:
+        title: Telegram bot
+        body: Use a bot to translate unknown words and get new words from the bot
+      apps:
+        title: iOS & Android apps
+        body: Soon
+      extension:
+        title: Chrome extension
+        body: Soon
+    select_words: "<a href=%{words_path}>Choose the words</a> to study and we will pick you up sentences with these words. The list of words is sorted from the most popular to the rarest, learn them in this order for better progress 🧠"
+    upload_articles: "<a href=%{audio_articles_path}>Read 📖 and listen 🎧</a> audio articles or <a href =%{articles_path}>add your own text</a> in the target language, for example, from magazines, books 📚 or create your own thematic word list️"
+    use_telegram_bot: "Use Telegram bot 🤖 <a target='_blank' href='https://t.me/enwordsapp_bot'>@enwordsapp_bot</a>. Send him an unfamiliar word and get a translation. The bot will also send you words on a schedule so that you can finally learn them"
+    follow_us: 'Follow and like us on Instagram ❤️ there are a lot of interesting️ <a target="_blank" href="https://instagram.com/enwordsapp">@enwordsapp</a>'
 
   texts:
     title: "Texts"
@@ -137,23 +140,21 @@ en:
       cancel: "Cancel"
       are_you_sure: "Are you sure?"
     new_text: "New text"
-    edit_text: "Edit text"
+    edit_text: "Edit"
     form:
       title: "Title"
       text: "Text"
       language: "Text language (the text will be unavailable when learning other languages) "
       warning: "Attention! Unfortunately for word search in Chinese and Japanese texts, the words should be separated by a space"
       submit: "Save"
-      saving: "Saving..."
       wait: "Please wait..."
     text_created: 'Text was successfully created'
     text_updated:  'Text was successfully updated'
     text_deleted:  'Text was successfully deleted'
 
-
   training:
     show_translation: "Show translation"
-    know: "Know?"
+    know: "Known?"
     end: "End"
     replace: "Reprint text above"
     check: "Check"
@@ -164,6 +165,9 @@ en:
     in_settings: "in settings"
     repeat: "Repeat exercise"
     spell_check: "Next"
+    result:
+      title: "Exercise result:"
+      text: "Learned words"
   words:
     learned: 'Learned words'
     learning: 'Learning words'
@@ -177,17 +181,16 @@ en:
       text2: "Please select the language in the "
       link2: "profile settings"
     buttons:
-      training_repeating:  '"Repeating" exercise'
-      training_spelling: '"Spelling" exercise'
-      training_grammar: 'Exercise'
-      training_mnemo: '"Mnemo" exercise'
-      add_to_learning: 'Add to "Learning"'
-      add_to_learned:  'Add to "Learned"&nbsp'
-      add_to_unknown:  'Add to "Unknown"'
-
-      added_to_learning: 'Added to "Learning"'
-      added_to_learned:  'Added to "Learned"'
-      added_to_unknown:  'Added to "Unknown"'
+      training_repeating: Remembering exercise
+      training_spelling: Orthography exercise
+      training_grammar: Exercise
+      training_mnemo: Mnemo exercise
+      add_to_learning: Add to Learning
+      add_to_learned: Add to Learned
+      add_to_unknown: Add to Unknown
+      added_to_learning: Added to Learning
+      added_to_learned: Added to Learned
+      added_to_unknown: Added to Unknown
       state_changed: "Status of words successfully changed"
       select_words: "Please, select words"
       show_learning: "Show learning"
@@ -201,13 +204,13 @@ en:
     errors:
       did_not_save: "Settings did not save"
     add_email: "Enter email from your <b>Skyeng</b> account"
-    main: "You can learn the words you added in Skyeng. Please fill in the following fields"
+    main: "You can learn the words you added in Skyeng"
     submit: "Submit"
-    add_token: "Please enter the secret key that we sent you by email <b>%{email}</b>"
-    token_example: "Add token here"
+    add_token: "Enter the token we sent to <b>%{email}</b>"
+    token_example: "Token"
     finished: "Now you can see the words added on Skyeng"
-    study_words: "Learn words from Skyeng"
-    change: "Change skyeng email and token"
+    study_words: "Learn words"
+    change: "Change email and token"
   word:
     proficiency_level:
       hide: "Now "
@@ -228,10 +231,10 @@ en:
       not_understand: "I don't understand"
     reminder: 'Send me the word you want to learn in English 🇬🇧 and you will receive a translation, and I will periodically send you this word to remember 🤖'
   premium:
-    basic_features: "Basic features."
+    basic_features: "Basic features"
     free: "Free"
-    subscription: "Subscription 💰 -> 🧠"
-    description: "Take your english from good to great with Enwords Premium."
+    subscription: "Subscription 💰"
+    description: "Take your english from good to great with Enwords Premium"
     words_to_learn: "%{words_count} Words to learn"
     free_items:
       - Grammar
@@ -239,15 +242,18 @@ en:
     premium_items:
       - Grammar
       - Articles
-      - Telegram bot-translator without limits
+      - Telegram bot without limits
       - All new features
-    advanced_features: "Advanced features."
+    advanced_features: "Advanced features"
     current_plan: "Current Plan"
-    upgrade: "Upgrade"
-    price_monthly: "~$2 monthly 😎"
-    price_yearly: "~$13 yearly (-45%) 🤑"
+    upgrade: "Upgrade 🚀"
+    price_monthly: "~$2 monthly"
+    price_yearly: "~$13 yearly (-45%)"
     or: "or"
-    thank_you: "Thank you for purchasing Premium. You are now an early adopter of Enwords. You will get new opportunities soon"
-    get_premium: "Get premium"
+    thank_you: "Thank you for purchasing Premium.<br>You are now an early adopter of Enwords.<br>You will get new opportunities soon"
+    get_premium: "Go premium"
+    buy_me_a_coffee: "Buy me a coffee"
+    say_thanks: "Express your gratitude to the author"
+    buy: "Buy ☕"
   footer:
     agreement: "Terms and conditions"

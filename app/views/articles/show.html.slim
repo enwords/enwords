@@ -1,30 +1,27 @@
 .row
-  .col-12.col-lg-8.offset-lg-2.jumbotron
-    div.links-top.mb-1
-      = link_to words_path(article: @article) do
-        = icon('far', 'hand-o-right')
-        = ' '
-        = t('texts.links.words')
-      = ' / '
-      = link_to t('texts.links.edit'), edit_article_path(@article)
-      = ' / '
-      = link_to t('texts.links.delete'), article_path(@article),
-          method: :delete,
-          data: { confirm: t('texts.links.are_you_sure') }
-    - if supported_pair?
-      div
-        h3.form-signin-heading
+  .col-12.col-lg-8.offset-lg-2.mt-4
+    .jumbotron
+      .links-top.mb-1
+        = link_to words_path(article: @article) do
+          = icon('far', 'hand-o-right')
+          = ' '
+          = t('texts.links.words')
+        = ' / '
+        = link_to t('texts.links.edit'), edit_article_path(@article)
+        = ' / '
+        = link_to t('texts.links.delete'), article_path(@article),
+            method: :delete,
+            data: { confirm: t('texts.links.are_you_sure') }
+      - if supported_pair?
+        h3.text-center
           - @article.title.split.each do |w|
             span.word-translate data-from=l_lang data-to=n_lang = w
             span.word-zero = ' '
-      div
         - @article.content.split("\r\n").each do |sen|
           - sen.split.each do |w|
             span.word-translate data-from=l_lang data-to=n_lang = w
             span.word-zero = ' '
           br
-    - else
-      div
-        h3.form-signin-heading = @article.title
-      div
+      - else
+        h3.text-center = @article.title
         pre = @article.content

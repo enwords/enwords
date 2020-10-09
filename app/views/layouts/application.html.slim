@@ -1,18 +1,18 @@
 doctype html
-html lang="ru" 
+html lang="en"
   head
-    title Enwords
+    title Enwords - learn any language
     = render 'layouts/meta'
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all'
-  body.light-blue-skin class=body_class
+  body
     = render 'layouts/yandex-metrika'
     = render 'layouts/google-anal'
     = render 'layouts/navigation'
     = render 'layouts/flash_messages'
-    .container.mt-5
+    .container.mt-4
       = yield
-    .mt-5
+    .mt-4
       = render 'layouts/footer'
     = javascript_include_tag 'application'
     = yield :footer_js

@@ -1,11 +1,11 @@
-.container
-  .row.row-content
-    .col-12.result-page
+.row.section-80
+  .col-12.col-sm-8.offset-sm-2.col-md-8.offset-md-2
+    .jumbotron.result-page
       - case @current_training
         - when RepeatingTraining, SpellingTraining, GrammarTraining
-          h3 == t 'static.result.title'
+          h3 == t 'training.result.title'
           h1 = @learned_words_count_training
-          h3 == t 'static.result.text'
+          h3 == t 'training.result.text'
           br
       = link_to t('training.repeat'), repeat_training_path,
                 class: 'btn btn-secondary',

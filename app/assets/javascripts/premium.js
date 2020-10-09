@@ -1,7 +1,7 @@
 $(function() {
   'use strict';
 
-  var $price = $('.premium.price');
+  var $price = $('.premium .price');
   var $planSelect = $('#plan');
 
   function togglePremiumPrice(e) {
@@ -15,6 +15,6 @@ $(function() {
   $price.on('click', togglePremiumPrice)
 
   $(window).on('load', function() {
-    $('#is_subscriber').modal('show');
+    $('#premium_modal').modal('show');
   });
 });

@@ -18827,7 +18827,7 @@ button:focus
 .btn-link
 {
 	background-color:transparent;
-	color:#000!important
+	color:#000
 }
 
 .btn-link:focus,.btn-link:hover

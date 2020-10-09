@@ -8,6 +8,6 @@ class SubscriptionsController < ApplicationController
 
   def after_checkout
     subscription = Subscriptions::Activate.run!(subscription: Subscription.find_by(payment_id: params[:payment_id]))
-    redirect_to root_path(subscriber: subscription.status_active?, locale: I18n.locale)
+    redirect_to root_path(premium: subscription.status_active?, locale: I18n.locale)
   end
 end

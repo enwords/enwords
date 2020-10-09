@@ -1,0 +1,56 @@
+.premium#premium
+  - if current_user.premium?
+    .row
+      .col-12.col-md-6.offset-md-3.col-lg-4.offset-lg-4
+        .jumbotron
+          h3.text-center.mb-2 = t('premium.buy_me_a_coffee')
+          p = t('premium.say_thanks')
+          = link_to t('premium.buy'), 'https://www.buymeacoffee.com/sadovnikov', target: '_blank', class: 'btn btn-secondary btn-block'
+  - else
+    .row.section-80
+      .col-12
+        h1 = t('premium.subscription')
+        p = t('premium.description')
+      .col-12.col-md-4
+        .jumbotron.card
+          h3.text-center.mb-2 = t('premium.free')
+          p = t('premium.basic_features')
+          = link_to t('premium.current_plan'), '#', class: 'btn btn-secondary btn-block disabled'
+          br
+          ul.fa-ul.ml-4
+            li
+              span class="fa-li"
+                i class="fas fa-check"
+              = t('premium.words_to_learn', words_count: Rails.configuration.application['free_words_limit'])
+            - t('premium.free_items').each do |item|
+              li
+                span class="fa-li"
+                  i class="fas fa-check"
+                = item
+      .col-12.col-md-4
+        .jumbotron.card
+          h3.text-center.mb-2 Premium
+          p = t('premium.advanced_features')
+          = form_tag subscriptions_path, method: :post do
+            = button_tag t('premium.upgrade'), class: 'btn btn-secondary btn-block'
+            br
+            = select_tag 'plan', options_for_select(%w[monthly yearly], 'monthly'), required: true, include_blank: false
+            span.price.active data-plan='monthly' == t('premium.price_monthly')
+            = " #{t('premium.or')} "
+            span.price data-plan='yearly' == t('premium.price_yearly')
+          br
+          ul.fa-ul.ml-4
+            li
+              span class="fa-li"
+                i class="fas fa-check"
+              = t('premium.words_to_learn', words_count: Word.where(language: current_user.learning_language).count)
+            - t('premium.premium_items').each do |item|
+              li
+                span class="fa-li"
+                  i class="fas fa-check"
+                = item
+      .col-12.col-md-4
+        .jumbotron.card.buy_coffee
+          h3.text-center.mb-2 = t('premium.buy_me_a_coffee')
+          p = t('premium.say_thanks')
+          = link_to t('premium.buy'), 'https://www.buymeacoffee.com/sadovnikov', target: '_blank', class: 'btn btn-secondary btn-block'

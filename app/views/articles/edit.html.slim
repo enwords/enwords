@@ -1,6 +1,6 @@
-.col-12.col-lg-8.offset-lg-2.jumbotron
-  .row.row-content
-    .col-12
-      h2.form-signin-heading
+.row.section-80
+  .col-12.col-lg-8.offset-lg-2.align-self-center
+    .jumbotron
+      h2.text-center.mb-2
         = t('texts.edit_text')
-    = render 'form', article: @article, url: article_path(@article)
+      = render 'form', article: @article, url: article_path(@article)
