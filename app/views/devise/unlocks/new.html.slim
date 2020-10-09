@@ -1,10 +1,7 @@
 h2 = t('devise.unlock.new.title')
 = form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
   = devise_error_messages!
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true
-  .actions
-    = f.submit t('devise.unlock.new.title')
+  = f.label :email
+  = f.email_field :email, autofocus: true
+  = f.submit t('devise.unlock.new.title')
 = render 'devise/shared/links'

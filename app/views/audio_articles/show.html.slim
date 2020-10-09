@@ -1,12 +1,12 @@
 .row
-  .col-12.col-lg-8.offset-lg-2.jumbotron
+  .col-12.col-lg-8.offset-lg-2.jumbotron.mt-4
     div.links-top.mb-1
       = link_to words_path(article: @article) do
-        = icon('far', 'hand-o-right')
+        = icon('fas', 'list')
         = ' '
         = t('texts.links.words')
     div
-      h3.form-signin-heading
+      h3
         - @article.title.split.each do |w|
           span.word-translate data-from=l_lang data-to=n_lang = w
           span.word-zero = ' '

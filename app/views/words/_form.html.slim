@@ -7,14 +7,10 @@
       ul
         - word.errors.full_messages.each do |message|
           li= message
-  .field
-    = f.label :id
-    = f.text_field :id
-  .field
-    = f.label :language
-    = f.select :language, User.learning_languages.keys.map { |lang| [lang.titleize, lang] }, {}, { class: 'form-control' }
-  .field
-    = f.label :word
-    = f.text_field :word
-  .actions
-    = f.submit
+  = f.label :id
+  = f.text_field :id
+  = f.label :language
+  = f.select :language, User.learning_languages.keys.map { |lang| [lang.titleize, lang] }, {}, { class: 'form-control' }
+  = f.label :word
+  = f.text_field :word
+  = f.submit

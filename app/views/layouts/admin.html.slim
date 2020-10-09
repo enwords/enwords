@@ -5,11 +5,11 @@ html lang="ru"
     = render 'layouts/meta'
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all'
-  body.light-blue-skin class=body_class
+  body
     = render 'layouts/navigation'
-    .mt-5
+    .mt-4
       = yield
-    .mt-5
+    .mt-4
       = render 'layouts/footer'
     = javascript_include_tag 'application'
     = yield :footer_js

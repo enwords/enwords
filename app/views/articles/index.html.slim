@@ -1,47 +1,41 @@
-.col-12.title
-  h3 = t('shared.navigation.articles.my')
-= form_tag delete_selected_articles_path, method: :post do
-  - if @articles.any?
-    .row
-      .col-12.col-sm-8.offset-sm-2.table-main
-        table.table__words.table-striped style='width: 100%'
-          thead
-            tr
-              th
-                input#check-all[type='checkbox']
-              th[style='width: 100%;']
-                label.checkbox-label[for='check-all']
-                  b = t 'words.select_all'
-          tbody
-            - @articles.each do |article|
-              tr
-                td style='background: white'
-                  = check_box_tag 'ids[]', article.id, false,
-                                   class: 'check'
-                td = link_to article.title, article_path(article),
-                             class: 'link'
-                td = link_to icon('fas', 'list'), words_path(article: article),
-                             title: t('texts.links.words')
-                td = link_to icon('fas', 'edit'),  edit_article_path(article),
-                             title: t('texts.links.edit')
-                td = link_to icon('fas', 'trash'), article_path(article),
-                             method: :delete,
-                             title:  t('texts.links.delete'),
-                             data:   { confirm: t('texts.links.are_you_sure') }
-
-  .col-12.btn-articles
-    = link_to new_article_path, class: 'btn' do
-      i.fa.fa-plus
-      = ' '
-      = t('texts.buttons.add_text')
-    - if @articles.any?
-      = button_tag type: 'submit', value: 'delete_articles', class: 'btn btn-warning'  do
-        i.fa.fa-trash
-        = ' '
-        = t('texts.buttons.delete_selected')
-  .col-12.digg_pagination
-    = will_paginate @articles,
-            previous_label: '<i class="fa fa-angle-left"></i>',
-            next_label:     '<i class="fa fa-angle-right"></i>',
-            outer_window:   0,
-            inner_window:   2
+.row
+  .col-12.mt-4
+    h3.text-center.mb-2 = t('shared.navigation.articles.my')
+    = form_tag delete_selected_articles_path, method: :post do
+      - if @articles.any?
+        .row
+          .col-12.col-sm-8.offset-sm-2.table-main
+            table.table__words.table-striped style='width: 100%'
+              thead
+                tr
+                  th
+                    input#check-all[type='checkbox']
+                  th[style='width: 100%;']
+                    label.checkbox-label[for='check-all']
+                      b = t 'words.select_all'
+              tbody
+                - @articles.each do |article|
+                  tr
+                    td
+                      = check_box_tag 'ids[]', article.id, false,
+                                       class: 'check'
+                    td = link_to article.title, article_path(article), class: 'article-link'
+                    td = link_to icon('fas', 'list'), words_path(article: article),
+                                 title: t('texts.links.words')
+                    td = link_to icon('fas', 'edit'),  edit_article_path(article),
+                                 title: t('texts.links.edit')
+                    td = link_to icon('fas', 'trash'), article_path(article),
+                                 method: :delete,
+                                 title:  t('texts.links.delete'),
+                                 data:   { confirm: t('texts.links.are_you_sure') }
+      .col-12.btn-articles
+        = link_to new_article_path, class: 'btn' do
+          i.fa.fa-plus
+          = ' '
+          = t('texts.buttons.add_text')
+      .col-12.digg_pagination
+        = will_paginate @articles,
+                previous_label: '<i class="fa fa-angle-left"></i>',
+                next_label:     '<i class="fa fa-angle-right"></i>',
+                outer_window:   0,
+                inner_window:   2

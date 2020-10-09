@@ -1,30 +1,15 @@
-.row
-  .col-12
-    span.text-center.devise-error == resource.errors.full_messages.join('<br>')
-.row
-  .col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2.jumbotron.mt-3
-    h2.form-signin-heading= t('devise.registration.form.title')
-    = render 'devise/shared/omniouth'
-    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-      .field
-        = f.email_field :email, class: 'form-control', placeholder: t('email')
-      .field
-        = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: t('password_minimum_6')
-      .field
-        table.table__form
-          tbody
-            tr
-              td.first-column
-                = t('devise.registration.form.learning_language')
-              td.second-column
-                = f.select :learning_language, options_for_select(t('languages').invert, 'eng'), {}, { class: 'form-control', style: 'height: 100%' }
-            tr
-              td.first-column
-                = t('devise.registration.form.native_language')
-              td.second-column
-                = f.select :native_language, options_for_select(t('languages').invert, 'rus'), {}, { class: 'form-control', style: 'height: 100%' }
-      br
-      = f.button t('devise.registration.form.title'),
-              class: 'btn btn-lg btn-secondary btn-block',
-              data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('shared.navigation.user.signing_up') }
-      = link_to t('footer.agreement'), '/agreement_ru.pdf', target: '_blank'
+h2.text-center.mb-2 = t('devise.registration.form.title')
+= render 'devise/shared/oauth'
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  = f.email_field :email, class: 'form-control', placeholder: t('email')
+  = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: t('password_minimum_6')
+  .form-inline
+    = f.label :learning_language, t('devise.registration.form.learning_language')
+    = f.select :learning_language, options_for_select(t('languages').invert, 'eng'), {}, { class: 'form-control', style: 'height: 100%; margin-left: auto' }
+  .form-inline
+    = f.label :native_language, t('devise.registration.form.native_language')
+    = f.select :native_language, options_for_select(t('languages').invert, 'rus'), {}, { class: 'form-control', style: 'height: 100%; margin-left: auto' }
+  = f.button t('devise.registration.form.title'),
+          class: 'btn btn-lg btn-secondary btn-block mb-1',
+          data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('shared.navigation.user.signing_up') }
+  = link_to t('footer.agreement'), '/agreement_ru.pdf', target: '_blank'

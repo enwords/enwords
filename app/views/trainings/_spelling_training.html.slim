@@ -13,7 +13,7 @@
           - else
             span.fa.fa-volume-off
           h4#original-sentence data-sentence-id=sentence.id data-sentence-value=sentence.value
-            - if body_class == 'eng-rus'
+            - if lang_pair == %w[eng rus]
               - sentence.value.split.each do |w|
                 span.word-translate data-from=l_lang data-to=n_lang = w
                 span.word-zero = ' '

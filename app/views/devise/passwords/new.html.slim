@@ -1,13 +1,9 @@
-.row
-  .col-12
-    span.text-center.devise-error == resource.errors.full_messages.join('<br>')
-
-.row.row-content
-  .col-12
-    .col-12.col-sm-6.offset-sm-3.jumbotron.mt-4
-      h2.form-signin-heading= t('devise.passwords.new.title')
+.alert.alert-danger = resource.errors.full_messages.join('<br>').html_safe
+.row.section-80
+  .col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2.col-lg-6.offset-lg-3.align-self-center
+    .jumbotron
+      h2.text-center.mb-2 = t('devise.passwords.new.title')
       = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-        .field
-          = f.email_field :email, autofocus: true, class: 'form-control', placeholder: t('email')
-        .field style=('padding-top: 20px')
-          = f.button t('devise.passwords.new.submit') ,class: 'btn btn-lg btn-secondary btn-block'
+        = f.email_field :email, autofocus: true, class: 'form-control', placeholder: t('email')
+        br
+        = f.button t('devise.passwords.new.submit') ,class: 'btn btn-lg btn-secondary btn-block'

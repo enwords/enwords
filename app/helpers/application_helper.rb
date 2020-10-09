@@ -21,10 +21,6 @@ module ApplicationHelper
     return 'learning' if @learning_ids.include?(word.id)
   end
 
-  def body_class
-    lang_pair.join('-') if current_user
-  end
-
   def l_lang
     current_user&.learning_language
   end

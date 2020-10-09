@@ -1,4 +1,5 @@
-.container
-  .row.row-content
-    .col-12
+.alert.alert-danger = resource.errors.full_messages.join('<br>').html_safe
+.row.section-80
+  .col-12.col-sm-8.offset-sm-4.col-lg-6.offset-lg-3.align-self-center
+    .jumbotron
       = render 'form'

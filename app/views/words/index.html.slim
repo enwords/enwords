@@ -1,5 +1,6 @@
-.col-12.title
-  h3 = words_page_title
+.row
+  .col-12.title
+    h3 = words_page_title
 - if @words.any?
   = form_tag word_action_words_path, method: :put do
     .row
@@ -10,7 +11,7 @@
               th
                 input.check#check-all type='checkbox'
               th.max-width
-                label.checkbox-label for='check-all'
+                label.checkbox-label for='check-all' style="padding-left: 3px"
                   b
                     = t 'words.select_all'
                     span = " ["
@@ -29,46 +30,45 @@
                   type:  'submit',
                   value: 'to_training_repeating',
                   name:  'commit',
-                  class: 'btn btn-raised btn-md btn-link btn-colored',
+                  class: 'btn btn-raised btn-md btn-link',
                   data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
           = button_tag t('words.buttons.training_spelling'),
                   type:  'submit',
                   value: 'to_training_spelling',
                   name:  'commit',
-                  class: 'btn btn-raised btn-md btn-link btn-colored',
+                  class: 'btn btn-raised btn-link',
                   data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
           - if current_user.native_language == 'rus' && current_user.learning_language == 'eng'
             = button_tag t('words.buttons.training_mnemo'),
                     type: 'submit',
                     value: 'to_training_mnemo',
                     name: 'commit',
-                    class: 'btn btn-raised btn-md btn-link btn-colored',
+                    class: 'btn btn-raised btn-md btn-link',
                     data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
           - unless params[:status] == 'learning'
             = button_tag t('words.buttons.add_to_learning'),
                     type:  'submit',
                     value: 'to_state_learning',
                     name:  'commit',
-                    class: 'btn btn-raised btn-md btn-link learning',
+                    class: 'btn btn-raised btn-link btn-md learning',
                     data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
           - unless params[:status] == 'learned'
             = button_tag t('words.buttons.add_to_learned').html_safe,
                     type:  'submit',
                     value: 'to_state_learned',
                     name:  'commit',
-                    class: 'btn btn-raised btn-md btn-link learned',
+                    class: 'btn btn-raised btn-link btn-md learned',
                     data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
           - unless params[:status] == 'unknown'
             = button_tag t('words.buttons.add_to_unknown'),
                     type:  'submit',
                     value: 'to_state_unknown',
                     name:  'commit',
-                    class: 'btn btn-raised btn-md btn-link unknown',
+                    class: 'btn btn-raised btn-link unknown',
                     data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
           - if params[:status] == 'unknown'
             span style='text-align: center; width: 100%;'
               = link_to t('words.very_easy_words'), '#',
-                        class: 'link',
                         style: 'opacity: .8',
                         data:  { target: '#select-proficiency_level', toggle: 'modal' }
 
@@ -92,11 +92,10 @@
         a href=edit_user_registration_path = t 'words.warning.link2'
       p style='text-align: center; width: 100%;'
         = link_to t('words.very_easy_words'), '#',
-            class: 'link',
             style: 'opacity: .8',
             data: { target: '#select-proficiency_level', toggle: 'modal' }
 
-#select-proficiency_level.modal.fade
+#select-proficiency_level.modal.fade.mt-4
   .modal-dialog role="document"
     .modal-content
       .modal-header

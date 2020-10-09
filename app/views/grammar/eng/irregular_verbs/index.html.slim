@@ -13,7 +13,7 @@
             th style='width: 32%' Past participle
         - @irregular_verbs.each do |verb|
           tr
-            td style='background: white'
+            td
               span.check-box-wrapper
                 = check_box_tag 'ids[]', verb.id, false, class: 'check'
             td
@@ -41,21 +41,21 @@
                 type: 'submit',
                 value: 'learned',
                 name: 'commit',
-                class: 'btn btn-raised btn-md btn-link learned',
+                class: 'btn btn-raised btn-link learned',
                 data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
         = link_to t('words.buttons.show_learned').html_safe,
                 grammar_eng_irregular_verbs_path(status: :learned),
-                class: 'btn btn-raised btn-md btn-link learned'
+                class: 'btn btn-raised btn-link learned'
       - when 'learned'
         = button_tag t('words.buttons.add_to_learning'),
                 type: 'submit',
                 value: 'learning',
                 name: 'commit',
-                class: 'btn btn-raised btn-md btn-link learning',
+                class: 'btn btn-raised btn-link learning',
                 data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
         = link_to t('words.buttons.show_learning').html_safe,
                 grammar_eng_irregular_verbs_path(status: :learning),
-                class: 'btn btn-raised btn-md btn-link learning'
+                class: 'btn btn-raised btn-link learning'
   .row
     .col-12.digg_pagination
       = will_paginate @irregular_verbs,

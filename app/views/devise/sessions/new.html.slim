@@ -1,21 +1,18 @@
-.container
-  .row.row-content
-    .col-12.col-sm-10.offset-sm-1.col-md-8.offset-md-2.col-lg-6.offset-lg-3.jumbotron.mt-5
-      h2.form-signin-heading= t('devise.session.new.title')
-      = render 'devise/shared/omniouth'
+.alert.alert-danger = resource.errors.full_messages.join('<br>').html_safe
+.row.section-80
+  .col-12.col-sm-8.offset-sm-4.col-lg-6.offset-lg-3.align-self-center
+    .jumbotron
+      h2.text-center.mb-2 = t('devise.session.new.title')
+      = render 'devise/shared/oauth'
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-        .col-12.error
-          p
-            = devise_error_messages!
-        .field
-          = f.email_field :email, autofocus: true, class: 'form-control', placeholder: t('email')
-        .field
+        = f.email_field :email, autofocus: true, class: 'form-control', placeholder: t('email')
+        .mb-1
           = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: t('password')
         - if devise_mapping.rememberable?
-          .field style=('padding-top: 20px; padding-bottom: 20px')
+          .mb-1
             = f.check_box :remember_me
             = f.label :remember_me,  t('devise.session.new.remember')
-        .field
+        .mb-1
           = f.button t('shared.navigation.user.sign_in'), class: 'btn btn-lg btn-secondary btn-block',
-                  data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('shared.navigation.user.signing_in') }
+                     data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('shared.navigation.user.signing_in') }
       = render 'devise/shared/links'

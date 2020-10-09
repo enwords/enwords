@@ -1,72 +1,25 @@
-.row
-  .col-12
-    span.text-center.devise-error == resource.errors.full_messages.join('<br>')
-
-.row.row-content
-  .col-12.col-sm-8.offset-sm-2.col-md-8.offset-md-2.jumbotron.mt-4
-    h2.form-signin-heading= t('shared.navigation.user.settings')
-    = form_for(resource, as: resource_name, url: update_user_registration_path, html: { method: :put }) do |f|
-      .field
+.alert.alert-danger = resource.errors.full_messages.join('<br>').html_safe
+.row.section-80
+  .col-12.col-sm-8.offset-sm-4.col-lg-6.offset-lg-3.align-self-center
+    .jumbotron
+      h2.text-center.mb-2 = t('shared.navigation.user.settings')
+      = form_for(resource, as: resource_name, url: update_user_registration_path, html: { method: :put }) do |f|
         = f.email_field :email, autofocus: true, class: 'form-control', placeholder: t('email')
         - if devise_mapping.confirmable? && resource.pending_reconfirmation?
           div
             = t('devise.registration.edit.unconfirmed_email')
             = resource.unconfirmed_email
-      .field
         = f.password_field :current_password, autocomplete: 'off', class: 'form-control', placeholder: t('old_password')
-      .field
         = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: t('new_password')
-      .field
         = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', placeholder: t('confirm_new_password')
-      .field
-        table.table__form
-          tbody
-            tr
-              td.first-column
-                span
-                  = t('devise.registration.form.learning_language')
-              td.second-column
-                span
-                  = f.select :learning_language, options_for_select(t('languages').invert,
-                          current_user.learning_language), {},
-                          { class: 'form-control' }
-
-            tr
-              td.first-column
-                span
-                  = t('devise.registration.form.native_language')
-              td.second-column
-                span
-                  = f.select :native_language, options_for_select(t('languages').invert,
-                          current_user.native_language), {},
-                          { class: 'form-control' }
-
-            tr
-              td.first-column
-                span
-                  = t('devise.registration.edit.sentences_number')
-              td.second-column
-                span
-                  = f.number_field :sentences_number, min: 1, max: 20
-
-            tr
-              td.first-column
-                span
-                  = t('devise.registration.edit.audio_enable')
-              td.second-column
-                span.pull-right
-                  = f.check_box :audio_enable
-
-            tr
-              td.first-column
-                span
-                  = t('devise.registration.edit.diversity_enable')
-              td.second-column
-                span.pull-right
-                  = f.check_box :diversity_enable
-
-      .field.pt-2
-        = f.button t('devise.registration.edit.submit'),
-                class: 'btn btn-lg btn-secondary btn-block',
-                data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
+        .form-inline
+          = f.label :learning_language, t('devise.registration.form.learning_language')
+          = f.select :learning_language, options_for_select(t('languages').invert, current_user.learning_language), {}, { class: 'form-control', style: 'height: 100%; margin-left: auto' }
+        .form-inline
+          = f.label :native_language, t('devise.registration.form.native_language')
+          = f.select :native_language, options_for_select(t('languages').invert, current_user.native_language), {}, { class: 'form-control', style: 'height: 100%; margin-left: auto' }
+        .mb-1
+          = f.button t('devise.registration.edit.submit'),
+                  class: 'btn btn-lg btn-secondary btn-block',
+                  data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
         = link_to t('footer.agreement'), '/agreement_ru.pdf', target: '_blank'
