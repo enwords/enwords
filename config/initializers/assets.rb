@@ -18,4 +18,6 @@ Rails.application.config.assets.precompile += %w[
   stat.js
   translate.js
   visible_videos.js
+  fa.css
+  landing.js
 ]

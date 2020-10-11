@@ -5,6 +5,7 @@ html lang="en"
     = render 'layouts/meta'
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all'
+    = stylesheet_link_tag 'fa', media: 'all'
   body
     = render 'layouts/yandex-metrika'
     = render 'layouts/google-anal'
@@ -14,5 +15,5 @@ html lang="en"
       = yield
     .mt-4
       = render 'layouts/footer'
-    = javascript_include_tag 'application'
+    = javascript_include_tag 'landing'
     = yield :footer_js

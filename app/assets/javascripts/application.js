@@ -13,10 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require mdb
-//= require iCheck/icheck.min.js
 //= require qTip2
-//= require main
-//= require translate
 //= require facebook
 //= require me-talk
-//= require premium
+//= require main
+//= require checkbox
+//= require translate
+//= require locale_switcher

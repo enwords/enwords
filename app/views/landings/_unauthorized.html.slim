@@ -1,4 +1,7 @@
 .space.mb-2
+  .planets
+  .rocket
+  .moon
   .container
     .row.section-100
       .col-12.col-md-6.align-self-center
@@ -29,9 +32,8 @@
           .jumbotron.card#ecosystem-card-4
             h3.text-center.mt-4.mb-4 = t('landings.ecosystem.extension.title')
             p.text-center = t('landings.ecosystem.extension.body')
-.sign_up#sign_up
-  .container
-    .row.section-80
-      .col-12.col-sm-8.offset-sm-2.col-lg-6.offset-lg-3.align-self-center
-        .jumbotron
-          = render 'devise/registrations/form'
+.container#sign_up
+  .row.section-80
+    .col-12.col-sm-8.offset-sm-2.col-lg-6.offset-lg-3.align-self-center
+      .jumbotron
+        = render 'devise/registrations/form'

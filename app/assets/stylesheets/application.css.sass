@@ -17,9 +17,6 @@
  *= require qTip2
  */
 
-@import "font-awesome-sprockets"
-@import "font-awesome"
-
 $learnedColor  : #5CB85C
 $learningColor : #F0AD4E
 $unknownColor  : #B7B7B7
@@ -30,7 +27,7 @@ $btnColBack    : #E2E2E2
 $bodyBgCol     : #1E1E1E
 $bodySecCol    : #272727
 $textCol       : #e2e2e2
-$textMuted     : #777777
+$textMuted     : #888888
 
 @mixin trans($del)
   -webkit-transition: $del
@@ -586,14 +583,24 @@ pre
     min-height: 405px
 
 .landing
-  background: image-url('landing/stars.png')
+  h1
+    font-weight: bold
+  background-image: image-url('landing/stars.png')
   background-size: contain
   background-attachment: fixed
-  .space
-    background: image-url('landing/space.png')
+  .moon
+    background-image: image-url('landing/moon.png')
+  .planets
+    background-image: image-url('landing/planets.png')
+  .moon, .planets, .rocket
+    position: absolute
+    overflow: hidden
+    min-height: 100vh
+    min-width: 100%
     background-repeat: no-repeat
-    background-size: cover
-    background-position: left
+    background-size: contain
+    background-position: 0px 0px
+  .space
     .main-text
       p
         font-size: 18px
@@ -603,37 +610,30 @@ pre
       background-image: image-url('landing/planets.png')
       background-repeat: no-repeat
       &#ecosystem-card-1
-        background-size: 833px
-        background-position-y: -92px
-        background-position-x: -186px
+        background-size: 1500px
+        background-position-y: -100px
+        background-position-x: -700px
       &#ecosystem-card-2
-        background-size: 1059px
-        background-position-x: -580px
-        background-position-y: -140px
+        background-size: 1300px
+        background-position-x: -430px
+        background-position-y: -200px
       &#ecosystem-card-3
-        background-size: 901px
-        background-position-x: -657px
-        background-position-y: -215px
+        background-size: 1200px
+        background-position-y: 100px
+        background-position-x: -800px
       &#ecosystem-card-4
-        background-size: 1403px
-        background-position-x: -185px
-        background-position-y: -413px
-
-  .sign_up
-    background: image-url('landing/planets.png')
-    background-repeat: no-repeat
-    background-size: cover
-    background-position: left
-
+        background-size: 2500px
+        background-position-x: -750px
+        background-position-y: -1000px
   .btn
     width: 100%
     margin: 0
 
 .buy_coffee
-  background-image: image-url('landing/planets.png')
-  background-size: 1500px
-  background-position-x: -150px
-  background-position-y: -500px
+  background-image: image-url('landing/moon.png')
+  background-size: 2100px
+  background-position-x: -1615px
+  background-position-y: -430px
 
 .section
   &-80
@@ -647,12 +647,9 @@ pre
 @media (min-width: 992px)
   .landing
     .space
-      background-size: contain
-      background-position: top right
       .main-text
         height: 250px
         width: 350px
-    .sign_up
-      background-repeat: no-repeat
-      background-size: contain
-      background-position: bottom right
+    .rocket
+      background-image: image-url('landing/rocket.png')
+      background-size: cover
