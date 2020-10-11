@@ -588,32 +588,37 @@ pre
 .landing
   background: image-url('landing/stars.png')
   background-size: contain
+  background-attachment: fixed
   .space
     background: image-url('landing/space.png')
     background-repeat: no-repeat
     background-size: cover
     background-position: left
+    .main-text
+      p
+        font-size: 18px
   .ecosystem
     .card
       min-height: 400px
       background-image: image-url('landing/planets.png')
       background-repeat: no-repeat
       &#ecosystem-card-1
-        background-size: 791px
-        background-position-y: -101px
-        background-position-x: -178px
+        background-size: 833px
+        background-position-y: -92px
+        background-position-x: -186px
       &#ecosystem-card-2
-        background-size: 1403px
-        background-position-x: -185px
-        background-position-y: -413px
+        background-size: 1059px
+        background-position-x: -580px
+        background-position-y: -140px
       &#ecosystem-card-3
         background-size: 901px
         background-position-x: -657px
         background-position-y: -215px
       &#ecosystem-card-4
-        background-size: 1059px
-        background-position-x: -580px
-        background-position-y: -140px
+        background-size: 1403px
+        background-position-x: -185px
+        background-position-y: -413px
+
   .sign_up
     background: image-url('landing/planets.png')
     background-repeat: no-repeat
@@ -632,12 +637,12 @@ pre
 
 .section
   &-80
-    overflow: auto
-    height: 80vh
+    overflow: hidden
+    min-height: 80vh
 
   &-100
-    overflow: auto
-    height: 100vh
+    overflow: hidden
+    min-height: 100vh
 
 @media (min-width: 992px)
   .landing
@@ -647,8 +652,6 @@ pre
       .main-text
         height: 250px
         width: 350px
-        p
-          font-size: 18px
     .sign_up
       background-repeat: no-repeat
       background-size: contain

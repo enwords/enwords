@@ -1,9 +1,8 @@
-- if user_signed_in?
-  .row
-  .container
+.landing
+  - if user_signed_in?
     - if current_user.learning_language?
       = render 'authorized'
     - else
       = render 'landings/select_languages'
-- else
-  = render 'unauthorized'
+  - else
+    = render 'unauthorized'

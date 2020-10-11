@@ -115,7 +115,7 @@ en:
         body: Here is a half a million words with millions sentences to learn
       telegram:
         title: Telegram bot
-        body: Use a bot to translate unknown words and get new words from the bot
+        body: Use a bot to translate unknown words and get new words daily
       apps:
         title: iOS & Android apps
         body: Soon
@@ -247,8 +247,8 @@ en:
     advanced_features: "Advanced features"
     current_plan: "Current Plan"
     upgrade: "Upgrade 🚀"
-    price_monthly: "~$2 monthly"
-    price_yearly: "~$13 yearly (-45%)"
+    price_monthly: "$1.99 monthly"
+    price_yearly: "$12.99 yearly (-45%)"
     or: "or"
     thank_you: "Thank you for purchasing Premium.<br>You are now an early adopter of Enwords.<br>You will get new opportunities soon"
     get_premium: "Go premium"
