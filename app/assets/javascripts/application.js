@@ -16,7 +16,6 @@
 //= require qTip2
 //= require facebook
 //= require me-talk
-//= require main
 //= require checkbox
 //= require translate
 //= require locale_switcher

@@ -1,6 +1,8 @@
 $(function () {
   'use strict';
 
+  $('.words-from-sentence-after').hide().fadeIn(500);
+
   var $btnShowTranslation = $('.translation-block a');
 
   $.ajax({
@@ -12,16 +14,15 @@ $(function () {
     $('.words-from-sentence-after').fadeIn(500);
 
     // switcher
-    var $switcher = $('.switcher');
 
-    $('[data-status="true"]').addClass('switcher_learned');
-    $('[data-status="unknown"]').addClass('switcher_unknown');
+    $('[data-status="true"]').addClass('word_status_switcher_learned');
+    $('[data-status="unknown"]').addClass('word_status_switcher_unknown');
 
-    $switcher.on('click', function () {
+    $('.word_status_switcher').on('click', function () {
       var st = $(this).attr('data-status') === 'true';
       var new_st = !st;
       $(this).attr('data-status', new_st + '');
-      $(this).removeClass('switcher_unknown').toggleClass('switcher_learned');
+      $(this).removeClass('word_status_switcher_unknown').toggleClass('word_status_switcher_learned');
       $.ajax({
         url: '/change_status/' + $(this).data('id') + '/' + new_st
       });

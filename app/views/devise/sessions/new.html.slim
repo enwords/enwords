@@ -5,9 +5,9 @@
       h2.text-center.mb-2 = t('devise.session.new.title')
       = render 'devise/shared/oauth'
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-        = f.email_field :email, autofocus: true, class: 'form-control', placeholder: t('email')
+        = f.email_field :email, autofocus: true, class: 'form-control', placeholder: t('email'), required: true
         .mb-1
-          = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: t('password')
+          = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: t('password'), required: true
         - if devise_mapping.rememberable?
           .mb-1
             = f.check_box :remember_me

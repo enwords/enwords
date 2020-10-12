@@ -12,9 +12,8 @@
               td.td__word
                 span.word-translate data-from=l_lang data-to=n_lang = word_hash['word'].capitalize
               td
-                .switcher data-id="#{word_hash['id']}" data-status="#{word_hash['learned'].nil? ? 'unknown' : word_hash['learned']}"
-                  .switcher-round
-                  = icon 'check', class: 'icon-check'
+                .word_status_switcher data-id="#{word_hash['id']}" data-status="#{word_hash['learned'].nil? ? 'unknown' : word_hash['learned']}"
+                  .word_status_switcher_round
 
       .row#training-legend
         .col-4

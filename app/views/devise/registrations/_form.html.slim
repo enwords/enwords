@@ -1,8 +1,8 @@
 h2.text-center.mb-2 = t('devise.registration.form.title')
 = render 'devise/shared/oauth'
 = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = f.email_field :email, class: 'form-control', placeholder: t('email')
-  = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: t('password_minimum_6')
+  = f.email_field :email, class: 'form-control', placeholder: t('email'), required: true
+  = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: t('password_minimum_6'), required: true
   .form-inline
     = f.label :learning_language, t('devise.registration.form.learning_language')
     = f.select :learning_language, options_for_select(t('languages').invert, 'eng'), {}, { class: 'form-control', style: 'height: 100%; margin-left: auto' }

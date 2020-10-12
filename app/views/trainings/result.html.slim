@@ -1,6 +1,6 @@
 .row.section-80
-  .col-12.col-sm-8.offset-sm-2.col-md-8.offset-md-2
-    .jumbotron.result-page
+  .col-12.col-sm-8.offset-sm-2.col-md-6.offset-md-3.align-self-center.text-center
+    .jumbotron
       - case @current_training
         - when RepeatingTraining, SpellingTraining, GrammarTraining
           h3 == t 'training.result.title'

@@ -11,15 +11,19 @@ ru:
   loading: "Подождите..."
 
   activerecord:
+    attributes:
+      user:
+        password: Пароль
+        password_confirmation: Подтвержление пароля
     errors:
       models:
         user:
           attributes:
             password:
-              blank: "Пароль не может быть пустым"
-              too_short: "Пароль слишком короткий (минимум 6 символов)"
+              blank: "не может быть пустым"
+              too_short: "слишком короткий (минимум 6 символов)"
             password_confirmation:
-              confirmation: "Пароли не совпадают"
+              confirmation: "не совпадает"
             current_password:
               invalid: "Текущий пароль неверен"
             email:
@@ -61,7 +65,7 @@ ru:
         submit: "Изменить пароль"
       new:
         title: "Забыли пароль?"
-        submit: "Отправить инструкцию по смене пароля"
+        submit: "Сбросить пароль"
     registration:
       form:
         title:  "Регистрация"

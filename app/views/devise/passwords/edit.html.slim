@@ -5,13 +5,12 @@
       h2.text-center.mb-2 == t('devise.passwords.edit.title')
       = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
         = f.hidden_field :reset_password_token
-        = f.label :password, t('new_password')
         = f.password_field :password,
+                           class: 'form-control',
                            autofocus: true,
                            autocomplete: 'off',
-                           placeholder: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
-        = f.label :password_confirmation, t('confirm_password')
-        = f.password_field :password_confirmation, autocomplete: 'off'
+                           placeholder: t('new_password')
+        = f.password_field :password_confirmation, autocomplete: 'off', class: 'form-control', placeholder: t('confirm_password')
         = f.button t('devise.passwords.edit.submit'),
                    class: 'btn btn-lg btn-secondary btn-block',
                    data: { disable_with: t('loading') }
