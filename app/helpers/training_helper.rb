@@ -1,9 +1,4 @@
 module TrainingHelper
-  def translation(original)
-    original.translations.where(language: current_user.native_language).first.try(:value) ||
-      Sentence::CreateTranslation.run!(sentence: original, translation_lang: current_user.native_language)&.value
-  end
-
   def clean_word(word)
     word.gsub(/\W/, '').downcase
   end

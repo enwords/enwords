@@ -36,7 +36,7 @@
                   type:  'submit',
                   value: 'to_training_spelling',
                   name:  'commit',
-                  class: 'btn btn-raised btn-link',
+                  class: 'btn btn-raised btn-md btn-link',
                   data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
           - if current_user.native_language == 'rus' && current_user.learning_language == 'eng'
             = button_tag t('words.buttons.training_mnemo'),
@@ -64,7 +64,7 @@
                     type:  'submit',
                     value: 'to_state_unknown',
                     name:  'commit',
-                    class: 'btn btn-raised btn-link unknown',
+                    class: 'btn btn-raised btn-link btn-md unknown',
                     data:  { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('loading') }
           - if params[:status] == 'unknown'
             span style='text-align: center; width: 100%;'

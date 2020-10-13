@@ -21,10 +21,9 @@
             - else
               = sentence.value
 
-        - if translation(sentence)
-          .col-12.translation-block
-            a = t 'training.show_translation'
-            span.hidden = translation(sentence)
+        .col-12.translation-block
+          a = t 'training.show_translation'
+          span.hidden = ''
       .col-12
         .digg_pagination.pagination-training
           - if params[:page] == @page_count.to_s

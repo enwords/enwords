@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/translation/:sentence_id', to: 'trainings#translation'
   get '/words_from_sentence/:sentence_id', to: 'trainings#words_from_sentence'
   get '/change_status/:id/:status', to: 'trainings#change_status'
 

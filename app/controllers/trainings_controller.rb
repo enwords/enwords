@@ -25,6 +25,13 @@ class TrainingsController < ApplicationController
     render nothing: true
   end
 
+  def translation
+    original = Sentence.find(params.require(:sentence_id))
+    value = original.translations.where(language: current_user.native_language).first.try(:value) ||
+      create_translation(original) || create_translation(original)
+    render json: { value: value }
+  end
+
   def change_status
     to_state =
       case params[:status]
@@ -64,5 +71,9 @@ class TrainingsController < ApplicationController
 
   def check_current_training
     redirect_to root_path unless current_training
+  end
+
+  def create_translation(original)
+    Sentence::CreateTranslation.run!(sentence: original, translation_lang: current_user.native_language)&.value
   end
 end

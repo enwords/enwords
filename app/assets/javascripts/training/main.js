@@ -9,8 +9,6 @@ $(function () {
     url: '/words_from_sentence/' + $('#original-sentence').data('sentence-id'),
   }).done(function (html) {
     $('.words-from-sentence-before').replaceWith(html);
-    $.getScript('/assets/skyeng.js');
-
     $('.words-from-sentence-after').fadeIn(500);
 
     // switcher
@@ -27,6 +25,16 @@ $(function () {
         url: '/change_status/' + $(this).data('id') + '/' + new_st
       });
     });
+  });
+
+  $.ajax({
+    url: '/translation/' + $('#original-sentence').data('sentence-id'),
+    type: 'GET',
+    dataType: 'json'
+  }).done(function (response) {
+    console.log(response)
+    console.log(response.value)
+    $('.translation-block span').text(response.value)
   });
 
   $btnShowTranslation.on('click', function (e) {
