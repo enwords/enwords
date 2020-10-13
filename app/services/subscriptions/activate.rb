@@ -17,7 +17,7 @@ module Subscriptions
     end
 
     def expires_at
-      return 1.year.from_now if subscription.plan_yearly?
+      return 1.year.from_now if subscription.plan_annual?
       return 1.month.from_now if subscription.plan_monthly?
     end
 

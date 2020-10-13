@@ -14,7 +14,7 @@ module Subscriptions
       @amount_cents ||=
         case plan
         when 'monthly' then 149_00
-        when 'yearly' then 990_00
+        when 'annual' then 990_00
         end
     end
 

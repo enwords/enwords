@@ -6,7 +6,7 @@ describe Subscriptions::Create do
   let(:options) do
     {
       user: user,
-      plan: 'yearly'
+      plan: 'annual'
     }
   end
   let(:user) { create(:user) }

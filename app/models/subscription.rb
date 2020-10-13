@@ -11,7 +11,7 @@ class Subscription < ApplicationRecord
 
   enum plan: {
     monthly: 1,
-    yearly: 2
+    annual: 2
   }, _prefix: :plan
 
   validates :user, :payment, :plan, :status, presence: true

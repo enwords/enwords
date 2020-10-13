@@ -10,7 +10,7 @@
     .row.section-80
       .col-12
         h1 = t('premium.subscription')
-        p = t('premium.description')
+        p style="font-size: 18px" = t('premium.description')
       .col-12.col-md-4
         .jumbotron.card
           h3.text-center.mb-2 = t('premium.free')
@@ -34,10 +34,10 @@
           = form_tag subscriptions_path, method: :post do
             = button_tag t('premium.upgrade'), class: 'btn btn-secondary btn-block'
             br
-            = select_tag 'plan', options_for_select(%w[monthly yearly], 'monthly'), required: true, include_blank: false
+            = select_tag 'plan', options_for_select(%w[monthly annual], 'monthly'), required: true, include_blank: false
             span.price.active data-plan='monthly' == t('premium.price_monthly')
             = " #{t('premium.or')} "
-            span.price data-plan='yearly' == t('premium.price_yearly')
+            span.price data-plan='annual' == t('premium.price_annual')
           br
           ul.fa-ul.ml-4
             li
