@@ -28,7 +28,8 @@ class TrainingsController < ApplicationController
   def translation
     original = Sentence.find(params.require(:sentence_id))
     value = original.translations.where(language: current_user.native_language).first.try(:value) ||
-      create_translation(original) || create_translation(original)
+            create_translation(original) ||
+            create_translation(original)
     render json: { value: value }
   end
 

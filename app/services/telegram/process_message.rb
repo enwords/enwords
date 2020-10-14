@@ -1,5 +1,7 @@
 module Telegram
   class ProcessMessage < ActiveInteraction::Base
+    DEFAULT_LANG = 'eng'.freeze
+
     private
 
     string :text, default: nil
@@ -66,7 +68,9 @@ module Telegram
     def process_word
       unless word
         return I18n.t('telegram.process_message.only_one_word', locale: :ru) if clean_text.split(' ').size > 1
+
         return I18n.t('telegram.process_message.go_premium', locale: :ru) unless telegram_chat_user.premium?
+
         return I18n.t('telegram.process_message.not_understand', locale: :ru)
       end
 
@@ -80,18 +84,21 @@ module Telegram
 
     def translation_lang
       @translation_lang ||=
-        case lang
-        when 'rus' then 'eng'
-        when 'eng' then 'rus'
+        if lang == telegram_chat_user&.learning_language
+          telegram_chat_user&.native_language || DEFAULT_LANG
+        else
+          telegram_chat_user&.learning_language || DEFAULT_LANG
         end
     end
 
     def lang
-      @lang ||=
-        case clean_text
-        when /[a-z]/i then 'eng'
-        when /[а-ё]/i then 'rus'
-        end
+      @lang ||= begin
+        langs = [telegram_chat_user&.learning_language, telegram_chat_user&.native_language].compact
+        langs << DEFAULT_LANG if langs.blank?
+        wl = WhatLanguage.new(*Rails.configuration.languages['what_language'].slice(*langs).values.map(&:to_sym))
+        language = wl.language(clean_text)
+        language ? Rails.configuration.languages['what_language'].invert[language.to_s] : DEFAULT_LANG
+      end
     end
 
     def clean_text

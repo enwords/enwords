@@ -5,10 +5,10 @@ h2.text-center.mb-2 = t('devise.registration.form.title')
   = f.password_field :password, autocomplete: 'off', class: 'form-control', placeholder: t('password_minimum_6'), required: true
   .form-inline
     = f.label :learning_language, t('devise.registration.form.learning_language')
-    = f.select :learning_language, options_for_select(t('languages').invert, 'eng'), {}, { class: 'form-control', style: 'height: 100%; margin-left: auto' }
+    = f.select :learning_language, options_for_select(t('languages').invert, params[:l] || 'eng'), {}, { class: 'form-control', style: 'height: 100%; margin-left: auto' }
   .form-inline
     = f.label :native_language, t('devise.registration.form.native_language')
-    = f.select :native_language, options_for_select(t('languages').invert, 'rus'), {}, { class: 'form-control', style: 'height: 100%; margin-left: auto' }
+    = f.select :native_language, options_for_select(t('languages').invert, params[:n] || 'rus'), {}, { class: 'form-control', style: 'height: 100%; margin-left: auto' }
   = f.button t('devise.registration.form.title'),
           class: 'btn btn-lg btn-secondary btn-block mb-1',
           data: { disable_with: '<i class="fa fa-spinner fa-spin"></i> ' + t('shared.navigation.user.signing_up') }

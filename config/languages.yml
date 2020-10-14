@@ -78,6 +78,28 @@ default: &default
     tr: turkish
     ru: russian
 
+  what_language:
+    ara: arabic
+    dan: danish
+    nld: dutch
+    eng: english
+    fas: farsi
+    fin: finnish
+    fra: french
+    deu: german
+    ell: greek
+    heb: hebrew
+    hun: hungarian
+    ita: italian
+    kor: korean
+    nor: norwegian
+    pny: pinyin
+    pol: polish
+    por: portuguese
+    rus: russian
+    spa: spanish
+    swe: swedish
+
 test:
   <<: *default
 

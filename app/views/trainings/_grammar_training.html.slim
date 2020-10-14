@@ -13,7 +13,7 @@
           - else
             span.fa.fa-volume-off
           h4#original-sentence data-sentence-id=sentence.id
-            - if lang_pair == %w[eng rus]
+            - if may_split_sentence?
               - count = 0
               - sentence.value.split.each do |w|
                 - if count.zero? && @words.include?(clean_word(w))

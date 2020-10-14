@@ -13,6 +13,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter'
 gem 'omniauth-vkontakte'
 gem 'pg'
+gem 'picture_tag'
 gem 'puma'
 gem 'rails', '5.2.2.1'
 gem 'redis-namespace'
@@ -26,8 +27,8 @@ gem 'slim'
 gem 'turbolinks', '~> 5.x'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'uglifier', '>= 1.3.0'
+gem 'whatlanguage'
 gem 'will_paginate', '~> 3.1.0'
-gem 'picture_tag'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-iCheck'

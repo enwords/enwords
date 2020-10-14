@@ -1,2 +1,5 @@
 Metrics/BlockLength:
   Max: 126
+
+Metrics/PerceivedComplexity:
+  Max: 8

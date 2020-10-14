@@ -12,7 +12,7 @@
         = link_to t('texts.links.delete'), article_path(@article),
             method: :delete,
             data: { confirm: t('texts.links.are_you_sure') }
-      - if supported_pair?
+      - if may_split_sentence?
         h3.text-center
           - @article.title.split.each do |w|
             span.word-translate data-from=l_lang data-to=n_lang = w

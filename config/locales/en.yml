@@ -105,8 +105,9 @@ en:
 
   landings:
     space:
-      title: "Learn any language for FREE"
-      body: "Here you will find 30 languages​​, such as English 🇬🇧 German 🇩🇪 Spanish 🇪🇸 French 🇫🇷 and others"
+      title: "Learn %{lang} easily with Enwords"
+      any: "any language"
+      body: "Here you will find 30 languages​​, such as<br>%{langs} and others"
       sign_up: "Start 🚀"
     ecosystem:
       title: Enwords Space Ecosystem
@@ -181,7 +182,7 @@ en:
       text2: "Please select the language in the "
       link2: "profile settings"
     buttons:
-      training_repeating: Remembering exercise
+      training_repeating: Memorizing exercise
       training_spelling: Orthography exercise
       training_grammar: Exercise
       training_mnemo: Mnemo exercise

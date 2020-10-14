@@ -3,14 +3,15 @@ en:
     ara: 🇦🇪 Arabic
     ber: 🏳️ Berber
     bul: 🇧🇬 Bulgarian
-    ces: 🇨🇿 Czech
     cmn: 🇨🇳 Chinese
+    ces: 🇨🇿 Czech
     dan: 🇩🇰 Danish
-    deu: 🇩🇪 German
+    nld: 🇳🇱 Dutch
     eng: 🇬🇧 English
     epo: 🏳️ Esperanto
     fin: 🇫🇮 Finnish
     fra: 🇫🇷 French
+    deu: 🇩🇪 German
     heb: 🇮🇱 Hebrew
     hun: 🇭🇺 Hungarian
     ina: 🏳️ Interlingua
@@ -18,15 +19,14 @@ en:
     jpn: 🇯🇵 Japanese
     lat: 🏳️ Latin
     lit: 🇱🇹 Lithuanian
-    mar: 🏳️ Marathi
-    mkd: 🇲🇰 Macedonian
     nds: 🏳️ Low Saxon
-    nld: 🇳🇱 Dutch
+    mkd: 🇲🇰 Macedonian
+    mar: 🏳️ Marathi
     pol: 🇵🇱 Polish
     por: 🇵🇹 Portuguese
     rus: 🇷🇺 Russian
-    spa: 🇪🇸 Spanish
     srp: 🇷🇸 Serbian
+    spa: 🇪🇸 Spanish
     swe: 🇸🇪 Swedish
     tur: 🇹🇷 Turkish
     ukr: 🇺🇦 Ukrainian
