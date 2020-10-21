@@ -111,4 +111,4 @@ header
           ul.nav-item.nav.navbar-nav.navbar-right
             li
               = link_to t('shared.navigation.user.sign_in'), new_user_session_path, class: 'nav-link'
-        = select_tag 'locale_switcher', options_for_select({ en: '🇬🇧', ru: '🇷🇺' }.invert, I18n.locale), class: 'form-control', style: 'width: auto; margin: 0'
+        = select_tag 'locale_switcher', options_for_select({ en: '🇬🇧', ru: '🇷🇺' }.invert, I18n.locale), class: 'form-control locale_switcher', style: 'width: auto; margin: 0'
