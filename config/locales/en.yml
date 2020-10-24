@@ -127,6 +127,8 @@ en:
     upload_articles: "<a href=%{audio_articles_path}>Read 📖 and listen 🎧</a> audio articles or <a href =%{articles_path}>add your own text</a> in the target language, for example, from magazines, books 📚 or create your own thematic word list️"
     use_telegram_bot: "Use Telegram bot 🤖 <a target='_blank' href='https://t.me/enwordsapp_bot'>@enwordsapp_bot</a>. Send him an unfamiliar word and get a translation. The bot will also send you words on a schedule so that you can finally learn them"
     follow_us: 'Follow and like us on Instagram ❤️ there are a lot of interesting️ <a target="_blank" href="https://instagram.com/enwordsapp">@enwordsapp</a>'
+    meta:
+      keywords: "learning English, English online, French online, German online, Spanish online, Italian online"
 
   texts:
     title: "Texts"
