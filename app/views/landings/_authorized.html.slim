@@ -3,21 +3,21 @@
     .col-sm-6.align-self-center
       p == t 'landings.select_words', words_path: words_path(status: 'unknown')
     .hidden-xs-down.col-sm-6
-      = picture_tag '/images/iphone-frame.png', image: { alt: 'You are awesome!', type: 'image/png', class: 'phone-preview' } do
+      = picture_tag '/images/iphone-frame.png', image: { alt: t('words.buttons.training_repeating'), type: 'image/png', class: 'phone-preview' } do
         = source_tag srcset: '/images/iphone-frame.webp', type: 'image/webp'
       = video_tag 'words.mp4', muted: true, playsinline: true, loop: true, autoplay: true, preload: 'auto', class: 'phone-video'
   .row.mb-5.guides-item.section-80
     .col-sm-6.align-self-center
       p == t 'landings.upload_articles', audio_articles_path: audio_articles_path, articles_path: articles_path
     .hidden-xs-down.col-sm-6
-      = picture_tag '/images/iphone-frame.png', image: { alt: 'You are awesome!', type: 'image/png', class: 'phone-preview' } do
+      = picture_tag '/images/iphone-frame.png', image: { alt: t('shared.navigation.articles.audio'), type: 'image/png', class: 'phone-preview' } do
         = source_tag srcset: '/images/iphone-frame.webp', type: 'image/webp'
       = video_tag 'articles.mp4', muted: true, playsinline: true, loop: true, autoplay: true, preload: 'auto', class: 'phone-video'
   .row.mb-5.guides-item.section-80
     .col-sm-6.align-self-center
       p == t 'landings.use_telegram_bot'
     .hidden-xs-down.col-sm-6
-      = picture_tag '/images/iphone-frame.png', image: { alt: 'You are awesome!', type: 'image/png', class: 'phone-preview' } do
+      = picture_tag '/images/iphone-frame.png', image: { alt: t('landings.ecosystem.telegram.title'), type: 'image/png', class: 'phone-preview' } do
         = source_tag srcset: '/images/iphone-frame.webp', type: 'image/webp'
       = video_tag 'telegram.mp4', muted: true, playsinline: true, loop: true, autoplay: true, preload: 'auto', class: 'phone-video cut'
   - if lang_pair == %w[eng rus]
@@ -25,7 +25,7 @@
       .col-sm-6.align-self-center
         p == t 'landings.follow_us'
       .hidden-xs-down.col-sm-6
-        = picture_tag '/images/iphone-frame.png', image: { alt: 'You are awesome!', type: 'image/png', class: 'phone-preview' } do
+        = picture_tag '/images/iphone-frame.png', image: { alt: 'Instagram', type: 'image/png', class: 'phone-preview' } do
           = source_tag srcset: '/images/iphone-frame.webp', type: 'image/webp'
         = video_tag 'instagram.mp4', muted: true, playsinline: true, loop: true, autoplay: true, preload: 'auto', class: 'phone-video cut'
   = render 'premium'

@@ -6,7 +6,8 @@ header
       data-toggle='collapse' type='button']
 
         span.navbar-toggler-icon
-      = link_to 'Enwords ', root_path, class: 'navbar-brand'
+      = link_to_unless_current 'Enwords ', root_path, class: 'navbar-brand' do
+        = link_to 'Enwords ', '#', class: 'navbar-brand'
       #navbarNav.collapse.navbar-collapse
         - if signed_in?
           ul.navbar-nav.mr-auto

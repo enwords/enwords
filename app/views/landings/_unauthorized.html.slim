@@ -6,7 +6,7 @@
     .row.section-100
       .col-12.col-md-6.align-self-center
         .main-text.mb-4
-          h1.mb-2 == space_title
+          h1.font-weight-bold.mb-2 == space_title
           p.mb-2 == space_body
           = link_to t('landings.space.sign_up'), '#sign_up', class: 'btn btn-secondary btn-lg'
 .ecosystem.mb-2
@@ -14,23 +14,23 @@
     .section-100
       .row.mt-6.mb-6
         .col-12.text-center
-          h1 = t('landings.ecosystem.title')
+          h2.font-weight-bold = t('landings.ecosystem.title')
       .row
         .col-12.col-md-6.col-lg-3
           .jumbotron.card#ecosystem-card-1
-            h3.text-center.mt-4.mb-4 = t('landings.ecosystem.web.title')
+            h3.font-weight-bold.text-center.mt-4.mb-4 = t('landings.ecosystem.web.title')
             p.text-center = t('landings.ecosystem.web.body')
         .col-12.col-md-6.col-lg-3
           .jumbotron.card#ecosystem-card-2
-            h3.text-center.mt-4.mb-4 = t('landings.ecosystem.telegram.title')
+            h3.font-weight-bold.text-center.mt-4.mb-4 = t('landings.ecosystem.telegram.title')
             p.text-center = t('landings.ecosystem.telegram.body')
         .col-12.col-md-6.col-lg-3
           .jumbotron.card#ecosystem-card-3
-            h3.text-center.mt-4.mb-4 = t('landings.ecosystem.apps.title')
+            h3.font-weight-bold.text-center.mt-4.mb-4 = t('landings.ecosystem.apps.title')
             p.text-center = t('landings.ecosystem.apps.body')
         .col-12.col-md-6.col-lg-3
           .jumbotron.card#ecosystem-card-4
-            h3.text-center.mt-4.mb-4 = t('landings.ecosystem.extension.title')
+            h3.font-weight-bold.text-center.mt-4.mb-4 = t('landings.ecosystem.extension.title')
             p.text-center = t('landings.ecosystem.extension.body')
 .container#sign_up
   .row.section-80
