@@ -92,13 +92,7 @@ module Telegram
     end
 
     def lang
-      @lang ||= begin
-        langs = [telegram_chat_user&.learning_language, telegram_chat_user&.native_language].compact
-        langs << DEFAULT_LANG if langs.blank?
-        wl = WhatLanguage.new(*Rails.configuration.languages['what_language'].slice(*langs).values.map(&:to_sym))
-        language = wl.language(clean_text)
-        language ? Rails.configuration.languages['what_language'].invert[language.to_s] : DEFAULT_LANG
-      end
+      @lang ||= word.language
     end
 
     def clean_text
@@ -108,7 +102,10 @@ module Telegram
     end
 
     def word
-      @word ||= Word.find_by(value: clean_text, language: lang)
+      @word ||= Word.where(
+        value: clean_text,
+        language: [telegram_chat_user.learning_language, telegram_chat_user.native_language, DEFAULT_LANG]
+      ).first
     end
 
     def translation_object
