@@ -28,12 +28,6 @@ header
                   = link_to words_path(status: 'learned'), class: 'nav-link learned' do
                     i.fas.fa-check.learned
                     = "#{t('shared.navigation.words.learned')} (#{@learned_words_count})"
-
-                - if lang_pair == %w[eng rus] && current_user.skyeng_setting.try(:finished?)
-                  li
-                    = link_to words_path(status: 'skyeng'), class: 'nav-link skyeng' do
-                      i.fas.fa-times.skyeng
-                      = "#{t('shared.navigation.words.skyeng')} (#{@skyeng_words_count})"
             - if current_user.learning_language == 'eng'
               li.nav-item.dropdown
                 a.dropdown-toggle data-toggle='dropdown' href='#' class='nav-link'
@@ -95,12 +89,6 @@ header
                           class: 'nav-link' do
                     i.fa.fa-cog
                     = t 'shared.navigation.user.settings'
-                - if lang_pair == %w[eng rus]
-                  li
-                    = link_to actual_skyeng_setting_path,
-                            class: 'nav-link' do
-                      i.fa.fa-cog
-                      = t 'shared.navigation.skyeng_setting'
                 li
                   = link_to destroy_user_session_path,
                           method: 'delete',
