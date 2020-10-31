@@ -73,8 +73,6 @@ class Sentence < ApplicationRecord
     end
 
     def text
-      return unless sentence.try(:value)
-
       result = "*#{word.value}*"
       result << ' '
       result << "_[#{word_transcription}]_ " if word_transcription.present?
@@ -83,6 +81,8 @@ class Sentence < ApplicationRecord
         result << '- '
         result << word_translation
       end
+
+      return result unless sentence.try(:value)
 
       result << "\n"
       result << "\n"
