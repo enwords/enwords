@@ -13,6 +13,6 @@ $(function() {
     var x = $(this).scrollTop();
     $('.landing .planets').css('background-position', parseInt(x * 0.5) + 'px ' + parseInt(x * 2.0) + 'px');
     $('.landing .moon').css('background-position', parseInt(x * 0.5) + 'px ' + parseInt(x * 1.5) + 'px');
-    $('.landing .rocket').css('background-position', parseInt(x * 2.0) + 'px ' + parseInt(x * 1.5) + 'px');
+    $('.landing .rocket').css('background-position', parseInt(x * 1.0) + 'px ' + parseInt(x * 1.5) + 'px');
   });
 });
