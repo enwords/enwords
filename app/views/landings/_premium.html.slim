@@ -35,8 +35,11 @@
             = button_tag t('premium.upgrade'), class: 'btn btn-secondary btn-block'
             br
             = select_tag 'plan', options_for_select(%w[monthly annual], 'monthly'), required: true, include_blank: false
+            span == t('premium.strike.price_monthly')
             span.price.active data-plan='monthly' == t('premium.price_monthly')
             = " #{t('premium.or')} "
+            br
+            span == t('premium.strike.price_annual')
             span.price data-plan='annual' == t('premium.price_annual')
           br
           ul.fa-ul.ml-4

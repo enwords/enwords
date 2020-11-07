@@ -79,6 +79,8 @@ header
                 span class='nav-link' Premium
               - else
                 = link_to t('premium.get_premium'), root_path(anchor: 'premium'), class: 'nav-link'
+            li.nav-item
+              = select_tag 'locale_switcher', options_for_select({ en: '🇬🇧', ru: '🇷🇺' }.invert, I18n.locale), class: 'form-control locale_switcher', style: 'width: auto; margin: 0'
             li.nav-item.dropdown
               a.dropdown-toggle data-toggle='dropdown' href='#' class='nav-link'
                 = icon('far', 'user')
@@ -98,6 +100,7 @@ header
         - else
           .mr-auto
           ul.nav-item.nav.navbar-nav.navbar-right
-            li
+            li.nav-item
+              = select_tag 'locale_switcher', options_for_select({ en: '🇬🇧', ru: '🇷🇺' }.invert, I18n.locale), class: 'form-control locale_switcher', style: 'width: auto; margin: 0'
+            li.nav-item
               = link_to t('shared.navigation.user.sign_in'), new_user_session_path, class: 'nav-link'
-        = select_tag 'locale_switcher', options_for_select({ en: '🇬🇧', ru: '🇷🇺' }.invert, I18n.locale), class: 'form-control locale_switcher', style: 'width: auto; margin: 0'

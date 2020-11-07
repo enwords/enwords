@@ -252,6 +252,9 @@ en:
     upgrade: "Upgrade 🚀"
     price_monthly: "$1.99 monthly"
     price_annual: "$12.99 annual (-45%)"
+    strike:
+      price_monthly: "<i><s>$4.49</s></i>&nbsp;&nbsp;"
+      price_annual: "<i><s>$28.99</s></i>&nbsp;&nbsp;"
     or: "or"
     thank_you: "Thank you for purchasing Premium.<br>You are now an early adopter of Enwords.<br>You will get new opportunities soon"
     get_premium: "Go premium"
