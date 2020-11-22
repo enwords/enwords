@@ -11,7 +11,7 @@
           - if sentence.audio_url
             span.fa.fa-volume-up.btn-play-audio = audio_tag sentence.audio_url, id: 'play-audio'
           - else
-            span.fa.fa-volume-off
+            span.fa.fa-volume-up.btn-play-audio onclick='tts("#{sentence.value.gsub("'", '`')}", "#{sentence.language}")'
           h4#original-sentence data-sentence-id=sentence.id
             - if may_split_sentence?
               - count = 0

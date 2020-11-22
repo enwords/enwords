@@ -7,7 +7,7 @@ class Word < ApplicationRecord
     def execute
       unless word
         tr = yandex_translate
-        return tr ? { translation: tr, text: text, youglish: youglish, sound_url: sound_url } : nil
+        return tr ? { translation: tr, text: text, youglish: youglish, sound_url: sound_url, from: from, to: to } : nil
       end
 
       translation =
@@ -19,7 +19,9 @@ class Word < ApplicationRecord
         transcription: word.transcription || skyeng_translate&.dig('transcription'),
         text: word.value,
         sound_url: sound_url,
-        youglish: youglish
+        youglish: youglish,
+        from: from,
+        to: to
       }
     end
 

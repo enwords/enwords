@@ -17,5 +17,6 @@
 //= require facebook
 //= require me-talk
 //= require checkbox
+//= require tts
 //= require translate
 //= require locale_switcher

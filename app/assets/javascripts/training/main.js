@@ -43,8 +43,9 @@ $(function () {
     $('.translation-block span').fadeIn(750);
   });
 
-  $('.btn-play-audio').on('click', function () {
-    $(this).children('audio')[0].play();
+  $('.btn-play-audio').on('click', function() {
+    var audio = $(this).children('audio')[0]
+    if(audio !== null && audio !== undefined) audio.play();
   });
 
   $(document).keyup(function (e) {

@@ -9,4 +9,4 @@
 - if current_user.audio_enable
   javascript:
     var audio = document.getElementById('play-audio');
-    if(audio !== undefined) audio.play();
+    if(audio !== null && audio !== undefined) audio.play();

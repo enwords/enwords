@@ -51,6 +51,7 @@ $(function() {
               var soundUrl;
               var icon;
               var audio;
+              var script;
               var transcriptionBlock;
               if(data.translation != null) {
                 translation = data.translation.capitalize();
@@ -59,9 +60,11 @@ $(function() {
                 if(soundUrl != null) {
                   icon = 'fa fa-volume-up'
                   audio = '<audio src="' + soundUrl + '"></audio>'
+                  script = ''
                 } else {
-                  icon = 'fa fa-volume-off'
+                  icon = 'fa fa-volume-up'
                   audio = ''
+                  script = 'onclick="tts(\'' + data.text.replaceAll("'", '`') + '\', \'' + data.from + '\')"'
                 }
                 transcriptionBlock = ' - ';
                 if(typeof transcription !== 'undefined' && transcription !== null) {
@@ -69,7 +72,7 @@ $(function() {
                 }
                 content = content + (
                   '<span class="word-translate-icon"> ' +
-                  '<span class="' + icon + '" onclick="$(this).children(\'audio\')[0].play();">' +
+                  '<span ' + script + ' class="' + icon + '" onclick="$(this).children(\'audio\')[0].play();">' +
                   audio +
                   '</span>' +
                   '<span> ' + word + '</span>' +
