@@ -43,7 +43,7 @@ class Word < ApplicationRecord
     end
 
     def word_value
-      @word_value ||= text.downcase.strip
+      @word_value ||= text.downcase.gsub(/[,.]/, '').strip
     end
 
     def skyeng_translate
