@@ -46,7 +46,7 @@ module Telegram
     end
 
     def text
-      @text ||= Sentence::ByWord.run!(word: learning_word, translation_lang: 'rus')[:text]
+      @text ||= Sentence::ByWord.run!(word: learning_word, translation_lang: user.native_language)[:text]
     end
   end
 end
