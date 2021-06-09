@@ -103,6 +103,19 @@ CREATE TABLE public.external_articles (
 
 
 --
+-- Name: grammar_eng_conditional_sentences; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.grammar_eng_conditional_sentences (
+    id uuid DEFAULT public.gen_random_uuid() NOT NULL,
+    value character varying,
+    translation character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
 -- Name: grammar_eng_idioms; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -590,6 +603,14 @@ ALTER TABLE ONLY public.articles
 
 ALTER TABLE ONLY public.external_articles
     ADD CONSTRAINT external_articles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: grammar_eng_conditional_sentences grammar_eng_conditional_sentences_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.grammar_eng_conditional_sentences
+    ADD CONSTRAINT grammar_eng_conditional_sentences_pkey PRIMARY KEY (id);
 
 
 --
@@ -1156,6 +1177,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200812182958'),
 ('20200826135019'),
 ('20200826174732'),
-('20200915190707');
+('20200915190707'),
+('20210609172724');
 
 

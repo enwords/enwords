@@ -11,6 +11,7 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 
 Rails.application.config.assets.precompile += %w[
+  training/load_translation.js
   training/main.js
   training/spelling.js
   training/repeating.js

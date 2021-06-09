@@ -5,7 +5,10 @@ $(function () {
   var $inputSentence    = $('.input-sentence');
   var $nextPage         = $('.next_page');
 
-  $nextPage.on('click', function () {
+  $nextPage.on('click', process);
+  $('#check-text-area').on('keyup', function(e) {if((e.keyCode || e.which) == 13) {process()}});
+
+  function process() {
     if (replacePunctuation($inputSentence.val()) === replacePunctuation($originalSentence)) {
       $inputSentence.addClass('input-sentence_right');
       setTimeout(function () {
@@ -22,7 +25,7 @@ $(function () {
 
       return false;
     }
-  });
+  }
 
   function replacePunctuation(str) {
     var result  = str.toLowerCase();

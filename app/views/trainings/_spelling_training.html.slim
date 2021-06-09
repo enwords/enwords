@@ -42,6 +42,7 @@
     .words-from-sentence-before
 
 = content_for :footer_js do
+  = javascript_include_tag 'training/load_translation'
   = javascript_include_tag 'training/main'
   = javascript_include_tag 'training/spelling'
 

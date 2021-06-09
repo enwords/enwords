@@ -101,6 +101,7 @@ Rails.application.routes.draw do
             put :change_status
           end
         end
+        resource :conditional_sentences, only: %i[show]
       end
     end
 

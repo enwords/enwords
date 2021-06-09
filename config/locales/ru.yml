@@ -122,6 +122,7 @@ ru:
           irregular_verbs: "Неправильные глаголы"
           idioms: "Идиомы"
           phrasal_verbs: "Фразовые глаголы"
+          conditional_sentences: "Условные предложения"
 
   landings:
     space:
@@ -191,6 +192,7 @@ ru:
     result:
       title: "Результат тренировки"
       text: "Выученных слов"
+    translate: "Переведите текст"
   words:
     learned: 'Выученные слова'
     learning: 'Изучаемые слова'
