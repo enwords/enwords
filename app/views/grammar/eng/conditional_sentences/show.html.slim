@@ -18,6 +18,51 @@
         .hidden
           span.fa.fa-volume-up.btn-play-audio onclick='tts("#{@conditional_sentence.value.gsub("'", '`')}", "eng")' style="display: inline; margin-right: 5px; font-size: 20px"
           span style="display: inline; font-size: 1.25rem; font-weight: 300;" = @conditional_sentence.value
+.row
+  .col-12.col-md-8.offset-md-2
+    br
+    h4.text-center Theory
+    table.table-main.table-striped style='width: 100%; font-weight: 300;'
+      tbody
+        tr style='height: 100px'
+          td style='width: 20px' 1
+          td
+            span = 'Condition '
+            b = 'possible '
+            span = 'to fulfill'
+          td = 'If + Simple Present + will-future'
+          td
+            span = 'If I '
+            b = 'study, '
+            span = 'I '
+            b = 'will pass '
+            span = 'the exam.'
+        tr style='height: 120px'
+          td 2
+          td
+            span = 'Condition '
+            b = 'in theory possible '
+            span = 'to fulfill'
+          td = 'If + Simple Past + would + infinitive'
+          td
+            span = 'If I '
+            b = 'studied, '
+            span = 'I '
+            b = 'would pass '
+            span = 'the exam.'
+        tr style='height: 100px'
+          td 3
+          td
+            span = 'Condition '
+            b = 'not possible '
+            span = 'to fulfill (too late)'
+          td = 'If + Past Perfect + would + have + past participle'
+          td
+            span = 'If I '
+            b = 'had studied, '
+            span = 'I '
+            b = 'would have passed '
+            span = 'the exam.'
 
 = content_for :footer_js do
   = javascript_include_tag 'training/main'
