@@ -43,7 +43,7 @@ header
                   li
                     = link_to grammar_eng_idioms_path(status: :learning), class: 'nav-link' do
                       = t('shared.navigation.grammar.eng.idioms')
-                  - if current_user.learning_language == 'eng'
+                  - if current_user.native_language == 'rus'
                     li
                       = link_to grammar_eng_conditional_sentences_path, class: 'nav-link' do
                         = t('shared.navigation.grammar.eng.conditional_sentences')

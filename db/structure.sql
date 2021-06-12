@@ -111,7 +111,8 @@ CREATE TABLE public.grammar_eng_conditional_sentences (
     value character varying,
     translation character varying,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    kind integer
 );
 
 
@@ -1178,6 +1179,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20200826135019'),
 ('20200826174732'),
 ('20200915190707'),
-('20210609172724');
+('20210609172724'),
+('20210612091240');
 
 
