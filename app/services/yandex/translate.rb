@@ -21,10 +21,11 @@ module Yandex
         targetLanguageCode: Rails.configuration.languages['locales'][to] || to,
         texts: [text]
       }
+      token = iam_token
       result = Curl.post(CONFIG[:api_url], request_params.to_json) do |curl|
         curl.headers['Content-Type'] = 'application/json'
         curl.headers['Accept'] = 'application/json'
-        curl.headers['Authorization'] = "Bearer #{iam_token}"
+        curl.headers['Authorization'] = "Bearer #{token}"
       end
       JSON.parse(result.body).dig('translations', 0, 'text')
     end
