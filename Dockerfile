@@ -11,3 +11,5 @@ RUN chmod +x entrypoint.sh
 ENTRYPOINT ["./entrypoint.sh"]
 CMD ["dbmigrate"]
 CMD ["web"]
+
+EXPOSE 3000
