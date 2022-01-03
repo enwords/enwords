@@ -6,10 +6,18 @@ services:
     command: redis-server
     volumes:
       - redis:/data
-
+  postgres:
+    image: postgres:9.6
+    volumes:
+      - postgres:/var/lib/postgresql/data/
+    env_file:
+      - .env
+    ports:
+      - 5432:5432
   web:
     depends_on:
       - redis
+      - postgres
     build: .
     ports:
       - 3000:3000
@@ -39,6 +47,7 @@ services:
   sidekiq:
     depends_on:
       - redis
+      - postgres
     build: .
     command: sidekiq -C config/sidekiq.yml
     volumes:
@@ -60,4 +69,5 @@ services:
 
 volumes:
   redis:
+  postgres:
   letsencrypt:
