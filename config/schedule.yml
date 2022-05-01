@@ -2,10 +2,6 @@ send_message:
   cron:  '5 */2 * * *'
   class: 'Telegram::SendMessageToSubscribersWorker'
 
-send_external_article:
-  cron:  '0 7 * * *'
-  class: 'Telegram::SendExternalArticleWorker'
-
 certbot_renew:
   cron:  '0 0 */15 * *'
   class: 'CertbotRenewWorker'
