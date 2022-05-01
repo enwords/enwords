@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-  - 2.6.1
+  - 2.7.2
 bundler_args: --without development --without production --no-cache
 script:
   - bundle exec rspec
