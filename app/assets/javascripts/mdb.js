@@ -1,6 +1,5 @@
-//= require MDBootstrap/tether
-//= require MDBootstrap/bootstrap
-//= require MDBootstrap/mdb
+//= require MDBootstrap/js/bootstrap
+//= require MDBootstrap/js/mdb
 
 function initMDB() {
   Waves.attach('.btn, .btn-floating', ['waves-light']);

@@ -7,8 +7,6 @@ class Training < ApplicationRecord
       Integer
     end
 
-    set_callback(:type_check, :after, -> { self.word_ids = word_ids.map(&:to_i) })
-
     def execute
       ApplicationRecord.transaction do
         training.update!(
