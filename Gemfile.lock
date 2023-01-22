@@ -1,6 +1,5 @@
 GEM
   remote: http://rubygems.org/
-  remote: https://rails-assets.org/
   specs:
     aasm (5.0.6)
       concurrent-ruby (~> 1.0)
@@ -201,23 +200,13 @@ GEM
       bundler (>= 1.3.0)
       railties (= 5.2.5)
       sprockets-rails (>= 2.0.0)
-    rails-assets-MDBootstrap (4.3.2)
-      rails-assets-bootstrap (= 4.0.0.alpha.6)
-      rails-assets-jquery (~> 3.1.1)
     rails-assets-bootstrap (4.0.0.alpha.6)
       rails-assets-jquery (>= 1.9.1)
       rails-assets-tether (>= 1.4.0, < 2)
     rails-assets-ev-emitter (1.1.1)
-    rails-assets-iCheck (1.0.2)
-      rails-assets-jquery (>= 1.7)
     rails-assets-imagesloaded (4.1.4)
       rails-assets-ev-emitter (>= 1.0.0, < 2)
     rails-assets-jquery (3.1.1)
-    rails-assets-jquery-migrate (3.0.0)
-    rails-assets-qTip2 (3.0.2)
-      rails-assets-imagesloaded (>= 3.0.0)
-      rails-assets-jquery (>= 1.6.0)
-    rails-assets-tether (1.4.7)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -354,6 +343,20 @@ GEM
     whatlanguage (1.0.6)
     will_paginate (3.1.8)
 
+GEM
+  remote: https://rails-assets.org/
+  specs:
+    rails-assets-MDBootstrap (4.3.2)
+      rails-assets-bootstrap (= 4.0.0.alpha.6)
+      rails-assets-jquery (~> 3.1.1)
+    rails-assets-iCheck (1.0.2)
+      rails-assets-jquery (>= 1.7)
+    rails-assets-jquery-migrate (3.0.0)
+    rails-assets-qTip2 (3.0.2)
+      rails-assets-imagesloaded (>= 3.0.0)
+      rails-assets-jquery (>= 1.6.0)
+    rails-assets-tether (1.4.7)
+
 PLATFORMS
   ruby
 
@@ -411,4 +414,4 @@ RUBY VERSION
    ruby 2.7.2p137
 
 BUNDLED WITH
-   1.17.3
+   2.4.5
