@@ -5,6 +5,7 @@ WORKDIR /app
 RUN apt-get update
 RUN apt-get install -y nodejs
 RUN gem install bundler
+RUN gem install sassc -- --disable-march-tune-native
 RUN bundle install
 RUN chmod +x entrypoint.sh
 
