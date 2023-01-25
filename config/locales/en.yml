@@ -130,7 +130,9 @@ en:
     follow_us: 'Follow and like us on Instagram ❤️ there are a lot of interesting️ <a target="_blank" href="https://instagram.com/enwordsapp">@enwordsapp</a>'
     meta:
       keywords: "learning English, English online, French online, German online, Spanish online, Italian online"
-
+  blog:
+    start_learning_english: "🚀 Start Learning English!"
+    other_articles: "Other articles"
   texts:
     title: "Texts"
     buttons:

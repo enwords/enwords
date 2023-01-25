@@ -2,4 +2,12 @@
   <div class="col-12 col-sm-8 offset-sm-2 mt-2 mb-2">
     <%= render params[:slug] %>
   </div>
+  <div class="col-12 col-sm-8 offset-sm-2 mb-2 text-center">
+    <div>
+      <%= link_to t('blog.start_learning_english'), new_user_registration_path, class: 'btn btn-secondary btn-lg' %>
+    </div>
+    <div>
+      <%= link_to t('blog.other_articles'), blog_index_path %>
+    </div>
+  </div>
 </div>
