@@ -86,7 +86,7 @@ en:
         audio: 'Audio articles'
 
       last_training: 'Continue exercise'
-      search: 'Word search'
+      search: 'Find a word'
       user:
         settings: 'Settings'
         sign_out: 'Sign Out'
@@ -162,7 +162,7 @@ en:
     show_translation: "Show translation"
     know: "Known?"
     end: "End"
-    replace: "Reprint text above"
+    replace: "Fill in the blanks"
     check: "Check"
     right: "You're right!"
     wrong: "You're wrong"

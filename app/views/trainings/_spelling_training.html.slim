@@ -12,21 +12,18 @@
             span.fa.fa-volume-up.btn-play-audio = audio_tag sentence.audio_url, id: 'play-audio'
           - else
             span.fa.fa-volume-up.btn-play-audio onclick='tts("#{sentence.value.gsub("'", '`')}", "#{sentence.language}")'
-          h4#original-sentence data-sentence-id=sentence.id data-sentence-value=sentence.value
+          h4#original-sentence data-sentence-id=sentence.id
             - if may_split_sentence?
+              - count = 0
               - sentence.value.split.each do |w|
-                span.word-translate data-from=l_lang data-to=n_lang = w
+                - if count.zero? && @words.include?(clean_word(w))
+                  = text_field_tag 'input-word', '', grammar_training_data(clean_word(w))
+                  - count += 1
+                - else
+                  span.word-translate data-from=l_lang data-to=n_lang = w
                 span.word-zero = ' '
             - else
               = sentence.value
-        .col-10.offset-1 style='margin-top: 10px'
-          = text_area_tag 'input-sentence', '',
-                  autocomplete: 'off',
-                  class: 'form-control input-sentence',
-                  maxlength: 200,
-                  autofocus: true
-          span style="float: right" = t('training.replace')
-
         .col-12.translation-block
           span = ''
     .row

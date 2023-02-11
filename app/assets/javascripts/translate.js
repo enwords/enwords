@@ -81,7 +81,8 @@ $(function() {
                   '<span> ' + translation + '</span>'
                 );
               }
-              var youglish = data.youglish
+              // var youglish = data.youglish
+              var youglish = null
               if(youglish != null) {
                 content = content +
                   '<br>' +

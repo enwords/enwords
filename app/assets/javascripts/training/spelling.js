@@ -1,40 +1,34 @@
 $(function () {
   'use strict';
 
-  var $originalSentence = $('#original-sentence').data('sentence-value');
-  var $inputSentence    = $('.input-sentence');
-  var $nextPage         = $('.next_page');
+  var $nextPage     = $('.next_page');
+  var $inputWord    = $('.input-word');
+  var $originalWord = $inputWord.data('hidden-word');
 
-  $nextPage.on('click', process);
-  $('#check-text-area').on('keyup', function(e) {if((e.keyCode || e.which) == 13) {process()}});
-
-  function process() {
-    if (replacePunctuation($inputSentence.val()) === replacePunctuation($originalSentence)) {
-      $inputSentence.addClass('input-sentence_right');
+  $nextPage.on('click', function () {
+    if (replacePunctuation($inputWord.val()) === replacePunctuation($originalWord)) {
+      $inputWord.addClass('input-word_right');
       setTimeout(function () {
-        $inputSentence.removeClass('input-sentence_right');
+        $inputWord.removeClass('input-word_right');
         window.location = $nextPage.attr('href');
       }, 800);
 
       return false;
     } else {
-      $inputSentence.addClass('input-sentence_wrong');
+      $inputWord.addClass('input-word_wrong');
       setTimeout(function () {
-        $inputSentence.removeClass('input-sentence_wrong');
+        $inputWord.removeClass('input-word_wrong').val('').attr('placeholder' , $originalWord);
       }, 800);
 
       return false;
     }
-  }
+  });
 
   function replacePunctuation(str) {
-    var result  = str.toLowerCase();
-    var punctRE = /[\u2000-\u206F\u2E00-\u2E7F\\'!"#$%&()*+,\-.\/:;<=>?@\[\]^_`{|}~]/g;
-    var spaceRE = /\s+/g;
-    return result.replace(punctRE, '').replace(spaceRE, '');
+    return str.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()\s]/g, '');
   }
 
-  $inputSentence.keypress(function (e) {
+  $inputWord.keypress(function (e) {
     if (e.keyCode === 13) {
       e.preventDefault();
       $nextPage.trigger('click');
