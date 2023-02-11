@@ -22,7 +22,7 @@ header
                     = "#{t('shared.navigation.words.unknown')} (#{@unknown_words_count})"
                 li
                   = link_to words_path(status: 'learning'), class: 'nav-link learning' do
-                    i.fas.fa-times.learning
+                    i.fas.fa-clock.learning
                     = "#{t('shared.navigation.words.learning')} (#{@learning_words_count})"
                 li
                   = link_to words_path(status: 'learned'), class: 'nav-link learned' do

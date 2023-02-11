@@ -38,7 +38,7 @@ en:
       form:
         title:  "Sign up"
         native_language: "Native language"
-        learning_language: "Learning language"
+        learning_language: "Language to learn"
       edit:
         title: "User settings"
         unconfirmed_email: "Still waiting for confirmation for: "
@@ -76,9 +76,9 @@ en:
     navigation:
       words:
         dropdown: 'Words'
-        learned: 'Learned '
-        learning: 'Learning '
-        unknown: 'Unknown '
+        learned: 'Done '
+        learning: 'In Progress '
+        unknown: 'Unfamiliar '
         skyeng: 'Skyeng'
       articles:
         dropdown: 'Texts'
@@ -117,7 +117,7 @@ en:
         body: Here is a half a million words with millions sentences to learn
       telegram:
         title: Telegram bot
-        body: Use the bot to translate unknown words and get new words daily
+        body: Use the bot to translate unfamiliar words and get new words daily
       apps:
         title: iOS & Android apps
         body: Soon
@@ -176,9 +176,9 @@ en:
       text: "Learned words"
     translate: "Translate the text"
   words:
-    learned: 'Learned words'
-    learning: 'Learning words'
-    unknown: 'Unknown words'
+    learned: 'Words Done'
+    learning: 'Words In Progress'
+    unknown: 'Unfamiliar words'
     all: "All words"
     search_result: "Search result"
     words_of_text: "Words from the text"
@@ -188,23 +188,23 @@ en:
       text2: "Please select the language in the "
       link2: "profile settings"
     buttons:
-      training_repeating: Memorizing exercise
-      training_spelling: Orthography exercise
+      training_repeating: Reading
+      training_spelling: Writing
       training_grammar: Exercise
-      training_mnemo: Mnemo exercise
-      add_to_learning: Add to Learning
-      add_to_learned: Add to Learned
-      add_to_unknown: Add to Unknown
-      added_to_learning: Added to Learning
-      added_to_learned: Added to Learned
-      added_to_unknown: Added to Unknown
+      training_mnemo: Mnemonics
+      add_to_learning: Add to In Progress
+      add_to_learned: Add to Done
+      add_to_unknown: Add to Unfamiliar
+      added_to_learning: Added to In Progress
+      added_to_learned: Added to Done
+      added_to_unknown: Added to Unfamiliar
       state_changed: "Status of words successfully changed"
       select_words: "Please, select words"
-      show_learning: "Show learning"
-      show_learned: "Show learned"
+      show_learning: "Show In Progress"
+      show_learned: "Show Done"
     select_all: 'Select all'
     skyeng: "Skyeng"
-    very_easy_words: "Very easy words?"
+    very_easy_words: "Are words too easy?"
   articles:
     delete: "Successfully deleted"
   skyeng_settings:
@@ -231,7 +231,7 @@ en:
     process_message:
       send_email: 'Hello! Send your email from [Enwords](https://enwords.app/en) to receive a list of studied words'
       user_not_found: 'User not found'
-      telegram_chat_created: "User found. You have %{words_count} learning words. You will receive a newsletter once an hour"
+      telegram_chat_created: "User found. You have %{words_count} words in progress. You will receive a newsletter once an hour"
       bye: "Bye!"
       only_one_word: "Send me just one word"
       go_premium: "This word is available only to premium users.\n[Go premium](https://enwords.app/en#premium)"
